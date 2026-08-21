@@ -323,7 +323,7 @@
                 </div>
             </div>
 
-            <!-- Guest Auth Fields: Updated and styled nicely for new users -->
+            <!-- Guest Auth Fields -->
             <div id="guest-auth-fields" style="display: none;" class="mb-4 bg-indigo-50 p-4 rounded-xl border border-indigo-200">
                 <div class="text-sm text-indigo-800 font-extrabold mb-2 border-b border-indigo-200 pb-2">
                     <i class="fas fa-user-plus mr-1"></i> অ্যাকাউন্ট তৈরি করুন (নতুনদের জন্য)
@@ -740,22 +740,26 @@
                 
                 if(p && typeof fbq === 'function') fbq('track', 'Purchase', {content_ids: [id], content_type: 'product', value: p.price, currency: 'BDT'});
 
-                // ---- EMAIL SENDING START ----
+                // ---- EMAIL SENDING START (FIXED & AWAITED) ----
                 const redirectUrl = (p && p.download_link) ? p.download_link : 'https://www.technographybd.xyz/p/mega-bundle-vip-access';
                 const productNameHTML = `${p ? p.name : 'Digital Product'}<br><br><a href="${redirectUrl}" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold; margin-top: 15px; border: 1px solid #3730a3; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">👉 Access Your Content Here</a>`;
                 
-                fetch(SUPABASE_URL + '/functions/v1/send-email-resend', {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY 
-                    },
-                    body: JSON.stringify({
-                        email: currentUser.email,
-                        name: currentUser.name || currentUser.email.split('@')[0],
-                        product: productNameHTML
-                    })
-                }).then(res => res.json()).then(data => console.log("Email Success:", data)).catch(err => console.log('Email send error:', err));
+                try {
+                    await fetch(SUPABASE_URL + '/functions/v1/send-email-resend', {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY 
+                        },
+                        body: JSON.stringify({
+                            email: currentUser.email,
+                            name: currentUser.name || currentUser.email.split('@')[0],
+                            product: productNameHTML
+                        })
+                    });
+                } catch(mailErr) {
+                    console.error("Mail send error:", mailErr);
+                }
                 // ---- EMAIL SENDING END ----
 
                 const successOverlay = document.getElementById('success-overlay');
@@ -842,22 +846,26 @@
 
                     const p = products.find(prod => prod.id === currentPurchaseProductId);
                     
-                    // ---- EMAIL SENDING START ----
+                    // ---- EMAIL SENDING START (FIXED & AWAITED) ----
                     const redirectUrl = (p && p.download_link) ? p.download_link : 'https://www.technographybd.xyz/p/mega-bundle-vip-access';
                     const productNameHTML = `${p ? p.name : 'Digital Product'}<br><br><a href="${redirectUrl}" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold; margin-top: 15px; border: 1px solid #3730a3; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">👉 Access Your Content Here</a>`;
                     
-                    fetch(SUPABASE_URL + '/functions/v1/send-email-resend', {
-                        method: 'POST',
-                        headers: { 
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
-                        },
-                        body: JSON.stringify({
-                            email: currentUser.email,
-                            name: currentUser.name || currentUser.email.split('@')[0],
-                            product: productNameHTML
-                        })
-                    }).then(res => res.json()).then(data => console.log("Email Success:", data)).catch(err => console.log('Email send error:', err));
+                    try {
+                        await fetch(SUPABASE_URL + '/functions/v1/send-email-resend', {
+                            method: 'POST',
+                            headers: { 
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+                            },
+                            body: JSON.stringify({
+                                email: currentUser.email,
+                                name: currentUser.name || currentUser.email.split('@')[0],
+                                product: productNameHTML
+                            })
+                        });
+                    } catch(mailErr) {
+                        console.error("Mail send error:", mailErr);
+                    }
                     // ---- EMAIL SENDING END ----
 
                     const successOverlay = document.getElementById('success-overlay');
