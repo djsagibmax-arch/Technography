@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+                <!-- Nagad Logo -->
+                <div class="flex items-center justify-between bg-white p-3 rounded-lg border mb-3 shadow-sm hover:shadow-md hover:border-orange-500 transition">
+                    <img src="https://freelogopng.com/images/all_img/1679248787Nagad-Logo.png" alt="Nagad" class="w-9 h-9 object-contain rounded-lg shadow-sm" onerror="fallbackLogo(this, 'nagad')">
+                    <span id="disp-nagad" class="font-black text-slate-800 tracking-wider text-xl">01871337792</span>
+                </div>
+                
+                <!-- Rocket Logo -->
+                <div class="flex items-center justify-between bg-white p-3 rounded-lg border shadow-sm hover:shadow-md hover:border-purple-500 transition">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Rocket_Mobile_Banking_Logo.svg/512px-Rocket_Mobile_Banking_Logo.svg.png" alt="Rocket" class="w-9 h-9 object-contain rounded-lg shadow-sm" onerror="fallbackLogo(this, 'rocket')">
+                    <span <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -742,6 +751,82 @@
 
                 // ---- EMAIL SENDING START (FIXED & AWAITED) ----
                 const redirectUrl = (p && p.download_link) ? p.download_link : 'https://www.technographybd.xyz/p/mega-bundle-vip-access';
+                const productNameHTML = `${p ? p.name : 'Digital Product'}<br><br><a href="${redirectUrl}" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold; margin-top: 15px; border: 1px solid #3730a3; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">👉 Access Your Content Here</a>`;
+                
+                try {
+                    await fetch(SUPABASE_URL + '/functions/v1/send-email-resend', {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY 
+                        },
+                        body: JSON.stringify({
+                            email: currentUser.email,
+                            name: currentUser.name || currentUser.email.split('@')[0],
+                            product: productNameHTML
+                        })
+                    });
+                } catch(mailErr) {
+                    console.error("Mail send error:", mailErr);
+                }
+                // ---- EMAIL SENDING END ----
+
+                const successOverlay = document.getElementById('success-overlay');
+                successOverlay.classList.remove('hidden'); successOverlay.style.display = 'flex';
+                
+                let count = 2;
+                let timer = setInterval(() => {
+                    count--; document.getElementById('countdown').innerText = count;
+                    if(count <= 0) {
+                        clearInterval(timer); successOverlay.style.display = 'none'; successOverlay.classList.add('hidden');
+                        
+                        if (redirectUrl !== '/') { 
+                            if (redirectUrl.includes('/p/')) {
+                                let slug = redirectUrl.split('/p/')[1];
+                                window.history.pushState(null, '', '/p/' + slug);
+                                checkUrlRouting();
+                            } else {
+                                window.location.href = redirectUrl; 
+                            }
+                        } else { 
+                            openMyProducts(); 
+                        }
+                    }
+                }, 1000);
+            } catch (err) {
+                alert("কোনো একটি সমস্যা হয়েছে, আবার চেষ্টা করুন।");
+                if (btn) { btn.innerHTML = originalText; btn.disabled = false; }
+            }
+        }
+
+        async function verifyPayment() {
+            const trxId = document.getElementById('verify-trxid').value.trim(); 
+            const msg = document.getElementById('payment-message'); 
+            const btn = document.getElementById('verify-btn');
+            
+            let email = '';
+            let password = '';
+
+            if (!currentUser) {
+                email = document.getElementById('verify-email').value.trim();
+                password = document.getElementById('verify-password').value.trim();
+                
+                if (!email || !password) { msg.innerText = "অ্যাকাউন্ট তৈরি করতে দয়া করে জিমেইল এবং পাসওয়ার্ড দিন!"; msg.className = "text-sm font-bold mt-4 text-center text-red-500"; msg.classList.remove('hidden'); return; }
+                if (password.length < 6) { msg.innerText = "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে!"; msg.className = "text-sm font-bold mt-4 text-center text-red-500"; msg.classList.remove('hidden'); return; }
+            }
+
+            if (!trxId) { msg.innerText = "দয়া করে সঠিক TrxID দিন!"; msg.className = "text-sm font-bold mt-4 text-center text-red-500"; msg.classList.remove('hidden'); return; }
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...'; btn.disabled = true; 
+            msg.innerText = "ভেরিফাই করা হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন..."; msg.className = "text-sm font-bold mt-4 text-center text-blue-500"; msg.classList.remove('hidden');
+
+            try {
+                const { data: payData, error: payError } = await db.from('payments').select('*').eq('trx_id', trxId);
+                if (payError) throw payError;
+                
+                if (payData && payData.length > 0) {
+                    const paymentInfo = payData[0];
+                    if (paymentInfo.is_used === true) { msg.innerHTML = '<i class="fas fa-exclamation-triangle mr-1"></i> এই TrxID টি আগে ব্যবহার করা হয়েছে!'; msg.className = "text-sm font-bold mt-4 text-center text-red-500"; btn.innerHTML = '<i class="fas fa-shield-check mr-2"></i> Verify & Confirm Order'; btn.disabled = false; return; }
                 const productNameHTML = `${p ? p.name : 'Digital Product'}<br><br><a href="${redirectUrl}" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold; margin-top: 15px; border: 1px solid #3730a3; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">👉 Access Your Content Here</a>`;
                 
                 try {
