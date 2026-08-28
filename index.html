@@ -1047,211 +1047,215 @@
                 }
             }
         };
-    
-<script>
-(function() {
-  if (window.DSB_INSTANT_LOADED) return;
-  window.DSB_INSTANT_LOADED = true;
+    </script>
 
-  var config = {
-    showChat: true,
-    showPayBtn: true,
-    payBtnText: "💳 অর্ডার ও পেমেন্ট করুন",
-    bkash: "017XXXXXXXX",
-    nagad: "018XXXXXXXX",
-    rocket: "019XXXXXXXX",
-    products: [{"code":"PROD-1","name":"ডিজিটাল প্রোডাক্ট","price":450,"buyUrl":""}]
-  };
+    <!-- === DIGITAL SALES BOT (ALL-IN-ONE INSTANT EMBED) === -->
+    <div id="dsb-widget-embed"></div>
+    <script>
+    (function() {
+      if (window.DSB_INSTANT_LOADED) return;
+      window.DSB_INSTANT_LOADED = true;
 
-  var style = document.createElement('style');
-  style.innerHTML = `
-    #dsb-c-btn { position: fixed; bottom: 20px; right: 20px; z-index: 9999999; width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #4f46e5, #7c3aed); box-shadow: 0 10px 25px rgba(79,70,229,0.45); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 26px; transition: transform 0.2s; }
-    #dsb-c-btn:hover { transform: scale(1.08); }
-    #dsb-p-btn { position: fixed; bottom: 20px; left: 20px; z-index: 9999998; background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 12px 18px; border-radius: 50px; border: none; cursor: pointer; font-size: 13.5px; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; box-shadow: 0 10px 25px rgba(16,185,129,0.45); display: flex; align-items: center; gap: 8px; transition: transform 0.2s; }
-    #dsb-p-btn:hover { transform: scale(1.05); }
-    #dsb-chat-box { display: none; position: fixed; bottom: 85px; right: 20px; z-index: 9999999; width: 330px; height: 460px; max-height: 80vh; background: #1e293b; color: white; border-radius: 18px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 1px solid #334155; flex-direction: column; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    #dsb-chat-head { padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed); display: flex; justify-content: space-between; align-items: center; }
-    #dsb-chat-head h4 { margin: 0; font-size: 14px; font-weight: bold; }
-    #dsb-chat-head button { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
-    #dsb-chat-msgs { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; background: #0f172a; font-size: 12.5px; }
-    .dsb-msg-b { background: #1e293b; color: #f8fafc; padding: 8px 12px; border-radius: 12px; max-width: 85%; align-self: flex-start; border: 1px solid #334155; line-height: 1.4; }
-    .dsb-msg-u { background: #4f46e5; color: white; padding: 8px 12px; border-radius: 12px; max-width: 85%; align-self: flex-end; }
-    #dsb-chat-chips { display: flex; gap: 6px; padding: 6px 12px; background: #0f172a; border-top: 1px solid #334155; overflow-x: auto; }
-    .dsb-chip { background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; border-radius: 10px; padding: 4px 8px; font-size: 11px; cursor: pointer; white-space: nowrap; }
-    #dsb-chat-in { padding: 8px 10px; background: #1e293b; display: flex; gap: 6px; border-top: 1px solid #334155; }
-    #dsb-chat-txt { flex: 1; padding: 8px 12px; border-radius: 16px; background: #0f172a; border: 1px solid #334155; color: white; font-size: 12.5px; outline: none; }
-    #dsb-chat-send { background: #4f46e5; color: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 13px; }
-    #dsb-modal-wrap { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.8); backdrop-filter: blur(4px); z-index: 10000000; align-items: center; justify-content: center; padding: 14px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    #dsb-modal-card { width: 100%; max-width: 390px; background: #1e293b; color: white; border-radius: 18px; border: 1px solid #334155; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.6); }
-    .dsb-m-h { padding: 14px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed); display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
-    .dsb-m-b { padding: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; max-height: 75vh; overflow-y: auto; }
-    .dsb-m-tabs { display: flex; gap: 6px; }
-    .dsb-tab { flex: 1; padding: 7px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: #cbd5e1; text-align: center; cursor: pointer; font-size: 12px; font-weight: bold; }
-    .dsb-tab.act { background: #4f46e5; color: white; border-color: #6366f1; }
-    .dsb-box { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 10px; display: flex; justify-content: space-between; align-items: center; font-family: monospace; font-size: 14px; font-weight: bold; color: #38bdf8; }
-    .dsb-cpy { background: #4f46e5; color: white; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-size: 11px; }
-    .dsb-inp { width: 100%; padding: 8px 12px; border-radius: 8px; background: #0f172a; border: 1px solid #334155; color: white; font-size: 13px; box-sizing: border-box; outline: none; margin-top: 4px; }
-    .dsb-sub { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 11px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 14px; margin-top: 6px; }
-  `;
-  document.head.appendChild(style);
+      var config = {
+        showChat: true,
+        showPayBtn: true,
+        payBtnText: "💳 অর্ডার ও পেমেন্ট করুন",
+        bkash: "01871337792",
+        nagad: "01871337792",
+        rocket: "01871337792",
+        products: [{"code":"PROD-1","name":"ডিজিটাল প্রোডাক্ট","price":450,"buyUrl":""}]
+      };
 
-  var root = document.getElementById('dsb-widget-embed') || document.body;
+      var style = document.createElement('style');
+      style.innerHTML = `
+        #dsb-c-btn { position: fixed; bottom: 20px; right: 20px; z-index: 9999999; width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #4f46e5, #7c3aed); box-shadow: 0 10px 25px rgba(79,70,229,0.45); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 26px; transition: transform 0.2s; }
+        #dsb-c-btn:hover { transform: scale(1.08); }
+        #dsb-p-btn { position: fixed; bottom: 20px; left: 20px; z-index: 9999998; background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 12px 18px; border-radius: 50px; border: none; cursor: pointer; font-size: 13.5px; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; box-shadow: 0 10px 25px rgba(16,185,129,0.45); display: flex; align-items: center; gap: 8px; transition: transform 0.2s; }
+        #dsb-p-btn:hover { transform: scale(1.05); }
+        #dsb-chat-box { display: none; position: fixed; bottom: 85px; right: 20px; z-index: 9999999; width: 330px; height: 460px; max-height: 80vh; background: #1e293b; color: white; border-radius: 18px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 1px solid #334155; flex-direction: column; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        #dsb-chat-head { padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed); display: flex; justify-content: space-between; align-items: center; }
+        #dsb-chat-head h4 { margin: 0; font-size: 14px; font-weight: bold; }
+        #dsb-chat-head button { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+        #dsb-chat-msgs { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; background: #0f172a; font-size: 12.5px; }
+        .dsb-msg-b { background: #1e293b; color: #f8fafc; padding: 8px 12px; border-radius: 12px; max-width: 85%; align-self: flex-start; border: 1px solid #334155; line-height: 1.4; }
+        .dsb-msg-u { background: #4f46e5; color: white; padding: 8px 12px; border-radius: 12px; max-width: 85%; align-self: flex-end; }
+        #dsb-chat-chips { display: flex; gap: 6px; padding: 6px 12px; background: #0f172a; border-top: 1px solid #334155; overflow-x: auto; }
+        .dsb-chip { background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; border-radius: 10px; padding: 4px 8px; font-size: 11px; cursor: pointer; white-space: nowrap; }
+        #dsb-chat-in { padding: 8px 10px; background: #1e293b; display: flex; gap: 6px; border-top: 1px solid #334155; }
+        #dsb-chat-txt { flex: 1; padding: 8px 12px; border-radius: 16px; background: #0f172a; border: 1px solid #334155; color: white; font-size: 12.5px; outline: none; }
+        #dsb-chat-send { background: #4f46e5; color: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 13px; }
+        #dsb-modal-wrap { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.8); backdrop-filter: blur(4px); z-index: 10000000; align-items: center; justify-content: center; padding: 14px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        #dsb-modal-card { width: 100%; max-width: 390px; background: #1e293b; color: white; border-radius: 18px; border: 1px solid #334155; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.6); }
+        .dsb-m-h { padding: 14px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed); display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        .dsb-m-b { padding: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; max-height: 75vh; overflow-y: auto; }
+        .dsb-m-tabs { display: flex; gap: 6px; }
+        .dsb-tab { flex: 1; padding: 7px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: #cbd5e1; text-align: center; cursor: pointer; font-size: 12px; font-weight: bold; }
+        .dsb-tab.act { background: #4f46e5; color: white; border-color: #6366f1; }
+        .dsb-box { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 10px; display: flex; justify-content: space-between; align-items: center; font-family: monospace; font-size: 14px; font-weight: bold; color: #38bdf8; }
+        .dsb-cpy { background: #4f46e5; color: white; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-size: 11px; }
+        .dsb-inp { width: 100%; padding: 8px 12px; border-radius: 8px; background: #0f172a; border: 1px solid #334155; color: white; font-size: 13px; box-sizing: border-box; outline: none; margin-top: 4px; }
+        .dsb-sub { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 11px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 14px; margin-top: 6px; }
+      `;
+      document.head.appendChild(style);
 
-  if (config.showChat) {
-    var bubble = document.createElement('button');
-    bubble.id = 'dsb-c-btn';
-    bubble.innerHTML = '💬';
-    bubble.title = 'লাইভ চ্যাট';
-    root.appendChild(bubble);
+      var root = document.getElementById('dsb-widget-embed') || document.body;
 
-    var chatBox = document.createElement('div');
-    chatBox.id = 'dsb-chat-box';
-    chatBox.innerHTML = `
-      <div id="dsb-chat-head">
-        <div><h4>ডিজিটাল সেলস বট</h4><span style="font-size:10.5px;opacity:0.8;">🟢 লাইভ অনলাইন</span></div>
-        <button id="dsb-chat-cls">&times;</button>
-      </div>
-      <div id="dsb-chat-msgs">
-        <div class="dsb-msg-b">আসসালামু আলাইকুম! কোনো প্রশ্ন থাকলে লিখুন অথবা সরাসরি অর্ডার করতে নিচের বাটনে চাপ দিন।</div>
-      </div>
-      <div id="dsb-chat-chips">
-        <button class="dsb-chip" id="dsb-chip-order">💳 অর্ডার ও পেমেন্ট</button>
-        <button class="dsb-chip" id="dsb-chip-price">🛍️ প্রাইজ ও অফার</button>
-      </div>
-      <div id="dsb-chat-in">
-        <input type="text" id="dsb-chat-txt" placeholder="মেসেজ লিখুন...">
-        <button id="dsb-chat-send">➤</button>
-      </div>
-    `;
-    root.appendChild(chatBox);
+      if (config.showChat) {
+        var bubble = document.createElement('button');
+        bubble.id = 'dsb-c-btn';
+        bubble.innerHTML = '💬';
+        bubble.title = 'লাইভ চ্যাট';
+        root.appendChild(bubble);
 
-    var isChatOpen = false;
-    function toggleC() {
-      isChatOpen = !isChatOpen;
-      chatBox.style.display = isChatOpen ? 'flex' : 'none';
-      if (isChatOpen) bubble.style.display = 'none';
-      else bubble.style.display = 'flex';
-    }
-    bubble.onclick = toggleC;
-    document.getElementById('dsb-chat-cls').onclick = toggleC;
-    document.getElementById('dsb-chip-order').onclick = function() { openModal(); };
-    document.getElementById('dsb-chip-price').onclick = function() {
-      addMsg("আমাদের স্পেশাল ডিজিটাল প্রোডাক্ট অফার চলছে! অর্ডার করতে 'অর্ডার ও পেমেন্ট' বাটনে ক্লিক করুন।", false);
-    };
+        var chatBox = document.createElement('div');
+        chatBox.id = 'dsb-chat-box';
+        chatBox.innerHTML = `
+          <div id="dsb-chat-head">
+            <div><h4>ডিজিটাল সেলস বট</h4><span style="font-size:10.5px;opacity:0.8;">🟢 লাইভ অনলাইন</span></div>
+            <button id="dsb-chat-cls">&times;</button>
+          </div>
+          <div id="dsb-chat-msgs">
+            <div class="dsb-msg-b">আসসালামু আলাইকুম! কোনো প্রশ্ন থাকলে লিখুন অথবা সরাসরি অর্ডার করতে নিচের বাটনে চাপ দিন।</div>
+          </div>
+          <div id="dsb-chat-chips">
+            <button class="dsb-chip" id="dsb-chip-order">💳 অর্ডার ও পেমেন্ট</button>
+            <button class="dsb-chip" id="dsb-chip-price">🛍️ প্রাইজ ও অফার</button>
+          </div>
+          <div id="dsb-chat-in">
+            <input type="text" id="dsb-chat-txt" placeholder="মেসেজ লিখুন...">
+            <button id="dsb-chat-send">➤</button>
+          </div>
+        `;
+        root.appendChild(chatBox);
 
-    function addMsg(txt, isUser) {
-      var d = document.createElement('div');
-      d.className = isUser ? 'dsb-msg-u' : 'dsb-msg-b';
-      d.innerText = txt;
-      document.getElementById('dsb-chat-msgs').appendChild(d);
-      document.getElementById('dsb-chat-msgs').scrollTop = document.getElementById('dsb-chat-msgs').scrollHeight;
-    }
-
-    document.getElementById('dsb-chat-send').onclick = function() {
-      var inp = document.getElementById('dsb-chat-txt');
-      var val = inp.value.trim();
-      if (!val) return;
-      addMsg(val, true);
-      inp.value = '';
-      setTimeout(function() {
-        if (/trx|bkash|nagad|টাকা|পেমেন্ট|payment|number|নাম্বার/i.test(val)) {
-          addMsg("পেমেন্ট সম্পন্ন করতে বা ট্রানজেকশন সাবমিট করতে নিচের 'অর্ডার ও পেমেন্ট' বাটনে ক্লিক করুন।", false);
-        } else {
-          addMsg("ধন্যবাদ আপনার মেসেজের জন্য! অর্ডার সম্পন্ন করতে অর্ডার বাটনে ক্লিক করুন।", false);
+        var isChatOpen = false;
+        function toggleC() {
+          isChatOpen = !isChatOpen;
+          chatBox.style.display = isChatOpen ? 'flex' : 'none';
+          if (isChatOpen) bubble.style.display = 'none';
+          else bubble.style.display = 'flex';
         }
-      }, 500);
-    };
-  }
+        bubble.onclick = toggleC;
+        document.getElementById('dsb-chat-cls').onclick = toggleC;
+        document.getElementById('dsb-chip-order').onclick = function() { openModal(); };
+        document.getElementById('dsb-chip-price').onclick = function() {
+          addMsg("আমাদের স্পেশাল ডিজিটাল প্রোডাক্ট অফার চলছে! অর্ডার করতে 'অর্ডার ও পেমেন্ট' বাটনে ক্লিক করুন।", false);
+        };
 
-  if (config.showPayBtn) {
-    var payBtn = document.createElement('button');
-    payBtn.id = 'dsb-p-btn';
-    payBtn.innerHTML = config.payBtnText;
-    payBtn.onclick = function() { openModal(); };
-    root.appendChild(payBtn);
-  }
+        function addMsg(txt, isUser) {
+          var d = document.createElement('div');
+          d.className = isUser ? 'dsb-msg-u' : 'dsb-msg-b';
+          d.innerText = txt;
+          document.getElementById('dsb-chat-msgs').appendChild(d);
+          document.getElementById('dsb-chat-msgs').scrollTop = document.getElementById('dsb-chat-msgs').scrollHeight;
+        }
 
-  var modalWrap = document.createElement('div');
-  modalWrap.id = 'dsb-modal-wrap';
-  modalWrap.innerHTML = `
-    <div id="dsb-modal-card">
-      <div class="dsb-m-h">
-        <span>💳 ডিজিটাল প্রোডাক্ট অর্ডার ও পেমেন্ট</span>
-        <button id="dsb-m-cls" style="background:none;border:none;color:white;font-size:22px;cursor:pointer;">&times;</button>
-      </div>
-      <div class="dsb-m-b">
-        <div>
-          <label style="font-size:12px;color:#94a3b8;font-weight:600;">পণ্য নির্বাচন করুন:</label>
-          <select id="dsb-p-sel" class="dsb-inp">
-            ` + config.products.map(function(p){ return '<option value="' + p.code + '" data-price="' + p.price + '">' + p.name + ' (৳' + p.price + ')</option>'; }).join('') + `
-          </select>
-        </div>
-        <div>
-          <label style="font-size:12px;color:#94a3b8;font-weight:600;">পেমেন্ট মেথড নির্বাচন করুন:</label>
-          <div class="dsb-m-tabs" style="margin-top:4px;">
-            <div class="dsb-tab act" id="dsb-t-bkash">💖 bKash</div>
-            <div class="dsb-tab" id="dsb-t-nagad">🧡 Nagad</div>
-            <div class="dsb-tab" id="dsb-t-rocket">🚀 Rocket</div>
+        document.getElementById('dsb-chat-send').onclick = function() {
+          var inp = document.getElementById('dsb-chat-txt');
+          var val = inp.value.trim();
+          if (!val) return;
+          addMsg(val, true);
+          inp.value = '';
+          setTimeout(function() {
+            if (/trx|bkash|nagad|টাকা|পেমেন্ট|payment|number|নাম্বার/i.test(val)) {
+              addMsg("পেমেন্ট সম্পন্ন করতে বা ট্রানজেকশন সাবমিট করতে নিচের 'অর্ডার ও পেমেন্ট' বাটনে ক্লিক করুন।", false);
+            } else {
+              addMsg("ধন্যবাদ আপনার মেসেজের জন্য! অর্ডার সম্পন্ন করতে অর্ডার বাটনে ক্লিক করুন।", false);
+            }
+          }, 500);
+        };
+      }
+
+      if (config.showPayBtn) {
+        var payBtn = document.createElement('button');
+        payBtn.id = 'dsb-p-btn';
+        payBtn.innerHTML = config.payBtnText;
+        payBtn.onclick = function() { openModal(); };
+        root.appendChild(payBtn);
+      }
+
+      var modalWrap = document.createElement('div');
+      modalWrap.id = 'dsb-modal-wrap';
+      modalWrap.innerHTML = `
+        <div id="dsb-modal-card">
+          <div class="dsb-m-h">
+            <span>💳 ডিজিটাল প্রোডাক্ট অর্ডার ও পেমেন্ট</span>
+            <button id="dsb-m-cls" style="background:none;border:none;color:white;font-size:22px;cursor:pointer;">&times;</button>
+          </div>
+          <div class="dsb-m-b">
+            <div>
+              <label style="font-size:12px;color:#94a3b8;font-weight:600;">পণ্য নির্বাচন করুন:</label>
+              <select id="dsb-p-sel" class="dsb-inp">
+                ` + config.products.map(function(p){ return '<option value="' + p.code + '" data-price="' + p.price + '">' + p.name + ' (৳' + p.price + ')</option>'; }).join('') + `
+              </select>
+            </div>
+            <div>
+              <label style="font-size:12px;color:#94a3b8;font-weight:600;">পেমেন্ট মেথড নির্বাচন করুন:</label>
+              <div class="dsb-m-tabs" style="margin-top:4px;">
+                <div class="dsb-tab act" id="dsb-t-bkash">💖 bKash</div>
+                <div class="dsb-tab" id="dsb-t-nagad">🧡 Nagad</div>
+                <div class="dsb-tab" id="dsb-t-rocket">🚀 Rocket</div>
+              </div>
+            </div>
+            <div class="dsb-box">
+              <span id="dsb-num-lbl">বিকাশ: ` + config.bkash + `</span>
+              <button class="dsb-cpy" id="dsb-num-cpy">কপি</button>
+            </div>
+            <div>
+              <label style="font-size:12px;color:#94a3b8;font-weight:600;">আপনার মোবাইল নম্বর:</label>
+              <input type="tel" id="dsb-c-phn" class="dsb-inp" placeholder="01XXXXXXXXX">
+            </div>
+            <div>
+              <label style="font-size:12px;color:#94a3b8;font-weight:600;">ট্রানজেকশন আইডি (TrxID):</label>
+              <input type="text" id="dsb-c-trx" class="dsb-inp" placeholder="BK98XXXXXX">
+            </div>
+            <button class="dsb-sub" id="dsb-sub-btn">✅ অর্ডার ও ভেরিফাই সম্পন্ন করুন</button>
+            <div id="dsb-succ-box" style="display:none;background:#064e3b;border:1px solid #059669;padding:12px;border-radius:10px;text-align:center;">
+              <div style="font-weight:bold;color:#34d399;font-size:14px;">🎉 অর্ডার সফলভাবে গৃহীত হয়েছে!</div>
+              <div style="font-size:12px;margin-top:4px;color:#e2e8f0;">আপনার ডিজিটাল প্রোডাক্ট ডাউনলোড বা ডেলিভারি তথ্য শীঘ্রই পাঠানো হবে।</div>
+            </div>
           </div>
         </div>
-        <div class="dsb-box">
-          <span id="dsb-num-lbl">বিকাশ: ` + config.bkash + `</span>
-          <button class="dsb-cpy" id="dsb-num-cpy">কপি</button>
-        </div>
-        <div>
-          <label style="font-size:12px;color:#94a3b8;font-weight:600;">আপনার মোবাইল নম্বর:</label>
-          <input type="tel" id="dsb-c-phn" class="dsb-inp" placeholder="01XXXXXXXXX">
-        </div>
-        <div>
-          <label style="font-size:12px;color:#94a3b8;font-weight:600;">ট্রানজেকশন আইডি (TrxID):</label>
-          <input type="text" id="dsb-c-trx" class="dsb-inp" placeholder="BK98XXXXXX">
-        </div>
-        <button class="dsb-sub" id="dsb-sub-btn">✅ অর্ডার ও ভেরিফাই সম্পন্ন করুন</button>
-        <div id="dsb-succ-box" style="display:none;background:#064e3b;border:1px solid #059669;padding:12px;border-radius:10px;text-align:center;">
-          <div style="font-weight:bold;color:#34d399;font-size:14px;">🎉 অর্ডার সফলভাবে গৃহীত হয়েছে!</div>
-          <div style="font-size:12px;margin-top:4px;color:#e2e8f0;">আপনার ডিজিটাল প্রোডাক্ট ডাউনলোড বা ডেলিভারি তথ্য শীঘ্রই পাঠানো হবে।</div>
-        </div>
-      </div>
-    </div>
-  `;
-  root.appendChild(modalWrap);
+      `;
+      root.appendChild(modalWrap);
 
-  var curMethod = 'bKash';
-  var curNum = config.bkash;
+      var curMethod = 'bKash';
+      var curNum = config.bkash;
 
-  function updateM(m, num) {
-    curMethod = m;
-    curNum = num;
-    document.getElementById('dsb-t-bkash').className = m === 'bKash' ? 'dsb-tab act' : 'dsb-tab';
-    document.getElementById('dsb-t-nagad').className = m === 'Nagad' ? 'dsb-tab act' : 'dsb-tab';
-    document.getElementById('dsb-t-rocket').className = m === 'Rocket' ? 'dsb-tab act' : 'dsb-tab';
-    document.getElementById('dsb-num-lbl').innerText = m + ': ' + num;
-  }
+      function updateM(m, num) {
+        curMethod = m;
+        curNum = num;
+        document.getElementById('dsb-t-bkash').className = m === 'bKash' ? 'dsb-tab act' : 'dsb-tab';
+        document.getElementById('dsb-t-nagad').className = m === 'Nagad' ? 'dsb-tab act' : 'dsb-tab';
+        document.getElementById('dsb-t-rocket').className = m === 'Rocket' ? 'dsb-tab act' : 'dsb-tab';
+        document.getElementById('dsb-num-lbl').innerText = m + ': ' + num;
+      }
 
-  document.getElementById('dsb-t-bkash').onclick = function() { updateM('bKash', config.bkash); };
-  document.getElementById('dsb-t-nagad').onclick = function() { updateM('Nagad', config.nagad); };
-  document.getElementById('dsb-t-rocket').onclick = function() { updateM('Rocket', config.rocket); };
+      document.getElementById('dsb-t-bkash').onclick = function() { updateM('bKash', config.bkash); };
+      document.getElementById('dsb-t-nagad').onclick = function() { updateM('Nagad', config.nagad); };
+      document.getElementById('dsb-t-rocket').onclick = function() { updateM('Rocket', config.rocket); };
 
-  document.getElementById('dsb-num-cpy').onclick = function() {
-    navigator.clipboard.writeText(curNum);
-    this.innerText = 'কপি হয়েছে!';
-    var b = this;
-    setTimeout(function() { b.innerText = 'কপি'; }, 2000);
-  };
+      document.getElementById('dsb-num-cpy').onclick = function() {
+        navigator.clipboard.writeText(curNum);
+        this.innerText = 'কপি হয়েছে!';
+        var b = this;
+        setTimeout(function() { b.innerText = 'কপি'; }, 2000);
+      };
 
-  function openModal() { modalWrap.style.display = 'flex'; }
-  document.getElementById('dsb-m-cls').onclick = function() { modalWrap.style.display = 'none'; };
+      function openModal() { modalWrap.style.display = 'flex'; }
+      document.getElementById('dsb-m-cls').onclick = function() { modalWrap.style.display = 'none'; };
 
-  document.getElementById('dsb-sub-btn').onclick = function() {
-    var phn = document.getElementById('dsb-c-phn').value.trim();
-    var trx = document.getElementById('dsb-c-trx').value.trim();
-    if (!phn) { alert('অনুগ্রহ করে আপনার ফোন নম্বর লিখুন'); return; }
-    if (!trx) { alert('অনুগ্রহ করে ট্রানজেকশন আইডি (TrxID) লিখুন'); return; }
-    this.style.display = 'none';
-    document.getElementById('dsb-succ-box').style.display = 'block';
-  };
-})();
-</script>
-<!-- === DIGITAL SALES BOT END === -->
+      document.getElementById('dsb-sub-btn').onclick = function() {
+        var phn = document.getElementById('dsb-c-phn').value.trim();
+        var trx = document.getElementById('dsb-c-trx').value.trim();
+        if (!phn) { alert('অনুগ্রহ করে আপনার ফোন নম্বর লিখুন'); return; }
+        if (!trx) { alert('অনুগ্রহ করে ট্রানজেকশন আইডি (TrxID) লিখুন'); return; }
+        this.style.display = 'none';
+        document.getElementById('dsb-succ-box').style.display = 'block';
+      };
+    })();
+    </script>
+    <!-- === DIGITAL SALES BOT END === -->
+
 </body>
 </html>
