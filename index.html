@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technography | Official Digital Store</title>
+    <meta name="description" content="Technography Official Store - সেরা ডিজিটাল প্রোডাক্ট, ভিডিও বান্ডিল এবং কোর্সের বিশ্বস্ত প্ল্যাটফর্ম।">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.technographybd.xyz/">
+
+    <!-- Open Graph for SEO -->
+    <meta property="og:title" content="Technography | Official Digital Store">
+    <meta property="og:description" content="সেরা ডিজিটাল প্রোডাক্ট, ভিডিও বান্ডিল এবং কোর্সের বিশ্বস্ত প্ল্যাটফর্ম।">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.technographybd.xyz/">
+
+    <style>
+        :root {
+            --primary: #4338ca;
+            --primary-hover: #3730a3;
+            --bg: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #334155;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --success: #15803d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* High Contrast Header */
+        header {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #1e1b4b;
+            color: #ffffff;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .card-img-wrap {
+            width: 100%;
+            height: 200px;
+            background-color: #e2e8f0;
+            position: relative;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #e0e7ff;
+            color: #312e81;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            width: fit-content;
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+
+        .price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover, .btn:focus {
+            background-color: var(--primary-hover);
+            outline: 2px solid #000000;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 450px;
+            width: 100%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-top: auto;
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo" aria-label="Technography Home">TECHNOGRAPHY</a>
+            <nav aria-label="Main Navigation">
+                <button class="btn" onclick="openOrderModal('General Order', 500)" aria-label="Quick Checkout">অর্ডার করুন</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>ডিজিটাল প্রোডাক্ট ও রিসোর্স হাব</h1>
+        <p>প্রিমিয়াম ভিডিও এডিটিং বান্ডিল, কোর্স ও টেমপ্লেট সংগ্রহ করুন এক ক্লিকে।</p>
+    </section>
+
+    <main>
+        <h2 class="section-title">জনপ্রিয় প্রোডাক্টসমূহ</h2>
+        <div class="product-grid">
+            
+            <!-- Product 1 -->
+            <article class="card">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=75&auto=format" 
+                         alt="Mega Viral Reels Bundle Preview" 
+                         class="card-img" 
+                         width="400" 
+                         height="200" 
+                         loading="lazy" 
+                         decoding="async">
+                </div>
+                <div class="card-body">
+                    <span class="tag">Digital Bundle</span>
+                    <h3 class="card-title">Mega Viral 3,00,000+ AI Reels Bundle</h3>
+                    <p class="card-desc">কপিরাইট ফ্রি হাই-কোয়ালিটি রিলস ভিডিও বান্ডিল সামাজিক যোগাযোগ মাধ্যমে ভাইরাল হওয়ার জন্য।</p>
+                    <div class="card-footer">
+                        <span class="price">৳৫০০</span>
+                        <button class="btn" onclick="openOrderModal('AI Reels Bundle', 500)" aria-label="Buy AI Reels Bundle">Buy Now</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Product 2 -->
+            <article class="card">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=75&auto=format" 
+                         alt="Web Development Resources Preview" 
+                         class="card-img" 
+                         width="400" 
+                         height="200" 
+                         loading="lazy" 
+                         decoding="async">
+                </div>
+                <div class="card-body">
+                    <span class="tag">Template Pack</span>
+                    <h3 class="card-title">Ultimate Landing Page Templates</h3>
+                    <p class="card-desc">হাই কনভার্টিং রেডিমেড ল্যান্ডিং পেজ টেমপ্লেট কোড কালেকশন।</p>
+                    <div class="card-footer">
+                        <span class="price">৳৭৫০</span>
+                        <button class="btn" onclick="openOrderModal('Landing Page Templates', 750)" aria-label="Buy Landing Page Templates">Buy Now</button>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- Payment Modal -->
+    <div id="order-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeOrderModal()" aria-label="Close Modal">&times;</button>
+            <h3 id="modal-title" style="margin-bottom: 0.5rem; font-size: 1.25rem;">পেমেন্ট কনফার্ম করুন</h3>
+            <p id="modal-product-name" style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">প্রোডাক্ট: -</p>
+            
+            <div style="background: #eef2ff; padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; font-size: 0.875rem; color: #3730a3;">
+                বিকাশ/নগদ/রকেট (Personal): <strong>01871337792</strong> (Send Money)
+            </div>
+
+            <form onsubmit="handlePaymentSubmit(event)">
+                <div class="input-group">
+                    <label for="user-email">আপনার ইমেইল (প্রোডাক্ট ডেলিভারির জন্য)</label>
+                    <input type="email" id="user-email" required placeholder="name@example.com">
+                </div>
+                <div class="input-group">
+                    <label for="trx-id">Transaction ID (TrxID)</label>
+                    <input type="text" id="trx-id" required placeholder="e.g. 9K8L7M6N5P">
+                </div>
+                <button type="submit" class="btn" style="width: 100%; padding: 0.75rem;" aria-label="Verify Payment">ভেরিফাই ও অর্ডার সম্পূর্ণ করুন</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Technography. সর্বস্বত্ব সংরক্ষিত। | <a href="/privacy">প্রাইভেসি পলিসি</a></p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        let selectedProduct = '';
+        let selectedPrice = 0;
+
+        function openOrderModal(productName, price) {
+            selectedProduct = productName;
+            selectedPrice = price;
+            document.getElementById('modal-product-name').textContent = `প্রোডাক্ট: ${productName} (৳${price})`;
+            document.getElementById('order-modal').classList.add('active');
+        }
+
+        function closeOrderModal() {
+            document.getElementById('order-modal').classList.remove('active');
+        }
+
+        function handlePaymentSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('user-email').value;
+            const trxId = document.getElementById('trx-id').value;
+            
+            alert(`ধন্যবাদ! আপনার TrxID (${trxId}) গ্রহণ করা হয়েছে। ${email} ঠিকানায় অ্যাক্সেস পাঠানো হচ্ছে।`);
+            closeOrderModal();
+        }
+    </script>
+</body>
+</html>
