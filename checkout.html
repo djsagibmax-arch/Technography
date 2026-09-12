@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পেমেন্ট ও চেকআউট - Technography</title>
+    <meta name="description" content="বিকাশের মাধ্যমে পেমেন্ট সম্পন্ন করে তাৎক্ষণিকভাবে ডাউনলোড লিংক বুঝে নিন।">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- আপনার ফেসবুক পিক্সেল কোড এখানে রাখুন -->
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased">
+
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="text-xl font-bold tracking-wider text-cyan-400">Technography</div>
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="text-slate-300 hover:text-cyan-400 transition">হোম</a>
+                <a href="product.html" class="text-slate-300 hover:text-cyan-400 transition">প্রোডাক্ট</a>
+                <a href="checkout.html" class="text-cyan-400 font-medium transition">অর্ডার করুন</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-2xl mx-auto px-4 py-12">
+        <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-400 text-center">অর্ডার কনফার্মেশন ফর্ম</h2>
+            <p class="text-slate-400 text-sm mb-6 text-center">আমাদের বিকাশ পার্সোনাল নাম্বারে (01XXXXXXXXX) ৩০০ টাকা সেন্ড করার পর নিচের ফর্মটি পূরণ করুন।</p>
+            
+            <form id="paymentForm" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">আপনার নাম:</label>
+                    <input type="text" id="customerName" required placeholder="আপনার পূর্ণ নাম লিখুন" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-cyan-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">হোয়াটসঅ্যাপ নম্বর:</label>
+                    <input type="text" id="customerPhone" required placeholder="017xxxxxxxx" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-cyan-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">বিকাশ ট্রানজ্যাকশন আইডি (TrxID):</label>
+                    <input type="text" id="trxId" required placeholder="যেমন: 9J7A..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-cyan-500">
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl shadow-lg transition">পেমেন্ট কনফার্ম করুন</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // আপনার সুপাবেজ এবং পেমেন্ট ভেরিফিকেশন লজিক এখানে যুক্ত করুন
+    </script>
+
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 text-center text-slate-500 text-sm mt-12">
+        <p>&copy; 2026 Technography. All rights reserved.</p>
+    </footer>
+</body>
+</html>
