@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অ্যাডমিন প্যানেল - Technography</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased">
+
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="text-xl font-bold tracking-wider text-cyan-400">Technography Admin</div>
+            <a href="index.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">মেইন সাইটে ফিরে যান</a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10">
+        <div class="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-2xl shadow-2xl">
+            <h2 class="text-2xl font-bold mb-6 text-cyan-400">অর্ডার ম্যানেজমেন্ট ড্যাশবোর্ড</h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-800 text-slate-400 text-sm">
+                            <th class="p-3">তারিখ</th>
+                            <th class="p-3">গ্রাহকের নাম</th>
+                            <th class="p-3">মোবাইল নম্বর</th>
+                            <th class="p-3">TrxID</th>
+                            <th class="p-3">স্ট্যাটাস</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderTableBody" class="divide-y divide-slate-800/60 text-sm">
+                        <tr>
+                            <td class="p-3 text-slate-400">২০২৬-০৯-১৩</td>
+                            <td class="p-3 font-medium">সোহেভুল হাসান</td>
+                            <td class="p-3 text-slate-300">01997440657</td>
+                            <td class="p-3 font-mono text-cyan-400">TRX12345678</td>
+                            <td class="p-3"><span class="bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full text-xs font-bold border border-emerald-500/20">সফল</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 text-center text-slate-500 text-sm mt-12">
+        <p>&copy; 2026 Technography. All rights reserved.</p>
+    </footer>
+</body>
+</html>
