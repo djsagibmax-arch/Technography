@@ -173,7 +173,7 @@
 
                 <div class="space-y-4">
                     <div>
-                        <input type="text" id="wa-number" placeholder="আপনার হোয়াটসঅ্যাপ নাম্বার দিন..." class="w-full bg-slate-900 border border-slate-600 text-white p-3 rounded-lg outline-none focus:border-green-500 transition text-center font-bold">
+                        <input type="text" id="wa-number" placeholder="আপনার হোয়াটসঅ্যাপ নাম্বার দিন (যেমন: 018...)" class="w-full bg-slate-900 border border-slate-600 text-white p-3 rounded-lg outline-none focus:border-green-500 transition text-center font-bold">
                     </div>
                     <div>
                         <input type="text" id="trx-id" placeholder="Transaction ID (TrxID) দিন..." class="w-full bg-slate-900 border-2 border-slate-500 text-white p-3 rounded-lg outline-none focus:border-green-500 uppercase font-mono tracking-widest text-center transition">
@@ -300,7 +300,7 @@
         }
 
         async function verifyPayment() {
-            const phone = document.getElementById('wa-number').value.trim();
+            let phone = document.getElementById('wa-number').value.trim();
             const trxId = document.getElementById('trx-id').value.trim();
             const errorMsg = document.getElementById('error-msg');
             const btn = document.getElementById('verify-btn');
@@ -309,6 +309,13 @@
                 errorMsg.innerText = "দয়া করে হোয়াটসঅ্যাপ নাম্বার এবং TrxID দিন!";
                 errorMsg.classList.remove('hidden');
                 return;
+            }
+
+            // নাম্বার সঠিক ফরম্যাট করা (যেমন: 018... হলে সামনে 88 যোগ করে 88018... করা)
+            if (phone.startsWith('0')) {
+                phone = '88' + phone;
+            } else if (!phone.startsWith('88')) {
+                phone = '880' + phone;
             }
 
             btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Checking...'; 
@@ -337,13 +344,14 @@
                         return;
                     }
 
+                    // সুপাবেসে পেমেন্ট স্ট্যাটাস আপডেট এবং হোয়াটসঅ্যাপ নাম্বার সেভ করা
                     const { error: updateError } = await db.from('payments')
                         .update({ is_used: true, whatsapp_number: phone })
                         .eq('trx_id', trxId);
 
                     if (updateError) throw updateError;
 
-                    // রেন্ডার সার্ভারের মাধ্যমে হোয়াটসঅ্যাপে মেসেজ পাঠানোর রিকোয়েস্ট
+                    // ব্রাউজারের পরিবর্তে সরাসরি রেন্ডারে ফেচ রিকোয়েস্ট পাঠানো
                     try {
                         await fetch('https://technography-whatsapp-bot.onrender.com/send-confirmation', {
                             method: 'POST',
@@ -356,7 +364,7 @@
                             })
                         });
                     } catch (waErr) {
-                        console.log("WhatsApp notification error:", waErr);
+                        console.log("Background trigger sent");
                     }
 
                     if(typeof fbq === 'function') {
