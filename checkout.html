@@ -27,39 +27,19 @@
         <div class="bg-slate-900/90 border border-slate-800 p-6 sm:p-10 rounded-3xl shadow-2xl backdrop-blur-xl">
             
             <h2 class="text-2xl sm:text-3xl font-black mb-3 text-center text-white">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
-            <p class="text-slate-400 text-sm text-center mb-8">নিচের যেকোনো একটি মাধ্যম সিলেক্ট করে পেমেন্ট সম্পন্ন করুন</p>
+            <p class="text-slate-400 text-sm text-center mb-6">পেমেন্ট সম্পন্ন করতে নিচের মাধ্যম থেকে একটি সিলেক্ট করুন</p>
 
-            <!-- Payment Method Selector (Logos) -->
-            <div class="mb-8">
-                <label class="block text-sm font-bold text-slate-300 mb-3 text-center">পেমেন্ট মাধ্যম বেছে নিন:</label>
-                <div class="grid grid-cols-3 gap-4">
-                    <!-- bKash -->
-                    <div onclick="selectPayment('bkash')" id="method-bkash" class="payment-card cursor-pointer bg-slate-950 border-2 border-pink-500/50 p-4 rounded-2xl text-center transition-all hover:scale-105 shadow-lg">
-                        <a href="https://www.bkash.com" target="_blank" onclick="event.stopPropagation()" title="বিকাশ ওয়েবসাইট ভিজিট করুন">
-                            <img src="https://i.ibb.co.com/1G6W07R/bkash-logo.png" alt="bKash" class="h-10 mx-auto object-contain mb-1 hover:opacity-85" onerror="this.src='https://raw.githubusercontent.com/atanu-s/bd-payment-logos/master/bkash.png'">
-                        </a>
-                        <span class="text-xs font-bold text-pink-400">বিকাশ</span>
-                    </div>
-                    <!-- Nagad -->
-                    <div onclick="selectPayment('nagad')" id="method-nagad" class="payment-card cursor-pointer bg-slate-950 border-2 border-slate-800 p-4 rounded-2xl text-center transition-all hover:scale-105 shadow-lg">
-                        <a href="https://www.mynagad.com" target="_blank" onclick="event.stopPropagation()" title="নগদ ওয়েবসাইট ভিজিট করুন">
-                            <img src="https://i.ibb.co.com/4gS1wZ6/nagad-logo.png" alt="Nagad" class="h-10 mx-auto object-contain mb-1 hover:opacity-85" onerror="this.src='https://raw.githubusercontent.com/atanu-s/bd-payment-logos/master/nagad.png'">
-                        </a>
-                        <span class="text-xs font-bold text-orange-400">নগদ</span>
-                    </div>
-                    <!-- Rocket -->
-                    <div onclick="selectPayment('rocket')" id="method-rocket" class="payment-card cursor-pointer bg-slate-950 border-2 border-slate-800 p-4 rounded-2xl text-center transition-all hover:scale-105 shadow-lg">
-                        <a href="https://www.dutchbanglabank.com/rocket/rocket.html" target="_blank" onclick="event.stopPropagation()" title="রকেট ওয়েবসাইট ভিজিট করুন">
-                            <img src="https://i.ibb.co.com/5GXW07R/rocket-logo.png" alt="Rocket" class="h-10 mx-auto object-contain mb-1 hover:opacity-85" onerror="this.src='https://raw.githubusercontent.com/atanu-s/bd-payment-logos/master/rocket.png'">
-                        </a>
-                        <span class="text-xs font-bold text-purple-400">রকেট</span>
-                    </div>
-                </div>
+            <!-- Change Payment Method Button -->
+            <div class="mb-6 text-center">
+                <button type="button" onclick="openPaymentModal()" class="bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 px-5 py-2.5 rounded-xl font-bold text-sm transition shadow-md flex items-center justify-center gap-2 mx-auto">
+                    <i class="fa-solid fa-wallet"></i> পেমেন্ট মাধ্যম পরিবর্তন করুন (<span id="current-method-badge" class="text-white">বিকাশ</span>)
+                </button>
             </div>
 
-            <!-- Dynamic Selected Header / Info Box -->
+            <!-- Dynamic Selected Payment Rules Box (Initially shown for bKash) -->
             <div id="selected-info-box" class="bg-pink-950/30 border border-pink-500/40 p-5 rounded-2xl mb-8 text-center transition-all">
-                <div id="active-logo-container" class="mb-3">
+                <div class="mb-4 flex items-center justify-center gap-3">
+                    <img id="active-method-logo" src="https://i.ibb.co.com/1G6W07R/bkash-logo.png" alt="Logo" class="h-10 object-contain" onerror="this.src='https://raw.githubusercontent.com/atanu-s/bd-payment-logos/master/bkash.png'">
                     <span id="active-method-name" class="text-lg font-black text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
                 </div>
                 
@@ -122,42 +102,84 @@
         </div>
     </main>
 
-    <!-- Script for interactive payment selection & Copy functions -->
+    <!-- Half-Screen Popup Modal for Payment Selection -->
+    <div id="paymentModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4 transition-all">
+        <div class="bg-slate-900 border-t sm:border border-slate-800 w-full max-w-lg rounded-t-3xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl transform transition-transform animate-in fade-in slide-in-from-bottom duration-300">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-black text-white">পেমেন্ট মাধ্যম নির্বাচন করুন</h3>
+                <button onclick="closePaymentModal()" class="text-slate-400 hover:text-white text-xl font-bold bg-slate-800 px-3 py-1 rounded-full"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <p class="text-slate-400 text-sm mb-6 text-center">নিচের লোগোগুলোতে ক্লিক করে পেমেন্ট মাধ্যম বেছে নিন</p>
+
+            <div class="grid grid-cols-3 gap-4 mb-4">
+                <!-- bKash -->
+                <div onclick="selectPayment('bkash')" class="cursor-pointer bg-slate-950 border-2 border-pink-500/50 hover:border-pink-500 p-4 rounded-2xl text-center transition-all hover:scale-105 shadow-lg group">
+                    <a href="https://www.bkash.com" target="_blank" onclick="event.stopPropagation()" title="বিকাশ ওয়েবসাইট">
+                        <img src="https://i.ibb.co.com/1G6W07R/bkash-logo.png" alt="bKash" class="h-12 mx-auto object-contain mb-2 group-hover:opacity-90" onerror="this.src='https://raw.githubusercontent.com/atanu-s/bd-payment-logos/master/bkash.png'">
+                    </a>
+                    <span class="text-xs font-bold text-pink-400 block">বিকাশ</span>
+                </div>
+                <!-- Nagad -->
+                <div onclick="selectPayment('nagad')" class="cursor-pointer bg-slate-950 border-2 border-orange-500/50 hover:border-orange-500 p-4 rounded-2xl text-center transition-all hover:scale-105 shadow-lg group">
+                    <a href="https://www.mynagad.com" target="_blank" onclick="event.stopPropagation()" title="নগদ ওয়েবসাইট">
+                        <img src="https://i.ibb.co.com/4gS1wZ6/nagad-logo.png" alt="Nagad" class="h-12 mx-auto object-contain mb-2 group-hover:opacity-90" onerror="this.src='https://raw.githubusercontent.com/atanu-s/bd-payment-logos/master/nagad.png'">
+                    </a>
+                    <span class="text-xs font-bold text-orange-400 block">নগদ</span>
+                </div>
+                <!-- Rocket -->
+                <div onclick="selectPayment('rocket')" class="cursor-pointer bg-slate-950 border-2 border-purple-500/50 hover:border-purple-500 p-4 rounded-2xl text-center transition-all hover:scale-105 shadow-lg group">
+                    <a href="https://www.dutchbanglabank.com/rocket/rocket.html" target="_blank" onclick="event.stopPropagation()" title="রকেট ওয়েবসাইট">
+                        <img src="https://i.ibb.co.com/5GXW07R/rocket-logo.png" alt="Rocket" class="h-12 mx-auto object-contain mb-2 group-hover:opacity-90" onerror="this.src='https://raw.githubusercontent.com/atanu-s/bd-payment-logos/master/rocket.png'">
+                    </a>
+                    <span class="text-xs font-bold text-purple-400 block">রকেট</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script for interactive popup, payment selection & Copy functions -->
     <script>
-        let currentMethod = 'bkash';
+        // Open modal on page load automatically
+        window.onload = function() {
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function openPaymentModal() {
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
 
         function selectPayment(method) {
-            currentMethod = method;
-            
-            // Reset all cards border and shadow
-            document.querySelectorAll('.payment-card').forEach(card => {
-                card.classList.remove('border-pink-500', 'border-orange-500', 'border-purple-500', 'scale-105');
-                card.classList.add('border-slate-800');
-            });
-
-            // Highlight selected card and info box style
-            const selectedCard = document.getElementById(`method-${method}`);
             const infoBox = document.getElementById('selected-info-box');
             const nameSpan = document.getElementById('active-method-name');
+            const badgeSpan = document.getElementById('current-method-badge');
+            const logoImg = document.getElementById('active-method-logo');
 
-            selectedCard.classList.remove('border-slate-800');
-            
             if(method === 'bkash') {
-                selectedCard.classList.add('border-pink-500');
                 infoBox.className = "bg-pink-950/30 border border-pink-500/40 p-5 rounded-2xl mb-8 text-center transition-all";
                 nameSpan.className = "text-lg font-black text-pink-400";
                 nameSpan.innerText = "বিকাশ (Personal) পেমেন্ট নিয়ম";
+                badgeSpan.innerText = "বিকাশ";
+                logoImg.src = "https://i.ibb.co.com/1G6W07R/bkash-logo.png";
             } else if(method === 'nagad') {
-                selectedCard.classList.add('border-orange-500');
                 infoBox.className = "bg-orange-950/30 border border-orange-500/40 p-5 rounded-2xl mb-8 text-center transition-all";
                 nameSpan.className = "text-lg font-black text-orange-400";
                 nameSpan.innerText = "নগদ (Personal) পেমেন্ট নিয়ম";
+                badgeSpan.innerText = "নগদ";
+                logoImg.src = "https://i.ibb.co.com/4gS1wZ6/nagad-logo.png";
             } else if(method === 'rocket') {
-                selectedCard.classList.add('border-purple-500');
                 infoBox.className = "bg-purple-950/30 border border-purple-500/40 p-5 rounded-2xl mb-8 text-center transition-all";
                 nameSpan.className = "text-lg font-black text-purple-400";
                 nameSpan.innerText = "রকেট (Personal) পেমেন্ট নিয়ম";
+                badgeSpan.innerText = "রকেট";
+                logoImg.src = "https://i.ibb.co.com/5GXW07R/rocket-logo.png";
             }
+
+            closePaymentModal();
         }
 
         // Copy text helper function
@@ -174,7 +196,7 @@
         }
     </script>
 
-    <!-- Supabase Connection & Form Submission Script (আপনার আগের কার্যকরী লজিক এখানে যুক্ত করবেন) -->
+    <!-- Supabase Connection & Form Submission Script -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         // আপনার সুপাবেজ সাবমিট ও পিক্সেল কোড এখানে যথারীতি যুক্ত থাকবে
