@@ -1,6 +1,209 @@
-    <!-- Scripts -->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নিরাপদ পেমেন্ট ও চেকআউট | Technography</title>
+    <meta name="theme-color" content="#070b18">
+
+    <!-- Meta Pixel Code -->
     <script>
-        // ১. Supabase কানেকশন সেটআপ
+        window.addEventListener('load', function() {
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1913791776249045');
+            fbq('track', 'PageView');
+        });
+    </script>
+    <noscript><img height="1" width="1" style="display:none" alt="fb-pixel" src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"/></noscript>
+
+    <!-- Tailwind CSS, FontAwesome, Supabase JS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #070b18;
+            color: #f1f5f9;
+            font-family: system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #f8fafc !important;
+            -webkit-box-shadow: 0 0 0px 1000px #0b132b inset !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        .dark-input {
+            background-color: #0b132b !important;
+            color: #f8fafc !important;
+            border: 1px solid #1e293b !important;
+        }
+        .dark-input:focus {
+            border-color: #06b6d4 !important;
+            box-shadow: 0 0 0 1px #06b6d4 !important;
+        }
+
+        #toast {
+            visibility: hidden;
+            min-width: 280px;
+            background-color: #10b981;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 12px;
+            padding: 14px 20px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 30px;
+            font-weight: bold;
+            font-size: 14px;
+            opacity: 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 40px;
+        }
+    </style>
+</head>
+<body class="bg-[#070b18] text-slate-100 font-sans antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="text-xl font-bold tracking-wider text-cyan-400">Technography</div>
+            <nav class="flex items-center gap-6">
+                <a href="index.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">হোম</a>
+                <a href="product.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">প্রোডাক্ট</a>
+                <a href="checkout.html" class="text-cyan-400 font-medium transition text-sm">অর্ডার</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Checkout Main Section -->
+    <main class="max-w-xl mx-auto px-4 py-8">
+        <div class="bg-slate-900/90 border border-slate-800 p-5 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
+            
+            <h2 class="text-xl sm:text-2xl font-black mb-5 text-center text-white">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
+
+            <!-- Selected Payment Details Box -->
+            <div id="selected-info-box" class="bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all">
+                
+                <div class="mb-3 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <a id="active-method-link" href="https://www.bkash.com" target="_blank" title="ওয়েবসাইটে প্রবেশ করুন">
+                            <img id="active-method-logo" src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="Logo" class="h-9 w-9 object-cover rounded-lg shadow hover:opacity-80 transition">
+                        </a>
+                        <span id="active-method-name" class="text-base sm:text-lg font-bold text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
+                    </div>
+                    <button type="button" onclick="openPaymentModal()" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-slate-700">
+                        <i class="fa-solid fa-rotate"></i> পরিবর্তন
+                    </button>
+                </div>
+                
+                <div class="space-y-2.5 text-left bg-slate-950/90 p-3.5 sm:p-4 rounded-xl border border-slate-800">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <span class="text-[11px] text-slate-400 block leading-tight">সেন্ড মনি (Send Money) নাম্বার:</span>
+                            <span id="targetNumber" class="text-base sm:text-lg font-mono font-bold text-cyan-400">01871337792</span>
+                        </div>
+                        <button type="button" onclick="copyText('01871337792', this)" class="w-28 h-9 bg-slate-800 hover:bg-slate-700 active:scale-95 text-cyan-300 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 border border-slate-700 shrink-0 shadow-sm">
+                            <i class="fa-regular fa-copy"></i> <span>কপি নাম্বার</span>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-3 pt-2.5 border-t border-slate-800/80">
+                        <div class="min-w-0">
+                            <span class="text-[11px] text-slate-400 block leading-tight">প্রোডাক্ট মূল্য:</span>
+                            <span id="targetAmount" class="text-base sm:text-lg font-mono font-bold text-emerald-400">৩০০ টাকা</span>
+                        </div>
+                        <button type="button" onclick="copyText('300', this)" class="w-28 h-9 bg-slate-800 hover:bg-slate-700 active:scale-95 text-emerald-300 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 border border-slate-700 shrink-0 shadow-sm">
+                            <i class="fa-regular fa-copy"></i> <span>কপি পরিমাণ</span>
+                        </button>
+                    </div>
+                </div>
+
+                <p class="text-xs text-slate-300 mt-3 font-normal leading-relaxed text-center">
+                    ⚠️ নিয়ম: প্রথমে আপনার একাউন্ট থেকে ওপরের নাম্বারে <span class="text-yellow-400 font-bold">৩০০ টাকা</span> Send Money করুন। এরপর নিচের ফর্মটি পূরণ করুন।
+                </p>
+            </div>
+
+            <!-- Order Form -->
+            <form id="paymentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-200 mb-1.5">আপনার নাম:</label>
+                    <input type="text" id="customerName" required placeholder="আপনার পূর্ণ নাম লিখুন" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium outline-none transition placeholder:text-slate-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-200 mb-1.5">মোবাইল নাম্বার (WhatsApp)</label>
+                    <input type="tel" id="customerPhone" required placeholder="017xxxxxxxx" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium font-mono outline-none transition placeholder:text-slate-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-200 mb-1.5">ট্রানজেকশন আইডি (TrxID)</label>
+                    <input type="text" id="trxId" required placeholder="টাকা পাঠানোর পর প্রাপ্ত TRXID এখানে দিন" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium font-mono uppercase outline-none transition placeholder:text-slate-500">
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 active:scale-98 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-600/30 transition text-base mt-2 flex items-center justify-center gap-2">
+                    <span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Center Screen Modal For Method Selection -->
+    <div id="paymentModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-xs sm:max-w-sm rounded-3xl p-5 sm:p-6 shadow-2xl">
+            <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2.5">
+                <h3 class="text-base font-bold text-white">পেমেন্ট মাধ্যম নির্বাচন করুন</h3>
+                <button type="button" onclick="closePaymentModal()" class="text-slate-400 hover:text-white bg-slate-800 w-7 h-7 rounded-full flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+            
+            <p class="text-slate-400 text-xs mb-4 text-center">নিচের লোগোতে ক্লিক করে পেমেন্ট মাধ্যম বেছে নিন</p>
+
+            <div class="grid grid-cols-3 gap-2">
+                <div onclick="selectPayment('bkash')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105">
+                    <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="bKash" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
+                    <span class="text-xs font-bold text-pink-400 block">বিকাশ</span>
+                </div>
+                <div onclick="selectPayment('nagad')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105">
+                    <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" alt="Nagad" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
+                    <span class="text-xs font-bold text-orange-400 block">নগদ</span>
+                </div>
+                <div onclick="selectPayment('rocket')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105">
+                    <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" alt="Rocket" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
+                    <span class="text-xs font-bold text-purple-400 block">রকেট</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast">
+        <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">অর্ডার সম্পন্ন!</span>
+    </div>
+
+    <!-- Main Logic Scripts -->
+    <script>
         const supabaseUrl = 'https://safymsagxrjymhfdzkph.supabase.co';
         const supabaseKey = 'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv';
         const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -27,24 +230,27 @@
             const infoBox = document.getElementById('selected-info-box');
             const nameSpan = document.getElementById('active-method-name');
             const logoImg = document.getElementById('active-method-logo');
+            const methodLink = document.getElementById('active-method-link');
 
             if (method === 'bkash') {
-                infoBox.className = "bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 text-center transition-all";
+                infoBox.className = "bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
                 nameSpan.className = "text-base sm:text-lg font-bold text-pink-400";
                 nameSpan.innerText = "বিকাশ (Personal) পেমেন্ট নিয়ম";
                 logoImg.src = "https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg";
+                methodLink.href = "https://www.bkash.com";
             } else if (method === 'nagad') {
-                infoBox.className = "bg-orange-950/20 border border-orange-500/30 p-4 sm:p-5 rounded-2xl mb-6 text-center transition-all";
+                infoBox.className = "bg-orange-950/20 border border-orange-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
                 nameSpan.className = "text-base sm:text-lg font-bold text-orange-400";
                 nameSpan.innerText = "নগদ (Personal) পেমেন্ট নিয়ম";
                 logoImg.src = "https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg";
+                methodLink.href = "https://www.mynagad.com";
             } else if (method === 'rocket') {
-                infoBox.className = "bg-purple-950/20 border border-purple-500/30 p-4 sm:p-5 rounded-2xl mb-6 text-center transition-all";
+                infoBox.className = "bg-purple-950/20 border border-purple-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
                 nameSpan.className = "text-base sm:text-lg font-bold text-purple-400";
                 nameSpan.innerText = "রকেট (Personal) পেমেন্ট নিয়ম";
                 logoImg.src = "https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg";
+                methodLink.href = "https://www.dutchbanglabank.com/rocket/rocket.html";
             }
-
             closePaymentModal();
         }
 
@@ -69,7 +275,7 @@
             toast.className = "show";
             setTimeout(function(){ 
                 toast.className = toast.className.replace("show", ""); 
-            }, 3500);
+            }, 4000);
         }
 
         function resetSubmitBtn(btn) {
@@ -77,7 +283,6 @@
             btn.innerHTML = '<span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>';
         }
 
-        // মূল ভেরিফিকেশন ও সাবমিট হ্যান্ডলার
         async function handleFormSubmit(event) {
             event.preventDefault();
             
@@ -91,7 +296,6 @@
                 return;
             }
 
-            // Meta WhatsApp API ফরম্যাট (Country Code 88 নিশ্চিত করা)
             if (phone.startsWith('01')) {
                 phone = '88' + phone;
             } else if (phone.startsWith('+88')) {
@@ -102,39 +306,28 @@
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> পেমেন্ট যাচাই করা হচ্ছে...';
 
             try {
-                // ১. Supabase থেকে পেমেন্ট রেকর্ড খুঁজে আনা
-                const { data: paymentRecord, error: fetchError } = await supabase
+                const { data: checkData, error: checkError } = await supabase
                     .from('payments')
                     .select('*')
                     .eq('trx_id', trxId)
-                    .maybeSingle();
+                    .single(); 
 
-                if (fetchError) {
-                    console.error("Fetch Error:", fetchError);
-                    showToast("ডাটাবেস কানেকশনে সমস্যা হয়েছে! একটু পর আবার চেষ্টা করুন।", true);
+                if (checkError || !checkData) {
+                    showToast("❌ দুঃখিত! TrxID পাওয়া যায়নি। সঠিক TrxID দিন অথবা কিছুক্ষণ পর চেষ্টা করুন।", true);
                     resetSubmitBtn(submitBtn);
                     return;
                 }
 
-                // যদি TrxID ডাটাবেসেই না থাকে
-                if (!paymentRecord) {
-                    showToast("❌ এই TrxID-এর কোনো পেমেন্ট রেকর্ড পাওয়া যায়নি! সঠিক TrxID দিন।", true);
+                if (checkData.is_used === true) {
+                    showToast("⚠️ এই TrxID টি ইতিমধ্যেই একবার ব্যবহার করা হয়েছে!", true);
                     resetSubmitBtn(submitBtn);
                     return;
                 }
 
-                // যদি TrxID ইতিমধ্যে ব্যবহার হয়ে গিয়ে থাকে
-                if (paymentRecord.is_used === true) {
-                    showToast("⚠️ এই TrxID টি ইতিমধ্যেই ব্যবহার করা হয়েছে!", true);
-                    resetSubmitBtn(submitBtn);
-                    return;
-                }
-
-                // ২. TrxID বৈধ হলে Supabase-এ স্ট্যাটাস আপডেট করা
                 const { error: updateError } = await supabase
                     .from('payments')
-                    .update({
-                        is_used: true,
+                    .update({ 
+                        is_used: true, 
                         name: name,
                         whatsapp_number: phone,
                         method: selectedMethod
@@ -142,14 +335,12 @@
                     .eq('trx_id', trxId);
 
                 if (updateError) {
-                    console.error("Update Error:", updateError);
-                    showToast("পেমেন্ট আপডেট ব্যর্থ হয়েছে। আবার চেষ্টা করুন।", true);
+                    showToast("❌ সার্ভার সমস্যা! অনুগ্রহ করে একটু পর আবার চেষ্টা করুন।", true);
                     resetSubmitBtn(submitBtn);
                     return;
                 }
 
-                // ৩. ভেরিফিকেশন সফল হওয়ার পর Render Bot-এ কল পাঠানো
-                fetch("https://technography-whatsapp-bot.onrender.com/verify-payment", {
+                fetch("https://technography-whatsapp-bot.onrender.com/send_whatsapp", { 
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -157,23 +348,24 @@
                         whatsapp_number: phone,
                         trx_id: trxId,
                         method: selectedMethod,
-                        amount: paymentRecord.amount || 300
+                        amount: checkData.amount || 300
                     })
-                }).catch(e => console.log("Render API Trigger:", e));
+                }).catch(e => console.log("Render API failed:", e));
 
-                // Meta Pixel Purchase Event
                 if (typeof fbq === 'function') {
                     fbq('track', 'Purchase', { value: 300, currency: 'BDT' });
                 }
 
-                showToast("✅ পেমেন্ট ভেরিফাই সফল হয়েছে! WhatsApp-এ প্রোডাক্ট লিংক পাঠানো হচ্ছে।");
+                showToast("✅ পেমেন্ট সফল হয়েছে! আপনার WhatsApp-এ প্রোডাক্ট লিংক পাঠানো হচ্ছে।");
                 document.getElementById('paymentForm').reset();
-
+                
             } catch (err) {
-                console.error("System Exception:", err);
-                showToast("সিস্টেম এরর হয়েছে! পেজ রিলোড দিয়ে চেষ্টা করুন।", true);
+                console.error("Verification System Error:", err);
+                showToast("❌ সিস্টেম এরর! দয়া করে পেজটি রিলোড করে আবার চেষ্টা করুন।", true);
             } finally {
                 resetSubmitBtn(submitBtn);
             }
         }
     </script>
+</body>
+</html>
