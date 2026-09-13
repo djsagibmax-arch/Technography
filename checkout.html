@@ -6,24 +6,6 @@
     <title>নিরাপদ পেমেন্ট ও চেকআউট | Technography</title>
     <meta name="theme-color" content="#070b18">
 
-    <!-- Meta Pixel Code -->
-    <script>
-        window.addEventListener('load', function() {
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1913791776249045');
-            fbq('track', 'PageView');
-        });
-    </script>
-    <noscript><img height="1" width="1" style="display:none" alt="fb-pixel" src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"/></noscript>
-
-    <!-- Tailwind CSS, FontAwesome, Supabase JS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -37,7 +19,7 @@
             font-family: system-ui, -apple-system, sans-serif;
             overflow-x: hidden;
         }
-        
+
         input:-webkit-autofill,
         input:-webkit-autofill:hover, 
         input:-webkit-autofill:focus {
@@ -84,7 +66,7 @@
 </head>
 <body class="bg-[#070b18] text-slate-100 font-sans antialiased">
 
-    <!-- Header / Navbar -->
+    <!-- Header -->
     <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="text-xl font-bold tracking-wider text-cyan-400">Technography</div>
@@ -96,20 +78,17 @@
         </div>
     </header>
 
-    <!-- Checkout Main Section -->
+    <!-- Main Content -->
     <main class="max-w-xl mx-auto px-4 py-8">
         <div class="bg-slate-900/90 border border-slate-800 p-5 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
             
             <h2 class="text-xl sm:text-2xl font-black mb-5 text-center text-white">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
 
-            <!-- Selected Payment Details Box -->
+            <!-- Selected Method Display Box -->
             <div id="selected-info-box" class="bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all">
-                
                 <div class="mb-3 flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <a id="active-method-link" href="https://www.bkash.com" target="_blank" title="ওয়েবসাইটে প্রবেশ করুন">
-                            <img id="active-method-logo" src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="Logo" class="h-9 w-9 object-cover rounded-lg shadow hover:opacity-80 transition">
-                        </a>
+                        <img id="active-method-logo" src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="Logo" class="h-9 w-9 object-cover rounded-lg shadow">
                         <span id="active-method-name" class="text-base sm:text-lg font-bold text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
                     </div>
                     <button type="button" onclick="openPaymentModal()" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-slate-700">
@@ -144,7 +123,7 @@
                 </p>
             </div>
 
-            <!-- Order Form -->
+            <!-- Form -->
             <form id="paymentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-slate-200 mb-1.5">আপনার নাম:</label>
@@ -168,7 +147,7 @@
         </div>
     </main>
 
-    <!-- Center Screen Modal For Method Selection -->
+    <!-- Modal Popup -->
     <div id="paymentModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-xs sm:max-w-sm rounded-3xl p-5 sm:p-6 shadow-2xl">
             <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2.5">
@@ -181,15 +160,18 @@
             <p class="text-slate-400 text-xs mb-4 text-center">নিচের লোগোতে ক্লিক করে পেমেন্ট মাধ্যম বেছে নিন</p>
 
             <div class="grid grid-cols-3 gap-2">
-                <div onclick="selectPayment('bkash')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105">
+                <!-- bKash Button -->
+                <div onclick="selectPayment('bkash')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
                     <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="bKash" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
                     <span class="text-xs font-bold text-pink-400 block">বিকাশ</span>
                 </div>
-                <div onclick="selectPayment('nagad')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105">
+                <!-- Nagad Button -->
+                <div onclick="selectPayment('nagad')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
                     <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" alt="Nagad" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
                     <span class="text-xs font-bold text-orange-400 block">নগদ</span>
                 </div>
-                <div onclick="selectPayment('rocket')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105">
+                <!-- Rocket Button -->
+                <div onclick="selectPayment('rocket')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
                     <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" alt="Rocket" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
                     <span class="text-xs font-bold text-purple-400 block">রকেট</span>
                 </div>
@@ -202,27 +184,18 @@
         <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">অর্ডার সম্পন্ন!</span>
     </div>
 
-    <!-- Main Logic Scripts -->
+    <!-- Functional Scripts -->
     <script>
-        const supabaseUrl = 'https://safymsagxrjymhfdzkph.supabase.co';
-        const supabaseKey = 'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-
         let selectedMethod = 'bkash';
 
-        window.onload = function() {
-            if (!sessionStorage.getItem('modal_shown')) {
-                openPaymentModal();
-                sessionStorage.setItem('modal_shown', 'true');
-            }
-        };
-
         function openPaymentModal() {
-            document.getElementById('paymentModal').style.display = 'flex';
+            const modal = document.getElementById('paymentModal');
+            modal.style.display = 'flex';
         }
 
         function closePaymentModal() {
-            document.getElementById('paymentModal').style.display = 'none';
+            const modal = document.getElementById('paymentModal');
+            modal.style.display = 'none';
         }
 
         function selectPayment(method) {
@@ -230,27 +203,25 @@
             const infoBox = document.getElementById('selected-info-box');
             const nameSpan = document.getElementById('active-method-name');
             const logoImg = document.getElementById('active-method-logo');
-            const methodLink = document.getElementById('active-method-link');
 
             if (method === 'bkash') {
                 infoBox.className = "bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
                 nameSpan.className = "text-base sm:text-lg font-bold text-pink-400";
                 nameSpan.innerText = "বিকাশ (Personal) পেমেন্ট নিয়ম";
                 logoImg.src = "https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg";
-                methodLink.href = "https://www.bkash.com";
             } else if (method === 'nagad') {
                 infoBox.className = "bg-orange-950/20 border border-orange-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
                 nameSpan.className = "text-base sm:text-lg font-bold text-orange-400";
                 nameSpan.innerText = "নগদ (Personal) পেমেন্ট নিয়ম";
                 logoImg.src = "https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg";
-                methodLink.href = "https://www.mynagad.com";
             } else if (method === 'rocket') {
                 infoBox.className = "bg-purple-950/20 border border-purple-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
                 nameSpan.className = "text-base sm:text-lg font-bold text-purple-400";
                 nameSpan.innerText = "রকেট (Personal) পেমেন্ট নিয়ম";
                 logoImg.src = "https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg";
-                methodLink.href = "https://www.dutchbanglabank.com/rocket/rocket.html";
             }
+
+            // অবিলম্বে পপআপ বন্ধ করা
             closePaymentModal();
         }
 
@@ -306,7 +277,13 @@
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> পেমেন্ট যাচাই করা হচ্ছে...';
 
             try {
-                const { data: checkData, error: checkError } = await supabase
+                // Supabase ইনিশিয়ালাইজেশন
+                const client = window.supabase.createClient(
+                    'https://safymsagxrjymhfdzkph.supabase.co',
+                    'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv'
+                );
+
+                const { data: checkData, error: checkError } = await client
                     .from('payments')
                     .select('*')
                     .eq('trx_id', trxId)
@@ -324,7 +301,7 @@
                     return;
                 }
 
-                const { error: updateError } = await supabase
+                const { error: updateError } = await client
                     .from('payments')
                     .update({ 
                         is_used: true, 
@@ -351,10 +328,6 @@
                         amount: checkData.amount || 300
                     })
                 }).catch(e => console.log("Render API failed:", e));
-
-                if (typeof fbq === 'function') {
-                    fbq('track', 'Purchase', { value: 300, currency: 'BDT' });
-                }
 
                 showToast("✅ পেমেন্ট সফল হয়েছে! আপনার WhatsApp-এ প্রোডাক্ট লিংক পাঠানো হচ্ছে।");
                 document.getElementById('paymentForm').reset();
