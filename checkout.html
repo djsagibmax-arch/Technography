@@ -24,21 +24,31 @@
     </script>
     <noscript><img height="1" width="1" style="display:none" alt="fb-pixel" src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"/></noscript>
 
-    <!-- Tailwind & FontAwesome & Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss-cdn@3.4.10/tailwindcss.min.js"></script>
+    <!-- Tailwind CSS, FontAwesome & Supabase JS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
         body { margin: 0; padding: 0; background-color: #070b18; color: #f1f5f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden; }
         
-        /* ব্রাউজার অটোফিল হলেও যেন ব্যাকগ্রাউন্ড সাদা ও টেক্সট কালো থাকে */
+        /* ব্রাউজার অটোফিল হলেও ব্যাকগ্রাউন্ড কালো এবং টেক্সট সাদা থাকবে */
         input:-webkit-autofill,
         input:-webkit-autofill:hover, 
         input:-webkit-autofill:focus {
-            -webkit-text-fill-color: #0f172a !important;
-            -webkit-box-shadow: 0 0 0px 1000px #f8fafc inset !important;
+            -webkit-text-fill-color: #f8fafc !important;
+            -webkit-box-shadow: 0 0 0px 1000px #0b132b inset !important;
             transition: background-color 5000s ease-in-out 0s;
+        }
+
+        .dark-input {
+            background-color: #0b132b !important;
+            color: #f8fafc !important;
+            border: 1px solid #1e293b !important;
+        }
+        .dark-input:focus {
+            border-color: #06b6d4 !important;
+            box-shadow: 0 0 0 1px #06b6d4 !important;
         }
 
         /* Custom Toast Notification */
@@ -95,9 +105,8 @@
                     <span id="active-method-name" class="text-base sm:text-lg font-bold text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
                 </div>
                 
-                <!-- Info Section with Perfectly Aligned Buttons -->
                 <div class="space-y-2.5 text-left bg-slate-950/90 p-3.5 sm:p-4 rounded-xl border border-slate-800">
-                    <!-- Number Row -->
+                    <!-- Copy Number -->
                     <div class="flex items-center justify-between gap-3">
                         <div class="min-w-0">
                             <span class="text-[11px] text-slate-400 block leading-tight">সেন্ড মনি (Send Money) নাম্বার:</span>
@@ -108,7 +117,7 @@
                         </button>
                     </div>
 
-                    <!-- Amount Row -->
+                    <!-- Copy Amount -->
                     <div class="flex items-center justify-between gap-3 pt-2.5 border-t border-slate-800/80">
                         <div class="min-w-0">
                             <span class="text-[11px] text-slate-400 block leading-tight">প্রোডাক্ট মূল্য:</span>
@@ -125,22 +134,22 @@
                 </p>
             </div>
 
-            <!-- Order Form (All inputs unified to clean white background) -->
+            <!-- Order Form (Black Inputs) -->
             <form id="paymentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                 
                 <div>
                     <label class="block text-sm font-semibold text-slate-200 mb-1.5">আপনার নাম:</label>
-                    <input type="text" id="customerName" required placeholder="আপনার পূর্ণ নাম লিখুন" class="w-full bg-[#f8fafc] text-slate-900 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 font-medium text-sm transition">
+                    <input type="text" id="customerName" required placeholder="আপনার পূর্ণ নাম লিখুন" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium outline-none transition placeholder:text-slate-500">
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-slate-200 mb-1.5">মোবাইল নাম্বার (WhatsApp)</label>
-                    <input type="tel" id="customerPhone" required placeholder="017xxxxxxxx" class="w-full bg-[#f8fafc] text-slate-900 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 font-medium text-sm font-mono transition">
+                    <input type="tel" id="customerPhone" required placeholder="017xxxxxxxx" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium font-mono outline-none transition placeholder:text-slate-500">
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-slate-200 mb-1.5">ট্রানজেকশন আইডি (TrxID)</label>
-                    <input type="text" id="trxId" required placeholder="টাকা পাঠানোর পর প্রাপ্ত TRXID এখানে দিন" class="w-full bg-[#f8fafc] text-slate-900 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 font-medium text-sm font-mono uppercase transition">
+                    <input type="text" id="trxId" required placeholder="টাকা পাঠানোর পর প্রাপ্ত TRXID এখানে দিন" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium font-mono uppercase outline-none transition placeholder:text-slate-500">
                 </div>
 
                 <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 active:scale-98 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-600/30 transition text-base mt-2 flex items-center justify-center gap-2">
@@ -179,15 +188,21 @@
         </div>
     </div>
 
-    <!-- Toast Notification (Alert Box এর পরিবর্তে এটি দেখাবে) -->
+    <!-- Toast Notification (Custom Green/Red Alert) -->
     <div id="toast">
-        <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">পেমেন্ট রিকোয়েস্ট সফলভাবে জমা হয়েছে!</span>
+        <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">অর্ডার সম্পন্ন!</span>
     </div>
 
-    <!-- Scripts -->
+    <!-- Main Logic Scripts -->
     <script>
+        // ১. Supabase কানেকশন
+        const supabaseUrl = 'https://safymsagxrjymhfdzkph.supabase.co';
+        const supabaseKey = 'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
         let selectedMethod = 'bkash';
 
+        // পেজ লোড হলে একবার মডেল দেখাবে
         window.onload = function() {
             if (!sessionStorage.getItem('modal_shown')) {
                 openPaymentModal();
@@ -242,66 +257,113 @@
             });
         }
 
-        // কাস্টম টোস্ট নোটিফিকেশন ফাংশন
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toast-msg');
             toastMsg.innerText = message;
-            toast.style.backgroundColor = isError ? '#ef4444' : '#10b981';
+            toast.style.backgroundColor = isError ? '#ef4444' : '#10b981'; // Red for error, Green for success
             toast.className = "show";
             setTimeout(function(){ 
                 toast.className = toast.className.replace("show", ""); 
-            }, 3500);
+            }, 4000);
         }
 
+        function resetSubmitBtn(btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>';
+        }
+
+        // ফর্ম সাবমিট এবং সুপাবেজ ভেরিফিকেশন লজিক
         async function handleFormSubmit(event) {
             event.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
             const name = document.getElementById('customerName').value.trim();
-            const phone = document.getElementById('customerPhone').value.trim();
-            const trxId = document.getElementById('trxId').value.trim();
+            let phone = document.getElementById('customerPhone').value.trim();
+            const trxId = document.getElementById('trxId').value.trim().toUpperCase();
 
             if (!name || !phone || !trxId) {
                 showToast("সবগুলো তথ্য সঠিকভাবে পূরণ করুন", true);
                 return;
             }
 
+            // WhatsApp নাম্বারের আগে 88 যুক্ত করা
+            if (phone.startsWith('01')) {
+                phone = '88' + phone;
+            } else if (phone.startsWith('+88')) {
+                phone = phone.replace('+', '');
+            }
+
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> যাচাই করা হচ্ছে...';
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> পেমেন্ট যাচাই করা হচ্ছে...';
 
             try {
-                // Render বা ব্যাকএন্ডে সাবমিট
-                const response = await fetch("https://technography-backend.onrender.com/verify-payment", {
+                // ১. সুপাবেস ডাটাবেসে TrxID খোঁজ করা
+                const { data: checkData, error: checkError } = await supabase
+                    .from('payments')
+                    .select('*')
+                    .eq('trx_id', trxId)
+                    .single(); // একটি রো খুঁজবে
+
+                // TrxID না পেলে
+                if (checkError || !checkData) {
+                    showToast("❌ দুঃখিত! TrxID পাওয়া যায়নি। সঠিক TrxID দিন অথবা কিছুক্ষণ পর চেষ্টা করুন।", true);
+                    resetSubmitBtn(submitBtn);
+                    return;
+                }
+
+                // TrxID আগে ব্যবহার হলে
+                if (checkData.is_used === true) {
+                    showToast("⚠️ এই TrxID টি ইতিমধ্যেই একবার ব্যবহার করা হয়েছে!", true);
+                    resetSubmitBtn(submitBtn);
+                    return;
+                }
+
+                // ২. ভেরিফিকেশন সফল! এবার সুপাবেসে কাস্টমার ডেটা আপডেট করা
+                const { error: updateError } = await supabase
+                    .from('payments')
+                    .update({ 
+                        is_used: true, 
+                        name: name,
+                        whatsapp_number: phone,
+                        method: selectedMethod
+                    })
+                    .eq('trx_id', trxId);
+
+                if (updateError) {
+                    showToast("❌ সার্ভার সমস্যা! অনুগ্রহ করে একটু পর আবার চেষ্টা করুন।", true);
+                    resetSubmitBtn(submitBtn);
+                    return;
+                }
+
+                // ৩. Render এ পাইথন বটের কাছে সিগন্যাল পাঠানো (WhatsApp এ লিংক পাঠানোর জন্য)
+                // আপনার সঠিক বট লিংকের এন্ডপয়েন্টটি এখানে দেবেন
+                fetch("https://technography-whatsapp-bot.onrender.com/send_whatsapp", { 
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         name: name,
-                        phone: phone,
+                        whatsapp_number: phone,
                         trx_id: trxId,
                         method: selectedMethod,
-                        amount: 300
+                        amount: checkData.amount || 300
                     })
-                });
+                }).catch(e => console.log("Render API failed:", e));
 
-                if (response.ok) {
-                    // Meta Pixel Purchase Event
-                    if (typeof fbq === 'function') {
-                        fbq('track', 'Purchase', { value: 300, currency: 'BDT' });
-                    }
-                    showToast("ধন্যবাদ " + name + "! ভেরিফিকেশন সফল হয়েছে। WhatsApp-এ লিংক পৌঁছে যাবে।");
-                    document.getElementById('paymentForm').reset();
-                } else {
-                    showToast("অর্ডারটি সাবমিট হয়েছে! শীঘ্রই WhatsApp-এ মেসেজ যাবে।");
-                    document.getElementById('paymentForm').reset();
+                // Meta Pixel Purchase ইভেন্ট
+                if (typeof fbq === 'function') {
+                    fbq('track', 'Purchase', { value: 300, currency: 'BDT' });
                 }
-            } catch (err) {
-                // ব্যাকএন্ড কানেকশনে কোনো সমস্যা হলেও ক্লিন টোস্টে জানানো হবে
-                showToast("অর্ডার সফল হয়েছে! WhatsApp-এ ডাউনলোড লিংক পৌঁছে যাবে।");
+
+                // ৪. সফল মেসেজ দেখানো এবং ফর্ম রিসেট করা
+                showToast("✅ পেমেন্ট সফল হয়েছে! আপনার WhatsApp-এ প্রোডাক্ট লিংক পাঠানো হচ্ছে।");
                 document.getElementById('paymentForm').reset();
+                
+            } catch (err) {
+                console.error("Verification System Error:", err);
+                showToast("❌ সিস্টেম এরর! দয়া করে পেজটি রিলোড করে আবার চেষ্টা করুন।", true);
             } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>';
+                resetSubmitBtn(submitBtn);
             }
         }
     </script>
