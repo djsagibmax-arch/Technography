@@ -101,7 +101,7 @@
                 
                 <div class="mb-3 flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <!-- Clickable Active Logo -->
+                        <!-- Clickable Active Logo to visit website -->
                         <a id="active-method-link" href="https://www.bkash.com" target="_blank" title="ওয়েবসাইটে প্রবেশ করুন">
                             <img id="active-method-logo" src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="Logo" class="h-9 w-9 object-cover rounded-lg shadow hover:opacity-80 transition">
                         </a>
@@ -165,7 +165,7 @@
         </div>
     </main>
 
-    <!-- Center Screen Modal For Method Selection (Clickable Website Links) -->
+    <!-- Center Screen Modal For Method Selection -->
     <div id="paymentModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-xs sm:max-w-sm rounded-3xl p-5 sm:p-6 shadow-2xl">
             <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2.5">
@@ -175,24 +175,24 @@
                 </button>
             </div>
             
-            <p class="text-slate-400 text-xs mb-4 text-center">নিচের লোগোতে ক্লিক করে ওয়েবসাইটে প্রবেশ করুন</p>
+            <p class="text-slate-400 text-xs mb-4 text-center">নিচের লোগোতে ক্লিক করে পেমেন্ট মাধ্যম বেছে নিন</p>
 
             <div class="grid grid-cols-3 gap-2">
-                <!-- bKash Link -->
-                <a href="https://www.bkash.com" target="_blank" onclick="selectPayment('bkash')" class="block p-2 rounded-2xl text-center transition hover:scale-105">
+                <!-- bKash Button -->
+                <div onclick="selectPayment('bkash')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105">
                     <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="bKash" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
                     <span class="text-xs font-bold text-pink-400 block">বিকাশ</span>
-                </a>
-                <!-- Nagad Link -->
-                <a href="https://www.mynagad.com" target="_blank" onclick="selectPayment('nagad')" class="block p-2 rounded-2xl text-center transition hover:scale-105">
+                </div>
+                <!-- Nagad Button -->
+                <div onclick="selectPayment('nagad')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105">
                     <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" alt="Nagad" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
                     <span class="text-xs font-bold text-orange-400 block">নগদ</span>
-                </a>
-                <!-- Rocket Link -->
-                <a href="https://www.dutchbanglabank.com/rocket/rocket.html" target="_blank" onclick="selectPayment('rocket')" class="block p-2 rounded-2xl text-center transition hover:scale-105">
+                </div>
+                <!-- Rocket Button -->
+                <div onclick="selectPayment('rocket')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105">
                     <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" alt="Rocket" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
                     <span class="text-xs font-bold text-purple-400 block">রকেট</span>
-                </a>
+                </div>
             </div>
         </div>
     </div>
@@ -254,10 +254,8 @@
                 methodLink.href = "https://www.dutchbanglabank.com/rocket/rocket.html";
             }
 
-            // লিংক ব্রাউজারে ওপেন হওয়ার জন্য সামান্য একটু বিলম্ব করে পপআপ বন্ধ করা
-            setTimeout(() => {
-                closePaymentModal();
-            }, 100);
+            // পপআপ বন্ধ করা
+            closePaymentModal();
         }
 
         function copyText(text, btnElement) {
