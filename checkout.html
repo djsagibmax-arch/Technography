@@ -1,6 +1,288 @@
-    <!-- Main Logic Scripts -->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নিরাপদ পেমেন্ট ও চেকআউট | Technography</title>
+    <meta name="theme-color" content="#070b18">
+
+    <!-- FontAwesome & Supabase JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Native Responsive CSS (সাদা স্ক্রিন স্থায়ীভাবে বন্ধ করার জন্য) -->
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #070b18;
+            color: #f1f5f9;
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid #1e293b;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand { font-weight: 900; font-size: 1.25rem; color: #22d3ee; text-decoration: none; }
+        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 15px; font-size: 0.9rem; font-weight: bold; }
+        .nav-links a.active { color: #22d3ee; }
+
+        main { flex: 1; padding: 25px 15px; display: flex; justify-content: center; }
+        .card {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+            padding: 24px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .title { font-size: 1.35rem; font-weight: 800; text-align: center; margin-bottom: 18px; color: #ffffff; }
+
+        /* Selected Info Box */
+        .info-box {
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: rgba(236, 72, 153, 0.08);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }
+        .info-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .method-title { display: flex; align-items: center; gap: 8px; font-weight: bold; font-size: 1rem; color: #f472b6; }
+        .method-title img { width: 32px; height: 32px; border-radius: 8px; object-fit: cover; }
+        .change-btn {
+            background: #1e293b;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .data-row {
+            background: #070b18;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .data-label { font-size: 0.7rem; color: #94a3b8; display: block; margin-bottom: 2px; }
+        .data-val { font-size: 1rem; font-weight: bold; font-family: monospace; }
+        .val-cyan { color: #22d3ee; }
+        .val-green { color: #34d399; }
+        .copy-btn {
+            background: #1e293b;
+            color: #22d3ee;
+            border: 1px solid #334155;
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .rules-text { font-size: 0.75rem; color: #cbd5e1; text-align: center; margin-top: 10px; line-height: 1.4; }
+
+        /* Inputs */
+        .form-group { margin-bottom: 14px; }
+        label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: #e2e8f0; }
+        .dark-input {
+            width: 100%;
+            background: #070b18 !important;
+            color: #ffffff !important;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .dark-input:focus { border-color: #22d3ee; }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            margin-top: 6px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* Modal */
+        .modal {
+            display: flex;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            z-index: 100;
+        }
+        .modal-body {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 18px;
+            padding: 20px;
+            width: 100%;
+            max-width: 360px;
+        }
+        .modal-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .modal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .method-opt {
+            background: #070b18;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .method-opt:hover { transform: scale(1.05); }
+        .method-opt img { width: 45px; height: 45px; border-radius: 10px; object-fit: cover; margin: 0 auto 5px auto; display: block; }
+        .method-opt span { font-size: 0.75rem; font-weight: bold; }
+
+        /* Toast */
+        #toast {
+            visibility: hidden;
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            z-index: 200;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: 0.3s;
+            text-align: center;
+            min-width: 260px;
+        }
+        #toast.show { visibility: visible; opacity: 1; bottom: 35px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="brand">Technography</a>
+        <div class="nav-links">
+            <a href="index.html">হোম</a>
+            <a href="product.html">প্রোডাক্ট</a>
+            <a href="checkout.html" class="active">অর্ডার</a>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+        <div class="card">
+            <h2 class="title">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
+
+            <!-- Selected Method Info Box -->
+            <div id="selected-info-box" class="info-box">
+                <div class="info-header">
+                    <div class="method-title">
+                        <img id="active-method-logo" src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="Logo">
+                        <span id="active-method-name">বিকাশ (Personal) নিয়ম</span>
+                    </div>
+                    <button type="button" onclick="openPaymentModal()" class="change-btn">
+                        <i class="fa-solid fa-rotate"></i> পরিবর্তন
+                    </button>
+                </div>
+
+                <div class="data-row">
+                    <div>
+                        <span class="data-label">সেন্ড মনি (Send Money) নাম্বার:</span>
+                        <span class="data-val val-cyan">01871337792</span>
+                    </div>
+                    <button type="button" onclick="copyText('01871337792', this)" class="copy-btn">কপি নাম্বার</button>
+                </div>
+
+                <div class="data-row">
+                    <div>
+                        <span class="data-label">প্রোডাক্ট মূল্য:</span>
+                        <span class="data-val val-green">৩০০ টাকা</span>
+                    </div>
+                    <button type="button" onclick="copyText('300', this)" class="copy-btn">কপি পরিমাণ</button>
+                </div>
+
+                <p class="rules-text">
+                    ⚠️ নিয়ম: প্রথমে আপনার একাউন্ট থেকে ওপরের নাম্বারে <strong style="color:#facc15">৩০০ টাকা</strong> Send Money করুন। এরপর নিচের ফর্মটি পূরণ করুন।
+                </p>
+            </div>
+
+            <!-- Form -->
+            <form id="paymentForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label>আপনার নাম:</label>
+                    <input type="text" id="customerName" required placeholder="আপনার পূর্ণ নাম লিখুন" class="dark-input">
+                </div>
+
+                <div class="form-group">
+                    <label>মোবাইল নাম্বার (WhatsApp):</label>
+                    <input type="tel" id="customerPhone" required placeholder="017xxxxxxxx" class="dark-input">
+                </div>
+
+                <div class="form-group">
+                    <label>ট্রানজেকশন আইডি (TrxID):</label>
+                    <input type="text" id="trxId" required placeholder="টাকা পাঠানোর পর প্রাপ্ত TRXID দিন" class="dark-input" style="text-transform: uppercase;">
+                </div>
+
+                <button type="submit" id="submitBtn" class="submit-btn">
+                    পেমেন্ট কনফার্ম করুন <i class="fa-solid fa-circle-check"></i>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Modal Selection -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-body">
+            <div class="modal-top">
+                <h4 style="font-weight:bold;">পেমেন্ট মাধ্যম বেছে নিন</h4>
+                <button type="button" onclick="closePaymentModal()" style="background:none; border:none; color:#94a3b8; font-size:1.2rem; cursor:pointer;">&times;</button>
+            </div>
+            <div class="modal-grid">
+                <div onclick="selectPayment('bkash')" class="method-opt">
+                    <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="bKash">
+                    <span style="color:#f472b6;">বিকাশ</span>
+                </div>
+                <div onclick="selectPayment('nagad')" class="method-opt">
+                    <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" alt="Nagad">
+                    <span style="color:#fb923c;">নগদ</span>
+                </div>
+                <div onclick="selectPayment('rocket')" class="method-opt">
+                    <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" alt="Rocket">
+                    <span style="color:#c084fc;">রকেট</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast"></div>
+
+    <!-- Core Working Scripts -->
     <script>
-        // Supabase কানেকশন
         const supabaseUrl = 'https://safymsagxrjymhfdzkph.supabase.co';
         const supabaseKey = 'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv';
         const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -22,19 +304,22 @@
             const logoImg = document.getElementById('active-method-logo');
 
             if (method === 'bkash') {
-                infoBox.className = "bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
-                nameSpan.className = "text-base sm:text-lg font-bold text-pink-400";
-                nameSpan.innerText = "বিকাশ (Personal) পেমেন্ট নিয়ম";
+                infoBox.style.background = "rgba(236, 72, 153, 0.08)";
+                infoBox.style.borderColor = "rgba(236, 72, 153, 0.3)";
+                nameSpan.innerText = "বিকাশ (Personal) নিয়ম";
+                nameSpan.style.color = "#f472b6";
                 logoImg.src = "https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg";
             } else if (method === 'nagad') {
-                infoBox.className = "bg-orange-950/20 border border-orange-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
-                nameSpan.className = "text-base sm:text-lg font-bold text-orange-400";
-                nameSpan.innerText = "নগদ (Personal) পেমেন্ট নিয়ম";
+                infoBox.style.background = "rgba(249, 115, 22, 0.08)";
+                infoBox.style.borderColor = "rgba(249, 115, 22, 0.3)";
+                nameSpan.innerText = "নগদ (Personal) নিয়ম";
+                nameSpan.style.color = "#fb923c";
                 logoImg.src = "https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg";
             } else if (method === 'rocket') {
-                infoBox.className = "bg-purple-950/20 border border-purple-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
-                nameSpan.className = "text-base sm:text-lg font-bold text-purple-400";
-                nameSpan.innerText = "রকেট (Personal) পেমেন্ট নিয়ম";
+                infoBox.style.background = "rgba(168, 85, 247, 0.08)";
+                infoBox.style.borderColor = "rgba(168, 85, 247, 0.3)";
+                nameSpan.innerText = "রকেট (Personal) নিয়ম";
+                nameSpan.style.color = "#c084fc";
                 logoImg.src = "https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg";
             }
             closePaymentModal();
@@ -42,31 +327,22 @@
 
         function copyText(text, btnElement) {
             navigator.clipboard.writeText(text).then(() => {
-                const span = btnElement.querySelector('span');
-                const originalText = span.innerText;
-                span.innerText = 'কপি হয়েছে!';
-                btnElement.classList.add('bg-emerald-600', 'text-white');
+                const old = btnElement.innerText;
+                btnElement.innerText = 'কপি হয়েছে!';
+                btnElement.style.color = '#34d399';
                 setTimeout(() => {
-                    span.innerText = originalText;
-                    btnElement.classList.remove('bg-emerald-600', 'text-white');
+                    btnElement.innerText = old;
+                    btnElement.style.color = '#22d3ee';
                 }, 1500);
             });
         }
 
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toast-msg');
-            toastMsg.innerText = message;
+            toast.innerText = message;
             toast.style.backgroundColor = isError ? '#ef4444' : '#10b981';
             toast.className = "show";
-            setTimeout(function(){ 
-                toast.className = toast.className.replace("show", ""); 
-            }, 4000);
-        }
-
-        function resetSubmitBtn(btn) {
-            btn.disabled = false;
-            btn.innerHTML = '<span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>';
+            setTimeout(() => { toast.className = ""; }, 4000);
         }
 
         async function handleFormSubmit(event) {
@@ -82,7 +358,6 @@
                 return;
             }
 
-            // WhatsApp নম্বরের ফরম্যাট (৮৮ যোগ করা)
             if (phone.startsWith('01')) {
                 phone = '88' + phone;
             } else if (phone.startsWith('+88')) {
@@ -90,10 +365,10 @@
             }
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> পেমেন্ট যাচাই করা হচ্ছে...';
+            submitBtn.innerText = 'পেমেন্ট যাচাই করা হচ্ছে...';
 
             try {
-                // ১. ডাটাবেসে TrxID খোঁজা
+                // ১. TrxID খোঁজা
                 const { data: records, error: checkError } = await supabase
                     .from('payments')
                     .select('*')
@@ -101,26 +376,28 @@
 
                 if (checkError) {
                     showToast("ডাটাবেস এরর: " + checkError.message, true);
-                    resetSubmitBtn(submitBtn);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = 'পেমেন্ট কনফার্ম করুন';
                     return;
                 }
 
                 if (!records || records.length === 0) {
                     showToast("❌ এই TrxID ডাটাবেসে পাওয়া যায়নি! সঠিক TrxID দিন।", true);
-                    resetSubmitBtn(submitBtn);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = 'পেমেন্ট কনফার্ম করুন';
                     return;
                 }
 
                 const paymentRecord = records[0];
 
-                // ২. চেক করা ইতিমধ্যে ব্যবহার হয়েছে কিনা
                 if (paymentRecord.is_used === true) {
-                    showToast("⚠️ এই TrxID টি ইতিমধ্যে ব্যবহার করা হয়েছে!", true);
-                    resetSubmitBtn(submitBtn);
+                    showToast("⚠️ এই TrxID টি ইতিমধ্যেই ব্যবহার করা হয়েছে!", true);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = 'পেমেন্ট কনফার্ম করুন';
                     return;
                 }
 
-                // ৩. শুধুমাত্র নিশ্চিত বিদ্যমান কলামগুলো আপডেট করা (whatsapp_number এবং is_used)
+                // ২. শুধুমাত্র whatsapp_number ও is_used আপডেট করা
                 const { error: updateError } = await supabase
                     .from('payments')
                     .update({ 
@@ -130,13 +407,13 @@
                     .eq('id', paymentRecord.id);
 
                 if (updateError) {
-                    // কোনো সমস্যা হলে আসল কারণ সরাসরি লাল বক্সে ফুটে উঠবে
-                    showToast("❌ এরর: " + updateError.message, true);
-                    resetSubmitBtn(submitBtn);
+                    showToast("❌ আপডেট এরর: " + updateError.message, true);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = 'পেমেন্ট কনফার্ম করুন';
                     return;
                 }
 
-                // ৪. Render Bot-এ তথ্য পাঠানো
+                // ৩. Render Bot-এ কল পাঠানো
                 fetch("https://technography-whatsapp-bot.onrender.com/send_whatsapp", { 
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -155,7 +432,10 @@
             } catch (err) {
                 showToast("❌ কোড এরর: " + err.message, true);
             } finally {
-                resetSubmitBtn(submitBtn);
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'পেমেন্ট কনফার্ম করুন';
             }
         }
     </script>
+</body>
+</html>
