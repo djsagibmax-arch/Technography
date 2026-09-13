@@ -315,8 +315,8 @@
                     return;
                 }
 
-                // কনফার্মেশন লিংক
-                const vipAccessLink = "https://technographybd.xyz/mega-bundle-vip-access";
+                // কনফার্মেশন লিংক (.html সহ সঠিক ইউআরএল)
+                const vipAccessLink = "https://technographybd.xyz/mega-bundle-vip-access.html";
 
                 // ৩. Render-এর পাইথন বটের কাছে মেসেজ পাঠানো
                 fetch("https://technography-whatsapp-bot.onrender.com/send-confirmation", { 
@@ -335,7 +335,7 @@
                 // ৪. সাথে সাথে কাস্টমারকে এই ভিআইপি পেজের ভেতরে রিডাইরেক্ট করে দেওয়া
                 setTimeout(() => {
                     window.location.href = "mega-bundle-vip-access.html";
-                }, 1200);
+                }, 1000);
                 
             } catch (err) {
                 console.error("Verification System Error:", err);
