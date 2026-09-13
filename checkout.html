@@ -6,286 +6,190 @@
     <title>নিরাপদ পেমেন্ট ও চেকআউট | Technography</title>
     <meta name="theme-color" content="#070b18">
 
-    <!-- FontAwesome & Supabase JS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Native Responsive CSS (সাদা স্ক্রিন স্থায়ীভাবে বন্ধ করার জন্য) -->
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
+            margin: 0;
+            padding: 0;
             background-color: #070b18;
             color: #f1f5f9;
             font-family: system-ui, -apple-system, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        header {
-            background: rgba(15, 23, 42, 0.9);
-            border-bottom: 1px solid #1e293b;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .brand { font-weight: 900; font-size: 1.25rem; color: #22d3ee; text-decoration: none; }
-        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 15px; font-size: 0.9rem; font-weight: bold; }
-        .nav-links a.active { color: #22d3ee; }
-
-        main { flex: 1; padding: 25px 15px; display: flex; justify-content: center; }
-        .card {
-            background: #0f172a;
-            border: 1px solid #1e293b;
-            border-radius: 20px;
-            padding: 24px;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-        .title { font-size: 1.35rem; font-weight: 800; text-align: center; margin-bottom: 18px; color: #ffffff; }
-
-        /* Selected Info Box */
-        .info-box {
-            border-radius: 14px;
-            padding: 15px;
-            margin-bottom: 20px;
-            background: rgba(236, 72, 153, 0.08);
-            border: 1px solid rgba(236, 72, 153, 0.3);
-        }
-        .info-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .method-title { display: flex; align-items: center; gap: 8px; font-weight: bold; font-size: 1rem; color: #f472b6; }
-        .method-title img { width: 32px; height: 32px; border-radius: 8px; object-fit: cover; }
-        .change-btn {
-            background: #1e293b;
-            color: #cbd5e1;
-            border: 1px solid #334155;
-            padding: 6px 10px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            font-weight: bold;
+            overflow-x: hidden;
         }
 
-        .data-row {
-            background: #070b18;
-            border: 1px solid #1e293b;
-            border-radius: 10px;
-            padding: 10px 12px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .data-label { font-size: 0.7rem; color: #94a3b8; display: block; margin-bottom: 2px; }
-        .data-val { font-size: 1rem; font-weight: bold; font-family: monospace; }
-        .val-cyan { color: #22d3ee; }
-        .val-green { color: #34d399; }
-        .copy-btn {
-            background: #1e293b;
-            color: #22d3ee;
-            border: 1px solid #334155;
-            padding: 7px 12px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            font-weight: bold;
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #f8fafc !important;
+            -webkit-box-shadow: 0 0 0px 1000px #0b132b inset !important;
+            transition: background-color 5000s ease-in-out 0s;
         }
 
-        .rules-text { font-size: 0.75rem; color: #cbd5e1; text-align: center; margin-top: 10px; line-height: 1.4; }
-
-        /* Inputs */
-        .form-group { margin-bottom: 14px; }
-        label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: #e2e8f0; }
         .dark-input {
-            width: 100%;
-            background: #070b18 !important;
-            color: #ffffff !important;
-            border: 1px solid #334155;
-            border-radius: 10px;
-            padding: 12px 14px;
-            font-size: 0.9rem;
-            outline: none;
+            background-color: #0b132b !important;
+            color: #f8fafc !important;
+            border: 1px solid #1e293b !important;
         }
-        .dark-input:focus { border-color: #22d3ee; }
+        .dark-input:focus {
+            border-color: #06b6d4 !important;
+            box-shadow: 0 0 0 1px #06b6d4 !important;
+        }
 
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #059669, #10b981);
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
-            padding: 14px;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            margin-top: 6px;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-        }
-        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
-        /* Modal */
-        .modal {
-            display: flex;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            z-index: 100;
-        }
-        .modal-body {
-            background: #0f172a;
-            border: 1px solid #1e293b;
-            border-radius: 18px;
-            padding: 20px;
-            width: 100%;
-            max-width: 360px;
-        }
-        .modal-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .modal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .method-opt {
-            background: #070b18;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .method-opt:hover { transform: scale(1.05); }
-        .method-opt img { width: 45px; height: 45px; border-radius: 10px; object-fit: cover; margin: 0 auto 5px auto; display: block; }
-        .method-opt span { font-size: 0.75rem; font-weight: bold; }
-
-        /* Toast */
         #toast {
             visibility: hidden;
+            min-width: 280px;
+            background-color: #10b981;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 12px;
+            padding: 14px 20px;
             position: fixed;
-            bottom: 25px;
+            z-index: 1000;
             left: 50%;
             transform: translateX(-50%);
-            background: #10b981;
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 10px;
+            bottom: 30px;
             font-weight: bold;
-            font-size: 0.85rem;
-            z-index: 200;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            font-size: 14px;
             opacity: 0;
-            transition: 0.3s;
-            text-align: center;
-            min-width: 260px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s, bottom 0.3s;
         }
-        #toast.show { visibility: visible; opacity: 1; bottom: 35px; }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 40px;
+        }
     </style>
 </head>
-<body>
+<body class="bg-[#070b18] text-slate-100 font-sans antialiased">
 
     <!-- Header -->
-    <header>
-        <a href="index.html" class="brand">Technography</a>
-        <div class="nav-links">
-            <a href="index.html">হোম</a>
-            <a href="product.html">প্রোডাক্ট</a>
-            <a href="checkout.html" class="active">অর্ডার</a>
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="text-xl font-bold tracking-wider text-cyan-400">Technography</div>
+            <nav class="flex items-center gap-6">
+                <a href="index.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">হোম</a>
+                <a href="product.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">প্রোডাক্ট</a>
+                <a href="checkout.html" class="text-cyan-400 font-medium transition text-sm">অর্ডার</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Main Section -->
-    <main>
-        <div class="card">
-            <h2 class="title">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
+    <!-- Main Content -->
+    <main class="max-w-xl mx-auto px-4 py-8">
+        <div class="bg-slate-900/90 border border-slate-800 p-5 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
+            
+            <h2 class="text-xl sm:text-2xl font-black mb-5 text-center text-white">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
 
-            <!-- Selected Method Info Box -->
-            <div id="selected-info-box" class="info-box">
-                <div class="info-header">
-                    <div class="method-title">
-                        <img id="active-method-logo" src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="Logo">
-                        <span id="active-method-name">বিকাশ (Personal) নিয়ম</span>
+            <!-- Selected Method Display Box -->
+            <div id="selected-info-box" class="bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all">
+                <div class="mb-3 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <img id="active-method-logo" src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="Logo" class="h-9 w-9 object-cover rounded-lg shadow">
+                        <span id="active-method-name" class="text-base sm:text-lg font-bold text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
                     </div>
-                    <button type="button" onclick="openPaymentModal()" class="change-btn">
+                    <button type="button" onclick="openPaymentModal()" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-slate-700">
                         <i class="fa-solid fa-rotate"></i> পরিবর্তন
                     </button>
                 </div>
-
-                <div class="data-row">
-                    <div>
-                        <span class="data-label">সেন্ড মনি (Send Money) নাম্বার:</span>
-                        <span class="data-val val-cyan">01871337792</span>
+                
+                <div class="space-y-2.5 text-left bg-slate-950/90 p-3.5 sm:p-4 rounded-xl border border-slate-800">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <span class="text-[11px] text-slate-400 block leading-tight">সেন্ড মনি (Send Money) নাম্বার:</span>
+                            <span id="targetNumber" class="text-base sm:text-lg font-mono font-bold text-cyan-400">01871337792</span>
+                        </div>
+                        <button type="button" onclick="copyText('01871337792', this)" class="w-28 h-9 bg-slate-800 hover:bg-slate-700 active:scale-95 text-cyan-300 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 border border-slate-700 shrink-0 shadow-sm">
+                            <i class="fa-regular fa-copy"></i> <span>কপি নাম্বার</span>
+                        </button>
                     </div>
-                    <button type="button" onclick="copyText('01871337792', this)" class="copy-btn">কপি নাম্বার</button>
+
+                    <div class="flex items-center justify-between gap-3 pt-2.5 border-t border-slate-800/80">
+                        <div class="min-w-0">
+                            <span class="text-[11px] text-slate-400 block leading-tight">প্রোডাক্ট মূল্য:</span>
+                            <span id="targetAmount" class="text-base sm:text-lg font-mono font-bold text-emerald-400">৩০০ টাকা</span>
+                        </div>
+                        <button type="button" onclick="copyText('300', this)" class="w-28 h-9 bg-slate-800 hover:bg-slate-700 active:scale-95 text-emerald-300 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 border border-slate-700 shrink-0 shadow-sm">
+                            <i class="fa-regular fa-copy"></i> <span>কপি পরিমাণ</span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="data-row">
-                    <div>
-                        <span class="data-label">প্রোডাক্ট মূল্য:</span>
-                        <span class="data-val val-green">৩০০ টাকা</span>
-                    </div>
-                    <button type="button" onclick="copyText('300', this)" class="copy-btn">কপি পরিমাণ</button>
-                </div>
-
-                <p class="rules-text">
-                    ⚠️ নিয়ম: প্রথমে আপনার একাউন্ট থেকে ওপরের নাম্বারে <strong style="color:#facc15">৩০০ টাকা</strong> Send Money করুন। এরপর নিচের ফর্মটি পূরণ করুন।
+                <p class="text-xs text-slate-300 mt-3 font-normal leading-relaxed text-center">
+                    ⚠️ নিয়ম: প্রথমে আপনার একাউন্ট থেকে ওপরের নাম্বারে <span class="text-yellow-400 font-bold">৩০০ টাকা</span> Send Money করুন। এরপর নিচের ফর্মটি পূরণ করুন।
                 </p>
             </div>
 
             <!-- Form -->
-            <form id="paymentForm" onsubmit="handleFormSubmit(event)">
-                <div class="form-group">
-                    <label>আপনার নাম:</label>
-                    <input type="text" id="customerName" required placeholder="আপনার পূর্ণ নাম লিখুন" class="dark-input">
+            <form id="paymentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-200 mb-1.5">আপনার নাম:</label>
+                    <input type="text" id="customerName" required placeholder="আপনার পূর্ণ নাম লিখুন" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium outline-none transition placeholder:text-slate-500">
                 </div>
 
-                <div class="form-group">
-                    <label>মোবাইল নাম্বার (WhatsApp):</label>
-                    <input type="tel" id="customerPhone" required placeholder="017xxxxxxxx" class="dark-input">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-200 mb-1.5">মোবাইল নাম্বার (WhatsApp)</label>
+                    <input type="tel" id="customerPhone" required placeholder="017xxxxxxxx" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium font-mono outline-none transition placeholder:text-slate-500">
                 </div>
 
-                <div class="form-group">
-                    <label>ট্রানজেকশন আইডি (TrxID):</label>
-                    <input type="text" id="trxId" required placeholder="টাকা পাঠানোর পর প্রাপ্ত TRXID দিন" class="dark-input" style="text-transform: uppercase;">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-200 mb-1.5">ট্রানজেকশন আইডি (TrxID)</label>
+                    <input type="text" id="trxId" required placeholder="টাকা পাঠানোর পর প্রাপ্ত TRXID এখানে দিন" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium font-mono uppercase outline-none transition placeholder:text-slate-500">
                 </div>
 
-                <button type="submit" id="submitBtn" class="submit-btn">
-                    পেমেন্ট কনফার্ম করুন <i class="fa-solid fa-circle-check"></i>
+                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 active:scale-98 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-600/30 transition text-base mt-2 flex items-center justify-center gap-2">
+                    <span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>
                 </button>
             </form>
         </div>
     </main>
 
-    <!-- Modal Selection -->
-    <div id="paymentModal" class="modal">
-        <div class="modal-body">
-            <div class="modal-top">
-                <h4 style="font-weight:bold;">পেমেন্ট মাধ্যম বেছে নিন</h4>
-                <button type="button" onclick="closePaymentModal()" style="background:none; border:none; color:#94a3b8; font-size:1.2rem; cursor:pointer;">&times;</button>
+    <!-- Modal Popup -->
+    <div id="paymentModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-xs sm:max-w-sm rounded-3xl p-5 sm:p-6 shadow-2xl">
+            <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2.5">
+                <h3 class="text-base font-bold text-white">পেমেন্ট মাধ্যম নির্বাচন করুন</h3>
+                <button type="button" onclick="closePaymentModal()" class="text-slate-400 hover:text-white bg-slate-800 w-7 h-7 rounded-full flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
             </div>
-            <div class="modal-grid">
-                <div onclick="selectPayment('bkash')" class="method-opt">
-                    <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="bKash">
-                    <span style="color:#f472b6;">বিকাশ</span>
+            
+            <p class="text-slate-400 text-xs mb-4 text-center">নিচের লোগোতে ক্লিক করে পেমেন্ট মাধ্যম বেছে নিন</p>
+
+            <div class="grid grid-cols-3 gap-2">
+                <!-- bKash Button -->
+                <div onclick="selectPayment('bkash')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
+                    <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="bKash" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
+                    <span class="text-xs font-bold text-pink-400 block">বিকাশ</span>
                 </div>
-                <div onclick="selectPayment('nagad')" class="method-opt">
-                    <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" alt="Nagad">
-                    <span style="color:#fb923c;">নগদ</span>
+                <!-- Nagad Button -->
+                <div onclick="selectPayment('nagad')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
+                    <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" alt="Nagad" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
+                    <span class="text-xs font-bold text-orange-400 block">নগদ</span>
                 </div>
-                <div onclick="selectPayment('rocket')" class="method-opt">
-                    <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" alt="Rocket">
-                    <span style="color:#c084fc;">রকেট</span>
+                <!-- Rocket Button -->
+                <div onclick="selectPayment('rocket')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
+                    <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" alt="Rocket" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
+                    <span class="text-xs font-bold text-purple-400 block">রকেট</span>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast"></div>
+    <div id="toast">
+        <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">অর্ডার সম্পন্ন!</span>
+    </div>
 
-    <!-- Core Working Scripts -->
+    <!-- Functional Scripts -->
     <script>
+        // Supabase ক্লায়েন্ট ইনিশিয়ালাইজেশন
         const supabaseUrl = 'https://safymsagxrjymhfdzkph.supabase.co';
         const supabaseKey = 'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+        const client = window.supabase.createClient(supabaseUrl, supabaseKey);
 
         let selectedMethod = 'bkash';
 
@@ -304,45 +208,52 @@
             const logoImg = document.getElementById('active-method-logo');
 
             if (method === 'bkash') {
-                infoBox.style.background = "rgba(236, 72, 153, 0.08)";
-                infoBox.style.borderColor = "rgba(236, 72, 153, 0.3)";
-                nameSpan.innerText = "বিকাশ (Personal) নিয়ম";
-                nameSpan.style.color = "#f472b6";
+                infoBox.className = "bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
+                nameSpan.className = "text-base sm:text-lg font-bold text-pink-400";
+                nameSpan.innerText = "বিকাশ (Personal) পেমেন্ট নিয়ম";
                 logoImg.src = "https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg";
             } else if (method === 'nagad') {
-                infoBox.style.background = "rgba(249, 115, 22, 0.08)";
-                infoBox.style.borderColor = "rgba(249, 115, 22, 0.3)";
-                nameSpan.innerText = "নগদ (Personal) নিয়ম";
-                nameSpan.style.color = "#fb923c";
+                infoBox.className = "bg-orange-950/20 border border-orange-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
+                nameSpan.className = "text-base sm:text-lg font-bold text-orange-400";
+                nameSpan.innerText = "নগদ (Personal) পেমেন্ট নিয়ম";
                 logoImg.src = "https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg";
             } else if (method === 'rocket') {
-                infoBox.style.background = "rgba(168, 85, 247, 0.08)";
-                infoBox.style.borderColor = "rgba(168, 85, 247, 0.3)";
-                nameSpan.innerText = "রকেট (Personal) নিয়ম";
-                nameSpan.style.color = "#c084fc";
+                infoBox.className = "bg-purple-950/20 border border-purple-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
+                nameSpan.className = "text-base sm:text-lg font-bold text-purple-400";
+                nameSpan.innerText = "রকেট (Personal) পেমেন্ট নিয়ম";
                 logoImg.src = "https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg";
             }
+
             closePaymentModal();
         }
 
         function copyText(text, btnElement) {
             navigator.clipboard.writeText(text).then(() => {
-                const old = btnElement.innerText;
-                btnElement.innerText = 'কপি হয়েছে!';
-                btnElement.style.color = '#34d399';
+                const span = btnElement.querySelector('span');
+                const originalText = span.innerText;
+                span.innerText = 'কপি হয়েছে!';
+                btnElement.classList.add('bg-emerald-600', 'text-white');
                 setTimeout(() => {
-                    btnElement.innerText = old;
-                    btnElement.style.color = '#22d3ee';
+                    span.innerText = originalText;
+                    btnElement.classList.remove('bg-emerald-600', 'text-white');
                 }, 1500);
             });
         }
 
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
-            toast.innerText = message;
+            const toastMsg = document.getElementById('toast-msg');
+            toastMsg.innerText = message;
             toast.style.backgroundColor = isError ? '#ef4444' : '#10b981';
             toast.className = "show";
-            setTimeout(() => { toast.className = ""; }, 4000);
+            setTimeout(function(){ 
+                toast.className = toast.className.replace("show", ""); 
+            }, 4000);
+        }
+
+        function resetSubmitBtn(btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>';
         }
 
         async function handleFormSubmit(event) {
@@ -351,7 +262,8 @@
             const submitBtn = document.getElementById('submitBtn');
             const name = document.getElementById('customerName').value.trim();
             let phone = document.getElementById('customerPhone').value.trim();
-            const trxId = document.getElementById('trxId').value.trim().replace(/\s+/g, '').toUpperCase();
+            // স্পেস পুরোপুরি মুছে আপারকেস করা
+            const trxId = document.getElementById('trxId').value.replace(/\s+/g, '').toUpperCase();
 
             if (!name || !phone || !trxId) {
                 showToast("সবগুলো তথ্য সঠিকভাবে পূরণ করুন", true);
@@ -365,51 +277,47 @@
             }
 
             submitBtn.disabled = true;
-            submitBtn.innerText = 'পেমেন্ট যাচাই করা হচ্ছে...';
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> পেমেন্ট যাচাই করা হচ্ছে...';
 
             try {
-                // ১. TrxID খোঁজা
-                const { data: records, error: checkError } = await supabase
+                // ১. ডাটাবেসে TrxID ম্যাচ করা
+                const { data: records, error: checkError } = await client
                     .from('payments')
                     .select('*')
                     .ilike('trx_id', trxId);
 
                 if (checkError) {
-                    showToast("ডাটাবেস এরর: " + checkError.message, true);
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = 'পেমেন্ট কনফার্ম করুন';
+                    showToast("ডাটাবেস কানেকশনে সমস্যা: " + checkError.message, true);
+                    resetSubmitBtn(submitBtn);
                     return;
                 }
 
                 if (!records || records.length === 0) {
-                    showToast("❌ এই TrxID ডাটাবেসে পাওয়া যায়নি! সঠিক TrxID দিন।", true);
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = 'পেমেন্ট কনফার্ম করুন';
+                    showToast("❌ দুঃখিত! TrxID পাওয়া যায়নি। সঠিক TrxID দিন।", true);
+                    resetSubmitBtn(submitBtn);
                     return;
                 }
 
                 const paymentRecord = records[0];
 
                 if (paymentRecord.is_used === true) {
-                    showToast("⚠️ এই TrxID টি ইতিমধ্যেই ব্যবহার করা হয়েছে!", true);
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = 'পেমেন্ট কনফার্ম করুন';
+                    showToast("⚠️ এই TrxID টি ইতিমধ্যেই একবার ব্যবহার করা হয়েছে!", true);
+                    resetSubmitBtn(submitBtn);
                     return;
                 }
 
-                // ২. শুধুমাত্র whatsapp_number ও is_used আপডেট করা
-                const { error: updateError } = await supabase
+                // ২. শুধুমাত্র ডাটাবেসে থাকা নিশ্চিত কলামগুলো আপডেট করা (whatsapp_number এবং is_used)
+                const { error: updateError } = await client
                     .from('payments')
                     .update({ 
                         is_used: true, 
-                        whatsapp_number: phone 
+                        whatsapp_number: phone
                     })
                     .eq('id', paymentRecord.id);
 
                 if (updateError) {
-                    showToast("❌ আপডেট এরর: " + updateError.message, true);
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = 'পেমেন্ট কনফার্ম করুন';
+                    showToast("❌ সার্ভার সমস্যা: " + updateError.message, true);
+                    resetSubmitBtn(submitBtn);
                     return;
                 }
 
@@ -424,16 +332,16 @@
                         method: selectedMethod,
                         amount: paymentRecord.amount || 300
                     })
-                }).catch(e => console.log("Render API notice:", e));
+                }).catch(e => console.log("Render Bot call error:", e));
 
-                showToast("✅ পেমেন্ট ভেরিফাই সফল হয়েছে! WhatsApp-এ প্রোডাক্ট লিংক পাঠানো হচ্ছে।");
+                showToast("✅ পেমেন্ট সফল হয়েছে! আপনার WhatsApp-এ প্রোডাক্ট লিংক পাঠানো হচ্ছে।");
                 document.getElementById('paymentForm').reset();
                 
             } catch (err) {
-                showToast("❌ কোড এরর: " + err.message, true);
+                console.error("Verification System Error:", err);
+                showToast("❌ সিস্টেম এরর: " + err.message, true);
             } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'পেমেন্ট কনফার্ম করুন';
+                resetSubmitBtn(submitBtn);
             }
         }
     </script>
