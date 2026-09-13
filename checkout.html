@@ -160,17 +160,14 @@
             <p class="text-slate-400 text-xs mb-4 text-center">নিচের লোগোতে ক্লিক করে পেমেন্ট মাধ্যম বেছে নিন</p>
 
             <div class="grid grid-cols-3 gap-2">
-                <!-- bKash Button -->
                 <div onclick="selectPayment('bkash')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
                     <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="bKash" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
                     <span class="text-xs font-bold text-pink-400 block">বিকাশ</span>
                 </div>
-                <!-- Nagad Button -->
                 <div onclick="selectPayment('nagad')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
                     <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" alt="Nagad" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
                     <span class="text-xs font-bold text-orange-400 block">নগদ</span>
                 </div>
-                <!-- Rocket Button -->
                 <div onclick="selectPayment('rocket')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
                     <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" alt="Rocket" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
                     <span class="text-xs font-bold text-purple-400 block">রকেট</span>
@@ -186,7 +183,6 @@
 
     <!-- Functional Scripts -->
     <script>
-        // Supabase ক্লায়েন্ট ইনিশিয়ালাইজেশন
         const supabaseUrl = 'https://safymsagxrjymhfdzkph.supabase.co';
         const supabaseKey = 'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv';
         const client = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -223,7 +219,6 @@
                 nameSpan.innerText = "রকেট (Personal) পেমেন্ট নিয়ম";
                 logoImg.src = "https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg";
             }
-
             closePaymentModal();
         }
 
@@ -262,7 +257,6 @@
             const submitBtn = document.getElementById('submitBtn');
             const name = document.getElementById('customerName').value.trim();
             let phone = document.getElementById('customerPhone').value.trim();
-            // স্পেস পুরোপুরি মুছে আপারকেস করা
             const trxId = document.getElementById('trxId').value.replace(/\s+/g, '').toUpperCase();
 
             if (!name || !phone || !trxId) {
@@ -280,7 +274,7 @@
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> পেমেন্ট যাচাই করা হচ্ছে...';
 
             try {
-                // ১. ডাটাবেসে TrxID ম্যাচ করা
+                // ১. Supabase থেকে TrxID যাচাই করা
                 const { data: records, error: checkError } = await client
                     .from('payments')
                     .select('*')
@@ -293,7 +287,7 @@
                 }
 
                 if (!records || records.length === 0) {
-                    showToast("❌ দুঃখিত! TrxID পাওয়া যায়নি। সঠিক TrxID দিন।", true);
+                    showToast("❌ এই TrxID ডাটাবেসে পাওয়া যায়নি! সঠিক TrxID দিন।", true);
                     resetSubmitBtn(submitBtn);
                     return;
                 }
@@ -306,7 +300,7 @@
                     return;
                 }
 
-                // ২. শুধুমাত্র ডাটাবেসে থাকা নিশ্চিত কলামগুলো আপডেট করা (whatsapp_number এবং is_used)
+                // ২. Supabase-এ স্ট্যাটাস আপডেট ও নাম্বার সেভ করা
                 const { error: updateError } = await client
                     .from('payments')
                     .update({ 
@@ -321,16 +315,15 @@
                     return;
                 }
 
-                // ৩. Render Bot-এ কল পাঠানো
-                fetch("https://technography-whatsapp-bot.onrender.com/send_whatsapp", { 
+                // ৩. সরাসরি Render-এর পাইথন বটের সঠিক এন্ডপয়েন্ট ("/send-confirmation") এ কল পাঠানো
+                fetch("https://technography-whatsapp-bot.onrender.com/send-confirmation", { 
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
+                        phone: phone,
                         name: name,
-                        whatsapp_number: phone,
-                        trx_id: paymentRecord.trx_id,
-                        method: selectedMethod,
-                        amount: paymentRecord.amount || 300
+                        product: "300,000+ প্রিমিয়াম ভাইরাল AI Reels & Shorts বান্ডিল",
+                        link: "https://yourwebsite.com/download-link" // এখানে আপনার আসল প্রোডাক্ট বা ড্রাইভের ডাউনলোড লিংকটি বসিয়ে দেবেন
                     })
                 }).catch(e => console.log("Render Bot call error:", e));
 
