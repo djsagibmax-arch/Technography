@@ -9,13 +9,25 @@
     <meta property="og:description" content="ঘরে বসেই ফেসবুক ও ইউটিউব থেকে আয় করুন। স্পেশাল ডিসকাউন্টে আজই কিনুন।">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 3D টেক্সট এবং গ্লো ইফেক্ট */
         .text-3d-glow {
             text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 4px 15px rgba(6,182,212,0.6), 0 0 25px rgba(59,130,246,0.5);
         }
         .box-3d {
             box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 10px 25px -5px rgba(0, 0, 0, 0.7), 0 0 20px rgba(6, 182, 212, 0.15);
             transform: perspective(600px) translateZ(10px);
+        }
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(239, 68, 68, 0.5), 0 0 40px rgba(245, 158, 11, 0.3);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(239, 68, 68, 0.8), 0 0 60px rgba(245, 158, 11, 0.5);
+                transform: scale(1.03);
+            }
+        }
+        .sticker-badge {
+            animation: pulse-glow 2.5s infinite ease-in-out;
         }
     </style>
 </head>
@@ -37,42 +49,60 @@
     <section class="relative overflow-hidden pt-8 pb-16 lg:py-24">
         <div class="max-w-5xl mx-auto px-4 text-center">
 
-            <!-- ৪৮ ঘণ্টার ৩D লাইভ টাইমার (টিক চিহ্ন সহ চিহ্নিত স্থানে) -->
-            <div class="mb-10 max-w-lg mx-auto">
+            <!-- ৪৮ ঘণ্টার ৩D লাইভ টাইমার -->
+            <div class="mb-6 max-w-lg mx-auto">
                 <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs sm:text-sm font-semibold mb-4 animate-pulse">
                     <span>⚡ মেগা ডিসকাউন্ট অফার শেষ হতে বাকি</span>
                 </div>
                 
                 <div class="grid grid-cols-4 gap-2 sm:gap-4 bg-slate-900/90 border border-cyan-500/30 p-4 sm:p-5 rounded-2xl box-3d backdrop-blur-xl">
-                    <!-- দিন -->
                     <div class="flex flex-col items-center bg-slate-950/80 border border-slate-800/80 rounded-xl py-3 px-1">
-                        <span id="t-days" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-cyan-200 via-cyan-400 to-blue-500">01</span>
+                        <span id="t-days" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-cyan-200 via-cyan-400 to-blue-500">০১</span>
                         <span class="text-[11px] sm:text-xs font-bold text-cyan-300 tracking-wider mt-1 uppercase">দিন</span>
                     </div>
-                    <!-- ঘণ্টা -->
                     <div class="flex flex-col items-center bg-slate-950/80 border border-slate-800/80 rounded-xl py-3 px-1">
-                        <span id="t-hours" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-cyan-200 via-cyan-400 to-blue-500">23</span>
+                        <span id="t-hours" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-cyan-200 via-cyan-400 to-blue-500">২৩</span>
                         <span class="text-[11px] sm:text-xs font-bold text-cyan-300 tracking-wider mt-1 uppercase">ঘণ্টা</span>
                     </div>
-                    <!-- মিনিট -->
                     <div class="flex flex-col items-center bg-slate-950/80 border border-slate-800/80 rounded-xl py-3 px-1">
-                        <span id="t-minutes" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-cyan-200 via-cyan-400 to-blue-500">59</span>
+                        <span id="t-minutes" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-cyan-200 via-cyan-400 to-blue-500">৫৭</span>
                         <span class="text-[11px] sm:text-xs font-bold text-cyan-300 tracking-wider mt-1 uppercase">মিনিট</span>
                     </div>
-                    <!-- সেকেন্ড -->
                     <div class="flex flex-col items-center bg-slate-950/80 border border-slate-800/80 rounded-xl py-3 px-1">
-                        <span id="t-seconds" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-amber-200 via-amber-400 to-orange-500">59</span>
+                        <span id="t-seconds" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-amber-200 via-amber-400 to-orange-500">২৮</span>
                         <span class="text-[11px] sm:text-xs font-bold text-amber-300 tracking-wider mt-1 uppercase">সেকেন্ড</span>
                     </div>
                 </div>
             </div>
 
-            <span class="inline-block bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-4 py-1.5 rounded-full text-sm font-semibold mb-6">🔥 সীমিত সময়ের জন্য স্পেশাল অফার</span>
+            <!-- আকর্ষণীয় ৭০% ডিসকাউন্ট স্টিকার ও প্রাইজ ব্যাজ (চিহ্নিত স্থানে প্রতিস্থাপিত) -->
+            <div class="my-6 max-w-md mx-auto">
+                <div class="sticker-badge relative bg-gradient-to-r from-red-600 via-rose-600 to-amber-500 p-0.5 rounded-2xl shadow-2xl">
+                    <div class="bg-slate-950/95 backdrop-blur-md rounded-2xl px-5 py-3.5 flex items-center justify-between gap-3 border border-white/10">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-gradient-to-r from-red-500 to-amber-500 text-white text-xs sm:text-sm font-black px-3 py-1.5 rounded-lg uppercase tracking-wider shadow-md">
+                                ৭০% ছাড়
+                            </span>
+                            <div class="text-left">
+                                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wide">রেগুলার মূল্য</div>
+                                <div class="text-base sm:text-lg font-bold text-rose-400 line-through">১,০০০ ৳</div>
+                            </div>
+                        </div>
+                        <div class="w-px h-10 bg-slate-800"></div>
+                        <div class="text-right">
+                            <div class="text-[11px] font-bold text-emerald-400 uppercase tracking-wide">অফার প্রাইস</div>
+                            <div class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
+                                মাত্র ৩০০ ৳
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <h1 class="text-3xl sm:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
                 ৩,০০,০০০+ প্রিমিয়াম ভাইরাল <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">AI Reels & Shorts</span> বান্ডিল
             </h1>
 
-            <!-- কালারিং হাইলাইট করা সাব-টেক্সট -->
             <p class="text-base sm:text-xl font-medium max-w-2xl mx-auto mb-10 leading-relaxed text-slate-200">
                 কোনো এডিটিং অভিজ্ঞতা ছাড়াই আপনার <span class="text-blue-400 font-semibold underline decoration-blue-500/40">ফেসবুক পেজ</span>, <span class="text-red-400 font-semibold underline decoration-red-500/40">ইউটিউব চ্যানেল</span> এবং <span class="text-pink-400 font-semibold underline decoration-pink-500/40">টিকটক অ্যাকাউন্ট</span> রাতারাতি গ্রো করুন। সাথে সম্পূর্ণ ফ্রি পাচ্ছেন <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">ক্যাপকাট প্রো</span>!
             </p>
@@ -88,13 +118,11 @@
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
-    <!-- ৪৮ ঘণ্টার রিয়েল-টাইম টাইমার স্ক্রিপ্ট -->
     <script>
         function initializeCountdown() {
             const STORAGE_KEY = 'technography_deal_end_time';
             let targetTime = localStorage.getItem(STORAGE_KEY);
 
-            // নতুন ভিজিটর হলে এখন থেকে ঠিক ৪৮ ঘণ্টা সেট হবে
             if (!targetTime || new Date().getTime() > parseInt(targetTime)) {
                 targetTime = new Date().getTime() + (48 * 60 * 60 * 1000);
                 localStorage.setItem(STORAGE_KEY, targetTime);
@@ -107,7 +135,6 @@
                 const diff = targetTime - now;
 
                 if (diff <= 0) {
-                    // সময় শেষ হলে পুনরায় ৪৮ ঘণ্টার সাইকেল অটো চালু হবে
                     localStorage.removeItem(STORAGE_KEY);
                     initializeCountdown();
                     return;
