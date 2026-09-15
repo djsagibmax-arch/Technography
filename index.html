@@ -9,20 +9,33 @@
     <meta property="og:description" content="ঘরে বসেই ফেসবুক ও ইউটিউব থেকে আয় করুন। স্পেশাল ডিসকাউন্টে আজই কিনুন।">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .text-3d-glow {
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 4px 15px rgba(6,182,212,0.6), 0 0 25px rgba(59,130,246,0.5);
+        /* অতি-উজ্জ্বল হাইপার-গ্লো টেক্সট ইফেক্ট */
+        .neon-glow-cyan {
+            text-shadow: 0 0 8px #22d3ee, 0 0 20px #06b6d4, 0 0 35px #0284c7;
         }
+        .neon-glow-emerald {
+            text-shadow: 0 0 8px #34d399, 0 0 20px #10b981, 0 0 35px #059669;
+        }
+        .neon-glow-purple {
+            text-shadow: 0 0 8px #c084fc, 0 0 20px #a855f7, 0 0 35px #7e22ce;
+        }
+        .neon-glow-amber {
+            text-shadow: 0 0 8px #fbbf24, 0 0 22px #f59e0b, 0 0 40px #d97706;
+        }
+
+        /* প্রাণবন্ত ৩D কার্ড কনটেইনার */
         .box-3d {
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 10px 25px -5px rgba(0, 0, 0, 0.7), 0 0 20px rgba(6, 182, 212, 0.15);
-            transform: perspective(600px) translateZ(10px);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25), 0 12px 35px -5px rgba(0, 0, 0, 0.9), 0 0 30px rgba(6, 182, 212, 0.28);
+            transform: perspective(700px) translateZ(12px);
         }
+
         @keyframes pulse-glow {
             0%, 100% {
-                box-shadow: 0 0 20px rgba(239, 68, 68, 0.5), 0 0 40px rgba(245, 158, 11, 0.3);
+                box-shadow: 0 0 25px rgba(239, 68, 68, 0.55), 0 0 45px rgba(245, 158, 11, 0.35);
                 transform: scale(1);
             }
             50% {
-                box-shadow: 0 0 30px rgba(239, 68, 68, 0.8), 0 0 60px rgba(245, 158, 11, 0.5);
+                box-shadow: 0 0 35px rgba(239, 68, 68, 0.9), 0 0 65px rgba(245, 158, 11, 0.6);
                 transform: scale(1.03);
             }
         }
@@ -49,33 +62,37 @@
     <section class="relative overflow-hidden pt-8 pb-16 lg:py-24">
         <div class="max-w-5xl mx-auto px-4 text-center">
 
-            <!-- ৪৮ ঘণ্টার ৩D লাইভ টাইমার -->
+            <!-- অতি-উজ্জ্বল ও কালারিং লাইভ টাইমার -->
             <div class="mb-6 max-w-lg mx-auto">
-                <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs sm:text-sm font-semibold mb-4 animate-pulse">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs sm:text-sm font-bold mb-4 animate-pulse shadow-lg shadow-amber-500/20">
                     <span>⚡ মেগা ডিসকাউন্ট অফার শেষ হতে বাকি</span>
                 </div>
                 
-                <div class="grid grid-cols-4 gap-2 sm:gap-4 bg-slate-900/90 border border-cyan-500/30 p-4 sm:p-5 rounded-2xl box-3d backdrop-blur-xl">
-                    <div class="flex flex-col items-center bg-slate-950/80 border border-slate-800/80 rounded-xl py-3 px-1">
-                        <span id="t-days" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-cyan-200 via-cyan-400 to-blue-500">০১</span>
-                        <span class="text-[11px] sm:text-xs font-bold text-cyan-300 tracking-wider mt-1 uppercase">দিন</span>
+                <div class="grid grid-cols-4 gap-2.5 sm:gap-4 bg-slate-900/95 border-2 border-cyan-400/50 p-4 sm:p-6 rounded-3xl box-3d backdrop-blur-2xl">
+                    <!-- দিন (নিয়ন সায়ান) -->
+                    <div class="flex flex-col items-center bg-cyan-950/40 border border-cyan-400/40 rounded-2xl py-3 px-1 shadow-inner">
+                        <span id="t-days" class="text-3xl sm:text-5xl font-black text-cyan-200 neon-glow-cyan">০১</span>
+                        <span class="text-[12px] sm:text-xs font-black text-cyan-300 tracking-wider mt-1.5 uppercase">দিন</span>
                     </div>
-                    <div class="flex flex-col items-center bg-slate-950/80 border border-slate-800/80 rounded-xl py-3 px-1">
-                        <span id="t-hours" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-cyan-200 via-cyan-400 to-blue-500">২৩</span>
-                        <span class="text-[11px] sm:text-xs font-bold text-cyan-300 tracking-wider mt-1 uppercase">ঘণ্টা</span>
+                    <!-- ঘণ্টা (নিয়ন এমারেল্ড গ্রিন) -->
+                    <div class="flex flex-col items-center bg-emerald-950/40 border border-emerald-400/40 rounded-2xl py-3 px-1 shadow-inner">
+                        <span id="t-hours" class="text-3xl sm:text-5xl font-black text-emerald-200 neon-glow-emerald">২৩</span>
+                        <span class="text-[12px] sm:text-xs font-black text-emerald-300 tracking-wider mt-1.5 uppercase">ঘণ্টা</span>
                     </div>
-                    <div class="flex flex-col items-center bg-slate-950/80 border border-slate-800/80 rounded-xl py-3 px-1">
-                        <span id="t-minutes" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-cyan-200 via-cyan-400 to-blue-500">৫৭</span>
-                        <span class="text-[11px] sm:text-xs font-bold text-cyan-300 tracking-wider mt-1 uppercase">মিনিট</span>
+                    <!-- মিনিট (নিয়ন পার্পল) -->
+                    <div class="flex flex-col items-center bg-purple-950/40 border border-purple-400/40 rounded-2xl py-3 px-1 shadow-inner">
+                        <span id="t-minutes" class="text-3xl sm:text-5xl font-black text-purple-200 neon-glow-purple">৫৭</span>
+                        <span class="text-[12px] sm:text-xs font-black text-purple-300 tracking-wider mt-1.5 uppercase">মিনিট</span>
                     </div>
-                    <div class="flex flex-col items-center bg-slate-950/80 border border-slate-800/80 rounded-xl py-3 px-1">
-                        <span id="t-seconds" class="text-2xl sm:text-4xl font-extrabold text-3d-glow text-transparent bg-clip-text bg-gradient-to-b from-amber-200 via-amber-400 to-orange-500">২৮</span>
-                        <span class="text-[11px] sm:text-xs font-bold text-amber-300 tracking-wider mt-1 uppercase">সেকেন্ড</span>
+                    <!-- সেকেন্ড (নিয়ন গোল্ডেন অ্যাম্বার) -->
+                    <div class="flex flex-col items-center bg-amber-950/40 border border-amber-400/40 rounded-2xl py-3 px-1 shadow-inner">
+                        <span id="t-seconds" class="text-3xl sm:text-5xl font-black text-amber-200 neon-glow-amber">২৮</span>
+                        <span class="text-[12px] sm:text-xs font-black text-amber-300 tracking-wider mt-1.5 uppercase">সেকেন্ড</span>
                     </div>
                 </div>
             </div>
 
-            <!-- আকর্ষণীয় ৭০% ডিসকাউন্ট স্টিকার ও প্রাইজ ব্যাজ (চিহ্নিত স্থানে প্রতিস্থাপিত) -->
+            <!-- আকর্ষণীয় ৭০% ডিসকাউন্ট স্টিকার ও প্রাইজ ব্যাজ -->
             <div class="my-6 max-w-md mx-auto">
                 <div class="sticker-badge relative bg-gradient-to-r from-red-600 via-rose-600 to-amber-500 p-0.5 rounded-2xl shadow-2xl">
                     <div class="bg-slate-950/95 backdrop-blur-md rounded-2xl px-5 py-3.5 flex items-center justify-between gap-3 border border-white/10">
@@ -118,26 +135,33 @@
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
+    <!-- অনবরত ৪৮ ঘণ্টার সাইকেল ও ১০ ঘণ্টার নিচে আসলে রিস্টার্ট স্ক্রিপ্ট -->
     <script>
-        function initializeCountdown() {
+        function initializeContinuousCountdown() {
             const STORAGE_KEY = 'technography_deal_end_time';
-            let targetTime = localStorage.getItem(STORAGE_KEY);
+            const TOTAL_DURATION = 48 * 60 * 60 * 1000;      // ৪৮ ঘণ্টা
+            const MIN_THRESHOLD = 10 * 60 * 60 * 1000;       // ১০ ঘণ্টা
 
-            if (!targetTime || new Date().getTime() > parseInt(targetTime)) {
-                targetTime = new Date().getTime() + (48 * 60 * 60 * 1000);
+            let targetTime = localStorage.getItem(STORAGE_KEY);
+            const now = new Date().getTime();
+
+            // ১০ ঘণ্টার নিচে আসলে অথবা মেয়াদ শেষ হলে স্বয়ংক্রিয়ভাবে নতুন ৪৮ ঘণ্টা সেট হবে
+            if (!targetTime || (parseInt(targetTime) - now) <= MIN_THRESHOLD) {
+                targetTime = now + TOTAL_DURATION;
                 localStorage.setItem(STORAGE_KEY, targetTime);
             } else {
                 targetTime = parseInt(targetTime);
             }
 
             function updateDisplay() {
-                const now = new Date().getTime();
-                const diff = targetTime - now;
+                const currentTime = new Date().getTime();
+                let diff = targetTime - currentTime;
 
-                if (diff <= 0) {
-                    localStorage.removeItem(STORAGE_KEY);
-                    initializeCountdown();
-                    return;
+                // ১০ ঘণ্টার কমে এলে তাৎক্ষণিক আবার ৪৮ ঘণ্টা থেকে রিস্টার্ট হবে
+                if (diff <= MIN_THRESHOLD) {
+                    targetTime = currentTime + TOTAL_DURATION;
+                    localStorage.setItem(STORAGE_KEY, targetTime);
+                    diff = TOTAL_DURATION;
                 }
 
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -160,7 +184,7 @@
             setInterval(updateDisplay, 1000);
         }
 
-        initializeCountdown();
+        initializeContinuousCountdown();
     </script>
 </body>
 </html>
