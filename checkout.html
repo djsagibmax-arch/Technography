@@ -6,6 +6,13 @@
     <title>নিরাপদ পেমেন্ট ও চেকআউট | Technography</title>
     <meta name="theme-color" content="#070b18">
 
+    <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
+    <link rel="dns-prefetch" href="https://i.postimg.cc">
+
+    <link rel="preload" as="image" href="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" fetchpriority="high">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -103,12 +110,13 @@
             <div id="selected-info-box" class="bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all">
                 <div class="mb-3 flex items-center justify-between">
                     <div class="flex items-center gap-2.5">
-                        <div id="active-method-icon" class="h-10 w-10 rounded-xl flex items-center justify-center text-white bg-[#e2136e] shadow-md border border-white/10">
-                            <!-- JS Inject icon -->
-                        </div>
+                        <img id="active-method-logo" 
+                             src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" 
+                             alt="Logo" 
+                             class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
                         <span id="active-method-name" class="text-base sm:text-lg font-bold text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
                     </div>
-                    <!-- পরিবর্তন বাটন সরাসরি মেথড সিলেকশন পেজে ফেরত পাঠাবে -->
+                    <!-- পরিবর্তন বাটন প্রথম পেজে পাঠিয়ে দিবে -->
                     <a href="select-payment.html" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-slate-700">
                         <i class="fa-solid fa-rotate"></i> পরিবর্তন
                     </a>
@@ -186,34 +194,29 @@
 
     <!-- লজিক স্ক্রিপ্ট -->
     <script>
-        // URL থেকে সিলেক্টেড মেথড পড়া (যেমন: checkout.html?method=nagad)
+        // URL থেকে সিলেক্টেড মেথড নেওয়া (যেমন: checkout.html?method=nagad)
         const urlParams = new URLSearchParams(window.location.search);
         let currentMethod = urlParams.get('method') || 'bkash';
 
+        // আপনার আসল ছবিগুলোর লিংক
         const paymentConfig = {
             bkash: {
                 name: 'বিকাশ (Personal) পেমেন্ট নিয়ম',
-                bgColor: 'bg-pink-950/20',
-                borderColor: 'border-pink-500/30',
-                textColor: 'text-pink-400',
-                iconBg: 'bg-[#e2136e]',
-                svg: '<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>'
+                logo: 'https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg',
+                boxClass: 'bg-pink-950/20 border-pink-500/30',
+                textColor: 'text-pink-400'
             },
             nagad: {
                 name: 'নগদ (Personal) পেমেন্ট নিয়ম',
-                bgColor: 'bg-orange-950/20',
-                borderColor: 'border-orange-500/30',
-                textColor: 'text-orange-400',
-                iconBg: 'bg-[#f7941d]',
-                svg: '<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.5h-2v-2h2zm0-4h-2V7h2z"/></svg>'
+                logo: 'https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg',
+                boxClass: 'bg-orange-950/20 border-orange-500/30',
+                textColor: 'text-orange-400'
             },
             rocket: {
                 name: 'রকেট (Personal) পেমেন্ট নিয়ম',
-                bgColor: 'bg-purple-950/20',
-                borderColor: 'border-purple-500/30',
-                textColor: 'text-purple-400',
-                iconBg: 'bg-[#8c3494]',
-                svg: '<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M13.13 2.18l-1.99.72c-.44.16-.83.47-1.12.87L2.1 14.71a1.5 1.5 0 0 0 1.25 2.29h4.15l-1.4 4.54c-.23.75.54 1.43 1.23 1.09l14.61-7.24a1.5 1.5 0 0 0 .14-2.61L14.77 2.6a2.03 2.03 0 0 0-1.64-.42z"/></svg>'
+                logo: 'https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg',
+                boxClass: 'bg-purple-950/20 border-purple-500/30',
+                textColor: 'text-purple-400'
             }
         };
 
@@ -221,16 +224,15 @@
             const conf = paymentConfig[methodKey] || paymentConfig.bkash;
             const box = document.getElementById('selected-info-box');
             const name = document.getElementById('active-method-name');
-            const icon = document.getElementById('active-method-icon');
+            const logo = document.getElementById('active-method-logo');
 
-            // রিসেট ও নতুন ক্লাস অ্যাড
-            box.className = `p-4 sm:p-5 rounded-2xl mb-6 transition-all border ${conf.bgColor} ${conf.borderColor}`;
+            box.className = `p-4 sm:p-5 rounded-2xl mb-6 transition-all border ${conf.boxClass}`;
             name.className = `text-base sm:text-lg font-bold ${conf.textColor}`;
             name.innerText = conf.name;
-            icon.className = `h-10 w-10 rounded-xl flex items-center justify-center text-white shadow-md border border-white/10 ${conf.iconBg}`;
-            icon.innerHTML = conf.svg;
+            logo.src = conf.logo;
         }
 
+        // পেজ লোড হওয়ার সাথে সাথে মেথড বসিয়ে দেওয়া
         renderSelectedMethod(currentMethod);
 
         function copyText(text, btn) {
@@ -258,7 +260,6 @@
             btn.disabled = true;
             btn.innerText = 'অর্ডার প্রসেস হচ্ছে...';
 
-            // আপনার প্রয়োজনীয় সাবমিশন কোড
             setTimeout(() => {
                 showToast("অর্ডার সফলভাবে সম্পন্ন হয়েছে!");
                 btn.disabled = false;
