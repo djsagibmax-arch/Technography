@@ -6,15 +6,6 @@
     <title>নিরাপদ পেমেন্ট ও চেকআউট | Technography</title>
     <meta name="theme-color" content="#070b18">
 
-    <!-- পোস্টইমেজ সার্ভারের সাথে দ্রুততম কানেকশন -->
-    <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
-    <link rel="dns-prefetch" href="https://i.postimg.cc">
-
-    <!-- ৩টি পেমেন্ট লোগোই কোনো বিলম্ব ছাড়াই আগে আনার জন্য প্রায়োরিটি প্রিলোডার -->
-    <link rel="preload" as="image" href="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" fetchpriority="high">
-    <link rel="preload" as="image" href="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" fetchpriority="high">
-    <link rel="preload" as="image" href="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" fetchpriority="high">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -47,11 +38,9 @@
             box-shadow: 0 0 0 1px #06b6d4 !important;
         }
 
-        /* 3D এবং উজ্জ্বল কালারফুল WhatsApp বাটন */
         .btn-whatsapp-3d {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             box-shadow: 0 6px 0px #075E54, 0 12px 25px rgba(37, 211, 102, 0.45);
-            transform: translateY(0);
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .btn-whatsapp-3d:hover {
@@ -99,7 +88,7 @@
             <nav class="flex items-center gap-6">
                 <a href="index.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">হোম</a>
                 <a href="product.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">প্রোডাক্ট</a>
-                <a href="checkout.html" class="text-cyan-400 font-medium transition text-sm">অর্ডার</a>
+                <a href="select-payment.html" class="text-cyan-400 font-medium transition text-sm">অর্ডার</a>
             </nav>
         </div>
     </header>
@@ -114,18 +103,15 @@
             <div id="selected-info-box" class="bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all">
                 <div class="mb-3 flex items-center justify-between">
                     <div class="flex items-center gap-2.5">
-                        <img id="active-method-logo" 
-                             src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" 
-                             alt="Logo" 
-                             fetchpriority="high"
-                             loading="eager"
-                             decoding="sync"
-                             class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
+                        <div id="active-method-icon" class="h-10 w-10 rounded-xl flex items-center justify-center text-white bg-[#e2136e] shadow-md border border-white/10">
+                            <!-- JS Inject icon -->
+                        </div>
                         <span id="active-method-name" class="text-base sm:text-lg font-bold text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
                     </div>
-                    <button type="button" onclick="openPaymentModal()" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-slate-700">
+                    <!-- পরিবর্তন বাটন সরাসরি মেথড সিলেকশন পেজে ফেরত পাঠাবে -->
+                    <a href="select-payment.html" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-slate-700">
                         <i class="fa-solid fa-rotate"></i> পরিবর্তন
-                    </button>
+                    </a>
                 </div>
                 
                 <div class="space-y-2.5 text-left bg-slate-950/90 p-3.5 sm:p-4 rounded-xl border border-slate-800">
@@ -176,7 +162,7 @@
                     <span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>
                 </button>
 
-                <!-- ৩D কালারফুল WhatsApp বাটন -->
+                <!-- WhatsApp বাটন -->
                 <div class="mt-8 pt-5 border-t border-slate-800 text-center">
                     <p class="text-xs sm:text-sm text-amber-400 font-semibold mb-3 flex items-center justify-center gap-1.5">
                         <i class="fa-solid fa-triangle-exclamation"></i>
@@ -193,56 +179,93 @@
         </div>
     </main>
 
-    <!-- Modal Popup -->
-    <div id="paymentModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-xs sm:max-w-sm rounded-3xl p-5 sm:p-6 shadow-2xl">
-            <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2.5">
-                <h3 class="text-base font-bold text-white">পেমেন্ট মাধ্যম নির্বাচন করুন</h3>
-                <button type="button" onclick="closePaymentModal()" class="text-slate-400 hover:text-white bg-slate-800 w-7 h-7 rounded-full flex items-center justify-center transition">
-                    <i class="fa-solid fa-xmark text-sm"></i>
-                </button>
-            </div>
-            
-            <p class="text-slate-400 text-xs mb-4 text-center">নিচের লোগোতে ক্লিক করে পেমেন্ট মাধ্যম বেছে নিন</p>
-
-            <div class="grid grid-cols-3 gap-2">
-                <div onclick="selectPayment('bkash')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
-                    <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" 
-                         alt="bKash" 
-                         fetchpriority="high"
-                         loading="eager"
-                         decoding="sync"
-                         class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
-                    <span class="text-xs font-bold text-pink-400 block">বিকাশ</span>
-                </div>
-                <div onclick="selectPayment('nagad')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
-                    <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" 
-                         alt="Nagad" 
-                         fetchpriority="high"
-                         loading="eager"
-                         decoding="sync"
-                         class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
-                    <span class="text-xs font-bold text-orange-400 block">নগদ</span>
-                </div>
-                <div onclick="selectPayment('rocket')" class="cursor-pointer block p-2 rounded-2xl text-center transition hover:scale-105 active:scale-95">
-                    <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" 
-                         alt="Rocket" 
-                         fetchpriority="high"
-                         loading="eager"
-                         decoding="sync"
-                         class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-1.5">
-                    <span class="text-xs font-bold text-purple-400 block">রকেট</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Toast Notification -->
     <div id="toast">
         <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">অর্ডার সম্পন্ন!</span>
     </div>
 
-    <!-- আলাদা ফাইল checkout.js লিঙ্ক করা হয়েছে -->
-    <script src="checkout.js"></script>
+    <!-- লজিক স্ক্রিপ্ট -->
+    <script>
+        // URL থেকে সিলেক্টেড মেথড পড়া (যেমন: checkout.html?method=nagad)
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentMethod = urlParams.get('method') || 'bkash';
+
+        const paymentConfig = {
+            bkash: {
+                name: 'বিকাশ (Personal) পেমেন্ট নিয়ম',
+                bgColor: 'bg-pink-950/20',
+                borderColor: 'border-pink-500/30',
+                textColor: 'text-pink-400',
+                iconBg: 'bg-[#e2136e]',
+                svg: '<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>'
+            },
+            nagad: {
+                name: 'নগদ (Personal) পেমেন্ট নিয়ম',
+                bgColor: 'bg-orange-950/20',
+                borderColor: 'border-orange-500/30',
+                textColor: 'text-orange-400',
+                iconBg: 'bg-[#f7941d]',
+                svg: '<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.5h-2v-2h2zm0-4h-2V7h2z"/></svg>'
+            },
+            rocket: {
+                name: 'রকেট (Personal) পেমেন্ট নিয়ম',
+                bgColor: 'bg-purple-950/20',
+                borderColor: 'border-purple-500/30',
+                textColor: 'text-purple-400',
+                iconBg: 'bg-[#8c3494]',
+                svg: '<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M13.13 2.18l-1.99.72c-.44.16-.83.47-1.12.87L2.1 14.71a1.5 1.5 0 0 0 1.25 2.29h4.15l-1.4 4.54c-.23.75.54 1.43 1.23 1.09l14.61-7.24a1.5 1.5 0 0 0 .14-2.61L14.77 2.6a2.03 2.03 0 0 0-1.64-.42z"/></svg>'
+            }
+        };
+
+        function renderSelectedMethod(methodKey) {
+            const conf = paymentConfig[methodKey] || paymentConfig.bkash;
+            const box = document.getElementById('selected-info-box');
+            const name = document.getElementById('active-method-name');
+            const icon = document.getElementById('active-method-icon');
+
+            // রিসেট ও নতুন ক্লাস অ্যাড
+            box.className = `p-4 sm:p-5 rounded-2xl mb-6 transition-all border ${conf.bgColor} ${conf.borderColor}`;
+            name.className = `text-base sm:text-lg font-bold ${conf.textColor}`;
+            name.innerText = conf.name;
+            icon.className = `h-10 w-10 rounded-xl flex items-center justify-center text-white shadow-md border border-white/10 ${conf.iconBg}`;
+            icon.innerHTML = conf.svg;
+        }
+
+        renderSelectedMethod(currentMethod);
+
+        function copyText(text, btn) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i> <span class="text-emerald-400">কপি হয়েছে!</span>';
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                }, 1500);
+            });
+        }
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toast-msg');
+            msg.textContent = message;
+            toast.style.backgroundColor = isError ? '#ef4444' : '#10b981';
+            toast.className = 'show';
+            setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3000);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = 'অর্ডার প্রসেস হচ্ছে...';
+
+            // আপনার প্রয়োজনীয় সাবমিশন কোড
+            setTimeout(() => {
+                showToast("অর্ডার সফলভাবে সম্পন্ন হয়েছে!");
+                btn.disabled = false;
+                btn.innerHTML = '<span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>';
+                document.getElementById('paymentForm').reset();
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
