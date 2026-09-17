@@ -5,32 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>পেমেন্ট মাধ্যম নির্বাচন করুন | Technography</title>
     <meta name="theme-color" content="#070b18">
+
+    <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
+    <link rel="dns-prefetch" href="https://i.postimg.cc">
+
+    <!-- ছবি ৩টি যেন দ্রুত লোড হয় -->
+    <link rel="preload" as="image" href="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" fetchpriority="high">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            margin: 0;
-            background-color: #070b18;
-            color: #f1f5f9;
-            font-family: system-ui, -apple-system, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .method-card {
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .method-card:hover {
-            transform: translateY(-4px) scale(1.03);
-        }
-        .method-card:active {
-            transform: scale(0.97);
-        }
-    </style>
 </head>
-<body class="bg-[#070b18] text-slate-100 antialiased">
+<body class="bg-[#070b18] text-slate-100 font-sans min-h-screen flex flex-col justify-between antialiased">
 
-    <!-- হেডার -->
+    <!-- Header -->
     <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="text-xl font-bold tracking-wider text-cyan-400">Technography</div>
@@ -42,52 +31,53 @@
         </div>
     </header>
 
-    <!-- সেন্ট্রাল পেমেন্ট সিলেক্টর বক্স -->
-    <main class="flex-1 flex items-center justify-center p-4">
-        <div class="bg-slate-900/90 border border-slate-800 w-full max-w-sm rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl text-center">
+    <!-- Payment Selection Box (স্ক্রিনশটের হুবহু ডিজাইন) -->
+    <main class="flex-1 flex items-center justify-center p-4 my-8">
+        <div class="bg-slate-900/95 border border-slate-800 w-full max-w-sm rounded-3xl p-6 shadow-2xl backdrop-blur-xl">
             
-            <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
-                <h2 class="text-lg sm:text-xl font-bold text-white tracking-wide">পেমেন্ট মাধ্যম নির্বাচন করুন</h2>
-                <a href="index.html" class="text-slate-400 hover:text-white bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center transition">
+            <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-3">
+                <h2 class="text-base sm:text-lg font-bold text-white">পেমেন্ট মাধ্যম নির্বাচন করুন</h2>
+                <a href="index.html" class="text-slate-400 hover:text-white bg-slate-800 w-7 h-7 rounded-full flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </a>
             </div>
+            
+            <p class="text-slate-400 text-xs mb-5 text-center">নিচের লোগোতে ক্লিক করে পেমেন্ট মাধ্যম বেছে নিন</p>
 
-            <p class="text-slate-400 text-xs sm:text-sm mb-6">নিচের যেকোনো একটি মাধ্যমে পেমেন্ট করতে ক্লিক করুন</p>
-
-            <div class="grid grid-cols-3 gap-3">
+            <div class="grid grid-cols-3 gap-3 text-center">
                 <!-- বিকাশ -->
-                <a href="checkout.html?method=bkash" class="method-card bg-pink-950/20 hover:bg-pink-900/30 border border-pink-500/30 rounded-2xl p-3 flex flex-col items-center justify-center shadow-lg">
-                    <div class="w-14 h-14 rounded-2xl bg-[#e2136e] flex items-center justify-center mb-2 shadow-md">
-                        <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
-                    <span class="text-xs font-bold text-pink-400">বিকাশ</span>
+                <a href="checkout.html?method=bkash" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-pink-500/30">
+                    <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" 
+                         alt="bKash" 
+                         loading="eager"
+                         class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-2">
+                    <span class="text-xs font-bold text-pink-400 block">বিকাশ</span>
                 </a>
 
                 <!-- নগদ -->
-                <a href="checkout.html?method=nagad" class="method-card bg-orange-950/20 hover:bg-orange-900/30 border border-orange-500/30 rounded-2xl p-3 flex flex-col items-center justify-center shadow-lg">
-                    <div class="w-14 h-14 rounded-2xl bg-[#f7941d] flex items-center justify-center mb-2 shadow-md">
-                        <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
-                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.5h-2v-2h2zm0-4h-2V7h2z"/>
-                        </svg>
-                    </div>
-                    <span class="text-xs font-bold text-orange-400">নগদ</span>
+                <a href="checkout.html?method=nagad" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-orange-500/30">
+                    <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" 
+                         alt="Nagad" 
+                         loading="eager"
+                         class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-2">
+                    <span class="text-xs font-bold text-orange-400 block">নগদ</span>
                 </a>
 
                 <!-- রকেট -->
-                <a href="checkout.html?method=rocket" class="method-card bg-purple-950/20 hover:bg-purple-900/30 border border-purple-500/30 rounded-2xl p-3 flex flex-col items-center justify-center shadow-lg">
-                    <div class="w-14 h-14 rounded-2xl bg-[#8c3494] flex items-center justify-center mb-2 shadow-md">
-                        <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
-                            <path d="M13.13 2.18l-1.99.72c-.44.16-.83.47-1.12.87L2.1 14.71a1.5 1.5 0 0 0 1.25 2.29h4.15l-1.4 4.54c-.23.75.54 1.43 1.23 1.09l14.61-7.24a1.5 1.5 0 0 0 .14-2.61L14.77 2.6a2.03 2.03 0 0 0-1.64-.42z"/>
-                        </svg>
-                    </div>
-                    <span class="text-xs font-bold text-purple-400">রকেট</span>
+                <a href="checkout.html?method=rocket" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-purple-500/30">
+                    <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" 
+                         alt="Rocket" 
+                         loading="eager"
+                         class="h-14 w-14 mx-auto object-cover rounded-2xl shadow mb-2">
+                    <span class="text-xs font-bold text-purple-400 block">রকেট</span>
                 </a>
             </div>
         </div>
     </main>
+
+    <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-900">
+        &copy; 2026 Technography. All rights reserved.
+    </footer>
 
 </body>
 </html>
