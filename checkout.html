@@ -7,8 +7,6 @@
     <meta name="theme-color" content="#070b18">
 
     <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
-    <link rel="dns-prefetch" href="https://i.postimg.cc">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -22,7 +20,6 @@
             font-family: system-ui, -apple-system, sans-serif;
             overflow-x: hidden;
         }
-
         input:-webkit-autofill,
         input:-webkit-autofill:hover, 
         input:-webkit-autofill:focus {
@@ -30,7 +27,6 @@
             -webkit-box-shadow: 0 0 0px 1000px #0b132b inset !important;
             transition: background-color 5000s ease-in-out 0s;
         }
-
         .dark-input {
             background-color: #0b132b !important;
             color: #f8fafc !important;
@@ -40,8 +36,6 @@
             border-color: #06b6d4 !important;
             box-shadow: 0 0 0 1px #06b6d4 !important;
         }
-
-        /* 3D WhatsApp বাটন */
         .btn-whatsapp-3d {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             box-shadow: 0 6px 0px #075E54, 0 12px 25px rgba(37, 211, 102, 0.45);
@@ -56,7 +50,6 @@
             transform: translateY(4px);
             box-shadow: 0 2px 0px #075E54, 0 6px 15px rgba(37, 211, 102, 0.3);
         }
-
         #toast {
             visibility: hidden;
             min-width: 280px;
@@ -76,11 +69,7 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             transition: opacity 0.3s, bottom 0.3s;
         }
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            bottom: 40px;
-        }
+        #toast.show { visibility: visible; opacity: 1; bottom: 40px; }
     </style>
 </head>
 <body class="bg-[#070b18] text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-white">
@@ -113,7 +102,7 @@
                              class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
                         <span id="active-method-name" class="text-base sm:text-lg font-bold"></span>
                     </div>
-                    <!-- পরিবর্তন বাটন select-payment.html পেজে নিয়ে যাবে -->
+                    <!-- পরিবর্তন বাটনে চাপলে ফাস্ট পেজ select-payment.html এ ফিরে যাবে -->
                     <a href="select-payment.html" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border border-slate-700 shadow-sm">
                         <i class="fa-solid fa-rotate"></i> পরিবর্তন
                     </a>
@@ -189,9 +178,8 @@
         <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">অর্ডার সম্পন্ন!</span>
     </div>
 
-    <!-- সেকেন্ড পেজের স্ক্রিপ্ট -->
+    <!-- সেকেন্ড পেজের ডায়নামিক কন্ট্রোলার -->
     <script>
-        // URL থেকে সিলেক্ট করা মেথড নেওয়া (যেমন: checkout.html?method=nagad)
         const urlParams = new URLSearchParams(window.location.search);
         let selectedMethod = urlParams.get('method') || 'bkash';
 
