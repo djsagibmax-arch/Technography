@@ -7,29 +7,14 @@
     <meta name="theme-color" content="#070b18">
 
     <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
-    <link rel="dns-prefetch" href="https://i.postimg.cc">
-
-    <!-- লোগোগুলো দ্রুত লোড হওয়ার জন্য প্রিলোডার -->
     <link rel="preload" as="image" href="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" fetchpriority="high">
     <link rel="preload" as="image" href="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" fetchpriority="high">
     <link rel="preload" as="image" href="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" fetchpriority="high">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        body {
-            margin: 0;
-            background-color: #070b18;
-            color: #f1f5f9;
-            font-family: system-ui, -apple-system, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
 </head>
-<body class="bg-[#070b18] text-slate-100 antialiased selection:bg-cyan-500 selection:text-white">
+<body class="bg-[#070b18] text-slate-100 font-sans min-h-screen flex flex-col justify-between antialiased selection:bg-cyan-500 selection:text-white">
 
     <!-- Header -->
     <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
@@ -43,12 +28,13 @@
         </div>
     </header>
 
-    <!-- ফাস্ট পেজ: পেমেন্ট মেথড বক্স (স্ক্রিনশটের ডিজাইন) -->
+    <!-- ফাস্ট পেজ কার্ড (স্ক্রিনশটের মতো বক্স) -->
     <main class="flex-1 flex items-center justify-center p-4">
         <div class="bg-slate-900/90 border border-slate-800/90 w-full max-w-sm rounded-3xl p-6 sm:p-7 shadow-2xl backdrop-blur-xl">
             
             <div class="flex items-center justify-between mb-3 border-b border-slate-800/80 pb-3">
                 <h2 class="text-base sm:text-lg font-bold text-white tracking-wide">পেমেন্ট মাধ্যম নির্বাচন করুন</h2>
+                <!-- ক্রস (✖) বাটনে চাপলে সরাসরি হোমপেজে (index.html) ব্যাক করবে -->
                 <a href="index.html" class="text-slate-400 hover:text-white bg-slate-800/80 hover:bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </a>
