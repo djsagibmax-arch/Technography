@@ -9,10 +9,6 @@
     <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
     <link rel="dns-prefetch" href="https://i.postimg.cc">
 
-    <link rel="preload" as="image" href="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" fetchpriority="high">
-    <link rel="preload" as="image" href="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" fetchpriority="high">
-    <link rel="preload" as="image" href="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" fetchpriority="high">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -45,6 +41,7 @@
             box-shadow: 0 0 0 1px #06b6d4 !important;
         }
 
+        /* 3D WhatsApp বাটন */
         .btn-whatsapp-3d {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             box-shadow: 0 6px 0px #075E54, 0 12px 25px rgba(37, 211, 102, 0.45);
@@ -86,12 +83,12 @@
         }
     </style>
 </head>
-<body class="bg-[#070b18] text-slate-100 font-sans antialiased">
+<body class="bg-[#070b18] text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-white">
 
     <!-- Header -->
     <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="text-xl font-bold tracking-wider text-cyan-400">Technography</div>
+            <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400">Technography</a>
             <nav class="flex items-center gap-6">
                 <a href="index.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">হোম</a>
                 <a href="product.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">প্রোডাক্ট</a>
@@ -100,24 +97,24 @@
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- সেকেন্ড পেজ: ইনফরমেশন ও ফর্ম -->
     <main class="max-w-xl mx-auto px-4 py-8">
         <div class="bg-slate-900/90 border border-slate-800 p-5 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
             
             <h2 class="text-xl sm:text-2xl font-black mb-5 text-center text-white">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
 
-            <!-- Selected Method Display Box -->
-            <div id="selected-info-box" class="bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all">
+            <!-- মেথড ইনফো কার্ড -->
+            <div id="selected-info-box" class="p-4 sm:p-5 rounded-2xl mb-6 transition-all border">
                 <div class="mb-3 flex items-center justify-between">
                     <div class="flex items-center gap-2.5">
                         <img id="active-method-logo" 
-                             src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" 
+                             src="" 
                              alt="Logo" 
                              class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
-                        <span id="active-method-name" class="text-base sm:text-lg font-bold text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
+                        <span id="active-method-name" class="text-base sm:text-lg font-bold"></span>
                     </div>
-                    <!-- পরিবর্তন বাটন প্রথম পেজে পাঠিয়ে দিবে -->
-                    <a href="select-payment.html" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-slate-700">
+                    <!-- পরিবর্তন বাটন select-payment.html পেজে নিয়ে যাবে -->
+                    <a href="select-payment.html" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border border-slate-700 shadow-sm">
                         <i class="fa-solid fa-rotate"></i> পরিবর্তন
                     </a>
                 </div>
@@ -149,7 +146,7 @@
                 </p>
             </div>
 
-            <!-- Form -->
+            <!-- অর্ডার ফর্ম -->
             <form id="paymentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-slate-200 mb-1.5">আপনার নাম:</label>
@@ -192,13 +189,12 @@
         <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">অর্ডার সম্পন্ন!</span>
     </div>
 
-    <!-- লজিক স্ক্রিপ্ট -->
+    <!-- সেকেন্ড পেজের স্ক্রিপ্ট -->
     <script>
-        // URL থেকে সিলেক্টেড মেথড নেওয়া (যেমন: checkout.html?method=nagad)
+        // URL থেকে সিলেক্ট করা মেথড নেওয়া (যেমন: checkout.html?method=nagad)
         const urlParams = new URLSearchParams(window.location.search);
-        let currentMethod = urlParams.get('method') || 'bkash';
+        let selectedMethod = urlParams.get('method') || 'bkash';
 
-        // আপনার আসল ছবিগুলোর লিংক
         const paymentConfig = {
             bkash: {
                 name: 'বিকাশ (Personal) পেমেন্ট নিয়ম',
@@ -232,8 +228,7 @@
             logo.src = conf.logo;
         }
 
-        // পেজ লোড হওয়ার সাথে সাথে মেথড বসিয়ে দেওয়া
-        renderSelectedMethod(currentMethod);
+        renderSelectedMethod(selectedMethod);
 
         function copyText(text, btn) {
             navigator.clipboard.writeText(text).then(() => {
@@ -265,7 +260,7 @@
                 btn.disabled = false;
                 btn.innerHTML = '<span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>';
                 document.getElementById('paymentForm').reset();
-            }, 1000);
+            }, 1200);
         }
     </script>
 </body>
