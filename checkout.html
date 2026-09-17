@@ -6,6 +6,25 @@
     <title>নিরাপদ পেমেন্ট ও চেকআউট | Technography</title>
     <meta name="theme-color" content="#070b18">
 
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1913791776249045');
+    fbq('track', 'PageView');
+    fbq('track', 'AddPaymentInfo');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
     <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -74,7 +93,6 @@
 </head>
 <body class="bg-[#070b18] text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-white">
 
-    <!-- Header -->
     <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400">Technography</a>
@@ -86,23 +104,19 @@
         </div>
     </header>
 
-    <!-- সেকেন্ড পেজ: ইনফরমেশন ও ফর্ম -->
     <main class="max-w-xl mx-auto px-4 py-8">
         <div class="bg-slate-900/90 border border-slate-800 p-5 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
             
             <h2 class="text-xl sm:text-2xl font-black mb-5 text-center text-white">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
 
-            <!-- মেথড ইনফো কার্ড -->
+            <!-- মেথড কার্ড -->
             <div id="selected-info-box" class="p-4 sm:p-5 rounded-2xl mb-6 transition-all border">
                 <div class="mb-3 flex items-center justify-between">
                     <div class="flex items-center gap-2.5">
-                        <img id="active-method-logo" 
-                             src="" 
-                             alt="Logo" 
-                             class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
+                        <img id="active-method-logo" src="" alt="Logo" class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
                         <span id="active-method-name" class="text-base sm:text-lg font-bold"></span>
                     </div>
-                    <!-- পরিবর্তন বাটনে চাপলে ফাস্ট পেজ select-payment.html এ ফিরে যাবে -->
+                    <!-- পরিবর্তন বাটন select-payment.html এ ফিরে যাবে -->
                     <a href="select-payment.html" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border border-slate-700 shadow-sm">
                         <i class="fa-solid fa-rotate"></i> পরিবর্তন
                     </a>
@@ -173,12 +187,10 @@
         </div>
     </main>
 
-    <!-- Toast Notification -->
     <div id="toast">
         <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">অর্ডার সম্পন্ন!</span>
     </div>
 
-    <!-- সেকেন্ড পেজের ডায়নামিক কন্ট্রোলার -->
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         let selectedMethod = urlParams.get('method') || 'bkash';
@@ -242,6 +254,15 @@
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
             btn.innerText = 'অর্ডার প্রসেস হচ্ছে...';
+
+            // মেটা পিক্সেল পারচেজ ইভেন্ট ফায়ার করা
+            if (typeof fbq === 'function') {
+                fbq('track', 'Purchase', {
+                    value: 300,
+                    currency: 'BDT',
+                    content_name: '৩,০০,০০০+ AI Reels Bundle'
+                });
+            }
 
             setTimeout(() => {
                 showToast("অর্ডার সফলভাবে সম্পন্ন হয়েছে!");
