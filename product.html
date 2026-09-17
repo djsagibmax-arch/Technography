@@ -8,17 +8,35 @@
     <meta property="og:title" content="৩,০০,০০০+ প্রিমিয়াম ভাইরাল AI Reels Bundle">
     <meta property="og:description" content="ঘরে বসেই ফেসবুক ও ইউটিউব থেকে আয় করুন। স্পেশাল ডিসকাউন্টে আজই কিনুন।">
     
-    <!-- ইমেজ হোস্টের সাথে সুপার-ফাস্ট হ্যান্ডশেক ও ডোমেন কানেকশন -->
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1913791776249045');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent', {
+        content_name: '৩,০০,০০০+ AI Reels Bundle',
+        value: 300,
+        currency: 'BDT'
+    });
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
     <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
     <link rel="dns-prefetch" href="https://i.postimg.cc">
-
-    <!-- প্রথম দুটি প্রধান ইমেজ পলকে স্ক্রিনে দেখানোর জন্য হাই-প্রাইওরিটি প্রিলোড -->
     <link rel="preload" as="image" href="https://i.postimg.cc/br1zQcLN/20260827-131010.jpg" fetchpriority="high">
     <link rel="preload" as="image" href="https://i.postimg.cc/1zvnszHL/file-0000000067ec81faa53e8cf2a7ab0a68-removebg-preview.png" fetchpriority="high">
 
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -87,9 +105,6 @@
             transition: transform 0.4s ease;
             display: block;
         }
-        .order-img:hover {
-            transform: scale(1.05);
-        }
         .sticky-buy-bar {
             position: fixed !important;
             bottom: 0 !important;
@@ -105,20 +120,10 @@
             z-index: 40 !important; 
             box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
         }
-
-        /* অতি-উজ্জ্বল টাইমার ও গ্লো ইফেক্ট */
-        .neon-glow-cyan {
-            text-shadow: 0 0 8px #22d3ee, 0 0 20px #06b6d4, 0 0 35px #0284c7;
-        }
-        .neon-glow-emerald {
-            text-shadow: 0 0 8px #34d399, 0 0 20px #10b981, 0 0 35px #059669;
-        }
-        .neon-glow-purple {
-            text-shadow: 0 0 8px #c084fc, 0 0 20px #a855f7, 0 0 35px #7e22ce;
-        }
-        .neon-glow-amber {
-            text-shadow: 0 0 8px #fbbf24, 0 0 22px #f59e0b, 0 0 40px #d97706;
-        }
+        .neon-glow-cyan { text-shadow: 0 0 8px #22d3ee, 0 0 20px #06b6d4, 0 0 35px #0284c7; }
+        .neon-glow-emerald { text-shadow: 0 0 8px #34d399, 0 0 20px #10b981, 0 0 35px #059669; }
+        .neon-glow-purple { text-shadow: 0 0 8px #c084fc, 0 0 20px #a855f7, 0 0 35px #7e22ce; }
+        .neon-glow-amber { text-shadow: 0 0 8px #fbbf24, 0 0 22px #f59e0b, 0 0 40px #d97706; }
         .box-3d {
             box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25), 0 12px 35px -5px rgba(0, 0, 0, 0.9), 0 0 30px rgba(6, 182, 212, 0.28);
             transform: perspective(700px) translateZ(12px);
@@ -130,34 +135,23 @@
     <!-- Header / Navbar -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="text-xl font-bold tracking-wider text-cyan-400">Technography</div>
+            <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400">Technography</a>
             <nav class="hidden md:flex items-center gap-8">
                 <a href="index.html" class="text-slate-300 hover:text-cyan-400 transition">হোম</a>
                 <a href="product.html" class="text-cyan-400 font-medium transition">প্রোডাক্ট বিবরণ</a>
-                <a href="checkout.html" class="text-slate-300 hover:text-cyan-400 transition">অর্ডার করুন</a>
-                <a href="admin.html" class="text-slate-300 hover:text-cyan-400 transition">অ্যাডমিন</a>
+                <a href="select-payment.html" class="text-slate-300 hover:text-cyan-400 transition">অর্ডার করুন</a>
             </nav>
-            <a href="checkout.html" class="bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-2 rounded-full font-medium transition shadow-lg shadow-cyan-500/20">অর্ডার করুন</a>
+            <!-- হেডার বাটন যা বিকাশ/নগদ/রকেট পেজে নিবে -->
+            <a href="select-payment.html" class="bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-2 rounded-full font-medium transition shadow-lg shadow-cyan-500/20">অর্ডার করুন</a>
         </div>
     </header>
 
     <div id="mega-landing-page">
-
-        <!-- Background Effects -->
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-            <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[120px] opacity-30 animate-pulse"></div>
-            <div class="absolute bottom-[20%] right-[-5%] w-96 h-96 bg-cyan-600 rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
-        </div>
-
-        <!-- Hero Section -->
         <div class="relative z-10 max-w-5xl mx-auto px-4 pt-10 pb-12 text-center">
-            
-            <!-- ১ম ছবি: চোখের পলকে আসার জন্য অগ্রাধিকার -->
             <img src="https://i.postimg.cc/br1zQcLN/20260827-131010.jpg" 
                  alt="Content Master Bundle" 
                  fetchpriority="high" 
                  loading="eager" 
-                 decoding="sync"
                  class="w-full max-w-4xl mx-auto rounded-3xl shadow-[0_0_40px_rgba(34,211,238,0.2)] mb-8 border border-slate-700 object-cover">
             
             <div class="inline-block py-3 px-8 rounded-full bg-slate-800/80 border border-slate-700 mb-8 shadow-lg">
@@ -174,14 +168,10 @@
                 এবং কন্টেন ভাইরাল এডিটিং<br>মনিটাইজেশন মাস্টার্স কোর্স ও<br>প্রিমিয়াম capcut pro ফ্রী।
             </p>
 
-            <!-- Intro Box -->
             <div class="glass-card max-w-4xl mx-auto text-left md:text-center border-t-4 border-t-[#22c55e]">
-                <!-- ২য় ছবি: উপরের অংশে দ্রুত আসার জন্য eager লোড -->
                 <img src="https://i.postimg.cc/1zvnszHL/file-0000000067ec81faa53e8cf2a7ab0a68-removebg-preview.png" 
                      alt="Content Creation" 
                      loading="eager"
-                     fetchpriority="high"
-                     decoding="sync"
                      class="feature-img">
                 
                 <h3 class="text-2xl md:text-3xl font-bold text-[#4ade80] mb-5"><span class="text-3xl">🎬</span> আপনার কনটেন্ট ক্রিয়েশনকে নিয়ে যান নতুন পর্যায়ে!</h3>
@@ -193,19 +183,16 @@
             </div>
         </div>
 
-        <!-- Mega Collection Title -->
+        <!-- Mega Collection Grid -->
         <div class="relative z-10 max-w-6xl mx-auto px-4 py-8">
             <div class="text-center mb-12">
                 <h2 class="text-[#facc15] text-3xl md:text-5xl font-black mb-4"><span class="text-4xl">🔥</span> এক বান্ডেলেই বিশাল কনটেন্ট কালেকশন</h2>
                 <p class="text-slate-400 text-lg max-w-2xl mx-auto">এই মেগা বান্ডেলে রয়েছে বিভিন্ন জনপ্রিয় ক্যাটাগরির কনটেন্ট, যাতে আপনার পছন্দ ও প্রয়োজন অনুযায়ী সহজেই ভিডিও নির্বাচন করতে পারেন।</p>
             </div>
 
-            <!-- Grid Cards (নিচের কার্ডের ছবিগুলো পেজের মূল স্পিড ঠিক রাখতে lazy থাকবে) -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- Card 1 -->
                 <div class="glass-card hover:border-purple-500 text-center md:text-left">
-                    <img src="https://i.postimg.cc/t40NT6vB/file-0000000035d481fa81e7f7fe81f6f595-removebg-preview.png" loading="lazy" decoding="async" alt="Growth & Viral Method" class="card-img md:mx-0">
+                    <img src="https://i.postimg.cc/t40NT6vB/file-0000000035d481fa81e7f7fe81f6f595-removebg-preview.png" loading="lazy" alt="Growth & Viral Method" class="card-img md:mx-0">
                     <h3 class="text-xl font-extrabold text-white mb-3 mt-4">Facebook & YouTube Growth + Video viral method</h3>
                     <p class="text-slate-400 text-sm mb-4">শুধু ভিডিও থাকলেই হবে না—ভিডিওকে কীভাবে আকর্ষণীয়ভাবে এডিট করে প্রকাশ করবেন, নিয়মিত কনটেন্ট তৈরি করবেন এবং পেজ/চ্যানেলের জন্য কনটেন্ট স্ট্র্যাটেজি তৈরি করবেন, সেসব বিষয়েও রয়েছে শিক্ষামূলক কনটেন্ট।</p>
                     <div class="bg-slate-900/50 p-4 rounded-lg text-sm text-slate-300 font-medium space-y-2 text-left">
@@ -218,17 +205,15 @@
                     </div>
                 </div>
 
-                <!-- Card 2 -->
                 <div class="glass-card hover:border-cyan-500 text-center">
-                    <img src="https://i.postimg.cc/bw4TWxLv/1787765735872-removebg-preview.png" loading="lazy" decoding="async" alt="Mixed Mega Reels" class="card-img">
+                    <img src="https://i.postimg.cc/bw4TWxLv/1787765735872-removebg-preview.png" loading="lazy" alt="Mixed Mega Reels" class="card-img">
                     <h3 class="text-xl font-extrabold text-[#22d3ee] mb-3">১.৫ লক্ষ+ মিক্সড মেগা রিলস</h3>
                     <p class="text-slate-300 font-bold mb-2">একসাথে বিশাল পরিমাণ Mixed Reels Collection!</p>
                     <p class="text-slate-400 text-sm">বিভিন্ন ধরনের Short Video ও Reels থেকে নিজের প্রয়োজন অনুযায়ী কনটেন্ট আইডিয়া এবং ভিডিও সংগ্রহ করতে পারবেন।</p>
                 </div>
 
-                <!-- Card 3 -->
                 <div class="glass-card hover:border-red-500 text-center">
-                    <img src="https://i.postimg.cc/vBsvHGp0/1787765938160-removebg-preview.png" loading="lazy" decoding="async" alt="Movie & Drama Clips" class="card-img">
+                    <img src="https://i.postimg.cc/vBsvHGp0/1787765938160-removebg-preview.png" loading="lazy" alt="Movie & Drama Clips" class="card-img">
                     <h3 class="text-xl font-extrabold text-[#ec4899] mb-3">৫০,০০০+ Movie & Drama Clips Collection</h3>
                     <p class="text-slate-400 text-sm mb-4">মুভি ও নাটকভিত্তিক কনটেন্ট নিয়ে কাজ করতে আগ্রহীদের জন্য রয়েছে বিশাল Clip Collection।</p>
                     <ul class="text-sm text-slate-300 font-medium space-y-2 text-left ml-4">
@@ -241,9 +226,8 @@
                     </ul>
                 </div>
 
-                <!-- Card 4 -->
                 <div class="glass-card hover:border-orange-500 text-center">
-                    <img src="https://i.postimg.cc/ydHTY7MB/file-00000000370c81fabc33ef3860b0c2bd-removebg-preview.png" loading="lazy" decoding="async" alt="Exclusive Mega Shorts" class="card-img">
+                    <img src="https://i.postimg.cc/ydHTY7MB/file-00000000370c81fabc33ef3860b0c2bd-removebg-preview.png" loading="lazy" alt="Exclusive Mega Shorts" class="card-img">
                     <h3 class="text-xl font-extrabold text-orange-400 mb-3">Exclusive Mega Shorts & Reels Collection</h3>
                     <p class="text-slate-400 text-sm mb-4">এখানে রয়েছে আরও বিশাল পরিমাণ Shorts ও Reels Content।</p>
                     <ul class="text-sm text-slate-300 font-medium space-y-2 text-left ml-4">
@@ -253,226 +237,58 @@
                         <li>💎 VIP Special Reels</li>
                         <li>💎 Gaming & Trending Shorts</li>
                     </ul>
-                    <p class="text-cyan-400 text-xs mt-4 font-bold text-left">আপনার Gaming Page, Shorts Channel কিংবা Reels Content-এর জন্য তৈরি করতে পারবেন বিভিন্ন ধরনের কনটেন্ট।</p>
                 </div>
 
-                <!-- Card 5 -->
                 <div class="glass-card hover:border-yellow-500 text-center">
-                    <img src="https://i.postimg.cc/bNzF99Vm/file-000000000b28820ba36af9c6b9ef2c38-removebg-preview.png" loading="lazy" decoding="async" alt="AI Food Talking Videos" class="card-img">
+                    <img src="https://i.postimg.cc/bNzF99Vm/file-000000000b28820ba36af9c6b9ef2c38-removebg-preview.png" loading="lazy" alt="AI Food Talking Videos" class="card-img">
                     <h3 class="text-xl font-extrabold text-yellow-400 mb-3">AI Food Talking Videos</h3>
-                    <p class="text-slate-400 text-sm mb-4">AI-ভিত্তিক Food Content বর্তমানে ব্যাপক জনপ্রিয়। এই বান্ডেলে রয়েছে:</p>
-                    <ul class="text-sm text-slate-300 font-medium space-y-2 text-left ml-4">
-                        <li>🍔 AI Food Talking Videos</li>
-                        <li>🍕 Food-related Short Content</li>
-                        <li>🍜 AI Food Presentation Videos</li>
-                        <li>🎥 Short-form Food Content</li>
-                    </ul>
-                    <p class="text-cyan-400 text-xs mt-4 font-bold text-left">Food Page, Reels Page কিংবা AI Content Creatorদের জন্য একটি আলাদা কনটেন্ট ক্যাটাগরি।</p>
+                    <p class="text-slate-400 text-sm mb-4">AI-ভিত্তিক Food Content বর্তমানে ব্যাপক জনপ্রিয়। এই বান্ডেলে রয়েছে AI Food Videos ও Short Content কালেকশন।</p>
                 </div>
 
-                <!-- Card 6 -->
                 <div class="glass-card hover:border-green-500 text-center">
-                    <img src="https://i.postimg.cc/SKw5hX7R/file-000000001128820bac2ea36b874f2e4a.png" loading="lazy" decoding="async" alt="AI Health Videos" class="card-img">
+                    <img src="https://i.postimg.cc/SKw5hX7R/file-000000001128820bac2ea36b874f2e4a.png" loading="lazy" alt="AI Health Videos" class="card-img">
                     <h3 class="text-xl font-extrabold text-green-400 mb-3">AI Health & Fitness Videos</h3>
-                    <p class="text-slate-400 text-sm mb-4">Health ও Fitness বিষয়ক কনটেন্ট তৈরির জন্য রয়েছে আলাদা ভিডিও কালেকশন।</p>
-                    <ul class="text-sm text-slate-300 font-medium space-y-2 text-left ml-4">
-                        <li>🏃 Fitness Content</li>
-                        <li>🥗 Health-related Videos</li>
-                        <li>💪 Workout Content</li>
-                        <li>🤖 AI Health Videos</li>
-                    </ul>
-                    <p class="text-yellow-400 text-xs mt-4 font-bold text-left">স্বাস্থ্য সম্পর্কিত কনটেন্ট প্রকাশের সময় অবশ্যই নির্ভরযোগ্য তথ্য ও প্ল্যাটফর্মের নীতিমালা অনুসরণ করুন।</p>
+                    <p class="text-slate-400 text-sm mb-4">Health ও Fitness বিষয়ক কনটেন্ট তৈরির জন্য রয়েছে আলাদা ভিডিও কালেকশন ও ওয়ার্কআউট কনটেন্ট।</p>
                 </div>
 
-                <!-- Card 7 -->
                 <div class="glass-card hover:border-emerald-500 text-center">
-                    <img src="https://i.postimg.cc/NMcxfQ3h/file-00000000327c81fa881ee6274649cf88-removebg-preview-(1).png" loading="lazy" decoding="async" alt="Islamic Viral Reels" class="card-img">
+                    <img src="https://i.postimg.cc/NMcxfQ3h/file-00000000327c81fa881ee6274649cf88-removebg-preview-(1).png" loading="lazy" alt="Islamic Viral Reels" class="card-img">
                     <h3 class="text-xl font-extrabold text-emerald-400 mb-3">Islamic Viral Reels Collection</h3>
-                    <p class="text-slate-400 text-sm mb-4">Islamic Content Creatorদের জন্য রয়েছে আলাদা বিশাল Reels Collection।</p>
-                    <ul class="text-sm text-slate-300 font-medium space-y-2 text-left ml-4">
-                        <li>🕌 Islamic Reels Master Collection</li>
-                        <li>📖 Islamic Reels Pack</li>
-                        <li>🌙 বিভিন্ন Islamic Short Videos</li>
-                        <li>🎬 Islamic Content Collection</li>
-                    </ul>
-                    <p class="text-cyan-400 text-xs mt-4 font-bold text-left">Islamic Page, Shorts Channel কিংবা Reels Content তৈরিতে ব্যবহারযোগ্য বিভিন্ন ধরনের ভিডিও।</p>
+                    <p class="text-slate-400 text-sm mb-4">Islamic Content Creatorদের জন্য রয়েছে আলাদা বিশাল Master Collection ও শর্ট ভিডিও।</p>
                 </div>
 
-                <!-- Card 8 -->
                 <div class="glass-card hover:border-pink-500 text-center">
-                    <img src="https://i.postimg.cc/q7nLTNZC/file-0000000061b081fabc33ef3860b0c2bd-removebg-preview.png" loading="lazy" decoding="async" alt="Motivational Reels" class="card-img">
+                    <img src="https://i.postimg.cc/q7nLTNZC/file-0000000061b081fabc33ef3860b0c2bd-removebg-preview.png" loading="lazy" alt="Motivational Reels" class="card-img">
                     <h3 class="text-xl font-extrabold text-pink-400 mb-3">Motivational & Emotional Reels</h3>
-                    <p class="text-slate-400 text-sm mb-4">মানুষের আবেগ, অনুপ্রেরণা ও জীবনের গল্পভিত্তিক Short Content-এর জন্য রয়েছে বিশাল কালেকশন।</p>
-                    <ul class="text-sm text-slate-300 font-medium space-y-2 text-left ml-4">
-                        <li>💪 Motivational English Videos</li>
-                        <li>🇮🇳 Hindi Motivation</li>
-                        <li>🇧🇩 Bangla Emotional Status</li>
-                        <li>❤️ English Emotional Reels</li>
-                        <li>😢 Viral Emotional Content</li>
-                    </ul>
+                    <p class="text-slate-400 text-sm mb-4">মানুষের আবেগ, অনুপ্রেরণা ও জীবনের গল্পভিত্তিক শর্ট কনটেন্টের জন্য রয়েছে বিশাল কালেকশন।</p>
                 </div>
 
-                <!-- Card 9 -->
                 <div class="glass-card hover:border-blue-500 text-center">
-                    <img src="https://i.postimg.cc/g0RDWxBy/file-00000000681081faa28feeee957fb3ed-removebg-preview.png" loading="lazy" decoding="async" alt="Sports & Trending Reels" class="card-img">
+                    <img src="https://i.postimg.cc/g0RDWxBy/file-00000000681081faa28feeee957fb3ed-removebg-preview.png" loading="lazy" alt="Sports & Trending Reels" class="card-img">
                     <h3 class="text-xl font-extrabold text-blue-400 mb-3">Sports & Trending Reels</h3>
-                    <p class="text-slate-400 text-sm mb-4">Sports Content Creatorদের জন্য রয়েছে:</p>
-                    <ul class="text-sm text-slate-300 font-medium space-y-2 text-left ml-4">
-                        <li>⚽ Football Reels</li>
-                        <li>🏏 Cricket Viral Reels</li>
-                        <li>🤼 WWE Content</li>
-                        <li>🏆 Sports Trending Videos</li>
-                        <li>🔥 বিভিন্ন Sports Shorts</li>
-                    </ul>
-                    <p class="text-cyan-400 text-xs mt-4 font-bold text-left">Sports Page বা Short-form Content Creatorদের জন্য আলাদা একটি বিশাল ক্যাটাগরি।</p>
-                </div>
-
-                <!-- Card 10 -->
-                <div class="glass-card hover:border-indigo-500 text-center">
-                    <img src="https://i.postimg.cc/CKDNgR6v/1787768154173-removebg-preview.png" loading="lazy" decoding="async" alt="Cartoon, Anime, Art" class="card-img">
-                    <h3 class="text-xl font-extrabold text-indigo-400 mb-3">Cartoon, Anime, Art & Funny Videos</h3>
-                    <p class="text-slate-400 text-sm mb-4">Entertainment Content-এর জন্যও রয়েছে বিশাল সংগ্রহ।</p>
-                    <ul class="text-sm text-slate-300 font-medium space-y-2 text-left ml-4">
-                        <li>😂 Funny Viral Videos</li>
-                        <li>🎨 Art & Craft Videos</li>
-                        <li>🧑‍🎨 Animation Content</li>
-                        <li>🐱 Cute & Funny Content</li>
-                        <li>🇯🇵 Anime Reels</li>
-                        <li>🎬 Cartoon Videos</li>
-                    </ul>
-                </div>
-
-                <!-- Card 11 -->
-                <div class="glass-card hover:border-rose-500 lg:col-span-2 text-center md:text-left">
-                    <div class="md:flex items-center gap-6">
-                        <img src="https://i.postimg.cc/9fTphDNG/1787768723442-removebg-preview.png" loading="lazy" decoding="async" alt="Lifestyle & Gadget" class="card-img md:m-0 shrink-0 h-32 md:h-40">
-                        <div>
-                            <h3 class="text-xl font-extrabold text-rose-400 mb-3 mt-4 md:mt-0">Lifestyle, Gadget & Trending Content</h3>
-                            <p class="text-slate-400 text-sm mb-4">আরও থাকছে বিভিন্ন ধরনের Lifestyle ও Trending Content:</p>
-                            <div class="grid grid-cols-2 gap-2 text-sm text-slate-300 font-medium ml-2 text-left">
-                                <p>❤️ Romantic Reels</p>
-                                <p>🎵 Song Reels</p>
-                                <p>✨ Aesthetic Reels</p>
-                                <p>🐱 Cute Cat Videos</p>
-                                <p>📱 Smart Gadget Reels</p>
-                                <p>🚗 Super Cars Reels</p>
-                                <p>🚀 Space Content</p>
-                                <p>🔥 Trending Reels</p>
-                                <p>🎬 Mixed Viral Content</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-
-        <!-- Audience Checklist & Why Choose -->
-        <div class="relative z-10 max-w-5xl mx-auto px-4 py-12">
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="glass-card bg-slate-800/90 border-t-4 border-t-cyan-500 text-center">
-                    <img src="https://i.postimg.cc/85nhVfrK/file-00000000ba7881fa82456de1daaab554-removebg-preview-(1).png" loading="lazy" decoding="async" alt="Audience" class="feature-img">
-                    
-                    <h2 class="text-2xl font-black text-white mb-6"><span class="text-3xl">🚀</span> কার জন্য এই বান্ডেল?</h2>
-                    <p class="text-slate-400 mb-6 text-sm">এই বান্ডেলটি বিশেষভাবে কাজে আসতে পারে—</p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-slate-200 font-bold text-sm text-left px-4">
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> Facebook Reels Creatorদের</p>
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> YouTube Shorts Creatorদের</p>
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> Instagram Reels Creatorদের</p>
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> নতুন Content Creatorদের</p>
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> Video Editorদের</p>
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> Facebook Page Ownerদের</p>
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> Gaming Content Creatorদের</p>
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> AI Content Creatorদের</p>
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> Motivational Page Ownerদের</p>
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> Islamic Content Creatorদের</p>
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> Sports Content Creatorদের</p>
-                        <p><span class="text-green-500 font-black text-lg mr-2">✔</span> Entertainment Page Ownerদের</p>
-                    </div>
-                </div>
-
-                <div class="glass-card bg-slate-800/90 border-t-4 border-t-purple-500 text-center">
-                    <img src="https://i.postimg.cc/hGc88BBz/file-00000000d3d481fa9e4b9ecba9b97165-removebg-preview.png" loading="lazy" decoding="async" alt="Why Choose" class="feature-img">
-                    
-                    <h2 class="text-2xl font-black text-white mb-6"><span class="text-3xl">💎</span> কেন এই মাস্টার বান্ডেল?</h2>
-                    <div class="space-y-4 text-left px-2">
-                        <div>
-                            <h4 class="font-black text-purple-400">১️⃣ বিশাল কনটেন্ট কালেকশন</h4>
-                            <p class="text-slate-400 text-sm">একটি মাত্র বান্ডেলে অসংখ্য ক্যাটাগরির বিশাল ভিডিও সংগ্রহ।</p>
-                        </div>
-                        <div>
-                            <h4 class="font-black text-purple-400">২️⃣ সময় বাঁচান</h4>
-                            <p class="text-slate-400 text-sm">প্রতিদিন নতুন কনটেন্ট খুঁজতে ঘণ্টার পর ঘণ্টা সময় ব্যয় করার প্রয়োজন কমবে।</p>
-                        </div>
-                        <div>
-                            <h4 class="font-black text-purple-400">৩️⃣ একাধিক Niche</h4>
-                            <p class="text-slate-400 text-sm">একটি নির্দিষ্ট ক্যাটাগরিতে সীমাবদ্ধ না থেকে বিভিন্ন Niche নিয়ে কাজ করার সুযোগ।</p>
-                        </div>
-                        <div>
-                            <h4 class="font-black text-purple-400">৪️⃣ Content Ideas-এর অভাব থাকবে না</h4>
-                            <p class="text-slate-400 text-sm">বিভিন্ন ধরনের ভিডিও দেখে নতুন Content Idea তৈরি করতে পারবেন।</p>
-                        </div>
-                        <div>
-                            <h4 class="font-black text-purple-400">৫️⃣ Creatorদের জন্য এক জায়গায় বিশাল রিসোর্স</h4>
-                            <p class="text-slate-400 text-sm">movie clip, Reels, Shorts, Editing, Resources, Courses এবং বিভিন্ন ধরনের Video Collection—সব একসাথে।</p>
-                        </div>
-                    </div>
+                    <p class="text-slate-400 text-sm mb-4">Football, Cricket, WWE সহ বিভিন্ন খেলাধুলার ভাইরাল ট্রেন্ডিং ভিডিও।</p>
                 </div>
             </div>
         </div>
 
-        <!-- Mega Bonus Section -->
-        <div class="relative z-10 max-w-4xl mx-auto px-4 py-10">
-            <div class="bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/50 p-8 md:p-12 rounded-3xl text-center relative overflow-hidden shadow-[0_0_40px_rgba(234,179,8,0.2)]">
-                <div class="absolute -top-10 -right-10 text-9xl text-yellow-500/10"><i class="fas fa-gift"></i></div>
-                
-                <img src="https://i.postimg.cc/HWhtqRQ3/1787882539713-removebg-preview.png" loading="lazy" decoding="async" alt="Bonus Content" class="bonus-img relative z-10">
-                
-                <h2 class="text-3xl md:text-4xl font-black text-yellow-400 mb-4 relative z-10"><span class="text-4xl md:text-5xl">🎁</span> BONUS CONTENT</h2>
-                <p class="text-lg text-slate-300 mb-6 relative z-10">মেগা বান্ডেলের সঙ্গে থাকছে বিভিন্ন অতিরিক্ত Content Collection ও Creator Resources, যাতে আপনার Content Creation Journey আরও সহজ হয়।</p>
-                
-                <div class="bg-slate-900/60 inline-block p-6 rounded-2xl border border-yellow-500/30 relative z-10">
-                    <h3 class="text-2xl font-black text-white mb-2"><span class="text-3xl">📱</span> CapCut Pro Related Resource</h3>
-                    <p class="text-slate-400 mb-2">ভিডিও এডিটিংয়ের জন্য CapCut-এর মতো জনপ্রিয় Editing Tool সম্পর্কিত Resource-ও বান্ডেলের অংশ হিসেবে রয়েছে।</p>
-                    <p class="text-green-400 font-black text-xl uppercase tracking-wider animate-pulse">একদম ফ্রি ডাউনলোড</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Final Conclusion -->
+        <!-- Final Call to Action -->
         <div class="relative z-10 max-w-4xl mx-auto px-4 py-12 text-center">
-            <h2 class="text-3xl md:text-5xl font-black text-white mb-8 leading-tight"><span class="text-4xl md:text-6xl">🔥</span> একটি বান্ডেল — অসংখ্য সম্ভাবনা!</h2>
-            
-            <div class="bg-slate-800 p-8 rounded-3xl text-lg text-slate-300 font-medium mb-12 shadow-xl border border-slate-700">
-                <p class="mb-4 text-xl font-bold text-white">ভাবুন তো—</p>
-                <p>আজ আপনার প্রয়োজন Football Reels। কাল আপনার প্রয়োজন Motivational Video। পরের দিন Islamic Content। তারপর AI Food Video কিংবা Funny Reels। আবার কখনো Gaming বা Lifestyle Content।</p>
-                <p class="mt-4 text-cyan-400 font-bold">প্রতিবার আলাদা আলাদা জায়গায় কনটেন্ট খোঁজার পরিবর্তে একটি বিশাল Content Library থাকলে আপনার কাজ অনেক সহজ হয়ে যায়।</p>
-            </div>
-
-            <h3 class="text-2xl md:text-4xl font-black text-white mb-6"><span class="text-3xl md:text-5xl">🚀</span> আপনার Content Creation Journey শুরু হোক আজ থেকেই!</h3>
-            <p class="text-lg text-slate-400 mb-8 max-w-3xl mx-auto">আপনি যদি নিয়মিত Facebook Reels, YouTube Shorts, Instagram Reels কিংবা অন্যান্য Short-form Content নিয়ে কাজ করতে চান, তাহলে এই ৩,০০,০০০+ Premium Reels & Content Master Bundle হতে পারে আপনার Content Library-এর একটি বড় সংযোজন।</p>
-            
-            <p class="text-yellow-400 font-bold text-xl md:text-2xl mb-10 drop-shadow-md">
-                🎯 বিশাল কনটেন্ট • একাধিক ক্যাটাগরি • Creator Resources • Learning Materials
-            </p>
-
-            <div class="inline-block border-2 border-dashed border-green-500 rounded-3xl p-8 mb-6 bg-slate-900/80">
-                <p class="text-green-400 font-black text-lg md:text-xl mb-2">🔥 আপনার কনটেন্ট তৈরির প্রয়োজনীয় রিসোর্স—একটি মেগা বান্ডেলে!</p>
-                <p class="text-white text-lg mb-4">আজই আপনার কনটেন্ট ক্রিয়েশনকে আরও দ্রুত, সহজ ও সংগঠিত করুন।</p>
-                <p class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 font-black text-3xl md:text-5xl mb-4">⚡ ৩,০০,০০০+ CONTENT MASTER BUNDLE</p>
-                <p class="text-slate-300 font-bold text-lg">একবার সংগ্রহ করুন — শুধু ডাউনলোড করুন এবং আপলোড করুন</p>
-            </div>
-            
             <!-- ৩য় ছবি -->
             <img src="https://i.postimg.cc/RVtwjFCf/1787884320404-removebg-preview.png" 
                  alt="Order Now" 
                  loading="lazy" 
-                 decoding="async" 
                  class="order-img">
                  
             <p class="text-red-400 font-black text-xl animate-pulse mt-4">সীমিত সময়ের জন্য এখনই অর্ডার করুন।</p>
 
-            <!-- ৪৮ ঘণ্টার অবিরাম লাইভ টাইমার -->
+            <!-- বাটন যা সরাসরি বিকাশ/নগদ/রকেট পেজে নিয়ে যাবে -->
+            <div class="mt-6">
+                <a href="select-payment.html" class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white px-10 py-4 rounded-2xl font-black text-xl shadow-2xl transition-all transform hover:scale-105 active:scale-95">
+                    <i class="fa-solid fa-cart-shopping mr-3"></i> মাত্র ৩০০ টাকায় সংগ্রহ করুন
+                </a>
+            </div>
+
+            <!-- লাইভ টাইমার -->
             <div class="mt-8 mb-6 max-w-lg mx-auto px-2">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs sm:text-sm font-bold mb-4 animate-pulse shadow-lg shadow-amber-500/20">
                     <span>⚡ স্পেশাল অফারের সময় শেষ হতে বাকি</span>
@@ -499,13 +315,12 @@
             </div>
         </div>
 
-        <!-- Sticky Floating Buy Button -->
+        <!-- Sticky Floating Buy Button (স্ক্রিনের নিচে ভাসমান অর্ডার বাটন) -->
         <div class="sticky-buy-bar">
-            <a href="checkout.html" class="w-full md:w-auto bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white px-10 py-4 rounded-full font-black text-xl md:text-2xl shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all hover:scale-105 border-b-4 border-green-800 flex items-center justify-center animate-bounce text-decoration-none">
+            <a href="select-payment.html" class="w-full md:w-auto bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white px-10 py-4 rounded-full font-black text-xl md:text-2xl shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all hover:scale-105 border-b-4 border-green-800 flex items-center justify-center animate-bounce text-decoration-none">
                 <i class="fas fa-shopping-cart mr-3"></i> এখনই অর্ডার করুন
             </a>
         </div>
-
     </div>
 
     <!-- Footer -->
@@ -513,13 +328,11 @@
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
-    <!-- স্ক্রিপ্ট -->
     <script>
         function initializeProductCountdown() {
             const STORAGE_KEY = 'technography_deal_end_time';
             const TOTAL_DURATION = 48 * 60 * 60 * 1000;
             const MIN_THRESHOLD = 10 * 60 * 60 * 1000;
-
             let targetTime = localStorage.getItem(STORAGE_KEY);
             const now = new Date().getTime();
 
@@ -533,38 +346,28 @@
             function updateDisplay() {
                 const currentTime = new Date().getTime();
                 let diff = targetTime - currentTime;
-
                 if (diff <= MIN_THRESHOLD) {
                     targetTime = currentTime + TOTAL_DURATION;
                     localStorage.setItem(STORAGE_KEY, targetTime);
                     diff = TOTAL_DURATION;
                 }
-
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-                const toBengaliNumber = (num) => {
-                    const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-                    return String(num).padStart(2, '0').split('').map(d => bnDigits[d] || d).join('');
-                };
-
+                const toBn = num => String(num).padStart(2, '0').replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
                 const elDays = document.getElementById('p-days');
                 const elHours = document.getElementById('p-hours');
                 const elMinutes = document.getElementById('p-minutes');
                 const elSeconds = document.getElementById('p-seconds');
-
-                if (elDays) elDays.textContent = toBengaliNumber(days);
-                if (elHours) elHours.textContent = toBengaliNumber(hours);
-                if (elMinutes) elMinutes.textContent = toBengaliNumber(minutes);
-                if (elSeconds) elSeconds.textContent = toBengaliNumber(seconds);
+                if (elDays) elDays.textContent = toBn(days);
+                if (elHours) elHours.textContent = toBn(hours);
+                if (elMinutes) elMinutes.textContent = toBn(minutes);
+                if (elSeconds) elSeconds.textContent = toBn(seconds);
             }
-
             updateDisplay();
             setInterval(updateDisplay, 1000);
         }
-
         initializeProductCountdown();
     </script>
 </body>
