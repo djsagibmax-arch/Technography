@@ -26,8 +26,16 @@
     <!-- End Meta Pixel Code -->
 
     <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
+    <link rel="dns-prefetch" href="https://i.postimg.cc">
+
+    <link rel="preload" as="image" href="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" fetchpriority="high">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Supabase লাইব্রেরি -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
@@ -39,6 +47,7 @@
             font-family: system-ui, -apple-system, sans-serif;
             overflow-x: hidden;
         }
+
         input:-webkit-autofill,
         input:-webkit-autofill:hover, 
         input:-webkit-autofill:focus {
@@ -46,6 +55,7 @@
             -webkit-box-shadow: 0 0 0px 1000px #0b132b inset !important;
             transition: background-color 5000s ease-in-out 0s;
         }
+
         .dark-input {
             background-color: #0b132b !important;
             color: #f8fafc !important;
@@ -55,6 +65,7 @@
             border-color: #06b6d4 !important;
             box-shadow: 0 0 0 1px #06b6d4 !important;
         }
+
         .btn-whatsapp-3d {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             box-shadow: 0 6px 0px #075E54, 0 12px 25px rgba(37, 211, 102, 0.45);
@@ -69,6 +80,7 @@
             transform: translateY(4px);
             box-shadow: 0 2px 0px #075E54, 0 6px 15px rgba(37, 211, 102, 0.3);
         }
+
         #toast {
             visibility: hidden;
             min-width: 280px;
@@ -88,11 +100,16 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             transition: opacity 0.3s, bottom 0.3s;
         }
-        #toast.show { visibility: visible; opacity: 1; bottom: 40px; }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 40px;
+        }
     </style>
 </head>
 <body class="bg-[#070b18] text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-white">
 
+    <!-- Header -->
     <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400">Technography</a>
@@ -104,20 +121,24 @@
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="max-w-xl mx-auto px-4 py-8">
         <div class="bg-slate-900/90 border border-slate-800 p-5 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
             
             <h2 class="text-xl sm:text-2xl font-black mb-5 text-center text-white">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
 
-            <!-- মেথড কার্ড -->
-            <div id="selected-info-box" class="p-4 sm:p-5 rounded-2xl mb-6 transition-all border">
+            <!-- Selected Method Display Box -->
+            <div id="selected-info-box" class="bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all">
                 <div class="mb-3 flex items-center justify-between">
                     <div class="flex items-center gap-2.5">
-                        <img id="active-method-logo" src="" alt="Logo" class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
-                        <span id="active-method-name" class="text-base sm:text-lg font-bold"></span>
+                        <img id="active-method-logo" 
+                             src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" 
+                             alt="Logo" 
+                             class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
+                        <span id="active-method-name" class="text-base sm:text-lg font-bold text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
                     </div>
-                    <!-- পরিবর্তন বাটন select-payment.html এ ফিরে যাবে -->
-                    <a href="select-payment.html" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border border-slate-700 shadow-sm">
+                    <!-- পরিবর্তন বাটন select-payment.html পেজে ফেরত পাঠাবে -->
+                    <a href="select-payment.html" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-slate-700 shadow-sm">
                         <i class="fa-solid fa-rotate"></i> পরিবর্তন
                     </a>
                 </div>
@@ -149,7 +170,7 @@
                 </p>
             </div>
 
-            <!-- অর্ডার ফর্ম -->
+            <!-- Form (যা আপনার আসল checkout.js ফাইলের handleFormSubmit ফাংশন কল করবে) -->
             <form id="paymentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-slate-200 mb-1.5">আপনার নাম:</label>
@@ -187,90 +208,21 @@
         </div>
     </main>
 
+    <!-- Toast Notification -->
     <div id="toast">
         <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">অর্ডার সম্পন্ন!</span>
     </div>
 
+    <!-- প্রথম পেজ থেকে আসা মেথড (বিকাশ/নগদ/রকেট) সেট করার স্ক্রিপ্ট -->
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        let selectedMethod = urlParams.get('method') || 'bkash';
-
-        const paymentConfig = {
-            bkash: {
-                name: 'বিকাশ (Personal) পেমেন্ট নিয়ম',
-                logo: 'https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg',
-                boxClass: 'bg-pink-950/20 border-pink-500/30',
-                textColor: 'text-pink-400'
-            },
-            nagad: {
-                name: 'নগদ (Personal) পেমেন্ট নিয়ম',
-                logo: 'https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg',
-                boxClass: 'bg-orange-950/20 border-orange-500/30',
-                textColor: 'text-orange-400'
-            },
-            rocket: {
-                name: 'রকেট (Personal) পেমেন্ট নিয়ম',
-                logo: 'https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg',
-                boxClass: 'bg-purple-950/20 border-purple-500/30',
-                textColor: 'text-purple-400'
-            }
-        };
-
-        function renderSelectedMethod(methodKey) {
-            const conf = paymentConfig[methodKey] || paymentConfig.bkash;
-            const box = document.getElementById('selected-info-box');
-            const name = document.getElementById('active-method-name');
-            const logo = document.getElementById('active-method-logo');
-
-            box.className = `p-4 sm:p-5 rounded-2xl mb-6 transition-all border ${conf.boxClass}`;
-            name.className = `text-base sm:text-lg font-bold ${conf.textColor}`;
-            name.innerText = conf.name;
-            logo.src = conf.logo;
-        }
-
-        renderSelectedMethod(selectedMethod);
-
-        function copyText(text, btn) {
-            navigator.clipboard.writeText(text).then(() => {
-                const originalHtml = btn.innerHTML;
-                btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i> <span class="text-emerald-400">কপি হয়েছে!</span>';
-                setTimeout(() => {
-                    btn.innerHTML = originalHtml;
-                }, 1500);
-            });
-        }
-
-        function showToast(message, isError = false) {
-            const toast = document.getElementById('toast');
-            const msg = document.getElementById('toast-msg');
-            msg.textContent = message;
-            toast.style.backgroundColor = isError ? '#ef4444' : '#10b981';
-            toast.className = 'show';
-            setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3000);
-        }
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.innerText = 'অর্ডার প্রসেস হচ্ছে...';
-
-            // মেটা পিক্সেল পারচেজ ইভেন্ট ফায়ার করা
-            if (typeof fbq === 'function') {
-                fbq('track', 'Purchase', {
-                    value: 300,
-                    currency: 'BDT',
-                    content_name: '৩,০০,০০০+ AI Reels Bundle'
-                });
-            }
-
-            setTimeout(() => {
-                showToast("অর্ডার সফলভাবে সম্পন্ন হয়েছে!");
-                btn.disabled = false;
-                btn.innerHTML = '<span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>';
-                document.getElementById('paymentForm').reset();
-            }, 1200);
+        const currentMethod = urlParams.get('method');
+        if (currentMethod && typeof selectPayment === 'function') {
+            selectPayment(currentMethod);
         }
     </script>
+
+    <!-- আপনার আসল checkout.js স্ক্রিপ্ট কানেক্ট করা হলো -->
+    <script src="checkout.js"></script>
 </body>
 </html>
