@@ -137,7 +137,7 @@
                              class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
                         <span id="active-method-name" class="text-base sm:text-lg font-bold text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
                     </div>
-                    <!-- পরিবর্তন বাটন select-payment.html পেজে ফেরত পাঠাবে -->
+                    <!-- পরিবর্তন বাটন চাপলে select-payment.html এ ফিরে যাবে -->
                     <a href="select-payment.html" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-slate-700 shadow-sm">
                         <i class="fa-solid fa-rotate"></i> পরিবর্তন
                     </a>
@@ -170,7 +170,7 @@
                 </p>
             </div>
 
-            <!-- Form (যা আপনার আসল checkout.js ফাইলের handleFormSubmit ফাংশন কল করবে) -->
+            <!-- Form -->
             <form id="paymentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-slate-200 mb-1.5">আপনার নাম:</label>
@@ -213,16 +213,21 @@
         <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">অর্ডার সম্পন্ন!</span>
     </div>
 
-    <!-- প্রথম পেজ থেকে আসা মেথড (বিকাশ/নগদ/রকেট) সেট করার স্ক্রিপ্ট -->
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const currentMethod = urlParams.get('method');
-        if (currentMethod && typeof selectPayment === 'function') {
-            selectPayment(currentMethod);
-        }
-    </script>
+    <!-- checkout.js এর এরর এড়ানোর জন্য হিডেন ডামি এলিমেন্ট -->
+    <div id="paymentModal" style="display:none;"></div>
 
-    <!-- আপনার আসল checkout.js স্ক্রিপ্ট কানেক্ট করা হলো -->
+    <!-- আপনার মূল checkout.js স্ক্রিপ্ট -->
     <script src="checkout.js"></script>
+
+    <!-- URL থেকে নগদ/রকেট পড়ে স্বয়ংক্রিয়ভাবে মেথড পরিবর্তন করার ট্র্যাকার -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const method = urlParams.get('method');
+            if (method && typeof selectPayment === 'function') {
+                selectPayment(method);
+            }
+        });
+    </script>
 </body>
 </html>
