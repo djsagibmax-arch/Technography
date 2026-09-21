@@ -20,70 +20,50 @@
     fbq('track', 'PageView');
     fbq('track', 'InitiateCheckout');
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"
-    /></noscript>
     <!-- End Meta Pixel Code -->
-
-    <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
-    <link rel="preload" as="image" href="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" fetchpriority="high">
-    <link rel="preload" as="image" href="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" fetchpriority="high">
-    <link rel="preload" as="image" href="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" fetchpriority="high">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        body {
-            margin: 0;
-            background-color: #070b18;
-            color: #f1f5f9;
-            font-family: system-ui, -apple-system, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
 </head>
-<body class="bg-[#070b18] text-slate-100 antialiased selection:bg-cyan-500 selection:text-white">
+<body class="bg-[#070b18] text-slate-100 antialiased min-h-screen flex flex-col">
 
     <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400">Technography</a>
             <nav class="flex items-center gap-6">
                 <a href="index.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">হোম</a>
-                <a href="product.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">প্রোডাক্ট</a>
+                <a href="index.html#products-section" class="text-slate-300 hover:text-cyan-400 transition text-sm">প্রোডাক্ট</a>
                 <a href="select-payment.html" class="text-cyan-400 font-medium transition text-sm">অর্ডার</a>
             </nav>
         </div>
     </header>
 
     <main class="flex-1 flex items-center justify-center p-4">
-        <div class="bg-slate-900/90 border border-slate-800/90 w-full max-w-sm rounded-3xl p-6 sm:p-7 shadow-2xl backdrop-blur-xl">
+        <div class="bg-slate-900/90 border border-slate-800 w-full max-w-sm rounded-3xl p-6 sm:p-7 shadow-2xl backdrop-blur-xl">
             
             <div class="flex items-center justify-between mb-3 border-b border-slate-800/80 pb-3">
-                <h2 class="text-base sm:text-lg font-bold text-white tracking-wide">পেমেন্ট মাধ্যম নির্বাচন করুন</h2>
-                <a href="index.html" class="text-slate-400 hover:text-white bg-slate-800/80 hover:bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center transition">
+                <h2 class="text-base sm:text-lg font-bold text-white">পেমেন্ট মাধ্যম নির্বাচন করুন</h2>
+                <a href="index.html" class="text-slate-400 hover:text-white bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </a>
             </div>
             
-            <p class="text-slate-400 text-xs sm:text-sm mb-6 text-center leading-relaxed">নিচের লোগোতে ক্লিক করে পেমেন্ট মাধ্যম বেছে নিন</p>
+            <p class="text-slate-400 text-xs sm:text-sm mb-6 text-center">নিচের লোগোতে ক্লিক করে পেমেন্ট মাধ্যম বেছে নিন</p>
 
             <div class="grid grid-cols-3 gap-3 text-center">
-                <a href="checkout.html?method=bkash" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-pink-500/30">
-                    <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="বিকাশ" loading="eager" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
-                    <span class="text-xs font-bold text-pink-400 block tracking-wide">বিকাশ</span>
+                <a id="linkBkash" href="checkout.html?method=bkash" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-pink-500/30">
+                    <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="বিকাশ" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
+                    <span class="text-xs font-bold text-pink-400 block">বিকাশ</span>
                 </a>
 
-                <a href="checkout.html?method=nagad" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-orange-500/30">
-                    <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" alt="নগদ" loading="eager" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
-                    <span class="text-xs font-bold text-orange-400 block tracking-wide">নগদ</span>
+                <a id="linkNagad" href="checkout.html?method=nagad" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-orange-500/30">
+                    <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" alt="নগদ" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
+                    <span class="text-xs font-bold text-orange-400 block">নগদ</span>
                 </a>
 
-                <a href="checkout.html?method=rocket" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-purple-500/30">
-                    <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" alt="রকেট" loading="eager" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
-                    <span class="text-xs font-bold text-purple-400 block tracking-wide">রকেট</span>
+                <a id="linkRocket" href="checkout.html?method=rocket" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-purple-500/30">
+                    <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" alt="রকেট" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
+                    <span class="text-xs font-bold text-purple-400 block">রকেট</span>
                 </a>
             </div>
         </div>
@@ -93,5 +73,11 @@
         &copy; 2026 Technography. All rights reserved.
     </footer>
 
+    <script>
+        const p = new URLSearchParams(window.location.search).get('product') || '1';
+        document.getElementById('linkBkash').href = `checkout.html?method=bkash&product=${p}`;
+        document.getElementById('linkNagad').href = `checkout.html?method=nagad&product=${p}`;
+        document.getElementById('linkRocket').href = `checkout.html?method=rocket&product=${p}`;
+    </script>
 </body>
 </html>
