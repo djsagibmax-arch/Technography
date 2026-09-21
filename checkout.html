@@ -26,16 +26,8 @@
     <!-- End Meta Pixel Code -->
 
     <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
-    <link rel="dns-prefetch" href="https://i.postimg.cc">
-
-    <link rel="preload" as="image" href="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" fetchpriority="high">
-    <link rel="preload" as="image" href="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" fetchpriority="high">
-    <link rel="preload" as="image" href="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" fetchpriority="high">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Supabase লাইব্রেরি -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
@@ -47,15 +39,6 @@
             font-family: system-ui, -apple-system, sans-serif;
             overflow-x: hidden;
         }
-
-        input:-webkit-autofill,
-        input:-webkit-autofill:hover, 
-        input:-webkit-autofill:focus {
-            -webkit-text-fill-color: #f8fafc !important;
-            -webkit-box-shadow: 0 0 0px 1000px #0b132b inset !important;
-            transition: background-color 5000s ease-in-out 0s;
-        }
-
         .dark-input {
             background-color: #0b132b !important;
             color: #f8fafc !important;
@@ -65,22 +48,10 @@
             border-color: #06b6d4 !important;
             box-shadow: 0 0 0 1px #06b6d4 !important;
         }
-
         .btn-whatsapp-3d {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             box-shadow: 0 6px 0px #075E54, 0 12px 25px rgba(37, 211, 102, 0.45);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .btn-whatsapp-3d:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 0px #075E54, 0 16px 30px rgba(37, 211, 102, 0.6);
-            filter: brightness(1.08);
-        }
-        .btn-whatsapp-3d:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0px #075E54, 0 6px 15px rgba(37, 211, 102, 0.3);
-        }
-
         #toast {
             visibility: hidden;
             min-width: 280px;
@@ -97,7 +68,6 @@
             font-weight: bold;
             font-size: 14px;
             opacity: 0;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             transition: opacity 0.3s, bottom 0.3s;
         }
         #toast.show {
@@ -107,38 +77,30 @@
         }
     </style>
 </head>
-<body class="bg-[#070b18] text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-white">
+<body class="bg-[#070b18] text-slate-100 font-sans antialiased">
 
-    <!-- Header -->
     <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400">Technography</a>
             <nav class="flex items-center gap-6">
                 <a href="index.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">হোম</a>
-                <a href="product.html" class="text-slate-300 hover:text-cyan-400 transition text-sm">প্রোডাক্ট</a>
+                <a href="index.html#products-section" class="text-slate-300 hover:text-cyan-400 transition text-sm">প্রোডাক্ট</a>
                 <a href="select-payment.html" class="text-cyan-400 font-medium transition text-sm">অর্ডার</a>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="max-w-xl mx-auto px-4 py-8">
         <div class="bg-slate-900/90 border border-slate-800 p-5 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
-            
             <h2 class="text-xl sm:text-2xl font-black mb-5 text-center text-white">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
 
-            <!-- Selected Method Display Box -->
             <div id="selected-info-box" class="bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all">
                 <div class="mb-3 flex items-center justify-between">
                     <div class="flex items-center gap-2.5">
-                        <img id="active-method-logo" 
-                             src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" 
-                             alt="Logo" 
-                             class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
+                        <img id="active-method-logo" src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="Logo" class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
                         <span id="active-method-name" class="text-base sm:text-lg font-bold text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
                     </div>
-                    <!-- পরিবর্তন বাটন চাপলে select-payment.html এ ফিরে যাবে -->
-                    <a href="select-payment.html" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-slate-700 shadow-sm">
+                    <a id="changeMethodBtn" href="select-payment.html" class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-slate-700">
                         <i class="fa-solid fa-rotate"></i> পরিবর্তন
                     </a>
                 </div>
@@ -146,10 +108,10 @@
                 <div class="space-y-2.5 text-left bg-slate-950/90 p-3.5 sm:p-4 rounded-xl border border-slate-800">
                     <div class="flex items-center justify-between gap-3">
                         <div class="min-w-0">
-                            <span class="text-[11px] text-slate-400 block leading-tight">সেন্ড মনি (Send Money) নাম্বার:</span>
+                            <span class="text-[11px] text-slate-400 block leading-tight">সেন্ড মানি (Send Money) নাম্বার:</span>
                             <span id="targetNumber" class="text-base sm:text-lg font-mono font-bold text-cyan-400">01871337792</span>
                         </div>
-                        <button type="button" onclick="copyText('01871337792', this)" class="w-28 h-9 bg-slate-800 hover:bg-slate-700 active:scale-95 text-cyan-300 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 border border-slate-700 shrink-0 shadow-sm">
+                        <button type="button" onclick="copyText('01871337792', this)" class="w-28 h-9 bg-slate-800 hover:bg-slate-700 active:scale-95 text-cyan-300 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 border border-slate-700">
                             <i class="fa-regular fa-copy"></i> <span>কপি নাম্বার</span>
                         </button>
                     </div>
@@ -159,73 +121,68 @@
                             <span class="text-[11px] text-slate-400 block leading-tight">প্রোডাক্ট মূল্য:</span>
                             <span id="targetAmount" class="text-base sm:text-lg font-mono font-bold text-emerald-400">৩০০ টাকা</span>
                         </div>
-                        <button type="button" onclick="copyText('300', this)" class="w-28 h-9 bg-slate-800 hover:bg-slate-700 active:scale-95 text-emerald-300 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 border border-slate-700 shrink-0 shadow-sm">
+                        <button id="copyAmountBtn" type="button" onclick="copyText('300', this)" class="w-28 h-9 bg-slate-800 hover:bg-slate-700 active:scale-95 text-emerald-300 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 border border-slate-700">
                             <i class="fa-regular fa-copy"></i> <span>কপি পরিমাণ</span>
                         </button>
                     </div>
                 </div>
 
-                <p class="text-xs text-slate-300 mt-3 font-normal leading-relaxed text-center">
+                <p id="priceNoticeRule" class="text-xs text-slate-300 mt-3 font-normal leading-relaxed text-center">
                     ⚠️ নিয়ম: প্রথমে আপনার একাউন্ট থেকে ওপরের নাম্বারে <span class="text-yellow-400 font-bold">৩০০ টাকা</span> Send Money করুন। এরপর নিচের ফর্মটি পূরণ করুন।
                 </p>
             </div>
 
-            <!-- Form -->
             <form id="paymentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-slate-200 mb-1.5">আপনার নাম:</label>
-                    <input type="text" id="customerName" required placeholder="আপনার পূর্ণ নাম লিখুন" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium outline-none transition placeholder:text-slate-500">
+                    <input type="text" id="customerName" required placeholder="আপনার পূর্ণ নাম লিখুন" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium outline-none transition">
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-slate-200 mb-1.5">মোবাইল নাম্বার (WhatsApp)</label>
-                    <input type="tel" id="customerPhone" required placeholder="017xxxxxxxx" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium font-mono outline-none transition placeholder:text-slate-500">
+                    <input type="tel" id="customerPhone" required placeholder="017xxxxxxxx" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium font-mono outline-none transition">
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-slate-200 mb-1.5">ট্রানজেকশন আইডি (TrxID)</label>
-                    <input type="text" id="trxId" required placeholder="টাকা পাঠানোর পর প্রাপ্ত TRXID এখানে দিন" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium font-mono uppercase outline-none transition placeholder:text-slate-500">
+                    <input type="text" id="trxId" required placeholder="টাকা পাঠানোর পর প্রাপ্ত TRXID এখানে দিন" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium font-mono uppercase outline-none transition">
                 </div>
 
-                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 active:scale-98 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-600/30 transition text-base mt-2 flex items-center justify-center gap-2">
+                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 active:scale-98 text-white font-bold py-3.5 rounded-xl shadow-lg transition text-base mt-2 flex items-center justify-center gap-2">
                     <span>পেমেন্ট কনফার্ম করুন</span> <i class="fa-solid fa-circle-check"></i>
                 </button>
 
-                <!-- WhatsApp বাটন -->
                 <div class="mt-8 pt-5 border-t border-slate-800 text-center">
-                    <p class="text-xs sm:text-sm text-amber-400 font-semibold mb-3 flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                        <span>অর্ডার করতে কোনো সমস্যা হচ্ছে বা বুঝতে পারছেন না?</span>
+                    <p class="text-xs sm:text-sm text-amber-400 font-semibold mb-3">
+                        <i class="fa-solid fa-triangle-exclamation"></i> অর্ডার করতে কোনো সমস্যা হচ্ছে বা বুঝতে পারছেন না?
                     </p>
-                    <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Technography%20থেকে%20AI%20Reels%20বান্ডিলটি%20অর্ডার%20করতে%20সহায়তা%20চাচ্ছি।" 
-                       target="_blank" 
-                       class="btn-whatsapp-3d w-full inline-flex items-center justify-center gap-3 text-white px-6 py-3.5 rounded-2xl text-sm sm:text-base font-black tracking-wide cursor-pointer border border-emerald-300/40">
-                        <i class="fa-brands fa-whatsapp text-2xl drop-shadow"></i>
-                        <span class="drop-shadow-sm">অর্ডার করতে না পারলে হোয়াটসঅ্যাপে যোগাযোগ করুন</span>
+                    <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Technography%20থেকে%20অর্ডার%20করতে%20সহায়তা%20চাচ্ছি।" target="_blank" class="btn-whatsapp-3d w-full inline-flex items-center justify-center gap-3 text-white px-6 py-3.5 rounded-2xl text-sm sm:text-base font-black">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span>হোয়াটসঅ্যাপে যোগাযোগ করুন</span>
                     </a>
                 </div>
             </form>
         </div>
     </main>
 
-    <!-- Toast Notification -->
     <div id="toast">
         <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">অর্ডার সম্পন্ন!</span>
     </div>
 
-    <!-- checkout.js এর এরর এড়ানোর জন্য হিডেন ডামি এলিমেন্ট -->
-    <div id="paymentModal" style="display:none;"></div>
-
-    <!-- আপনার মূল checkout.js স্ক্রিপ্ট -->
     <script src="checkout.js"></script>
-
-    <!-- URL থেকে নগদ/রকেট পড়ে স্বয়ংক্রিয়ভাবে মেথড পরিবর্তন করার ট্র্যাকার -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const method = urlParams.get('method');
+            const params = new URLSearchParams(window.location.search);
+            const method = params.get('method');
+            const product = params.get('product') || '1';
+            
             if (method && typeof selectPayment === 'function') {
                 selectPayment(method);
+            }
+            // পরিবর্তন বাটন যাতে সঠিক প্রোডাক্ট বজায় রাখে
+            const changeBtn = document.getElementById('changeMethodBtn');
+            if (changeBtn) {
+                changeBtn.href = `select-payment.html?product=${product}`;
             }
         });
     </script>
