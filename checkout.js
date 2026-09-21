@@ -3,16 +3,52 @@ const supabaseUrl = 'https://safymsagxrjymhfdzkph.supabase.co';
 const supabaseKey = 'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv';
 const client = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-const REQUIRED_AMOUNT = 300; // নির্ধারিত প্রোডাক্ট মূল্য
+// প্রোডাক্ট ও প্রাইস কনফিগারেশন
+const PRODUCTS_DATA = {
+    '1': { name: 'Mega Bundle (All in One)', price: 300, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' },
+    '2': { name: 'Facebook & YouTube Growth Course', price: 70, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' },
+    '3': { name: 'Premium Digital Resource Package', price: 99, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' },
+    '4': { name: 'Movie & Drama Clips Collection', price: 99, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' },
+    '5': { name: 'AI Food & Fitness Videos', price: 50, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' },
+    '6': { name: 'Islamic Viral Reels Collection', price: 50, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' }
+};
+
+const urlParams = new URLSearchParams(window.location.search);
+const currentProductKey = urlParams.get('product') || '1';
+const CURRENT_PRODUCT = PRODUCTS_DATA[currentProductKey] || PRODUCTS_DATA['1'];
+const REQUIRED_AMOUNT = CURRENT_PRODUCT.price;
 
 let selectedMethod = 'bkash';
 
+function toBn(num) {
+    const bn = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+    return String(num).split('').map(d => bn[d] || d).join('');
+}
+
+// পেজ লোড হলে সঠিক প্রাইস ইন্টারফেসে বসানো
+document.addEventListener('DOMContentLoaded', () => {
+    const targetAmountEl = document.getElementById('targetAmount');
+    if (targetAmountEl) {
+        targetAmountEl.innerText = `${toBn(REQUIRED_AMOUNT)} টাকা`;
+    }
+    const copyAmountBtn = document.getElementById('copyAmountBtn');
+    if (copyAmountBtn) {
+        copyAmountBtn.setAttribute('onclick', `copyText('${REQUIRED_AMOUNT}', this)`);
+    }
+    const ruleNotice = document.getElementById('priceNoticeRule');
+    if (ruleNotice) {
+        ruleNotice.innerHTML = `⚠️ নিয়ম: প্রথমে আপনার একাউন্ট থেকে ওপরের নাম্বারে <span class="text-yellow-400 font-bold">${toBn(REQUIRED_AMOUNT)} টাকা</span> Send Money করুন। এরপর নিচের ফর্মটি পূরণ করুন।`;
+    }
+});
+
 function openPaymentModal() {
-    document.getElementById('paymentModal').style.display = 'flex';
+    const modal = document.getElementById('paymentModal');
+    if (modal) modal.style.display = 'flex';
 }
 
 function closePaymentModal() {
-    document.getElementById('paymentModal').style.display = 'none';
+    const modal = document.getElementById('paymentModal');
+    if (modal) modal.style.display = 'none';
 }
 
 function selectPayment(method) {
@@ -92,7 +128,6 @@ async function handleFormSubmit(event) {
     submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> পেমেন্ট যাচাই করা হচ্ছে...';
 
     try {
-        // ১. Supabase থেকে TrxID দিয়ে ডাটা চেক
         const { data: records, error: checkError } = await client
             .from('payments')
             .select('*')
@@ -112,14 +147,12 @@ async function handleFormSubmit(event) {
 
         const paymentRecord = records[0];
 
-        // ২. TrxID ইতিমধ্যে ব্যবহার হয়েছে কি না চেক
         if (paymentRecord.is_used === true) {
             showToast("⚠️ এই TrxID টি ইতিমধ্যেই একবার ব্যবহার করা হয়েছে!", true);
             resetSubmitBtn(submitBtn);
             return;
         }
 
-        // ৩. টাকার পরিমাণ যাচাই (৩০০ টাকার কম হলে বাতিল)
         const receivedAmount = parseFloat(paymentRecord.amount);
 
         if (isNaN(receivedAmount) || receivedAmount < REQUIRED_AMOUNT) {
@@ -128,7 +161,6 @@ async function handleFormSubmit(event) {
             return;
         }
 
-        // ৪. Supabase-এ স্ট্যাটাস আপডেট ও WhatsApp নম্বর সেভ করা
         const { error: updateError } = await client
             .from('payments')
             .update({ 
@@ -143,24 +175,19 @@ async function handleFormSubmit(event) {
             return;
         }
 
-        // কনফার্মেশন লিংক
-        const vipAccessLink = "https://technographybd.xyz/mega-bundle-vip-access.html";
-
-        // ৫. Render-এর পাইথন বটের কাছে রিকোয়েস্ট পাঠানো
         fetch("https://technography-whatsapp-bot.onrender.com/send-confirmation", { 
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 phone: phone,
                 name: name,
-                product: "Mega Bundle VIP Access",
-                link: vipAccessLink
+                product: CURRENT_PRODUCT.name,
+                link: CURRENT_PRODUCT.link
             })
         }).catch(e => console.log("Render Bot call error:", e));
 
         showToast("✅ পেমেন্ট সফল হয়েছে! অ্যাক্সেস পেজে নিয়ে যাওয়া হচ্ছে...");
 
-        // ৬. ভিআইপি অ্যাক্সেস পেজে রিডাইরেক্ট
         setTimeout(() => {
             window.location.href = "mega-bundle-vip-access.html";
         }, 1000);
