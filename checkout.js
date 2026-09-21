@@ -3,16 +3,41 @@ const supabaseUrl = 'https://safymsagxrjymhfdzkph.supabase.co';
 const supabaseKey = 'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv';
 const client = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-// প্রোডাক্ট ও প্রাইস কনফিগারেশন
+// ৬টি প্রোডাক্টের সম্পূর্ণ কনফিগারেশন (নাম, দাম ও হিডেন লিংক)
 const PRODUCTS_DATA = {
-    '1': { name: 'Mega Bundle (All in One)', price: 300, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' },
-    '2': { name: 'Facebook & YouTube Growth Course', price: 70, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' },
-    '3': { name: 'Premium Digital Resource Package', price: 99, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' },
-    '4': { name: 'Movie & Drama Clips Collection', price: 99, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' },
-    '5': { name: 'AI Food & Fitness Videos', price: 50, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' },
-    '6': { name: 'Islamic Viral Reels Collection', price: 50, link: 'https://technographybd.xyz/mega-bundle-vip-access.html' }
+    '1': { 
+        name: 'Mega Bundle (All in One)', 
+        price: 300, 
+        link: 'https://technographybd.xyz/mega-bundle-vip-access.html' 
+    },
+    '2': { 
+        name: 'Facebook & YouTube Growth Course', 
+        price: 70, 
+        link: 'https://technographybd.xyz/growth-course-access.html' 
+    },
+    '3': { 
+        name: '1.5 Lakh Mixed Mega Reels Bundle', 
+        price: 99, 
+        link: 'https://technographybd.xyz/reels-bundle-access.html' 
+    },
+    '4': { 
+        name: 'Movie & Drama Clips Collection', 
+        price: 99, 
+        link: 'https://technographybd.xyz/movie-clips-access.html' 
+    },
+    '5': { 
+        name: 'AI Food & Fitness Videos', 
+        price: 50, 
+        link: 'https://technographybd.xyz/food-fitness-access.html' 
+    },
+    '6': { 
+        name: 'Islamic Viral Reels Collection', 
+        price: 50, 
+        link: 'https://technographybd.xyz/islamic-reels-access.html' 
+    }
 };
 
+// URL থেকে প্রোডাক্ট আইডি সংগ্রহ
 const urlParams = new URLSearchParams(window.location.search);
 const currentProductKey = urlParams.get('product') || '1';
 const CURRENT_PRODUCT = PRODUCTS_DATA[currentProductKey] || PRODUCTS_DATA['1'];
@@ -25,7 +50,7 @@ function toBn(num) {
     return String(num).split('').map(d => bn[d] || d).join('');
 }
 
-// পেজ লোড হলে সঠিক প্রাইস ইন্টারফেসে বসানো
+// পেজ লোড হলে সঠিক টাকার পরিমাণ স্ক্রিনে বসানো
 document.addEventListener('DOMContentLoaded', () => {
     const targetAmountEl = document.getElementById('targetAmount');
     if (targetAmountEl) {
@@ -128,6 +153,7 @@ async function handleFormSubmit(event) {
     submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> পেমেন্ট যাচাই করা হচ্ছে...';
 
     try {
+        // ১. Supabase থেকে TrxID দিয়ে ডাটা চেক
         const { data: records, error: checkError } = await client
             .from('payments')
             .select('*')
@@ -147,12 +173,14 @@ async function handleFormSubmit(event) {
 
         const paymentRecord = records[0];
 
+        // ২. TrxID ইতিমধ্যে ব্যবহার হয়েছে কি না চেক
         if (paymentRecord.is_used === true) {
             showToast("⚠️ এই TrxID টি ইতিমধ্যেই একবার ব্যবহার করা হয়েছে!", true);
             resetSubmitBtn(submitBtn);
             return;
         }
 
+        // ৩. নির্দিষ্ট প্রোডাক্টের মূল্যের সাথে মিল চেক করা
         const receivedAmount = parseFloat(paymentRecord.amount);
 
         if (isNaN(receivedAmount) || receivedAmount < REQUIRED_AMOUNT) {
@@ -161,6 +189,7 @@ async function handleFormSubmit(event) {
             return;
         }
 
+        // ৪. Supabase-এ স্ট্যাটাস আপডেট
         const { error: updateError } = await client
             .from('payments')
             .update({ 
@@ -175,6 +204,7 @@ async function handleFormSubmit(event) {
             return;
         }
 
+        // ৫. Render-এর পাইথন বটের কাছে ডাইনামিক ডেটা পাঠানো (৪টি প্যারামিটার)
         fetch("https://technography-whatsapp-bot.onrender.com/send-confirmation", { 
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -182,15 +212,17 @@ async function handleFormSubmit(event) {
                 phone: phone,
                 name: name,
                 product: CURRENT_PRODUCT.name,
+                amount: String(receivedAmount),
                 link: CURRENT_PRODUCT.link
             })
         }).catch(e => console.log("Render Bot call error:", e));
 
         showToast("✅ পেমেন্ট সফল হয়েছে! অ্যাক্সেস পেজে নিয়ে যাওয়া হচ্ছে...");
 
+        // ৬. নির্দিষ্ট প্রোডাক্টের হিডেন অ্যাক্সেস পেজে রিডাইরেক্ট
         setTimeout(() => {
-            window.location.href = "mega-bundle-vip-access.html";
-        }, 1000);
+            window.location.href = CURRENT_PRODUCT.link;
+        }, 1200);
         
     } catch (err) {
         console.error("Verification System Error:", err);
