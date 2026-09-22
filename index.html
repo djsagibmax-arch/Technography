@@ -58,7 +58,6 @@
             margin: 0 auto; 
         }
         
-        /* কাস্টমার রিভিউ কার্ডের স্টাইল */
         .rev-card {
             background: #111827 !important;
             border: 1px solid #1f2937 !important;
@@ -87,9 +86,67 @@
             font-weight: 700 !important;
             font-size: 15px !important;
         }
+
+        /* ফ্লোটিং যোগাযোগ সাইডবার (WhatsApp + Facebook) */
+        .floating-contact-bar {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 10px 8px;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: none;
+            box-shadow: -4px 10px 25px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .contact-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease;
+        }
+        .contact-btn:hover {
+            transform: scale(1.15);
+        }
+        .contact-btn-wa {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+        .contact-btn-fb {
+            background: linear-gradient(135deg, #1877F2 0%, #0c56be 100%);
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased">
+
+    <!-- ফ্লোটিং কন্টাক্ট সাইডবার (WhatsApp & Facebook) -->
+    <aside class="floating-contact-bar">
+        <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Technography%20ওয়েবসাইট%20থেকে%20যোগাযোগ%20করছি।" 
+           target="_blank" 
+           title="WhatsApp-এ যোগাযোগ করুন" 
+           class="contact-btn contact-btn-wa">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="https://www.facebook.com/Digitalgrowthbdd" 
+           target="_blank" 
+           title="ফেসবুক পেজ ভিজিট করুন" 
+           class="contact-btn contact-btn-fb">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
+    </aside>
 
     <!-- হেডার -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/90 border-b border-slate-800">
@@ -280,7 +337,6 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <input type="text" id="revName" required placeholder="আপনার নাম" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
                     
-                    <!-- ১ স্টার থেকে ৫ স্টার পর্যন্ত অপশন -->
                     <select id="revRating" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-amber-300 focus:outline-none focus:border-cyan-400">
                         <option value="5">⭐⭐⭐⭐⭐ (৫ স্টার)</option>
                         <option value="4.5">⭐⭐⭐⭐½ (৪.৫ স্টার)</option>
@@ -300,7 +356,7 @@
             </form>
         </div>
 
-        <!-- বাটনটির নিচে স্থানান্তরিত রেটিং ব্যাজ ও স্কোর -->
+        <!-- বাটনটির নিচে রেটিং ব্যাজ ও স্কোর -->
         <div class="text-center mb-8">
             <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold mb-2">
                 <i class="fa-solid fa-certificate text-amber-400"></i> Verified Customer Feedback
@@ -416,8 +472,18 @@
         renderReviews();
     }
 
+    // প্রোডাক্ট না কিনলে রিভিউ দিতে না পারার লজিক
     function handleReviewSubmit(e) {
         e.preventDefault();
+        
+        // কাস্টমার কোনো অর্ডার সফলভাবে করেছে কি না তা চেক করা
+        const hasPurchased = localStorage.getItem('technography_order_success');
+        
+        if (!hasPurchased) {
+            alert("⚠️ দুঃখিত! শুধুমাত্র ভেরিফাইড ক্রেতারা রিভিউ প্রদান করতে পারেন।\n\nরিভিউ প্রদান করতে অনুগ্রহ করে প্রথমে যেকোনো একটি প্রোডাক্ট অর্ডার করুন। ধন্যবাদ!");
+            return;
+        }
+
         const name = document.getElementById('revName').value.trim();
         const rating = parseFloat(document.getElementById('revRating').value);
         const text = document.getElementById('revComment').value.trim();
@@ -440,6 +506,7 @@
         localStorage.setItem('technography_user_reviews', JSON.stringify(userReviews));
 
         document.getElementById('userReviewForm').reset();
+        alert('অভিনন্দন! আপনার ভেরিফাইড রিভিউ সফলভাবে যোগ হয়েছে।');
         displayedCount = 9;
         renderReviews();
     }
