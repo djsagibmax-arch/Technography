@@ -6,6 +6,10 @@
     <title>প্রিমিয়াম ডিজিটাল প্রোডাক্ট কালেকশন | Technography</title>
     <meta name="description" content="আপনার ফেসবুক পেজ ও ইউটিউব চ্যানেল ভাইরাল করার জন্য প্রিমিয়াম AI Reels, কোর্স ও ডিজিটাল কালেকশন।">
 
+    <!-- প্রি-কানেক্ট যাতে ভিডিও এবং ইমেজ দ্রুত সার্ভ হয় -->
+    <link rel="preconnect" href="https://i.postimg.cc">
+    <link rel="preconnect" href="https://www.youtube.com">
+
     <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
@@ -47,7 +51,7 @@
             transform: translateY(-6px);
             border-color: rgba(34, 211, 238, 0.4);
         }
-        /* ছবি যাতে সম্পূর্ণ দেখায় এবং কোনো অংশ না কাটে */
+        /* ছবির সম্পূর্ণ ভিউ এবং স্মুথ ফিট */
         .card-poster-img {
             width: 100%;
             height: auto;
@@ -76,18 +80,18 @@
     <section class="relative overflow-hidden pt-6 pb-16">
         <div class="max-w-6xl mx-auto px-4 text-center">
 
-            <!-- ভিডিও সেকশন -->
+            <!-- ১. সবার উপরে ভিডিও (Fast Loading) -->
             <div class="mb-10 max-w-3xl mx-auto">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-cyan-500/10 border border-cyan-400/40 text-cyan-300 text-sm sm:text-base font-extrabold mb-3">
                     <span class="text-red-500 text-lg">▶</span>
                     <span>আমাদের প্রোডাক্টটির ভিতরে কি পাবেন / কিভাবে নিবেন</span>
                 </div>
                 <div class="relative w-full rounded-2xl overflow-hidden border-2 border-cyan-400/60 shadow-[0_0_35px_rgba(6,182,212,0.35)] bg-slate-900 aspect-video">
-                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/E5Ow-YAPpms?rel=0&playsinline=1" title="Product Info" frameborder="0" allowfullscreen></iframe>
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/E5Ow-YAPpms?rel=0&playsinline=1" title="Product Info" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <!-- লাইভ কাউন্টডাউন টাইমার -->
+            <!-- কাউন্টডাউন টাইমার -->
             <div class="mb-8 max-w-lg mx-auto">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs sm:text-sm font-bold mb-4 animate-pulse">
                     <span>⚡ মেগা ডিসকাউন্ট অফার শেষ হতে বাকি</span>
@@ -126,10 +130,10 @@
                 </div>
             </div>
 
-            <!-- প্রোডাক্ট গ্রিড -->
+            <!-- প্রোডাক্ট গ্রিড (সিরিয়াল অনুযায়ী স্মুথ লোডিং) -->
             <div id="products-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left mt-10">
                 
-                <!-- প্রোডাক্ট ১ -->
+                <!-- প্রোডাক্ট ১ (Second Loading - স্ক্রিনের ঠিক সামনে থাকে) -->
                 <div class="product-card rounded-3xl p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[220px]">
@@ -151,11 +155,11 @@
                     </div>
                 </div>
 
-                <!-- প্রোডাক্ট ২ -->
+                <!-- প্রোডাক্ট ২ (3rd Loading - Lazy Loaded) -->
                 <div class="product-card rounded-3xl p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[220px]">
-                            <img src="https://i.postimg.cc/JhPTdGvN/file-00000000825482118fbe670b1fe198c4.png" alt="মাস্টার কোর্স" loading="eager" fetchpriority="high" decoding="async" class="card-poster-img rounded-xl">
+                            <img src="https://i.postimg.cc/JhPTdGvN/file-00000000825482118fbe670b1fe198c4.png" alt="মাস্টার কোর্স" loading="lazy" fetchpriority="low" decoding="async" class="card-poster-img rounded-xl">
                             <span class="absolute top-3 right-3 bg-cyan-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">কোর্স</span>
                         </div>
                         <h3 class="text-xl font-black text-cyan-300 mb-2">Facebook & YouTube Growth Course</h3>
@@ -173,16 +177,16 @@
                     </div>
                 </div>
 
-                <!-- প্রোডাক্ট ৩ (টাইটেল ও ফুল ইমেজ ঠিক করা হয়েছে) -->
+                <!-- প্রোডাক্ট ৩ (4th Loading - Lazy Loaded) -->
                 <div class="product-card rounded-3xl p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[220px]">
-                            <img src="https://i.postimg.cc/76BZ6MRQ/file-0000000087f881f88ff6c440b3f40f9e.png" alt="১.৫ লক্ষ+ মিক্সড মেগা রিলস" loading="eager" fetchpriority="high" decoding="async" class="card-poster-img rounded-xl">
+                            <img src="https://i.postimg.cc/76BZ6MRQ/file-0000000087f881f88ff6c440b3f40f9e.png" alt="১.৫ লক্ষ+ মিক্সড মেগা রিলস" loading="lazy" fetchpriority="low" decoding="async" class="card-poster-img rounded-xl">
                             <span class="absolute top-3 right-3 bg-purple-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">১.৫ লক্ষ+ রিলস</span>
                         </div>
                         <h3 class="text-xl font-black text-cyan-300 mb-2">১.৫ লক্ষ+ মিক্সড মেগা রিলস বান্ডিল</h3>
                         <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
-                            একসাথে বিশাল পরিমাণ Mixed Reels Collection! মোটিভেশনাল, স্পোর্টস, কার্টুন, এনিমে, গেমিং এবং গ্যাজেট সহ সব ট্রেন্ডিং শর্ট ভিডিও কালেকশন[span_3](start_span)[span_3](end_span)।
+                            একসাথে বিশাল পরিমাণ Mixed Reels Collection! মোটিভেশনাল, স্পোর্টস, কার্টুন, এনিমে, গেমিং এবং গ্যাজেট সহ সব ট্রেন্ডিং শর্ট ভিডিও কালেকশন।
                         </p>
                     </div>
                     <div>
@@ -197,11 +201,11 @@
                     </div>
                 </div>
 
-                <!-- প্রোডাক্ট ৪ -->
+                <!-- প্রোডাক্ট ৪ (5th Loading - Lazy Loaded) -->
                 <div class="product-card rounded-3xl p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[220px]">
-                            <img src="https://i.postimg.cc/pL8QFpR3/file-00000000ec748211ab687ae846780eb3.png" alt="মুভি ও ড্রামা ক্লিপস" loading="eager" fetchpriority="high" decoding="async" class="card-poster-img rounded-xl">
+                            <img src="https://i.postimg.cc/pL8QFpR3/file-00000000ec748211ab687ae846780eb3.png" alt="মুভি ও ড্রামা ক্লিপস" loading="lazy" fetchpriority="low" decoding="async" class="card-poster-img rounded-xl">
                             <span class="absolute top-3 right-3 bg-pink-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">৫০কে+ ক্লিপ</span>
                         </div>
                         <h3 class="text-xl font-black text-cyan-300 mb-2">Movie & Drama Clips Collection</h3>
@@ -219,11 +223,11 @@
                     </div>
                 </div>
 
-                <!-- প্রোডাক্ট ৫ -->
+                <!-- প্রোডাক্ট ৫ (6th Loading - Lazy Loaded) -->
                 <div class="product-card rounded-3xl p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[220px]">
-                            <img src="https://i.postimg.cc/vHyVcM0H/file-00000000435082118859234ac21ec9cb.png" alt="AI ফুড ও ফিটনেস" loading="eager" fetchpriority="high" decoding="async" class="card-poster-img rounded-xl">
+                            <img src="https://i.postimg.cc/vHyVcM0H/file-00000000435082118859234ac21ec9cb.png" alt="AI ফুড ও ফিটনেস" loading="lazy" fetchpriority="low" decoding="async" class="card-poster-img rounded-xl">
                             <span class="absolute top-3 right-3 bg-amber-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">AI ট্রেন্ডিং</span>
                         </div>
                         <h3 class="text-xl font-black text-cyan-300 mb-2">AI Food & Fitness Videos</h3>
@@ -241,11 +245,11 @@
                     </div>
                 </div>
 
-                <!-- প্রোডাক্ট ৬ -->
+                <!-- প্রোডাক্ট ৬ (7th Loading - Lazy Loaded) -->
                 <div class="product-card rounded-3xl p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[220px]">
-                            <img src="https://i.postimg.cc/yNC4zQVn/file-00000000fd3c8211b4893dc1d62370ca.png" alt="ইসলামিক রিলস" loading="eager" fetchpriority="high" decoding="async" class="card-poster-img rounded-xl">
+                            <img src="https://i.postimg.cc/yNC4zQVn/file-00000000fd3c8211b4893dc1d62370ca.png" alt="ইসলামিক রিলস" loading="lazy" fetchpriority="low" decoding="async" class="card-poster-img rounded-xl">
                             <span class="absolute top-3 right-3 bg-emerald-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">ইসলামিক</span>
                         </div>
                         <h3 class="text-xl font-black text-cyan-300 mb-2">Islamic Viral Reels Collection</h3>
@@ -301,7 +305,7 @@
 
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const minutes = Math.floor((diff % (1000 * 60)) / (1000 * 60));
                 const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
                 const toBengaliNumber = (num) => {
