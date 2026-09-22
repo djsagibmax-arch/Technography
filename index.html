@@ -1,42 +1,104 @@
-    <!-- ফ্লোটিং যোগাযোগ সাইডবার (অটো-হাইড ও সরাসরি ফেসবুক অ্যাপে ওপেন) -->
-    <aside id="socialFloatBar" class="floating-contact-bar">
-        <!-- বন্ধ/খোলার ছোট টগল বাটন -->
-        <button onclick="toggleSocialBar()" id="socialToggleBtn" class="toggle-btn" title="যোগাযোগ অপশন">
-            <i class="fa-solid fa-headset"></i>
-        </button>
-        
-        <div id="socialIconsList" class="social-icons flex flex-col gap-2">
-            <!-- সরাসরি হোয়াটসঅ্যাপ চ্যাট লিংক -->
-            <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Technography%20ওয়েবসাইট%20থেকে%20যোগাযোগ%20করছি।" 
-               target="_blank" 
-               title="WhatsApp-এ যোগাযোগ করুন" 
-               class="contact-btn contact-btn-wa">
-                <i class="fa-brands fa-whatsapp"></i>
-            </a>
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রিমিয়াম ডিজিটাল প্রোডাক্ট কালেকশন | Technography</title>
+    <meta name="description" content="আপনার ফেসবুক পেজ ও ইউটিউব চ্যানেল ভাইরাল করার জন্য প্রিমিয়াম AI Reels, কোর্স ও ডিজিটাল কালেকশন।">
 
-            <!-- সরাসরি Facebook App-এ পেজ ওপেন করার ডিপ-লিংক -->
-            <a href="fb://facewebmodal/f?href=https://www.facebook.com/Digitalgrowthbdd" 
-               onclick="openFacebookApp(event, 'https://www.facebook.com/Digitalgrowthbdd')" 
-               target="_blank" 
-               title="ফেসবুক পেজ ভিজিট করুন" 
-               class="contact-btn contact-btn-fb">
-                <i class="fa-brands fa-facebook-f"></i>
-            </a>
-        </div>
-    </aside>
+    <link rel="preconnect" href="https://i.postimg.cc">
+    <link rel="preconnect" href="https://www.youtube.com">
 
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1913791776249045');
+    fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* সোশ্যাল সাইডবার স্টাইল */
+        body { 
+            background-color: #030712 !important; 
+            color: #f3f4f6 !important; 
+            font-family: system-ui, -apple-system, sans-serif; 
+            margin: 0; 
+            padding: 0;
+        }
+        .neon-glow-cyan { text-shadow: 0 0 8px #22d3ee, 0 0 20px #06b6d4; }
+        .neon-glow-emerald { text-shadow: 0 0 8px #34d399, 0 0 20px #10b981; }
+        .neon-glow-purple { text-shadow: 0 0 8px #c084fc, 0 0 20px #a855f7; }
+        .neon-glow-amber { text-shadow: 0 0 8px #fbbf24, 0 0 22px #f59e0b; }
+        
+        .product-card {
+            background: rgba(17, 24, 39, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .product-card:hover { 
+            border-color: rgba(34, 211, 238, 0.4); 
+            transform: translateY(-4px);
+        }
+        .card-poster-img { 
+            width: 100%; 
+            height: auto; 
+            max-height: 280px; 
+            object-fit: contain; 
+            display: block; 
+            margin: 0 auto; 
+        }
+        
+        .rev-card {
+            background: #111827 !important;
+            border: 1px solid #1f2937 !important;
+            border-radius: 16px !important;
+            padding: 18px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            transition: all 0.2s ease;
+        }
+        .rev-card:hover {
+            border-color: #374151 !important;
+        }
+        .rev-avatar {
+            width: 42px !important;
+            height: 42px !important;
+            min-width: 42px !important;
+            min-height: 42px !important;
+            max-width: 42px !important;
+            max-height: 42px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            font-size: 15px !important;
+        }
+
+        /* ফ্লোটিং যোগাযোগ সাইডবার */
         .floating-contact-bar {
             position: fixed;
             right: 0;
-            top: 60%;
+            top: 55%;
             transform: translateY(-50%);
             z-index: 9999;
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(12px);
             padding: 8px;
             border-top-left-radius: 20px;
@@ -44,7 +106,7 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-right: none;
             box-shadow: -4px 10px 25px rgba(0, 0, 0, 0.6);
-            transition: all 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out;
         }
 
         .toggle-btn {
@@ -78,37 +140,419 @@
         .contact-btn-wa { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
         .contact-btn-fb { background: linear-gradient(135deg, #1877F2 0%, #0c56be 100%); }
 
-        /* হাইড অবস্থা */
         .floating-contact-bar.collapsed {
-            transform: translateY(-50%) translateX(60px);
+            transform: translateY(-50%) translateX(96px);
         }
     </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased">
 
+    <!-- ফ্লোটিং যোগাযোগ সাইডবার -->
+    <aside id="socialFloatBar" class="floating-contact-bar">
+        <button type="button" onclick="toggleSocialBar()" id="socialToggleBtn" class="toggle-btn" title="যোগাযোগ অপশন">
+            <i class="fa-solid fa-headset"></i>
+        </button>
+        <div class="flex flex-col gap-2">
+            <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Technography%20ওয়েবসাইট%20থেকে%20যোগাযোগ%20করছি।" 
+               target="_blank" 
+               title="WhatsApp-এ যোগাযোগ করুন" 
+               class="contact-btn contact-btn-wa">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a href="https://www.facebook.com/Digitalgrowthbdd" 
+               onclick="openFacebookApp(event, 'https://www.facebook.com/Digitalgrowthbdd')" 
+               target="_blank" 
+               title="ফেসবুক পেজ ভিজিট করুন" 
+               class="contact-btn contact-btn-fb">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+        </div>
+    </aside>
+
+    <!-- হেডার -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/90 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="text-xl font-bold tracking-wider text-cyan-400">Technography</div>
+            <a href="select-payment.html?product=1" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-5 py-2 rounded-full font-medium shadow transition">এখনই কিনুন</a>
+        </div>
+    </header>
+
+    <section class="max-w-6xl mx-auto px-4 pt-6 pb-12 text-center">
+
+        <!-- ভিডিও -->
+        <div class="mb-10 max-w-3xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-cyan-500/10 border border-cyan-400/40 text-cyan-300 text-sm font-bold mb-3">
+                <span class="text-red-500 text-lg">▶</span>
+                <span>আমাদের প্রোডাক্টটির ভিতরে কি পাবেন / কিভাবে নিবেন</span>
+            </div>
+            <div class="relative w-full rounded-2xl overflow-hidden border-2 border-cyan-400/60 shadow-lg bg-slate-900 aspect-video">
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/E5Ow-YAPpms?rel=0&playsinline=1" title="Product Info" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- কাউন্টডাউন টাইমার -->
+        <div class="mb-8 max-w-lg mx-auto">
+            <div class="grid grid-cols-4 gap-2 bg-slate-900 border border-slate-800 p-4 rounded-3xl">
+                <div class="bg-slate-950 p-2 rounded-xl"><span id="t-days" class="text-2xl sm:text-4xl font-black text-cyan-300 neon-glow-cyan">০১</span><div class="text-[10px] text-cyan-400">দিন</div></div>
+                <div class="bg-slate-950 p-2 rounded-xl"><span id="t-hours" class="text-2xl sm:text-4xl font-black text-emerald-300 neon-glow-emerald">২৩</span><div class="text-[10px] text-emerald-400">ঘণ্টা</div></div>
+                <div class="bg-slate-950 p-2 rounded-xl"><span id="t-minutes" class="text-2xl sm:text-4xl font-black text-purple-300 neon-glow-purple">৫৭</span><div class="text-[10px] text-purple-400">মিনিট</div></div>
+                <div class="bg-slate-950 p-2 rounded-xl"><span id="t-seconds" class="text-2xl sm:text-4xl font-black text-amber-300 neon-glow-amber">২৮</span><div class="text-[10px] text-amber-400">সেকেন্ড</div></div>
+            </div>
+        </div>
+
+        <!-- প্রোডাক্ট গ্রিড -->
+        <div id="products-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left mt-10">
+            
+            <!-- প্রোডাক্ট ১ -->
+            <div class="product-card p-5 flex flex-col justify-between">
+                <div>
+                    <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
+                        <img src="https://i.postimg.cc/br1zQcLN/20260827-131010.jpg" alt="মেগা বান্ডিল" loading="eager" fetchpriority="high" class="card-poster-img rounded-xl">
+                        <span class="absolute top-3 right-3 bg-red-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">মেগা অফার</span>
+                    </div>
+                    <h3 class="text-xl font-black text-cyan-300 mb-2">মেগা বান্ডিল সবগুলো ৩০০ টাকায়</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm mb-4">৩,০০,০০০+ AI Reels, Shorts, ৫০ হাজার মুভি ক্লিপ, এডিটিং কোর্স ও ক্যাপকাট প্রো সহ অল-ইন-ওয়ান প্যাকেজ।</p>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৩০০ ৳</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="product.html" class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">বিস্তারিত</a>
+                        <a href="select-payment.html?product=1" class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">অর্ডার করুন</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- প্রোডাক্ট ২ -->
+            <div class="product-card p-5 flex flex-col justify-between">
+                <div>
+                    <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
+                        <img src="https://i.postimg.cc/JhPTdGvN/file-00000000825482118fbe670b1fe198c4.png" alt="মাস্টার কোর্স" loading="lazy" class="card-poster-img rounded-xl">
+                        <span class="absolute top-3 right-3 bg-cyan-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">কোর্স</span>
+                    </div>
+                    <h3 class="text-xl font-black text-cyan-300 mb-2">Facebook & YouTube Growth Course</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm mb-4">ভিডিও ভাইরাল করার মেথড, প্রফেশনাল এডিটিং গাইড ও সিরিয়াল আপলোড স্ট্র্যাটেজির অনলাইন মাস্টার কোর্স।</p>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৭০ ৳</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="product2.html" class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">বিস্তারিত</a>
+                        <a href="select-payment.html?product=2" class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">অর্ডার করুন</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- প্রোডাক্ট ৩ -->
+            <div class="product-card p-5 flex flex-col justify-between">
+                <div>
+                    <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
+                        <img src="https://i.postimg.cc/76BZ6MRQ/file-0000000087f881f88ff6c440b3f40f9e.png" alt="১.৫ লক্ষ+ মিক্সড মেগা রিলস" loading="lazy" class="card-poster-img rounded-xl">
+                        <span class="absolute top-3 right-3 bg-purple-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">১.৫ লক্ষ+ রিলস</span>
+                    </div>
+                    <h3 class="text-xl font-black text-cyan-300 mb-2">১.৫ লক্ষ+ মিক্সড মেগা রিলস বান্ডিল</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm mb-4">মোটিভেশনাল, স্পোর্টস, কার্টুন, এনিমে, গেমিং এবং গ্যাজেট সহ সব ট্রেন্ডিং শর্ট ভিডিও কালেকশন।</p>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৯৯ ৳</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="product3.html" class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">বিস্তারিত</a>
+                        <a href="select-payment.html?product=3" class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">অর্ডার করুন</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- প্রোডাক্ট ৪ -->
+            <div class="product-card p-5 flex flex-col justify-between">
+                <div>
+                    <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
+                        <img src="https://i.postimg.cc/pL8QFpR3/file-00000000ec748211ab687ae846780eb3.png" alt="মুভি ও ড্রামা ক্লিপস" loading="lazy" class="card-poster-img rounded-xl">
+                        <span class="absolute top-3 right-3 bg-pink-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">৫০কে+ ক্লিপ</span>
+                    </div>
+                    <h3 class="text-xl font-black text-cyan-300 mb-2">Movie & Drama Clips Collection</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm mb-4">৫০,০০০+ বলিউড, হলিউড ও বাংলা নাটকের প্রিমিয়াম ক্লিপ কালেকশন যা শর্টস বানিয়ে দ্রুত গ্রো করতে সাহায্য করবে।</p>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৯৯ ৳</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="product4.html" class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">বিস্তারিত</a>
+                        <a href="select-payment.html?product=4" class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">অর্ডার করুন</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- প্রোডাক্ট ৫ -->
+            <div class="product-card p-5 flex flex-col justify-between">
+                <div>
+                    <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
+                        <img src="https://i.postimg.cc/vHyVcM0H/file-00000000435082118859234ac21ec9cb.png" alt="AI ফুড ও ফিটনেস" loading="lazy" class="card-poster-img rounded-xl">
+                        <span class="absolute top-3 right-3 bg-amber-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">AI ট্রেন্ডিং</span>
+                    </div>
+                    <h3 class="text-xl font-black text-cyan-300 mb-2">AI Food & Fitness Videos</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm mb-4">ব্যাপক জনপ্রিয় AI Food Talking ভিডিও এবং AI Health & Workout শর্ট ভিডিওর আকর্ষণীয় কালেকশন।</p>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৫০ ৳</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="product5.html" class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">বিস্তারিত</a>
+                        <a href="select-payment.html?product=5" class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">অর্ডার করুন</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- প্রোডাক্ট ৬ -->
+            <div class="product-card p-5 flex flex-col justify-between">
+                <div>
+                    <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
+                        <img src="https://i.postimg.cc/yNC4zQVn/file-00000000fd3c8211b4893dc1d62370ca.png" alt="ইসলামিক রিলস" loading="lazy" class="card-poster-img rounded-xl">
+                        <span class="absolute top-3 right-3 bg-emerald-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">ইসলামিক</span>
+                    </div>
+                    <h3 class="text-xl font-black text-cyan-300 mb-2">Islamic Viral Reels Collection</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm mb-4">ইসলামিক ফেসবুক পেজ ও ইউটিউব শর্টস ক্রিয়েটরদের জন্য বাছাইকৃত ইসলামিক রিলস কালেকশন।</p>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৫০ ৳</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="product6.html" class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">বিস্তারিত</a>
+                        <a href="select-payment.html?product=6" class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">অর্ডার করুন</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CUSTOMER REVIEWS SECTION -->
+    <section class="max-w-6xl mx-auto px-4 py-12 border-t border-slate-800">
+        
+        <div class="text-center mb-6">
+            <h2 class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 tracking-wide uppercase">
+                Customer Reviews
+            </h2>
+        </div>
+
+        <!-- রিভিউ সাবমিট ফর্ম -->
+        <div class="max-w-xl mx-auto bg-slate-900 border border-slate-800 p-5 rounded-2xl mb-8 shadow-xl">
+            <h3 class="text-sm font-bold text-cyan-300 mb-3 text-center flex items-center justify-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> আপনার মূল্যবান রিভিউ শেয়ার করুন
+            </h3>
+            
+            <form id="userReviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <input type="text" id="revName" required placeholder="আপনার নাম" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                    
+                    <select id="revRating" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-amber-300 focus:outline-none focus:border-cyan-400">
+                        <option value="5">⭐⭐⭐⭐⭐ (৫ স্টার)</option>
+                        <option value="4.5">⭐⭐⭐⭐½ (৪.৫ স্টার)</option>
+                        <option value="4">⭐⭐⭐⭐ (৪ স্টার)</option>
+                        <option value="3.5">⭐⭐⭐½ (৩.৫ স্টার)</option>
+                        <option value="3">⭐⭐⭐ (৩ স্টার)</option>
+                        <option value="2">⭐⭐ (২ স্টার)</option>
+                        <option value="1">⭐ (১ স্টার)</option>
+                    </select>
+                </div>
+                
+                <textarea id="revComment" rows="2" required placeholder="বান্ডিলটি আপনার কেমন লেগেছে লিখুন..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400"></textarea>
+                
+                <button type="submit" class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-2.5 rounded-xl text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i> রিভিউ সাবমিট করুন
+                </button>
+            </form>
+        </div>
+
+        <!-- রেটিং ব্যাজ ও স্কোর -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold mb-2">
+                <i class="fa-solid fa-certificate text-amber-400"></i> Verified Customer Feedback
+            </div>
+            <div class="flex items-center justify-center gap-1.5 text-amber-400 text-sm">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
+                <span class="text-white font-black ml-1 text-base">৪.৯ / ৫.০</span>
+                <span class="text-slate-400 ml-1 text-xs">(৫০০+ সফল অর্ডার)</span>
+            </div>
+        </div>
+
+        <!-- রিভিউ কার্ড গ্রিড -->
+        <div id="reviewsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+        <div class="text-center mt-6">
+            <button id="loadMoreRevBtn" onclick="loadMoreReviews()" class="bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-slate-700 font-bold px-5 py-2 rounded-full text-xs transition">
+                আরো রিভিউ দেখুন <i class="fa-solid fa-angles-down ml-1"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- ফুটার -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-slate-500 text-xs">
+        <p>&copy; 2026 Technography. All rights reserved.</p>
+    </footer>
+
+    <!-- স্ক্রিপ্টস -->
     <script>
-        // ফেসবুকে সরাসরি অ্যাপ দিয়ে ওপেন করার লজিক (লগইন পাসওয়ার্ড চাইবে না)
-        function openFacebookApp(e, webUrl) {
-            e.preventDefault();
-            const appUrl = "fb://facewebmodal/f?href=" + encodeURIComponent(webUrl);
-            
-            // প্রথমে অ্যাপে খোলার চেষ্টা করবে
-            window.location.href = appUrl;
-            
-            // যদি ডিভাইসে ফেসবুক অ্যাপ না থাকে, তখন স্বাভাবিক ব্রাউজার পেজে নিয়ে যাবে
-            setTimeout(() => {
-                window.open(webUrl, '_blank');
-            }, 800);
-        }
+    const INITIAL_REVIEWS = [
+        { name: "সাদিয়া রহমান", rating: 5, text: "কালেকশনটা অনেক ভালো লেগেছে।", color: "#e11d48", initial: "স", time: "২ দিন আগে" },
+        { name: "Rakib Hasan", rating: 5, text: "Really useful collection. I found many good content ideas here.", color: "#2563eb", initial: "R", time: "৩ দিন আগে" },
+        { name: "তানভীর", rating: 4.5, text: "Ajke Ami bundle ta nilam. Collection dekhe onek valo lagse.", color: "#059669", initial: "ত", time: "৩ দিন আগে" },
+        { name: "নুসরাত জাহান", rating: 5, text: "আমি মূলত ফেসবুক রিলস নিয়ে কাজ করি। এখানে অনেক ধরনের কনটেন্ট পেয়েছি, তাই নতুন ভিডিওর আইডিয়া খুঁজতে এখন অনেক কম সময় লাগছে।", color: "#d97706", initial: "ন", time: "৪ দিন আগে" },
+        { name: "Arif Hossain", rating: 5, text: "Excellent collection with lots of useful content. I especially liked the variety of reels, shorts and learning materials. It is a helpful resource for content creators.", color: "#7c3aed", initial: "A", time: "৫ দিন আগে" },
+        { name: "মেহজাবিন", rating: 4.5, text: "Ami mainly YouTube Shorts niye kaj kori. Ei bundle er editing course ar reels collection amar jonno helpful hoise.", color: "#db2777", initial: "ম", time: "৫ দিন আগে" },
+        { name: "সাকিবুল ইসলাম", rating: 5, text: "এক কথায় অসাধারণ!", color: "#0891b2", initial: "স", time: "৬ দিন আগে" },
+        { name: "Farzana Rahman", rating: 5, text: "Very good collection. There are many different categories, and I really liked the overall variety.", color: "#ea580c", initial: "F", time: "১ সপ্তাহ আগে" },
+        { name: "ইমরান কবির", rating: 4.5, text: "Bhai collection ta onek boro. Gaming, sports, motivation—onek category ache. Amar page er jonno definitely useful.", color: "#4f46e5", initial: "ই", time: "১ সপ্তাহ আগে" },
+        { name: "জান্নাতুল ফেরদৌস", rating: 5, text: "কনটেন্ট তৈরি করতে গিয়ে প্রতিদিন নতুন ভিডিওর আইডিয়া খুঁজে পাওয়া কঠিন হয়ে যেত। এই কালেকশনে বিভিন্ন ধরনের কনটেন্ট একসাথে থাকায় কাজ অনেক সহজ হয়েছে। বিশেষ করে ইসলামিক ও মোটিভেশনাল কনটেন্টগুলো আমার বেশি পছন্দ হয়েছে।", color: "#16a34a", initial: "জ", time: "১ সপ্তাহ আগে" },
+        { name: "Naim Ahmed", rating: 5, text: "I’m happy with the collection. There are many useful videos and content ideas in different categories. The editing course is also a nice addition for beginners.", color: "#0284c7", initial: "N", time: "১ সপ্তাহ আগে" },
+        { name: "তাসনিমা আক্তার", rating: 4.5, text: "Ajke Ami bundle ta check korlam. Prothome vabchilam eto gula content kemon hobe, but collection dekhe valo lagse. Onk kichu ase!", color: "#c026d3", initial: "ত", time: "১ সপ্তাহ আগে" },
+        { name: "রাফি", rating: 5, text: "অনেক বড় কালেকশন, একসাথে এত ধরনের কনটেন্ট পাওয়া সত্যিই সুবিধার।", color: "#65a30d", initial: "র", time: "১ সপ্তাহ আগে" },
+        { name: "Samiul Khan", rating: 5, text: "Great variety and easy to explore. I found several categories that match my content style.", color: "#9333ea", initial: "S", time: "২ সপ্তাহ আগে" },
+        { name: "ফারহান", rating: 4.5, text: "Bhai, bundle ta niyechi. Ekhon aste aste shob category dekhtesi. Content idea er obhab hobe na mone hocche.", color: "#0d9488", initial: "ফ", time: "২ সপ্তাহ আগে" },
+        { name: "মিম আক্তার", rating: 5, text: "আমি একদম নতুন কনটেন্ট ক্রিয়েটর। শুরুতে কী ধরনের ভিডিও বানাব বুঝতে পারছিলাম না। এই কালেকশন থেকে অনেক আইডিয়া পেয়েছি এবং ভিডিও এডিটিং সম্পর্কিত কনটেন্টগুলোও কাজে লাগছে।", color: "#e11d48", initial: "ম", time: "২ সপ্তাহ আগে" }
+    ];
 
-        // সাইডবার টগল ফাংশন
-        function toggleSocialBar() {
-            const bar = document.getElementById('socialFloatBar');
-            bar.classList.toggle('collapsed');
-        }
+    let displayedCount = 9;
 
-        // স্ক্রিনে টাচ করলে বা স্ক্রোল করলে স্বয়ংক্রিয়ভাবে সক্রিয় হওয়া
-        let isTouching = false;
-        document.addEventListener('touchstart', () => {
-            const bar = document.getElementById('socialFloatBar');
-            if(bar) bar.classList.remove('collapsed');
+    function getStarIcons(rating) {
+        let stars = '';
+        const fullStars = Math.floor(rating);
+        const hasHalf = rating % 1 !== 0;
+        for (let i = 0; i < fullStars; i++) stars += '<i class="fa-solid fa-star text-amber-400"></i>';
+        if (hasHalf) stars += '<i class="fa-solid fa-star-half-stroke text-amber-400"></i>';
+        return stars;
+    }
+
+    function renderReviews() {
+        const container = document.getElementById('reviewsContainer');
+        if(!container) return;
+        const userReviews = JSON.parse(localStorage.getItem('technography_user_reviews') || '[]');
+        const allReviews = [...userReviews, ...INITIAL_REVIEWS];
+
+        container.innerHTML = '';
+        const toShow = allReviews.slice(0, displayedCount);
+
+        toShow.forEach(rev => {
+            const card = document.createElement('div');
+            card.className = "rev-card";
+            card.innerHTML = `
+                <div>
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+                        <div class="rev-avatar" style="background-color: ${rev.color || '#0284c7'};">
+                            ${rev.initial || rev.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                            <div style="font-size:14px; font-weight:700; color:#f3f4f6; display:flex; align-items:center; gap:6px;">
+                                ${rev.name}
+                                <i class="fa-solid fa-circle-check" style="color:#22d3ee; font-size:11px;"></i>
+                            </div>
+                            <div style="font-size:11px; color:#9ca3af;">${rev.time || 'সদ্য রিভিউ দিয়েছেন'}</div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom:8px; font-size:11px;">
+                        ${getStarIcons(rev.rating)}
+                    </div>
+                    <p style="font-size:13px; color:#d1d5db; line-height:1.5; margin:0;">
+                        "${rev.text}"
+                    </p>
+                </div>
+                <div style="margin-top:14px; padding-top:10px; border-top:1px solid #1f2937; display:flex; justify-content:space-between; font-size:11px; color:#9ca3af;">
+                    <span style="color:#34d399;"><i class="fa-solid fa-bag-shopping"></i> ভেরিফাইড ক্রয়</span>
+                    <span>Technography</span>
+                </div>
+            `;
+            container.appendChild(card);
         });
+
+        const loadMoreBtn = document.getElementById('loadMoreRevBtn');
+        if (loadMoreBtn) {
+            if (displayedCount >= allReviews.length) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'inline-block';
+            }
+        }
+    }
+
+    function loadMoreReviews() {
+        displayedCount += 9;
+        renderReviews();
+    }
+
+    function handleReviewSubmit(e) {
+        e.preventDefault();
+        const hasPurchased = localStorage.getItem('technography_order_success');
+        
+        if (!hasPurchased) {
+            alert("⚠️ দুঃখিত! শুধুমাত্র ভেরিফাইড ক্রেতারা রিভিউ প্রদান করতে পারেন।\n\nরিভিউ প্রদান করতে প্রথমে যেকোনো একটি প্রোডাক্ট অর্ডার করুন। ধন্যবাদ!");
+            return;
+        }
+
+        const name = document.getElementById('revName').value.trim();
+        const rating = parseFloat(document.getElementById('revRating').value);
+        const text = document.getElementById('revComment').value.trim();
+        if (!name || !text) return;
+
+        const colors = ['#e11d48', '#2563eb', '#059669', '#d97706', '#7c3aed', '#0891b2', '#ea580c'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+        const newRev = {
+            name: name,
+            rating: rating,
+            text: text,
+            color: randomColor,
+            initial: name.charAt(0).toUpperCase(),
+            time: 'এইমাত্র'
+        };
+
+        const userReviews = JSON.parse(localStorage.getItem('technography_user_reviews') || '[]');
+        userReviews.unshift(newRev);
+        localStorage.setItem('technography_user_reviews', JSON.stringify(userReviews));
+
+        document.getElementById('userReviewForm').reset();
+        alert('অভিনন্দন! আপনার ভেরিফাইড রিভিউ সফলভাবে প্রকাশিত হয়েছে।');
+        displayedCount = 9;
+        renderReviews();
+    }
+
+    function openFacebookApp(e, webUrl) {
+        e.preventDefault();
+        const appUrl = "fb://facewebmodal/f?href=" + encodeURIComponent(webUrl);
+        window.location.href = appUrl;
+        setTimeout(() => {
+            window.open(webUrl, '_blank');
+        }, 800);
+    }
+
+    function toggleSocialBar() {
+        const bar = document.getElementById('socialFloatBar');
+        if(bar) bar.classList.toggle('collapsed');
+    }
+
+    document.addEventListener('touchstart', () => {
+        const bar = document.getElementById('socialFloatBar');
+        if(bar) bar.classList.remove('collapsed');
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderReviews();
+    });
     </script>
+</body>
+</html>
