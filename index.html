@@ -59,6 +59,7 @@
             margin: 0 auto; 
         }
         
+        /* কাস্টমার রিভিউ কার্ডের স্টাইল */
         .rev-card {
             background: #111827 !important;
             border: 1px solid #1f2937 !important;
@@ -88,7 +89,7 @@
             font-size: 15px !important;
         }
 
-        /* ফ্লোটিং যোগাযোগ সাইডবার */
+        /* ফ্লোটিং সোশ্যাল সাইডবার (হেডফোন ছাড়া ক্লিন স্টাইল) */
         .floating-contact-bar {
             position: fixed;
             right: 0;
@@ -96,77 +97,69 @@
             transform: translateY(-50%);
             z-index: 9999;
             display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(15, 23, 42, 0.92);
-            backdrop-filter: blur(12px);
-            padding: 8px;
-            border-top-left-radius: 20px;
-            border-bottom-left-radius: 20px;
+            flex-direction: column;
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(10px);
+            padding: 10px 8px;
+            border-top-left-radius: 18px;
+            border-bottom-left-radius: 18px;
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-right: none;
-            box-shadow: -4px 10px 25px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .toggle-btn {
-            background: #0284c7;
-            color: #ffffff;
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            cursor: pointer;
+            box-shadow: -4px 8px 25px rgba(0, 0, 0, 0.6);
         }
 
         .contact-btn {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            font-size: 20px;
+            color: #ffffff !important;
+            font-size: 22px;
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+            transition: transform 0.2s ease, filter 0.2s ease;
         }
-        .contact-btn:hover { transform: scale(1.1); }
-        .contact-btn-wa { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
-        .contact-btn-fb { background: linear-gradient(135deg, #1877F2 0%, #0c56be 100%); }
 
-        .floating-contact-bar.collapsed {
-            transform: translateY(-50%) translateX(96px);
+        .contact-btn:hover {
+            transform: scale(1.12);
+            filter: brightness(1.1);
+        }
+
+        .contact-btn:active {
+            transform: scale(0.95);
+        }
+
+        .contact-btn-wa {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+
+        .contact-btn-fb {
+            background: linear-gradient(135deg, #1877F2 0%, #0c56be 100%);
         }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased">
 
-    <!-- ফ্লোটিং যোগাযোগ সাইডবার -->
-    <aside id="socialFloatBar" class="floating-contact-bar">
-        <button type="button" onclick="toggleSocialBar()" id="socialToggleBtn" class="toggle-btn" title="যোগাযোগ অপশন">
-            <i class="fa-solid fa-headset"></i>
-        </button>
-        <div class="flex flex-col gap-2">
-            <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Technography%20ওয়েবসাইট%20থেকে%20যোগাযোগ%20করছি।" 
-               target="_blank" 
-               title="WhatsApp-এ যোগাযোগ করুন" 
-               class="contact-btn contact-btn-wa">
-                <i class="fa-brands fa-whatsapp"></i>
-            </a>
-            <a href="https://www.facebook.com/Digitalgrowthbdd" 
-               onclick="openFacebookApp(event, 'https://www.facebook.com/Digitalgrowthbdd')" 
-               target="_blank" 
-               title="ফেসবুক পেজ ভিজিট করুন" 
-               class="contact-btn contact-btn-fb">
-                <i class="fa-brands fa-facebook-f"></i>
-            </a>
-        </div>
+    <!-- ফ্লোটিং যোগাযোগ সাইডবার (শুধুমাত্র WhatsApp এবং Facebook) -->
+    <aside class="floating-contact-bar">
+        <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Technography%20ওয়েবসাইট%20থেকে%20যোগাযোগ%20করছি।" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           title="WhatsApp-এ যোগাযোগ করুন" 
+           class="contact-btn contact-btn-wa">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+
+        <a href="https://www.facebook.com/Digitalgrowthbdd" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           title="ফেসবুক পেজ ভিজিট করুন" 
+           class="contact-btn contact-btn-fb">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
     </aside>
 
     <!-- হেডার -->
@@ -179,7 +172,7 @@
 
     <section class="max-w-6xl mx-auto px-4 pt-6 pb-12 text-center">
 
-        <!-- ভিডিও -->
+        <!-- ১. সবার উপরে ভিডিও (Fast Loading) -->
         <div class="mb-10 max-w-3xl mx-auto">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-cyan-500/10 border border-cyan-400/40 text-cyan-300 text-sm font-bold mb-3">
                 <span class="text-red-500 text-lg">▶</span>
@@ -338,7 +331,7 @@
         </div>
     </section>
 
-    <!-- CUSTOMER REVIEWS SECTION -->
+    <!-- ================== CUSTOMER REVIEWS SECTION ================== -->
     <section class="max-w-6xl mx-auto px-4 py-12 border-t border-slate-800">
         
         <div class="text-center mb-6">
@@ -376,7 +369,7 @@
             </form>
         </div>
 
-        <!-- রেটিং ব্যাজ ও স্কোর -->
+        <!-- বাটনটির নিচে রেটিং ব্যাজ ও স্কোর -->
         <div class="text-center mb-8">
             <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold mb-2">
                 <i class="fa-solid fa-certificate text-amber-400"></i> Verified Customer Feedback
@@ -530,25 +523,6 @@
         displayedCount = 9;
         renderReviews();
     }
-
-    function openFacebookApp(e, webUrl) {
-        e.preventDefault();
-        const appUrl = "fb://facewebmodal/f?href=" + encodeURIComponent(webUrl);
-        window.location.href = appUrl;
-        setTimeout(() => {
-            window.open(webUrl, '_blank');
-        }, 800);
-    }
-
-    function toggleSocialBar() {
-        const bar = document.getElementById('socialFloatBar');
-        if(bar) bar.classList.toggle('collapsed');
-    }
-
-    document.addEventListener('touchstart', () => {
-        const bar = document.getElementById('socialFloatBar');
-        if(bar) bar.classList.remove('collapsed');
-    });
 
     document.addEventListener('DOMContentLoaded', () => {
         renderReviews();
