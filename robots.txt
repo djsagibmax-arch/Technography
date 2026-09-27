@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://technographybd.xyz/sitemap.xml
+Sitemap: https://technographybd.xyz/mysite.xml
