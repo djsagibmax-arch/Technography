@@ -49,14 +49,13 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 650px;
             width: 100%;
             margin: 0 auto;
             padding: 20px 15px 50px;
             flex: 1;
         }
 
-        /* প্রম্পট বক্স */
         .card {
             background: #111827;
             border: 1px solid #1f2937;
@@ -82,7 +81,6 @@
             border-color: #22d3ee;
         }
 
-        /* ড্রপডাউন গ্রিড */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -109,7 +107,6 @@
             outline: none;
         }
 
-        /* অ্যাডভান্সড চিপস অপশন (স্ক্রিনশটের মতো) */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -153,10 +150,8 @@
             background: #0284c7;
             color: #fff;
             border-color: #38bdf8;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
         }
 
-        /* জেনারেট বাটন */
         .btn-gen {
             width: 100%;
             background: linear-gradient(135deg, #0284c7, #2563eb);
@@ -175,11 +170,10 @@
             cursor: not-allowed;
         }
 
-        /* লোডার */
         #loader {
             display: none;
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             background: #111827;
             border: 1px dashed #374151;
             border-radius: 14px;
@@ -198,46 +192,47 @@
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* ইমেজ কার্ড গ্রিড */
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-        }
-
-        .img-card {
+        /* সিঙ্গেল ফুল-ভিউ ও স্মার্ট ওয়াটারমার্ক প্যাচ এরিয়া */
+        .single-card {
+            display: none;
             background: #111827;
             border: 1px solid #1f2937;
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
-            display: flex;
             flex-direction: column;
         }
 
-        .img-wrapper {
+        .img-container {
             position: relative;
             width: 100%;
-            height: 320px;
             background: #030712;
-            overflow: hidden;
-        }
-
-        .img-wrapper img {
-            width: 100%;
-            height: calc(100% + 38px); /* ওয়াটারমার্ক ফ্রেমের নিচে লুকানো */
-            object-fit: cover;
-            display: block;
-        }
-
-        .img-loading {
-            position: absolute;
-            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #0b0f19;
-            color: #94a3b8;
-            font-size: 13px;
+            min-height: 300px;
+            overflow: hidden;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* ওয়াটারমার্ক অংশে স্মার্ট ব্লেন্ডিং প্যাচ (ছবি না কেটে ঢেকে দেওয়া) */
+        .watermark-cover {
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            width: 145px;
+            height: 28px;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            background: rgba(0, 0, 0, 0.45);
+            border-radius: 6px;
+            pointer-events: none;
         }
 
         .btn-dl {
@@ -245,12 +240,18 @@
             text-align: center;
             background: #1f2937;
             color: #38bdf8;
-            text-decoration: none;
-            padding: 12px;
-            font-size: 13px;
+            padding: 14px;
+            font-size: 14px;
             font-weight: bold;
             border-top: 1px solid #374151;
             cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-dl:hover {
+            background: #0284c7;
+            color: #fff;
         }
     </style>
 </head>
@@ -264,11 +265,11 @@
     <div class="container">
         <div class="card">
             <span class="field-label">ছবির বর্ণনা লিখুন (বাংলা বা ইংরেজি):</span>
-            <textarea id="prompt" placeholder="যেমন: সুন্দর একটি মেয়ের ছবি, লাল শাড়ি পরা, সূর্যাস্তের আলো..."></textarea>
+            <textarea id="prompt" placeholder="যেমন: সুন্দর একটি মেয়ের ছবি, লাল শাড়ি পরা, প্রাকৃতিক আলো..."></textarea>
 
             <div class="grid-2">
                 <div>
-                    <span class="field-label">AI Engine (Version):</span>
+                    <span class="field-label">AI Engine:</span>
                     <select id="engineVersion">
                         <option value="flux" selected>FLUX (Ultra Realistic)</option>
                         <option value="sdxl">SDXL (Digital Art/Anime)</option>
@@ -284,49 +285,37 @@
                 </div>
             </div>
 
-            <!-- অ্যাডভান্সড অপশনস (লাইটিং ও স্টাইল ট্যাগ) -->
             <div class="section-header">
-                <span class="section-title">Lighting & Detail (ক্লিক করে সিলেক্ট করুন):</span>
+                <span class="section-title">Lighting & Quality:</span>
                 <span class="clear-btn" onclick="clearActiveTags()">Clear all</span>
             </div>
 
             <div class="tags-container" id="lightingTags">
                 <div class="tag active" onclick="toggleTag(this)" data-val="Studio lighting">Studio lighting</div>
                 <div class="tag active" onclick="toggleTag(this)" data-val="Cinematic lighting">Cinematic lighting</div>
-                <div class="tag" onclick="toggleTag(this)" data-val="Neon lights">Neon lights</div>
-                <div class="tag" onclick="toggleTag(this)" data-val="Volumetric lighting">Volumetric lighting</div>
                 <div class="tag active" onclick="toggleTag(this)" data-val="Hyper-realistic">Hyper-realistic</div>
-                <div class="tag active" onclick="toggleTag(this)" data-val="Deep focus">Deep focus</div>
-                <div class="tag" onclick="toggleTag(this)" data-val="8k resolution">8k resolution</div>
-                <div class="tag" onclick="toggleTag(this)" data-val="Masterpiece photography">Masterpiece photography</div>
+                <div class="tag active" onclick="toggleTag(this)" data-val="8k resolution">8k resolution</div>
+                <div class="tag" onclick="toggleTag(this)" data-val="Neon lights">Neon lights</div>
             </div>
 
-            <div class="section-header">
-                <span class="section-title">Art & Photography Style:</span>
-            </div>
-
-            <div class="tags-container" id="styleTags">
-                <div class="tag" onclick="toggleTag(this)" data-val="Photorealistic DSLR">Photography</div>
-                <div class="tag" onclick="toggleTag(this)" data-val="Anime style">Anime</div>
-                <div class="tag" onclick="toggleTag(this)" data-val="3D Render Octane">3D Render</div>
-                <div class="tag" onclick="toggleTag(this)" data-val="Cyberpunk style">Cyberpunk</div>
-                <div class="tag" onclick="toggleTag(this)" data-val="Vibrant colors">Vibrant colors</div>
-                <div class="tag" onclick="toggleTag(this)" data-val="Dramatic colors">Dramatic colors</div>
-            </div>
-
-            <button class="btn-gen" id="genBtn" onclick="startGeneration()">⚡ একসাথে ৩টি ছবি তৈরি করুন</button>
+            <button class="btn-gen" id="genBtn" onclick="startGeneration()">⚡ ছবি তৈরি করুন</button>
         </div>
 
         <div id="loader">
             <div class="spinner"></div>
-            <p id="loaderText" style="font-size: 14px; color: #cbd5e1;">প্রসেস হচ্ছে...</p>
+            <p id="loaderText" style="font-size: 14px; color: #cbd5e1;">ছবি প্রসেস হচ্ছে...</p>
         </div>
 
-        <div class="image-grid" id="grid"></div>
+        <div class="single-card" id="singleCard">
+            <div class="img-container">
+                <img id="mainImg" crossOrigin="anonymous" src="" alt="AI Image">
+                <div class="watermark-cover"></div>
+            </div>
+            <button class="btn-dl" id="dlBtn" onclick="downloadCleanNoCrop()">ডাউনলোড ওয়াটারমার্ক-মুক্ত Full HD</button>
+        </div>
     </div>
 
     <script>
-        // ট্যাগ সিলেক্ট / ডিসিলেক্ট করার ফাংশন
         function toggleTag(el) {
             el.classList.toggle('active');
         }
@@ -375,71 +364,81 @@
             const btn = document.getElementById("genBtn");
             const loader = document.getElementById("loader");
             const loaderText = document.getElementById("loaderText");
-            const grid = document.getElementById("grid");
+            const card = document.getElementById("singleCard");
+            const img = document.getElementById("mainImg");
 
             btn.disabled = true;
-            grid.innerHTML = "";
+            card.style.display = "none";
             loader.style.display = "block";
-            loaderText.innerText = "প্রম্পট ও ট্যাগ সাজানো হচ্ছে...";
+            loaderText.innerText = "প্রম্পট প্রস্তুত হচ্ছে...";
 
             let promptEn = text;
             if (hasBengali(text)) {
                 promptEn = await translateText(text);
             }
 
-            loader.style.display = "none";
+            loaderText.innerText = "Ultra-HD ছবি আঁকা হচ্ছে...";
 
-            // ব্যবহারকারীর সিলেক্ট করা ট্যাগগুলো প্রম্পটে যোগ করা
             const extraStyles = getSelectedTags();
             const cleanPrompt = promptEn.replace(/watermark|logo|text/gi, "");
-            const finalFullPrompt = encodeURIComponent(`${cleanPrompt}, ${extraStyles}, raw color, tack sharp focus, highly detailed`);
-            
-            // ঘোলা হওয়া ঠেকানোর নেগেটিভ ফিল্টার
-            const negativeFilter = encodeURIComponent("blurry, out of focus, distorted face, bad anatomy, deformed eyes, extra fingers, low quality");
+            const finalFullPrompt = encodeURIComponent(`${cleanPrompt}, ${extraStyles}, raw color, tack sharp focus, highly detailed, full body or full portrait`);
+            const negativeFilter = encodeURIComponent("blurry, out of focus, distorted face, bad anatomy, deformed eyes, cropped, bad framing, low quality");
 
             const w = ratio[0];
             const h = ratio[1];
+            const seed = Math.floor(Math.random() * 899999);
 
-            // ৩টি শার্প ছবি লোড করা
-            for (let i = 0; i < 3; i++) {
-                const seed = Math.floor(Math.random() * 899999) + (i * 741);
-                const imgUrl = `https://image.pollinations.ai/prompt/${finalFullPrompt}?negative=${negativeFilter}&width=${w}&height=${h}&model=${engine}&seed=${seed}&nologo=true&nofeed=true&enhance=false`;
+            const imgUrl = `https://image.pollinations.ai/prompt/${finalFullPrompt}?negative=${negativeFilter}&width=${w}&height=${h}&model=${engine}&seed=${seed}&nologo=true&nofeed=true&enhance=false`;
 
-                const card = document.createElement("div");
-                card.className = "img-card";
-                card.innerHTML = `
-                    <div class="img-wrapper">
-                        <div class="img-loading" id="load-${i}">Ultra-HD ছবি রেন্ডার হচ্ছে (${i+1}/3)...</div>
-                        <img id="img-${i}" src="${imgUrl}" alt="AI Image ${i+1}" 
-                             onload="document.getElementById('load-${i}').style.display='none';" 
-                             onerror="this.src='https://image.pollinations.ai/prompt/${finalFullPrompt}?width=${w}&height=${h}&seed=${seed+99}&nologo=true';">
-                    </div>
-                    <a class="btn-dl" onclick="downloadCleanImage('img-${i}', ${i+1})">ডাউনলোড Ultra-HD (${i+1})</a>
-                `;
-                grid.appendChild(card);
-            }
+            img.src = imgUrl;
 
-            btn.disabled = false;
-            btn.innerText = "⚡ নতুন ৩টি ছবি তৈরি করুন";
+            img.onload = () => {
+                loader.style.display = "none";
+                card.style.display = "flex";
+                btn.disabled = false;
+                btn.innerText = "⚡ নতুন ছবি তৈরি করুন";
+            };
+
+            img.onerror = () => {
+                loaderText.innerText = "ছবি লোড হতে সমস্যা হয়েছে। আবার চেষ্টা করুন।";
+                btn.disabled = false;
+            };
         }
 
-        // ওয়াটারমার্ক কেটে নিখুঁত ছবি সেভ করার ফাংশন
-        function downloadCleanImage(imgId, index) {
-            const img = document.getElementById(imgId);
-            if (!img) return;
+        // ছবি না কেটে ক্যানভাস দিয়ে সুনির্দিষ্ট ওয়াটারমার্ক ব্লেন্ড করে ডাউনলোড করার মেথড
+        function downloadCleanNoCrop() {
+            const img = document.getElementById("mainImg");
+            if (!img || !img.naturalWidth) return;
 
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
 
-            const cropBottomPixels = 38;
+            // ছবির আসল সাইজ ১০০% অপরিবর্তিত রাখা
             canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight - cropBottomPixels;
+            canvas.height = img.naturalHeight;
 
-            ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight - cropBottomPixels, 0, 0, canvas.width, canvas.height);
+            // সম্পূর্ণ মূল ছবিটি ড্র করা
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
+            // ওয়াটারমার্ক এরিয়ার মাপ (ডানপাশের কোণা)
+            const patchWidth = 160;
+            const patchHeight = 35;
+            const patchX = canvas.width - patchWidth - 8;
+            const patchY = canvas.height - patchHeight - 8;
+
+            // ঠিক ওয়াটারমার্কের উপরের ব্যাকগ্রাউন্ড পিক্সেল কপি করে ওয়াটারমার্কের ওপর ব্লেন্ড করা
+            ctx.filter = "blur(4px)";
+            ctx.drawImage(
+                img,
+                patchX, patchY - 20, patchWidth, patchHeight, // আশপাশের ক্লিয়ার ব্যাকগ্রাউন্ডের স্যাম্পল
+                patchX, patchY, patchWidth, patchHeight        // ওয়াটারমার্কের ওপর স্থাপন
+            );
+            ctx.filter = "none";
+
+            // ডাউনলোড লিংক এক্সিকিউট
             const a = document.createElement("a");
-            a.download = `technography-ai-${index}.jpg`;
-            a.href = canvas.toDataURL("image/jpeg", 0.95);
+            a.download = `technography-hd-${Date.now()}.jpg`;
+            a.href = canvas.toDataURL("image/jpeg", 0.96);
             a.click();
         }
     </script>
