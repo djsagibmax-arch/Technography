@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technography - AI Image Studio</title>
+    <title>Technography - Pro AI Studio</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #030712;
+            background-color: #0b0f19;
             color: #f3f4f6;
             min-height: 100vh;
             display: flex;
@@ -21,15 +21,15 @@
         }
 
         header {
-            background: #0f172a;
-            border-bottom: 1px solid #1e293b;
+            background: #111827;
+            border-bottom: 1px solid #1f2937;
             padding: 14px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 50;
         }
 
         .logo {
@@ -40,61 +40,37 @@
         }
 
         .home-btn {
-            background: #1e293b;
+            background: #1f2937;
             color: #94a3b8;
             text-decoration: none;
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 13px;
-            border: 1px solid #334155;
         }
 
         .container {
-            max-width: 960px;
+            max-width: 800px;
             width: 100%;
             margin: 0 auto;
-            padding: 20px 15px 40px;
+            padding: 20px 15px 50px;
             flex: 1;
         }
 
-        .title-box {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .title-box h1 {
-            font-size: 22px;
-            color: #fff;
-            margin-bottom: 6px;
-        }
-
-        .title-box p {
-            font-size: 13px;
-            color: #94a3b8;
-        }
-
+        /* প্রম্পট বক্স */
         .card {
-            background: #0f172a;
-            border: 1px solid #1e293b;
-            border-radius: 16px;
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 18px;
             padding: 18px;
-            margin-bottom: 24px;
-        }
-
-        label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #cbd5e1;
-            margin-bottom: 8px;
+            margin-bottom: 20px;
         }
 
         textarea {
             width: 100%;
-            height: 85px;
-            background: #030712;
-            border: 1px solid #334155;
-            border-radius: 10px;
+            height: 90px;
+            background: #0b0f19;
+            border: 1px solid #374151;
+            border-radius: 12px;
             padding: 12px;
             color: #fff;
             font-size: 14px;
@@ -106,34 +82,92 @@
             border-color: #22d3ee;
         }
 
-        .options-grid {
+        /* ড্রপডাউন গ্রিড */
+        .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 14px 0;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .field-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #9ca3af;
+            margin-bottom: 6px;
+            display: block;
         }
 
         select {
             width: 100%;
-            background: #030712;
-            border: 1px solid #334155;
-            border-radius: 8px;
+            background: #0b0f19;
+            border: 1px solid #374151;
+            border-radius: 10px;
             padding: 10px;
             color: #fff;
             font-size: 13px;
             outline: none;
         }
 
+        /* অ্যাডভান্সড চিপস অপশন (স্ক্রিনশটের মতো) */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 18px 0 10px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #e5e7eb;
+        }
+
+        .clear-btn {
+            font-size: 12px;
+            color: #f87171;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .tag {
+            background: #1f2937;
+            color: #d1d5db;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            border: 1px solid #374151;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .tag.active {
+            background: #0284c7;
+            color: #fff;
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+
+        /* জেনারেট বাটন */
         .btn-gen {
             width: 100%;
-            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            background: linear-gradient(135deg, #0284c7, #2563eb);
             color: #fff;
             border: none;
             padding: 14px;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 15px;
             font-weight: bold;
             cursor: pointer;
+            margin-top: 15px;
         }
 
         .btn-gen:disabled {
@@ -141,47 +175,45 @@
             cursor: not-allowed;
         }
 
+        /* লোডার */
         #loader {
             display: none;
             text-align: center;
-            padding: 25px;
-            background: #0f172a;
-            border: 1px dashed #334155;
+            padding: 20px;
+            background: #111827;
+            border: 1px dashed #374151;
             border-radius: 14px;
             margin-bottom: 20px;
         }
 
         .spinner {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             border: 3px solid rgba(255,255,255,0.1);
-            border-top: 3px solid #22d3ee;
+            border-top: 3px solid #38bdf8;
             border-radius: 50%;
-            margin: 0 auto 10px;
+            margin: 0 auto 8px;
             animation: spin 0.8s linear infinite;
         }
 
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
+        /* ইমেজ কার্ড গ্রিড */
         .image-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 16px;
         }
 
         .img-card {
-            background: #0f172a;
-            border: 1px solid #1e293b;
+            background: #111827;
+            border: 1px solid #1f2937;
             border-radius: 14px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            position: relative;
         }
 
-        /* ওয়াটারমার্ক কাটার ফ্রেম */
         .img-wrapper {
             position: relative;
             width: 100%;
@@ -192,7 +224,7 @@
 
         .img-wrapper img {
             width: 100%;
-            height: calc(100% + 36px); /* ওয়াটারমার্ক নিচে ঠেলে লুকানো */
+            height: calc(100% + 38px); /* ওয়াটারমার্ক ফ্রেমের নিচে লুকানো */
             object-fit: cover;
             display: block;
         }
@@ -203,7 +235,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #0b1120;
+            background: #0b0f19;
             color: #94a3b8;
             font-size: 13px;
         }
@@ -211,57 +243,75 @@
         .btn-dl {
             display: block;
             text-align: center;
-            background: #1e293b;
-            color: #22d3ee;
+            background: #1f2937;
+            color: #38bdf8;
             text-decoration: none;
             padding: 12px;
             font-size: 13px;
             font-weight: bold;
-            border-top: 1px solid #334155;
+            border-top: 1px solid #374151;
             cursor: pointer;
-        }
-
-        .btn-dl:hover {
-            background: #22d3ee;
-            color: #030712;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="index.html" class="logo">⚡ Technography</a>
+        <a href="index.html" class="logo">⚡ Technography AI</a>
         <a href="index.html" class="home-btn">হোম পেজ</a>
     </header>
 
     <div class="container">
-        <div class="title-box">
-            <h1>AI ইমেজ স্টুডিও (3X Ultra-HD)</h1>
-            <p>সম্পূর্ণ নিখুঁত ও ওয়াটারমার্ক ছাড়া ৩টি ভিন্ন ছবি তৈরি করুন</p>
-        </div>
-
         <div class="card">
-            <label for="prompt">ছবির বর্ণনা লিখুন (বাংলায় লিখলেও চলবে):</label>
+            <span class="field-label">ছবির বর্ণনা লিখুন (বাংলা বা ইংরেজি):</span>
             <textarea id="prompt" placeholder="যেমন: সুন্দর একটি মেয়ের ছবি, লাল শাড়ি পরা, সূর্যাস্তের আলো..."></textarea>
 
-            <div class="options-grid">
+            <div class="grid-2">
                 <div>
-                    <label for="ratio">সাইজ / অনুপাত:</label>
+                    <span class="field-label">AI Engine (Version):</span>
+                    <select id="engineVersion">
+                        <option value="flux" selected>FLUX (Ultra Realistic)</option>
+                        <option value="sdxl">SDXL (Digital Art/Anime)</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="field-label">Resolutions (সাইজ):</span>
                     <select id="ratio">
-                        <option value="1024x1024" selected>স্কয়ার (1:1 - Post)</option>
-                        <option value="768x1344">পোর্ট্রেট (9:16 - Reels)</option>
-                        <option value="1280x720">ল্যান্ডস্কেপ (16:9 - YouTube)</option>
+                        <option value="1024x1024" selected>Square (1:1 - Post)</option>
+                        <option value="768x1344">Portrait (9:16 - Reels/Story)</option>
+                        <option value="1280x720">Landscape (16:9 - YouTube)</option>
                     </select>
                 </div>
+            </div>
 
-                <div>
-                    <label for="style">কোয়ালিটি স্টাইল:</label>
-                    <select id="style">
-                        <option value="masterpiece, 8k, photorealistic, sharp focus, highly detailed skin texture, dslr" selected>আল্ট্রা রিয়ালিস্টিক (HD)</option>
-                        <option value="cinematic lighting, dramatic, hyper-detailed">সিনেমাটিক</option>
-                        <option value="anime art, vivid colors, detailed">অ্যানিমে আর্ট</option>
-                    </select>
-                </div>
+            <!-- অ্যাডভান্সড অপশনস (লাইটিং ও স্টাইল ট্যাগ) -->
+            <div class="section-header">
+                <span class="section-title">Lighting & Detail (ক্লিক করে সিলেক্ট করুন):</span>
+                <span class="clear-btn" onclick="clearActiveTags()">Clear all</span>
+            </div>
+
+            <div class="tags-container" id="lightingTags">
+                <div class="tag active" onclick="toggleTag(this)" data-val="Studio lighting">Studio lighting</div>
+                <div class="tag active" onclick="toggleTag(this)" data-val="Cinematic lighting">Cinematic lighting</div>
+                <div class="tag" onclick="toggleTag(this)" data-val="Neon lights">Neon lights</div>
+                <div class="tag" onclick="toggleTag(this)" data-val="Volumetric lighting">Volumetric lighting</div>
+                <div class="tag active" onclick="toggleTag(this)" data-val="Hyper-realistic">Hyper-realistic</div>
+                <div class="tag active" onclick="toggleTag(this)" data-val="Deep focus">Deep focus</div>
+                <div class="tag" onclick="toggleTag(this)" data-val="8k resolution">8k resolution</div>
+                <div class="tag" onclick="toggleTag(this)" data-val="Masterpiece photography">Masterpiece photography</div>
+            </div>
+
+            <div class="section-header">
+                <span class="section-title">Art & Photography Style:</span>
+            </div>
+
+            <div class="tags-container" id="styleTags">
+                <div class="tag" onclick="toggleTag(this)" data-val="Photorealistic DSLR">Photography</div>
+                <div class="tag" onclick="toggleTag(this)" data-val="Anime style">Anime</div>
+                <div class="tag" onclick="toggleTag(this)" data-val="3D Render Octane">3D Render</div>
+                <div class="tag" onclick="toggleTag(this)" data-val="Cyberpunk style">Cyberpunk</div>
+                <div class="tag" onclick="toggleTag(this)" data-val="Vibrant colors">Vibrant colors</div>
+                <div class="tag" onclick="toggleTag(this)" data-val="Dramatic colors">Dramatic colors</div>
             </div>
 
             <button class="btn-gen" id="genBtn" onclick="startGeneration()">⚡ একসাথে ৩টি ছবি তৈরি করুন</button>
@@ -276,13 +326,33 @@
     </div>
 
     <script>
+        // ট্যাগ সিলেক্ট / ডিসিলেক্ট করার ফাংশন
+        function toggleTag(el) {
+            el.classList.toggle('active');
+        }
+
+        function clearActiveTags() {
+            document.querySelectorAll('.tag.active').forEach(t => t.classList.remove('active'));
+        }
+
+        function getSelectedTags() {
+            const activeTags = [];
+            document.querySelectorAll('.tag.active').forEach(t => {
+                activeTags.push(t.getAttribute('data-val'));
+            });
+            return activeTags.join(', ');
+        }
+
         function hasBengali(text) {
             return /[\u0980-\u09FF]/.test(text);
         }
 
         async function translateText(text) {
             try {
-                const res = await fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(text) + "&langpair=bn|en");
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2000);
+                const res = await fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(text) + "&langpair=bn|en", { signal: controller.signal });
+                clearTimeout(timeoutId);
                 const json = await res.json();
                 if (json && json.responseData && json.responseData.translatedText) {
                     return json.responseData.translatedText;
@@ -291,56 +361,11 @@
             return text;
         }
 
-        // ৩টি ইমেজ একটির পর একটি নিখুঁতভাবে লোড করানো
-        async function loadCardSequentially(container, prompt, w, h, index) {
-            const seed = Math.floor(Math.random() * 900000) + (index * 7777);
-            
-            // সার্ভার ট্রাফিক এড়াতে বিভিন্ন মডেল ডিস্ট্রিবিউট করা
-            const modelType = (index === 0) ? "flux" : (index === 1 ? "turbo" : "flux");
-            const imgUrl = `https://image.pollinations.ai/prompt/${prompt}?width=${w}&height=${h}&model=${modelType}&seed=${seed}&nologo=true&enhance=true`;
-
-            const card = document.createElement("div");
-            card.className = "img-card";
-            card.innerHTML = `
-                <div class="img-wrapper">
-                    <div class="img-loading" id="load-${index}">ছবি তৈরি হচ্ছে... (${index + 1}/3)</div>
-                    <img id="img-${index}" src="" alt="AI Image ${index+1}" style="display:none;">
-                </div>
-                <a class="btn-dl" onclick="downloadCleanImage('img-${index}', ${index+1})">ডাউনলোড HD (${index+1})</a>
-            `;
-            container.appendChild(card);
-
-            const imgEl = card.querySelector(`#img-${index}`);
-            const loadEl = card.querySelector(`#load-${index}`);
-
-            // ইমেজ লোড এবং অটো রিট্রাই লজিক
-            return new Promise((resolve) => {
-                imgEl.src = imgUrl;
-
-                imgEl.onload = () => {
-                    loadEl.style.display = "none";
-                    imgEl.style.display = "block";
-                    resolve();
-                };
-
-                // ফেইল করলে বিকল্প সার্ভার সিড দিয়ে অটো রিলোড করবে
-                imgEl.onerror = () => {
-                    const fallbackUrl = `https://image.pollinations.ai/prompt/${prompt}?width=${w}&height=${h}&seed=${seed + 999}&nologo=true`;
-                    imgEl.src = fallbackUrl;
-                    imgEl.onload = () => {
-                        loadEl.style.display = "none";
-                        imgEl.style.display = "block";
-                        resolve();
-                    };
-                };
-            });
-        }
-
         async function startGeneration() {
             const promptBox = document.getElementById("prompt");
             const text = promptBox.value.trim();
+            const engine = document.getElementById("engineVersion").value;
             const ratio = document.getElementById("ratio").value.split("x");
-            const style = document.getElementById("style").value;
 
             if (!text) {
                 alert("অনুগ্রহ করে ছবির বিবরণ লিখুন!");
@@ -355,32 +380,50 @@
             btn.disabled = true;
             grid.innerHTML = "";
             loader.style.display = "block";
+            loaderText.innerText = "প্রম্পট ও ট্যাগ সাজানো হচ্ছে...";
 
             let promptEn = text;
             if (hasBengali(text)) {
-                loaderText.innerText = "বাংলা প্রম্পট অনুবাদ হচ্ছে...";
                 promptEn = await translateText(text);
             }
 
-            loaderText.innerText = "৩টি ছবি রেন্ডার হচ্ছে, অপেক্ষা করুন...";
+            loader.style.display = "none";
 
+            // ব্যবহারকারীর সিলেক্ট করা ট্যাগগুলো প্রম্পটে যোগ করা
+            const extraStyles = getSelectedTags();
             const cleanPrompt = promptEn.replace(/watermark|logo|text/gi, "");
-            const finalPrompt = encodeURIComponent(`${cleanPrompt}, ${style}, beautiful lighting, unblurred`);
+            const finalFullPrompt = encodeURIComponent(`${cleanPrompt}, ${extraStyles}, raw color, tack sharp focus, highly detailed`);
+            
+            // ঘোলা হওয়া ঠেকানোর নেগেটিভ ফিল্টার
+            const negativeFilter = encodeURIComponent("blurry, out of focus, distorted face, bad anatomy, deformed eyes, extra fingers, low quality");
+
             const w = ratio[0];
             const h = ratio[1];
 
-            // একের পর এক ৩টি ছবি লোড করবে যাতে সার্ভার ড্রপ না করে
+            // ৩টি শার্প ছবি লোড করা
             for (let i = 0; i < 3; i++) {
-                loaderText.innerText = `ছবি তৈরি হচ্ছে: ${i + 1} / 3...`;
-                await loadCardSequentially(grid, finalPrompt, w, h, i);
+                const seed = Math.floor(Math.random() * 899999) + (i * 741);
+                const imgUrl = `https://image.pollinations.ai/prompt/${finalFullPrompt}?negative=${negativeFilter}&width=${w}&height=${h}&model=${engine}&seed=${seed}&nologo=true&nofeed=true&enhance=false`;
+
+                const card = document.createElement("div");
+                card.className = "img-card";
+                card.innerHTML = `
+                    <div class="img-wrapper">
+                        <div class="img-loading" id="load-${i}">Ultra-HD ছবি রেন্ডার হচ্ছে (${i+1}/3)...</div>
+                        <img id="img-${i}" src="${imgUrl}" alt="AI Image ${i+1}" 
+                             onload="document.getElementById('load-${i}').style.display='none';" 
+                             onerror="this.src='https://image.pollinations.ai/prompt/${finalFullPrompt}?width=${w}&height=${h}&seed=${seed+99}&nologo=true';">
+                    </div>
+                    <a class="btn-dl" onclick="downloadCleanImage('img-${i}', ${i+1})">ডাউনলোড Ultra-HD (${i+1})</a>
+                `;
+                grid.appendChild(card);
             }
 
-            loader.style.display = "none";
             btn.disabled = false;
             btn.innerText = "⚡ নতুন ৩টি ছবি তৈরি করুন";
         }
 
-        // ডাউনলোড করার সময় স্বয়ংক্রিয়ভাবে নিচের ওয়াটারমার্ক ক্রপ করে সেভ করার ফাংশন
+        // ওয়াটারমার্ক কেটে নিখুঁত ছবি সেভ করার ফাংশন
         function downloadCleanImage(imgId, index) {
             const img = document.getElementById(imgId);
             if (!img) return;
@@ -388,8 +431,7 @@
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
 
-            // নিচের ওয়াটারমার্ক অংশ বাদ দিয়ে ক্যানভাসে ড্র করা
-            const cropBottomPixels = 36;
+            const cropBottomPixels = 38;
             canvas.width = img.naturalWidth;
             canvas.height = img.naturalHeight - cropBottomPixels;
 
