@@ -144,7 +144,7 @@
         #loader {
             display: none;
             text-align: center;
-            padding: 30px;
+            padding: 25px;
             background: #0f172a;
             border: 1px dashed #334155;
             border-radius: 14px;
@@ -152,12 +152,12 @@
         }
 
         .spinner {
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border: 3px solid rgba(255,255,255,0.1);
             border-top: 3px solid #22d3ee;
             border-radius: 50%;
-            margin: 0 auto 12px;
+            margin: 0 auto 10px;
             animation: spin 0.8s linear infinite;
         }
 
@@ -174,23 +174,41 @@
         .img-card {
             background: #0f172a;
             border: 1px solid #1e293b;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             position: relative;
         }
 
-        .img-card img {
+        /* ওয়াটারমার্ক কাটার ফ্রেম */
+        .img-wrapper {
+            position: relative;
             width: 100%;
-            height: auto;
-            display: block;
+            height: 320px;
             background: #030712;
-            min-height: 280px;
-            object-fit: cover;
+            overflow: hidden;
         }
 
-        .img-card a {
+        .img-wrapper img {
+            width: 100%;
+            height: calc(100% + 36px); /* ওয়াটারমার্ক নিচে ঠেলে লুকানো */
+            object-fit: cover;
+            display: block;
+        }
+
+        .img-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0b1120;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        .btn-dl {
             display: block;
             text-align: center;
             background: #1e293b;
@@ -200,9 +218,10 @@
             font-size: 13px;
             font-weight: bold;
             border-top: 1px solid #334155;
+            cursor: pointer;
         }
 
-        .img-card a:hover {
+        .btn-dl:hover {
             background: #22d3ee;
             color: #030712;
         }
@@ -218,12 +237,12 @@
     <div class="container">
         <div class="title-box">
             <h1>AI ইমেজ স্টুডিও (3X Ultra-HD)</h1>
-            <p>ওয়াটারমার্ক ছাড়া সম্পূর্ণ ক্লিয়ার ৩টি ইউনিক ছবি তৈরি করুন</p>
+            <p>সম্পূর্ণ নিখুঁত ও ওয়াটারমার্ক ছাড়া ৩টি ভিন্ন ছবি তৈরি করুন</p>
         </div>
 
         <div class="card">
             <label for="prompt">ছবির বর্ণনা লিখুন (বাংলায় লিখলেও চলবে):</label>
-            <textarea id="prompt" placeholder="যেমন: সুন্দর একটি মেয়ের ছবি, লাল শাড়ি পরা, ব্যাকগ্রাউন্ডে প্রাকৃতিক আলো..."></textarea>
+            <textarea id="prompt" placeholder="যেমন: সুন্দর একটি মেয়ের ছবি, লাল শাড়ি পরা, সূর্যাস্তের আলো..."></textarea>
 
             <div class="options-grid">
                 <div>
@@ -238,9 +257,9 @@
                 <div>
                     <label for="style">কোয়ালিটি স্টাইল:</label>
                     <select id="style">
-                        <option value="masterpiece, 8k resolution, raw photo, sharp focus, highly detailed, realistic skin texture, dslr" selected>আল্ট্রা রিয়ালিস্টিক (HD)</option>
-                        <option value="cinematic lighting, dramatic atmosphere, hyper-detailed, octane render">সিনেমাটিক</option>
-                        <option value="modern anime art, vivid colors, detailed, 4k wallpaper">অ্যানিমে আর্ট</option>
+                        <option value="masterpiece, 8k, photorealistic, sharp focus, highly detailed skin texture, dslr" selected>আল্ট্রা রিয়ালিস্টিক (HD)</option>
+                        <option value="cinematic lighting, dramatic, hyper-detailed">সিনেমাটিক</option>
+                        <option value="anime art, vivid colors, detailed">অ্যানিমে আর্ট</option>
                     </select>
                 </div>
             </div>
@@ -250,7 +269,7 @@
 
         <div id="loader">
             <div class="spinner"></div>
-            <p id="loaderText" style="font-size: 14px; color: #cbd5e1;">ছবি প্রসেস হচ্ছে...</p>
+            <p id="loaderText" style="font-size: 14px; color: #cbd5e1;">প্রসেস হচ্ছে...</p>
         </div>
 
         <div class="image-grid" id="grid"></div>
@@ -270,6 +289,51 @@
                 }
             } catch(e) {}
             return text;
+        }
+
+        // ৩টি ইমেজ একটির পর একটি নিখুঁতভাবে লোড করানো
+        async function loadCardSequentially(container, prompt, w, h, index) {
+            const seed = Math.floor(Math.random() * 900000) + (index * 7777);
+            
+            // সার্ভার ট্রাফিক এড়াতে বিভিন্ন মডেল ডিস্ট্রিবিউট করা
+            const modelType = (index === 0) ? "flux" : (index === 1 ? "turbo" : "flux");
+            const imgUrl = `https://image.pollinations.ai/prompt/${prompt}?width=${w}&height=${h}&model=${modelType}&seed=${seed}&nologo=true&enhance=true`;
+
+            const card = document.createElement("div");
+            card.className = "img-card";
+            card.innerHTML = `
+                <div class="img-wrapper">
+                    <div class="img-loading" id="load-${index}">ছবি তৈরি হচ্ছে... (${index + 1}/3)</div>
+                    <img id="img-${index}" src="" alt="AI Image ${index+1}" style="display:none;">
+                </div>
+                <a class="btn-dl" onclick="downloadCleanImage('img-${index}', ${index+1})">ডাউনলোড HD (${index+1})</a>
+            `;
+            container.appendChild(card);
+
+            const imgEl = card.querySelector(`#img-${index}`);
+            const loadEl = card.querySelector(`#load-${index}`);
+
+            // ইমেজ লোড এবং অটো রিট্রাই লজিক
+            return new Promise((resolve) => {
+                imgEl.src = imgUrl;
+
+                imgEl.onload = () => {
+                    loadEl.style.display = "none";
+                    imgEl.style.display = "block";
+                    resolve();
+                };
+
+                // ফেইল করলে বিকল্প সার্ভার সিড দিয়ে অটো রিলোড করবে
+                imgEl.onerror = () => {
+                    const fallbackUrl = `https://image.pollinations.ai/prompt/${prompt}?width=${w}&height=${h}&seed=${seed + 999}&nologo=true`;
+                    imgEl.src = fallbackUrl;
+                    imgEl.onload = () => {
+                        loadEl.style.display = "none";
+                        imgEl.style.display = "block";
+                        resolve();
+                    };
+                };
+            });
         }
 
         async function startGeneration() {
@@ -293,42 +357,48 @@
             loader.style.display = "block";
 
             let promptEn = text;
-
             if (hasBengali(text)) {
-                loaderText.innerText = "বাংলা প্রম্পট অনুবাদ ও ফিল্টারিং হচ্ছে...";
+                loaderText.innerText = "বাংলা প্রম্পট অনুবাদ হচ্ছে...";
                 promptEn = await translateText(text);
             }
 
-            loaderText.innerText = "৩টি Ultra-HD ছবি ওয়াটারমার্ক ছাড়া তৈরি হচ্ছে...";
+            loaderText.innerText = "৩টি ছবি রেন্ডার হচ্ছে, অপেক্ষা করুন...";
 
-            // ঘোলা ভাব দূর করার প্রম্পট
-            const cleanPrompt = promptEn.replace(/watermark|logo|text|signature/gi, "");
-            const fullPrompt = encodeURIComponent(`${cleanPrompt}, ${style}, perfect face, unblurred, no watermark, clean image`);
+            const cleanPrompt = promptEn.replace(/watermark|logo|text/gi, "");
+            const finalPrompt = encodeURIComponent(`${cleanPrompt}, ${style}, beautiful lighting, unblurred`);
             const w = ratio[0];
             const h = ratio[1];
 
-            // ৩টি ছবির কার্ড তৈরি করা
+            // একের পর এক ৩টি ছবি লোড করবে যাতে সার্ভার ড্রপ না করে
             for (let i = 0; i < 3; i++) {
-                const seed = Math.floor(Math.random() * 899999) + (i * 54321);
-                
-                // ওয়াটারমার্ক সম্পূর্ণ বন্ধের নো-লোগো ও নো-ফিড প্যারামিটার
-                const imgUrl = `https://image.pollinations.ai/prompt/${fullPrompt}?width=${w}&height=${h}&model=flux&seed=${seed}&nologo=true&nofeed=true&enhance=true`;
-
-                const card = document.createElement("div");
-                card.className = "img-card";
-                card.innerHTML = `
-                    <img src="${imgUrl}" alt="AI Generated Image ${i+1}" loading="lazy" onload="this.style.minHeight='auto'">
-                    <a href="${imgUrl}" target="_blank" download="technography-ai-${i+1}.jpg">ডাউনলোড HD (${i+1})</a>
-                `;
-                grid.appendChild(card);
+                loaderText.innerText = `ছবি তৈরি হচ্ছে: ${i + 1} / 3...`;
+                await loadCardSequentially(grid, finalPrompt, w, h, i);
             }
 
-            // ছবি লোড হতে পর্যাপ্ত সময় দেওয়া
-            setTimeout(() => {
-                loader.style.display = "none";
-                btn.disabled = false;
-                btn.innerText = "⚡ নতুন ৩টি ছবি তৈরি করুন";
-            }, 3000);
+            loader.style.display = "none";
+            btn.disabled = false;
+            btn.innerText = "⚡ নতুন ৩টি ছবি তৈরি করুন";
+        }
+
+        // ডাউনলোড করার সময় স্বয়ংক্রিয়ভাবে নিচের ওয়াটারমার্ক ক্রপ করে সেভ করার ফাংশন
+        function downloadCleanImage(imgId, index) {
+            const img = document.getElementById(imgId);
+            if (!img) return;
+
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            // নিচের ওয়াটারমার্ক অংশ বাদ দিয়ে ক্যানভাসে ড্র করা
+            const cropBottomPixels = 36;
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight - cropBottomPixels;
+
+            ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight - cropBottomPixels, 0, 0, canvas.width, canvas.height);
+
+            const a = document.createElement("a");
+            a.download = `technography-ai-${index}.jpg`;
+            a.href = canvas.toDataURL("image/jpeg", 0.95);
+            a.click();
         }
     </script>
 </body>
