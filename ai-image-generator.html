@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technography - AI Image Studio</title>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent: #a855f7;
+            --bg-dark: #090d16;
+            --nav-bg: rgba(15, 23, 42, 0.85);
+            --card-bg: rgba(22, 27, 46, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+        }
+
+        /* Technography হেডার / ন্যাভবার */
+        nav {
+            width: 100%;
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-logo span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* মূল কনটেন্ট এরিয়া */
+        main {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 15px 50px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #c084fc;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(26px, 5vw, 38px);
+            font-weight: 700;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* ওয়ার্কস্পেস */
+        .workspace {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .workspace {
+                grid-template-columns: 1fr 1fr;
+                align-items: start;
+            }
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 110px;
+            background: rgba(10, 14, 26, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            color: #fff;
+            font-size: 15px;
+            resize: none;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .grid-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        select {
+            width: 100%;
+            background: rgba(10, 14, 26, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-generate {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 5px;
+        }
+
+        .btn-generate:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-generate:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* প্রিভিউ বক্স */
+        .preview-pane {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 380px;
+            background: rgba(10, 14, 26, 0.5);
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .placeholder-text {
+            color: var(--text-muted);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .placeholder-text i {
+            font-size: 38px;
+            opacity: 0.4;
+        }
+
+        .spinner {
+            display: none;
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-wrapper {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .loading-wrapper p {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        #imageResult {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+            display: none;
+        }
+
+        .image-actions {
+            display: none;
+            position: absolute;
+            bottom: 12px;
+            gap: 10px;
+        }
+
+        .btn-download {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-download:hover {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Technography ন্যাভিগেশন বার -->
+    <nav>
+        <a href="index.html" class="brand-logo">
+            <i class="fa-solid fa-layer-group" style="color: #6366f1;"></i>
+            <span>Technography</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html"><i class="fa-solid fa-house"></i> হোম পেজ</a>
+        </div>
+    </nav>
+
+    <main>
+        <header>
+            <div class="badge"><i class="fa-solid fa-bolt"></i> Technography AI Suite</div>
+            <h1>AI ইমেজ স্টুডিও</h1>
+            <p>আপনার ধারণাকে রূপ দিন এক ক্লিকেই, সম্পূর্ণ ফ্রিতে</p>
+        </header>
+
+        <div class="workspace">
+            <!-- কন্ট্রোল প্যানেল -->
+            <div class="controls">
+                <div class="field-group">
+                    <label for="promptInput"><i class="fa-regular fa-comment-dots"></i> প্রম্পট লিখুন</label>
+                    <textarea id="promptInput" placeholder="যেমন: A futuristic cyber robot standing in a dark street, neon lights, 8k resolution..."></textarea>
+                </div>
+
+                <div class="grid-options">
+                    <div class="field-group">
+                        <label for="aspectRatio"><i class="fa-solid fa-crop-simple"></i> সাইজ / অনুপাত</label>
+                        <select id="aspectRatio">
+                            <option value="1024x1024" selected>স্কয়ার (1:1 - Post)</option>
+                            <option value="768x1344">পোর্ট্রেট (9:16 - Reels/Story)</option>
+                            <option value="1280x720">ল্যান্ডস্কেপ (16:9 - YouTube)</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="stylePreset"><i class="fa-solid fa-wand-magic-sparkles"></i> আর্ট স্টাইল</label>
+                        <select id="stylePreset">
+                            <option value="" selected>বাস্তবসম্মত (Realistic)</option>
+                            <option value=", anime style, studio ghibli, vivid colors">অ্যানিমে (Anime)</option>
+                            <option value=", cyberpunk style, neon lights, dark ambience">সাইবারপাঙ্ক (Cyberpunk)</option>
+                            <option value=", 3D cartoon, Pixar style, cute, smooth render">থ্রি-ডি অ্যানিমেশন (3D Render)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn-generate" id="generateBtn" onclick="createImage()">
+                    <i class="fa-solid fa-sparkles"></i> ইমেজ জেনারেট করুন
+                </button>
+            </div>
+
+            <!-- প্রিভিউ স্ক্রিন -->
+            <div class="preview-pane" id="previewArea">
+                <div class="placeholder-text" id="placeholder">
+                    <i class="fa-regular fa-image"></i>
+                    <p>ছবি তৈরি হয়ে এখানে প্রদর্শিত হবে</p>
+                </div>
+
+                <div class="loading-wrapper" id="loader">
+                    <div class="spinner"></div>
+                    <p>এআই ছবি প্রস্তুত করছে...</p>
+                </div>
+
+                <img id="imageResult" alt="Technography AI Generated Graphic" />
+
+                <div class="image-actions" id="actionArea">
+                    <button class="btn-download" onclick="downloadImage()">
+                        <i class="fa-solid fa-arrow-down-to-bracket"></i> ডাউনলোড HD
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentImageBlobUrl = null;
+
+        async function createImage() {
+            const promptInput = document.getElementById('promptInput');
+            const promptText = promptInput.value.trim();
+            const aspectRatio = document.getElementById('aspectRatio').value.split('x');
+            const style = document.getElementById('stylePreset').value;
+
+            if (!promptText) {
+                alert('অনুগ্রহ করে একটি প্রম্পট লিখুন!');
+                return;
+            }
+
+            const width = aspectRatio[0];
+            const height = aspectRatio[1];
+            const fullPrompt = encodeURIComponent(promptText + style);
+
+            const seed = Math.floor(Math.random() * 1000000);
+            const apiUrl = `https://image.pollinations.ai/prompt/${fullPrompt}?width=${width}&height=${height}&model=flux&seed=${seed}&nologo=true`;
+
+            const btn = document.getElementById('generateBtn');
+            const placeholder = document.getElementById('placeholder');
+            const loader = document.getElementById('loader');
+            const imgEl = document.getElementById('imageResult');
+            const actionArea = document.getElementById('actionArea');
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ছবি তৈরি হচ্ছে...';
+            placeholder.style.display = 'none';
+            imgEl.style.display = 'none';
+            actionArea.style.display = 'none';
+            loader.style.display = 'flex';
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('সার্ভারে সমস্যা হয়েছে');
+
+                const blob = await response.blob();
+                if (currentImageBlobUrl) URL.revokeObjectURL(currentImageBlobUrl);
+                currentImageBlobUrl = URL.createObjectURL(blob);
+
+                imgEl.src = currentImageBlobUrl;
+                imgEl.onload = () => {
+                    loader.style.display = 'none';
+                    imgEl.style.display = 'block';
+                    actionArea.style.display = 'flex';
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-sparkles"></i> নতুন ইমেজ তৈরি করুন';
+                };
+            } catch (err) {
+                alert('ছবি লোড হতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।');
+                loader.style.display = 'none';
+                placeholder.style.display = 'flex';
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-sparkles"></i> ইমেজ জেনারেট করুন';
+            }
+        }
+
+        function downloadImage() {
+            if (!currentImageBlobUrl) return;
+            const a = document.createElement('a');
+            a.href = currentImageBlobUrl;
+            a.download = `technography-ai-${Date.now()}.jpg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
