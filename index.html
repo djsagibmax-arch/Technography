@@ -189,13 +189,11 @@
 
     <!-- ফ্লোটিং যোগাযোগ সাইডবার -->
     <aside class="floating-contact-bar">
-
         <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Technography%20ওয়েবসাইট%20থেকে%20যোগাযোগ%20করছি."
            target="_blank"
            rel="noopener noreferrer"
            title="WhatsApp-এ যোগাযোগ করুন"
            class="contact-btn contact-btn-wa">
-
             <i class="fa-brands fa-whatsapp"></i>
         </a>
 
@@ -204,28 +202,31 @@
            rel="noopener noreferrer"
            title="ফেসবুক পেজ ভিজিট করুন"
            class="contact-btn contact-btn-fb">
-
             <i class="fa-brands fa-facebook-f"></i>
         </a>
-
     </aside>
 
-    <!-- হেডার -->
+    <!-- হেডার (AI Image Generator লিঙ্ক সহ) -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/90 border-b border-slate-800">
-
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-
             <div class="text-xl font-bold tracking-wider text-cyan-400">
                 Technography
             </div>
 
-            <a href="select-payment.html?product=1"
-               class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-5 py-2 rounded-full font-medium shadow transition">
-                এখনই কিনুন
-            </a>
+            <div class="flex items-center gap-3">
+                <!-- AI Generator পেজের লিঙ্ক বাটন -->
+                <a href="ai-image-generator.html"
+                   class="inline-flex items-center gap-1.5 bg-purple-950/80 hover:bg-purple-900/90 text-purple-300 border border-purple-500/40 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition">
+                    <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i>
+                    <span>AI Image Tool</span>
+                </a>
 
+                <a href="select-payment.html?product=1"
+                   class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow transition">
+                    এখনই কিনুন
+                </a>
+            </div>
         </div>
-
     </header>
 
 
@@ -233,19 +234,12 @@
 
         <!-- ১. ভিডিও সেকশন -->
         <div class="mb-10 max-w-3xl mx-auto">
-
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-cyan-500/10 border border-cyan-400/40 text-cyan-300 text-sm font-bold mb-3">
-
                 <span class="text-red-500 text-lg">▶</span>
-
-                <span>
-                    আমাদের প্রোডাক্টটির ভিতরে কি পাবেন / কিভাবে নিবেন
-                </span>
-
+                <span>আমাদের প্রোডাক্টটির ভিতরে কি পাবেন / কিভাবে নিবেন</span>
             </div>
 
             <div class="relative w-full rounded-2xl overflow-hidden border-2 border-cyan-400/60 shadow-lg bg-slate-900 aspect-video">
-
                 <iframe
                     class="w-full h-full"
                     src="https://www.youtube.com/embed/E5Ow-YAPpms?rel=0&playsinline=1"
@@ -253,121 +247,82 @@
                     frameborder="0"
                     allowfullscreen>
                 </iframe>
-
             </div>
-
         </div>
 
 
         <!-- ২. লাইভ কাউন্টডাউন -->
         <div class="mb-8 max-w-lg mx-auto">
-
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs sm:text-sm font-bold mb-4 animate-pulse">
-
-                <span>
-                    ⚡ মেগা ডিসকাউন্ট অফার শেষ হতে বাকি
-                </span>
-
+                <span>⚡ মেগা ডিসকাউন্ট অফার শেষ হতে বাকি</span>
             </div>
 
             <div class="grid grid-cols-4 gap-2 sm:gap-4 bg-slate-900/95 border-2 border-cyan-400/50 p-4 sm:p-5 rounded-3xl box-3d">
-
                 <div class="flex flex-col items-center bg-cyan-950/40 border border-cyan-400/40 rounded-2xl py-3 px-1">
-
-                    <span id="t-days"
-                          class="text-3xl sm:text-5xl font-black text-cyan-200 neon-glow-cyan">
-                        ০১
-                    </span>
-
-                    <span class="text-[12px] sm:text-xs font-black text-cyan-300 tracking-wider mt-1.5 uppercase">
-                        দিন
-                    </span>
-
+                    <span id="t-days" class="text-3xl sm:text-5xl font-black text-cyan-200 neon-glow-cyan">০১</span>
+                    <span class="text-[12px] sm:text-xs font-black text-cyan-300 tracking-wider mt-1.5 uppercase">দিন</span>
                 </div>
-
 
                 <div class="flex flex-col items-center bg-emerald-950/40 border border-emerald-400/40 rounded-2xl py-3 px-1">
-
-                    <span id="t-hours"
-                          class="text-3xl sm:text-5xl font-black text-emerald-200 neon-glow-emerald">
-                        ২৩
-                    </span>
-
-                    <span class="text-[12px] sm:text-xs font-black text-emerald-300 tracking-wider mt-1.5 uppercase">
-                        ঘণ্টা
-                    </span>
-
+                    <span id="t-hours" class="text-3xl sm:text-5xl font-black text-emerald-200 neon-glow-emerald">২৩</span>
+                    <span class="text-[12px] sm:text-xs font-black text-emerald-300 tracking-wider mt-1.5 uppercase">ঘণ্টা</span>
                 </div>
-
 
                 <div class="flex flex-col items-center bg-purple-950/40 border border-purple-400/40 rounded-2xl py-3 px-1">
-
-                    <span id="t-minutes"
-                          class="text-3xl sm:text-5xl font-black text-purple-200 neon-glow-purple">
-                        ৫৭
-                    </span>
-
-                    <span class="text-[12px] sm:text-xs font-black text-purple-300 tracking-wider mt-1.5 uppercase">
-                        মিনিট
-                    </span>
-
+                    <span id="t-minutes" class="text-3xl sm:text-5xl font-black text-purple-200 neon-glow-purple">৫৭</span>
+                    <span class="text-[12px] sm:text-xs font-black text-purple-300 tracking-wider mt-1.5 uppercase">মিনিট</span>
                 </div>
-
 
                 <div class="flex flex-col items-center bg-amber-950/40 border border-amber-400/40 rounded-2xl py-3 px-1">
-
-                    <span id="t-seconds"
-                          class="text-3xl sm:text-5xl font-black text-amber-200 neon-glow-amber">
-                        ২৮
-                    </span>
-
-                    <span class="text-[12px] sm:text-xs font-black text-amber-300 tracking-wider mt-1.5 uppercase">
-                        সেকেন্ড
-                    </span>
-
+                    <span id="t-seconds" class="text-3xl sm:text-5xl font-black text-amber-200 neon-glow-amber">২৮</span>
+                    <span class="text-[12px] sm:text-xs font-black text-amber-300 tracking-wider mt-1.5 uppercase">সেকেন্ড</span>
                 </div>
-
             </div>
-
         </div>
 
 
         <!-- ৩. ডিসকাউন্ট অফার -->
         <div class="my-10 max-w-xl mx-auto">
-
             <div class="offer-badge p-1 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 shadow-2xl">
-
                 <div class="bg-slate-950/95 py-4 px-6 rounded-xl flex items-center justify-center gap-3">
-
                     <i class="fa-solid fa-fire text-amber-400 text-2xl animate-bounce"></i>
-
                     <span class="text-lg sm:text-2xl font-black tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300">
-
                         চলছে আকর্ষণীয় অফার ৭০% ডিসকাউন্ট
-
                     </span>
-
                     <i class="fa-solid fa-tag text-emerald-400 text-2xl"></i>
-
                 </div>
-
             </div>
+        </div>
 
+
+        <!-- এআই ইমেজ জেনারেটর প্রমো ব্যানার কার্ড -->
+        <div class="my-10 max-w-4xl mx-auto bg-gradient-to-r from-purple-950/60 via-slate-900 to-cyan-950/60 border border-purple-500/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold mb-2">
+                    <i class="fa-solid fa-sparkles"></i> নতুন ফ্রি টুল
+                </div>
+                <h3 class="text-xl sm:text-2xl font-black text-white mb-2">
+                    Technography AI ইমেজ স্টুডিও
+                </h3>
+                <p class="text-slate-400 text-xs sm:text-sm max-w-lg">
+                    রিলস, থাম্বনেইল বা সোশ্যাল মিডিয়ার জন্য সম্পূর্ণ ফ্রিতে প্রফেশনাল এআই ছবি তৈরি ও ডাউনলোড করুন কোনো প্রকার সাবস্ক্রিপশন ছাড়াই।
+                </p>
+            </div>
+            <a href="ai-image-generator.html"
+               class="whitespace-nowrap bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold px-6 py-3 rounded-xl text-sm shadow-lg transition flex items-center gap-2">
+                <span>ছবি তৈরি শুরু করুন</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
 
 
         <!-- ৪. প্রোডাক্ট গ্রিড -->
-        <div id="products-section"
-             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left mt-10">
-
+        <div id="products-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left mt-10">
 
             <!-- প্রোডাক্ট ১ -->
             <div class="product-card p-5 flex flex-col justify-between">
-
                 <div>
-
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
-
                         <img
                             src="https://i.postimg.cc/br1zQcLN/20260827-131010.jpg"
                             alt="মেগা বান্ডিল"
@@ -378,7 +333,6 @@
                         <span class="absolute top-3 right-3 bg-red-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
                             মেগা অফার
                         </span>
-
                     </div>
 
                     <h3 class="text-xl font-black text-cyan-300 mb-2">
@@ -388,51 +342,32 @@
                     <p class="text-slate-400 text-xs sm:text-sm mb-4">
                         ৩,০০,০০০+ AI Reels, Shorts, ৫০ হাজার মুভি ক্লিপ, এডিটিং কোর্স ও ক্যাপকাট প্রো সহ অল-ইন-ওয়ান প্যাকেজ।
                     </p>
-
                 </div>
 
-
                 <div>
-
                     <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
-
-                        <span class="text-xs text-slate-400">
-                            অফার প্রাইস:
-                        </span>
-
-                        <span class="text-2xl font-black text-emerald-400">
-                            ৩০০ ৳
-                        </span>
-
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৩০০ ৳</span>
                     </div>
 
-
                     <div class="grid grid-cols-2 gap-2">
-
                         <a href="product.html"
                            class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">
                             বিস্তারিত
                         </a>
-
                         <a href="select-payment.html?product=1"
                            class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">
                             অর্ডার করুন
                         </a>
-
                     </div>
-
                 </div>
-
             </div>
 
 
             <!-- প্রোডাক্ট ২ -->
             <div class="product-card p-5 flex flex-col justify-between">
-
                 <div>
-
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
-
                         <img
                             src="https://i.postimg.cc/JhPTdGvN/file-00000000825482118fbe670b1fe198c4.png"
                             alt="মাস্টার কোর্স"
@@ -442,7 +377,6 @@
                         <span class="absolute top-3 right-3 bg-cyan-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
                             কোর্স
                         </span>
-
                     </div>
 
                     <h3 class="text-xl font-black text-cyan-300 mb-2">
@@ -452,51 +386,32 @@
                     <p class="text-slate-400 text-xs sm:text-sm mb-4">
                         ভিডিও ভাইরাল করার মেথড, প্রফেশনাল এডিটিং গাইড ও সিরিয়াল আপলোড স্ট্র্যাটেজির অনলাইন মাস্টার কোর্স।
                     </p>
-
                 </div>
 
-
                 <div>
-
                     <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
-
-                        <span class="text-xs text-slate-400">
-                            অফার প্রাইস:
-                        </span>
-
-                        <span class="text-2xl font-black text-emerald-400">
-                            ৭০ ৳
-                        </span>
-
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৭০ ৳</span>
                     </div>
 
-
                     <div class="grid grid-cols-2 gap-2">
-
                         <a href="product2.html"
                            class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">
                             বিস্তারিত
                         </a>
-
                         <a href="select-payment.html?product=2"
                            class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">
                             অর্ডার করুন
                         </a>
-
                     </div>
-
                 </div>
-
             </div>
 
 
             <!-- প্রোডাক্ট ৩ -->
             <div class="product-card p-5 flex flex-col justify-between">
-
                 <div>
-
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
-
                         <img
                             src="https://i.postimg.cc/76BZ6MRQ/file-0000000087f881f88ff6c440b3f40f9e.png"
                             alt="১.৫ লক্ষ+ মিক্সড মেগা রিলস"
@@ -506,7 +421,6 @@
                         <span class="absolute top-3 right-3 bg-purple-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
                             ১.৫ লক্ষ+ রিলস
                         </span>
-
                     </div>
 
                     <h3 class="text-xl font-black text-cyan-300 mb-2">
@@ -516,51 +430,32 @@
                     <p class="text-slate-400 text-xs sm:text-sm mb-4">
                         মোটিভেশনাল, স্পোর্টস, কার্টুন, এনিমে, গেমিং এবং গ্যাজেট সহ সব ট্রেন্ডিং শর্ট ভিডিও কালেকশন।
                     </p>
-
                 </div>
 
-
                 <div>
-
                     <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
-
-                        <span class="text-xs text-slate-400">
-                            অফার প্রাইস:
-                        </span>
-
-                        <span class="text-2xl font-black text-emerald-400">
-                            ৯৯ ৳
-                        </span>
-
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৯৯ ৳</span>
                     </div>
 
-
                     <div class="grid grid-cols-2 gap-2">
-
                         <a href="product3.html"
                            class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">
                             বিস্তারিত
                         </a>
-
                         <a href="select-payment.html?product=3"
                            class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">
                             অর্ডার করুন
                         </a>
-
                     </div>
-
                 </div>
-
             </div>
 
 
             <!-- প্রোডাক্ট ৪ -->
             <div class="product-card p-5 flex flex-col justify-between">
-
                 <div>
-
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
-
                         <img
                             src="https://i.postimg.cc/pL8QFpR3/file-00000000ec748211ab687ae846780eb3.png"
                             alt="মুভি ও ড্রামা ক্লিপস"
@@ -570,7 +465,6 @@
                         <span class="absolute top-3 right-3 bg-pink-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
                             ৫০কে+ ক্লিপ
                         </span>
-
                     </div>
 
                     <h3 class="text-xl font-black text-cyan-300 mb-2">
@@ -580,51 +474,32 @@
                     <p class="text-slate-400 text-xs sm:text-sm mb-4">
                         ৫০,০০০+ বলিউড, হলিউড ও বাংলা নাটকের প্রিমিয়াম ক্লিপ কালেকশন যা শর্টস বানিয়ে দ্রুত গ্রো করতে সাহায্য করবে।
                     </p>
-
                 </div>
 
-
                 <div>
-
                     <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
-
-                        <span class="text-xs text-slate-400">
-                            অফার প্রাইস:
-                        </span>
-
-                        <span class="text-2xl font-black text-emerald-400">
-                            ৯৯ ৳
-                        </span>
-
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৯৯ ৳</span>
                     </div>
 
-
                     <div class="grid grid-cols-2 gap-2">
-
                         <a href="product4.html"
                            class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">
                             বিস্তারিত
                         </a>
-
                         <a href="select-payment.html?product=4"
                            class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">
                             অর্ডার করুন
                         </a>
-
                     </div>
-
                 </div>
-
             </div>
 
 
             <!-- প্রোডাক্ট ৫ -->
             <div class="product-card p-5 flex flex-col justify-between">
-
                 <div>
-
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
-
                         <img
                             src="https://i.postimg.cc/vHyVcM0H/file-00000000435082118859234ac21ec9cb.png"
                             alt="৫০ হাজার AI ভাইরাল Reels/shorts ভিডিও"
@@ -634,7 +509,6 @@
                         <span class="absolute top-3 right-3 bg-amber-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
                             ৫০কে+ ভিডিও
                         </span>
-
                     </div>
 
                     <h3 class="text-xl font-black text-cyan-300 mb-2">
@@ -644,51 +518,32 @@
                     <p class="text-slate-400 text-xs sm:text-sm mb-4">
                         ব্যাপক জনপ্রিয় AI Food Talking ভিডিও এবং AI Health & Workout শর্ট ভিডিওর আকর্ষণীয় ৫০,০০০+ কালেকশন।
                     </p>
-
                 </div>
 
-
                 <div>
-
                     <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
-
-                        <span class="text-xs text-slate-400">
-                            অফার প্রাইস:
-                        </span>
-
-                        <span class="text-2xl font-black text-emerald-400">
-                            ৫০ ৳
-                        </span>
-
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৫০ ৳</span>
                     </div>
 
-
                     <div class="grid grid-cols-2 gap-2">
-
                         <a href="product5.html"
                            class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">
                             বিস্তারিত
                         </a>
-
                         <a href="select-payment.html?product=5"
                            class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">
                             অর্ডার করুন
                         </a>
-
                     </div>
-
                 </div>
-
             </div>
 
 
             <!-- প্রোডাক্ট ৬ -->
             <div class="product-card p-5 flex flex-col justify-between">
-
                 <div>
-
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
-
                         <img
                             src="https://i.postimg.cc/yNC4zQVn/file-00000000fd3c8211b4893dc1d62370ca.png"
                             alt="৫০ হাজার ইসলামিক ভাইরাল Reels/shorts ভিডিও"
@@ -698,7 +553,6 @@
                         <span class="absolute top-3 right-3 bg-emerald-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
                             ৫০কে+ ইসলামিক
                         </span>
-
                     </div>
 
                     <h3 class="text-xl font-black text-cyan-300 mb-2">
@@ -708,41 +562,25 @@
                     <p class="text-slate-400 text-xs sm:text-sm mb-4">
                         ইসলামিক ফেসবুক পেজ ও ইউটিউব শর্টস ক্রিয়েটরদের জন্য বাছাইকৃত ৫০,০০০+ প্রিমিয়াম ইসলামিক রিলস কালেকশন।
                     </p>
-
                 </div>
 
-
                 <div>
-
                     <div class="flex items-center justify-between py-2 border-t border-slate-800 mb-3">
-
-                        <span class="text-xs text-slate-400">
-                            অফার প্রাইস:
-                        </span>
-
-                        <span class="text-2xl font-black text-emerald-400">
-                            ৫০ ৳
-                        </span>
-
+                        <span class="text-xs text-slate-400">অফার প্রাইস:</span>
+                        <span class="text-2xl font-black text-emerald-400">৫০ ৳</span>
                     </div>
 
-
                     <div class="grid grid-cols-2 gap-2">
-
                         <a href="product6.html"
                            class="bg-slate-800 text-slate-200 font-bold py-2 rounded-xl text-xs text-center">
                             বিস্তারিত
                         </a>
-
                         <a href="select-payment.html?product=6"
                            class="bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs text-center shadow">
                             অর্ডার করুন
                         </a>
-
                     </div>
-
                 </div>
-
             </div>
 
         </div>
@@ -752,34 +590,21 @@
 
     <!-- CUSTOMER REVIEWS SECTION -->
     <section class="max-w-6xl mx-auto px-4 py-12 border-t border-slate-800">
-
         <div class="text-center mb-6">
-
             <h2 class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 tracking-wide uppercase">
                 Customer Reviews
             </h2>
-
         </div>
-
 
         <!-- রিভিউ সাবমিট ফর্ম -->
         <div class="max-w-xl mx-auto bg-slate-900 border border-slate-800 p-5 rounded-2xl mb-8 shadow-xl">
-
             <h3 class="text-sm font-bold text-cyan-300 mb-3 text-center flex items-center justify-center gap-2">
-
                 <i class="fa-solid fa-pen-to-square"></i>
-
                 আপনার মূল্যবান রিভিউ শেয়ার করুন
-
             </h3>
 
-
-            <form id="userReviewForm"
-                  onsubmit="handleReviewSubmit(event)"
-                  class="space-y-3">
-
+            <form id="userReviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-3">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-
                     <input
                         type="text"
                         id="revName"
@@ -787,11 +612,9 @@
                         placeholder="আপনার নাম"
                         class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
 
-
                     <select
                         id="revRating"
                         class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-amber-300 focus:outline-none focus:border-cyan-400">
-
                         <option value="5">⭐⭐⭐⭐⭐ (৫ স্টার)</option>
                         <option value="4.5">⭐⭐⭐⭐½ (৪.৫ স্টার)</option>
                         <option value="4">⭐⭐⭐⭐ (৪ স্টার)</option>
@@ -799,11 +622,8 @@
                         <option value="3">⭐⭐⭐ (৩ স্টার)</option>
                         <option value="2">⭐⭐ (২ স্টার)</option>
                         <option value="1">⭐ (১ স্টার)</option>
-
                     </select>
-
                 </div>
-
 
                 <textarea
                     id="revComment"
@@ -813,36 +633,23 @@
                     class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
                 </textarea>
 
-
                 <button
                     type="submit"
                     class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-2.5 rounded-xl text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2">
-
                     <i class="fa-solid fa-paper-plane"></i>
-
                     রিভিউ সাবমিট করুন
-
                 </button>
-
             </form>
-
         </div>
-
 
         <!-- রেটিং -->
         <div class="text-center mb-8">
-
             <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold mb-2">
-
                 <i class="fa-solid fa-certificate text-amber-400"></i>
-
                 Verified Customer Feedback
-
             </div>
 
-
             <div class="flex items-center justify-center gap-1.5 text-amber-400 text-sm">
-
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
@@ -856,176 +663,91 @@
                 <span class="text-slate-400 ml-1 text-xs">
                     (৫০০+ সফল অর্ডার)
                 </span>
-
             </div>
-
         </div>
-
 
         <!-- রিভিউ কার্ড -->
-        <div id="reviewsContainer"
-             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div id="reviewsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         </div>
 
-
         <div class="text-center mt-6">
-
             <button
                 id="loadMoreRevBtn"
                 onclick="loadMoreReviews()"
                 class="bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-slate-700 font-bold px-5 py-2 rounded-full text-xs transition">
-
                 আরো রিভিউ দেখুন
-
                 <i class="fa-solid fa-angles-down ml-1"></i>
-
             </button>
-
         </div>
-
     </section>
 
 
     <!-- ফুটার -->
     <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-slate-500 text-xs">
-
         <p>
             &copy; 2026 Technography. All rights reserved.
         </p>
-
     </footer>
 
 
     <!-- স্ক্রিপ্টস -->
     <script>
-
     // লাইভ ও অনবরত কাউন্টডাউন টাইমার
-
     function initializeContinuousCountdown() {
-
         const STORAGE_KEY = 'technography_deal_end_time';
-
         const TOTAL_DURATION =
             (1 * 24 * 60 * 60 * 1000) +
             (23 * 60 * 60 * 1000) +
             (57 * 60 * 1000);
 
         const MIN_THRESHOLD = 5 * 60 * 1000;
-
         let targetTime = localStorage.getItem(STORAGE_KEY);
-
         const now = new Date().getTime();
 
         if (!targetTime || (parseInt(targetTime) - now) <= MIN_THRESHOLD) {
-
             targetTime = now + TOTAL_DURATION;
-
             localStorage.setItem(STORAGE_KEY, targetTime);
-
         } else {
-
             targetTime = parseInt(targetTime);
-
         }
-
 
         function updateDisplay() {
-
             const currentTime = new Date().getTime();
-
             let diff = targetTime - currentTime;
 
-
             if (diff <= MIN_THRESHOLD) {
-
                 targetTime = currentTime + TOTAL_DURATION;
-
                 localStorage.setItem(STORAGE_KEY, targetTime);
-
                 diff = TOTAL_DURATION;
-
             }
 
-
-            const days =
-                Math.floor(diff / (1000 * 60 * 60 * 24));
-
-            const hours =
-                Math.floor(
-                    (diff % (1000 * 60 * 60 * 24)) /
-                    (1000 * 60 * 60)
-                );
-
-            const minutes =
-                Math.floor(
-                    (diff % (1000 * 60 * 60)) /
-                    (1000 * 60)
-                );
-
-            const seconds =
-                Math.floor((diff / 1000) % 60);
-
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff / 1000) % 60);
 
             const toBengaliNumber = (num) => {
-
-                const bnDigits = [
-                    '০','১','২','৩','৪',
-                    '৫','৬','৭','৮','৯'
-                ];
-
-                return String(num)
-                    .padStart(2, '0')
-                    .split('')
-                    .map(d => bnDigits[d] || d)
-                    .join('');
-
+                const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+                return String(num).padStart(2, '0').split('').map(d => bnDigits[d] || d).join('');
             };
 
+            const elDays = document.getElementById('t-days');
+            const elHours = document.getElementById('t-hours');
+            const elMinutes = document.getElementById('t-minutes');
+            const elSeconds = document.getElementById('t-seconds');
 
-            const elDays =
-                document.getElementById('t-days');
-
-            const elHours =
-                document.getElementById('t-hours');
-
-            const elMinutes =
-                document.getElementById('t-minutes');
-
-            const elSeconds =
-                document.getElementById('t-seconds');
-
-
-            if(elDays)
-                elDays.textContent =
-                    toBengaliNumber(days);
-
-            if(elHours)
-                elHours.textContent =
-                    toBengaliNumber(hours);
-
-            if(elMinutes)
-                elMinutes.textContent =
-                    toBengaliNumber(minutes);
-
-            if(elSeconds)
-                elSeconds.textContent =
-                    toBengaliNumber(seconds);
-
+            if(elDays) elDays.textContent = toBengaliNumber(days);
+            if(elHours) elHours.textContent = toBengaliNumber(hours);
+            if(elMinutes) elMinutes.textContent = toBengaliNumber(minutes);
+            if(elSeconds) elSeconds.textContent = toBengaliNumber(seconds);
         }
 
-
         updateDisplay();
-
         setInterval(updateDisplay, 1000);
-
     }
 
-
-
     // রিভিউ স্ক্রিপ্ট
-
     const INITIAL_REVIEWS = [
-
         {
             name: "সাদিয়া রহমান",
             rating: 5,
@@ -1034,7 +756,6 @@
             initial: "স",
             time: "২ দিন আগে"
         },
-
         {
             name: "Rakib Hasan",
             rating: 5,
@@ -1043,7 +764,6 @@
             initial: "R",
             time: "৩ দিন আগে"
         },
-
         {
             name: "তানভীর",
             rating: 4.5,
@@ -1052,7 +772,6 @@
             initial: "ত",
             time: "৩ দিন আগে"
         },
-
         {
             name: "নুসরাত জাহান",
             rating: 5,
@@ -1061,7 +780,6 @@
             initial: "ন",
             time: "৪ দিন আগে"
         },
-
         {
             name: "Arif Hossain",
             rating: 5,
@@ -1070,7 +788,6 @@
             initial: "A",
             time: "৫ দিন আগে"
         },
-
         {
             name: "মেহজাবিন",
             rating: 4.5,
@@ -1079,7 +796,6 @@
             initial: "ম",
             time: "৫ দিন আগে"
         },
-
         {
             name: "সাকিবুল ইসলাম",
             rating: 5,
@@ -1088,7 +804,6 @@
             initial: "স",
             time: "৬ দিন আগে"
         },
-
         {
             name: "Farzana Rahman",
             rating: 5,
@@ -1097,7 +812,6 @@
             initial: "F",
             time: "১ সপ্তাহ আগে"
         },
-
         {
             name: "ইমরান কবির",
             rating: 4.5,
@@ -1106,7 +820,6 @@
             initial: "ই",
             time: "১ সপ্তাহ আগে"
         },
-
         {
             name: "জান্নাতুল ফেরদৌস",
             rating: 5,
@@ -1115,7 +828,6 @@
             initial: "জ",
             time: "১ সপ্তাহ আগে"
         },
-
         {
             name: "Naim Ahmed",
             rating: 5,
@@ -1124,7 +836,6 @@
             initial: "N",
             time: "১ সপ্তাহ আগে"
         },
-
         {
             name: "তাসনিমা আক্তার",
             rating: 4.5,
@@ -1133,7 +844,6 @@
             initial: "ত",
             time: "১ সপ্তাহ আগে"
         },
-
         {
             name: "রাফি",
             rating: 5,
@@ -1142,7 +852,6 @@
             initial: "র",
             time: "১ সপ্তাহ আগে"
         },
-
         {
             name: "Samiul Khan",
             rating: 5,
@@ -1151,7 +860,6 @@
             initial: "S",
             time: "২ সপ্তাহ আগে"
         },
-
         {
             name: "ফারহান",
             rating: 4.5,
@@ -1160,7 +868,6 @@
             initial: "ফ",
             time: "২ সপ্তাহ আগে"
         },
-
         {
             name: "মিম আক্তার",
             rating: 5,
@@ -1169,337 +876,131 @@
             initial: "ম",
             time: "২ সপ্তাহ আগে"
         }
-
     ];
-
 
     let displayedCount = 9;
 
-
     function getStarIcons(rating) {
-
         let stars = '';
-
         const fullStars = Math.floor(rating);
-
         const hasHalf = rating % 1 !== 0;
 
-
-        for (
-            let i = 0;
-            i < fullStars;
-            i++
-        ) {
-
-            stars +=
-                '<i class="fa-solid fa-star text-amber-400"></i>';
-
+        for (let i = 0; i < fullStars; i++) {
+            stars += '<i class="fa-solid fa-star text-amber-400"></i>';
         }
-
 
         if (hasHalf) {
-
-            stars +=
-                '<i class="fa-solid fa-star-half-stroke text-amber-400"></i>';
-
+            stars += '<i class="fa-solid fa-star-half-stroke text-amber-400"></i>';
         }
-
 
         return stars;
-
     }
-
-
 
     function renderReviews() {
-
-        const container =
-            document.getElementById('reviewsContainer');
-
+        const container = document.getElementById('reviewsContainer');
         if(!container) return;
 
-
-        const userReviews =
-            JSON.parse(
-                localStorage.getItem(
-                    'technography_user_reviews'
-                ) || '[]'
-            );
-
-
-        const allReviews =
-            [...userReviews, ...INITIAL_REVIEWS];
-
+        const userReviews = JSON.parse(localStorage.getItem('technography_user_reviews') || '[]');
+        const allReviews = [...userReviews, ...INITIAL_REVIEWS];
 
         container.innerHTML = '';
-
-
-        const toShow =
-            allReviews.slice(
-                0,
-                displayedCount
-            );
-
+        const toShow = allReviews.slice(0, displayedCount);
 
         toShow.forEach(rev => {
-
-            const card =
-                document.createElement('div');
-
-
-            card.className =
-                "rev-card";
-
-
+            const card = document.createElement('div');
+            card.className = "rev-card";
             card.innerHTML = `
-
                 <div>
-
                     <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-
-                        <div
-                            class="rev-avatar"
-                            style="background-color: ${rev.color || '#0284c7'};">
+                        <div class="rev-avatar" style="background-color: ${rev.color || '#0284c7'};">
                             ${rev.initial || rev.name.charAt(0).toUpperCase()}
                         </div>
-
                         <div>
-
                             <div style="font-size:14px; font-weight:700; color:#f3f4f6; display:flex; align-items:center; gap:6px;">
-
                                 ${rev.name}
-
-                                <i
-                                    class="fa-solid fa-circle-check"
-                                    style="color:#22d3ee; font-size:11px;">
-                                </i>
-
+                                <i class="fa-solid fa-circle-check" style="color:#22d3ee; font-size:11px;"></i>
                             </div>
-
-                            <div
-                                style="font-size:11px; color:#9ca3af;">
+                            <div style="font-size:11px; color:#9ca3af;">
                                 ${rev.time || 'সদ্য রিভিউ দিয়েছেন'}
                             </div>
-
                         </div>
-
                     </div>
 
-
-                    <div
-                        style="margin-bottom:8px; font-size:11px;">
-
+                    <div style="margin-bottom:8px; font-size:11px;">
                         ${getStarIcons(rev.rating)}
-
                     </div>
 
-
-                    <p
-                        style="font-size:13px; color:#d1d5db; line-height:1.5; margin:0;">
-
+                    <p style="font-size:13px; color:#d1d5db; line-height:1.5; margin:0;">
                         "${rev.text}"
-
                     </p>
-
                 </div>
 
-
-                <div
-                    style="margin-top:14px; padding-top:10px; border-top:1px solid #1f2937; display:flex; justify-content:space-between; font-size:11px; color:#9ca3af;">
-
+                <div style="margin-top:14px; padding-top:10px; border-top:1px solid #1f2937; display:flex; justify-content:space-between; font-size:11px; color:#9ca3af;">
                     <span style="color:#34d399;">
-
-                        <i class="fa-solid fa-bag-shopping"></i>
-
-                        ভেরিফাইড ক্রয়
-
+                        <i class="fa-solid fa-bag-shopping"></i> ভেরিফাইড ক্রয়
                     </span>
-
-                    <span>
-                        Technography
-                    </span>
-
+                    <span>Technography</span>
                 </div>
-
             `;
-
-
             container.appendChild(card);
-
         });
 
-
-        const loadMoreBtn =
-            document.getElementById(
-                'loadMoreRevBtn'
-            );
-
-
+        const loadMoreBtn = document.getElementById('loadMoreRevBtn');
         if (loadMoreBtn) {
-
-            if (
-                displayedCount >=
-                allReviews.length
-            ) {
-
-                loadMoreBtn.style.display =
-                    'none';
-
+            if (displayedCount >= allReviews.length) {
+                loadMoreBtn.style.display = 'none';
             } else {
-
-                loadMoreBtn.style.display =
-                    'inline-block';
-
+                loadMoreBtn.style.display = 'inline-block';
             }
-
         }
-
     }
-
-
 
     function loadMoreReviews() {
-
         displayedCount += 9;
-
         renderReviews();
-
     }
-
-
 
     function handleReviewSubmit(e) {
-
         e.preventDefault();
 
-
-        const hasPurchased =
-            localStorage.getItem(
-                'technography_order_success'
-            );
-
-
+        const hasPurchased = localStorage.getItem('technography_order_success');
         if (!hasPurchased) {
-
-            alert(
-                "⚠️ দুঃখিত! শুধুমাত্র ভেরিফাইড ক্রেতারা রিভিউ প্রদান করতে পারেন।\n\nরিভিউ প্রদান করতে প্রথমে যেকোনো একটি প্রোডাক্ট অর্ডার করুন। ধন্যবাদ!"
-            );
-
+            alert("⚠️ দুঃখিত! শুধুমাত্র ভেরিফাইড ক্রেতারা রিভিউ প্রদান করতে পারেন।\n\nরিভিউ প্রদান করতে প্রথমে যেকোনো একটি প্রোডাক্ট অর্ডার করুন। ধন্যবাদ!");
             return;
-
         }
 
+        const name = document.getElementById('revName').value.trim();
+        const rating = parseFloat(document.getElementById('revRating').value);
+        const text = document.getElementById('revComment').value.trim();
 
-        const name =
-            document.getElementById(
-                'revName'
-            ).value.trim();
+        if (!name || !text) return;
 
-
-        const rating =
-            parseFloat(
-                document.getElementById(
-                    'revRating'
-                ).value
-            );
-
-
-        const text =
-            document.getElementById(
-                'revComment'
-            ).value.trim();
-
-
-        if (!name || !text)
-            return;
-
-
-        const colors = [
-            '#e11d48',
-            '#2563eb',
-            '#059669',
-            '#d97706',
-            '#7c3aed',
-            '#0891b2',
-            '#ea580c'
-        ];
-
-
-        const randomColor =
-            colors[
-                Math.floor(
-                    Math.random() *
-                    colors.length
-                )
-            ];
-
+        const colors = ['#e11d48', '#2563eb', '#059669', '#d97706', '#7c3aed', '#0891b2', '#ea580c'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
         const newRev = {
-
             name: name,
-
             rating: rating,
-
             text: text,
-
             color: randomColor,
-
-            initial:
-                name.charAt(0).toUpperCase(),
-
+            initial: name.charAt(0).toUpperCase(),
             time: 'এইমাত্র'
-
         };
 
-
-        const userReviews =
-            JSON.parse(
-                localStorage.getItem(
-                    'technography_user_reviews'
-                ) || '[]'
-            );
-
-
+        const userReviews = JSON.parse(localStorage.getItem('technography_user_reviews') || '[]');
         userReviews.unshift(newRev);
+        localStorage.setItem('technography_user_reviews', JSON.stringify(userReviews));
 
-
-        localStorage.setItem(
-            'technography_user_reviews',
-            JSON.stringify(userReviews)
-        );
-
-
-        document
-            .getElementById(
-                'userReviewForm'
-            )
-            .reset();
-
-
-        alert(
-            'অভিনন্দন! আপনার ভেরিফাইড রিভিউ সফলভাবে প্রকাশিত হয়েছে।'
-        );
-
-
+        document.getElementById('userReviewForm').reset();
+        alert('অভিনন্দন! আপনার ভেরিফাইড রিভিউ সফলভাবে প্রকাশিত হয়েছে।');
         displayedCount = 9;
-
         renderReviews();
-
     }
 
-
-
-    document.addEventListener(
-        'DOMContentLoaded',
-        () => {
-
-            initializeContinuousCountdown();
-
-            renderReviews();
-
-        }
-    );
-
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeContinuousCountdown();
+        renderReviews();
+    });
     </script>
 
 </body>
