@@ -35,16 +35,15 @@
 
         header {
             background: rgba(21, 29, 48, 0.8);
-            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
-            padding: 18px 24px;
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: #fff;
             text-decoration: none;
@@ -58,35 +57,36 @@
         }
 
         .main-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+            max-width: 1100px;
+            margin: 25px auto;
+            padding: 0 15px;
             width: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 20px;
             flex: 1;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 768px) {
             .main-container {
                 grid-template-columns: 1fr;
+                margin: 15px auto;
             }
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 28px;
+            border-radius: 14px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
         h2 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -94,25 +94,25 @@
         }
 
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
             color: var(--text-muted);
         }
 
         textarea {
             width: 100%;
-            height: 130px;
+            height: 120px;
             background: #0d1322;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 14px;
+            border-radius: 8px;
+            padding: 12px;
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.95rem;
             resize: none;
             outline: none;
             transition: border 0.3s;
@@ -125,18 +125,19 @@
         .row-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
         select {
             width: 100%;
             background: #0d1322;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 12px;
+            border-radius: 8px;
+            padding: 10px;
             color: #fff;
             outline: none;
+            font-size: 0.85rem;
             cursor: pointer;
         }
 
@@ -144,30 +145,23 @@
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
             border: none;
-            border-radius: 10px;
-            padding: 15px;
-            font-size: 1.05rem;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            transition: opacity 0.3s, transform 0.2s;
-        }
-
-        .btn-generate:hover {
-            opacity: 0.95;
-            transform: translateY(-2px);
+            gap: 8px;
+            transition: opacity 0.3s;
         }
 
         .btn-generate:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
-            transform: none;
         }
 
-        /* Result Section */
         .preview-box {
             flex: 1;
             display: flex;
@@ -176,22 +170,22 @@
             justify-content: center;
             background: #0d1322;
             border: 2px dashed var(--border-color);
-            border-radius: 12px;
+            border-radius: 10px;
+            min-height: 320px;
             position: relative;
             overflow: hidden;
-            min-height: 380px;
         }
 
         .placeholder-text {
             color: var(--text-muted);
             text-align: center;
-            font-size: 0.95rem;
-            padding: 20px;
+            font-size: 0.9rem;
+            padding: 15px;
         }
 
         .placeholder-text i {
-            font-size: 3rem;
-            margin-bottom: 15px;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
             color: var(--border-color);
             display: block;
         }
@@ -201,22 +195,24 @@
             height: 100%;
             object-fit: contain;
             display: none;
-            border-radius: 8px;
+            border-radius: 6px;
         }
 
         .loader {
             display: none;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             color: var(--accent);
+            text-align: center;
+            padding: 15px;
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(6, 182, 212, 0.2);
-            border-top: 4px solid var(--accent);
+            width: 42px;
+            height: 42px;
+            border: 3px solid rgba(6, 182, 212, 0.2);
+            border-top: 3px solid var(--accent);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -239,7 +235,6 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: background 0.3s;
         }
 
         .btn-download:hover {
@@ -248,9 +243,9 @@
 
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             border-top: 1px solid var(--border-color);
         }
     </style>
@@ -269,37 +264,36 @@
             <h2><i class="fa-solid fa-sliders"></i> ইমেজ কনফিগারেশন</h2>
             
             <div class="input-group">
-                <label for="promptInput">আপনার প্রম্পট লিখুন (বাংলা বা ইংরেজি):</label>
-                <textarea id="promptInput" placeholder="যেমন: A beautiful futuristic city with flying cars, sunset, cinematic 8k photorealistic..."></textarea>
+                <label for="promptInput">ছবির প্রম্পট লিখুন:</label>
+                <textarea id="promptInput" placeholder="A futuristic car on a neon highway, cinematic lighting, ultra-detailed 8k..."></textarea>
             </div>
 
             <div class="row-options">
                 <div>
-                    <label for="engineVersion">এআই ইঞ্জিন কোয়ালিটি:</label>
+                    <label for="engineVersion">এআই মডেল:</label>
                     <select id="engineVersion">
-                        <option value="flux-realism" selected>FLUX Realism Ultra (DSLR 8K)</option>
-                        <option value="flux">FLUX.1 Schnell HD</option>
-                        <option value="flux-anime">FLUX Anime Style</option>
-                        <option value="flux-3d">FLUX 3D Render</option>
+                        <option value="flux-realism" selected>FLUX Realism Ultra</option>
+                        <option value="flux">FLUX Schnell HD</option>
+                        <option value="flux-anime">Anime Style</option>
+                        <option value="flux-3d">3D Render</option>
                     </select>
                 </div>
                 <div>
-                    <label for="aspectRatio">আকার (Aspect Ratio):</label>
+                    <label for="aspectRatio">রেশিও:</label>
                     <select id="aspectRatio">
                         <option value="1024x1024" selected>Square (1:1)</option>
                         <option value="1280x720">Landscape (16:9)</option>
-                        <option value="720x1280">Story / Reels (9:16)</option>
-                        <option value="1024x768">Standard (4:3)</option>
+                        <option value="720x1280">Reels (9:16)</option>
                     </select>
                 </div>
             </div>
 
             <button id="generateBtn" class="btn-generate">
-                <i class="fa-solid fa-bolt"></i> ছবি তৈরি করুন (HD)
+                <i class="fa-solid fa-bolt"></i> ছবি তৈরি করুন
             </button>
         </div>
 
-        <!-- Preview Card -->
+        <!-- Output Card -->
         <div class="card">
             <h2><i class="fa-solid fa-image"></i> আউটপুট রেজাল্ট</h2>
             <div class="preview-box">
@@ -310,14 +304,14 @@
 
                 <div class="loader" id="loader">
                     <div class="spinner"></div>
-                    <p id="loaderText">FLUX AI আল্ট্রা ডিটেইল দিয়ে ছবি তৈরি করছে...</p>
+                    <p id="loaderText">FLUX AI ছবি রেন্ডার করছে...</p>
                 </div>
 
-                <img id="outputImg" class="generated-image" alt="AI Generated Image">
+                <img id="outputImg" class="generated-image" alt="Generated Output">
             </div>
 
-            <a id="downloadBtn" class="btn-download" href="#" target="_blank" download="technography-ai-image.jpg">
-                <i class="fa-solid fa-download"></i> ফুল এইচডি ছবি ডাউনলোড করুন
+            <a id="downloadBtn" class="btn-download" href="#" target="_blank" download="technography-ai.jpg">
+                <i class="fa-solid fa-download"></i> ফুল এইচডি ছবি ডাউনলোড
             </a>
         </div>
     </div>
@@ -336,77 +330,62 @@
         const loader = document.getElementById('loader');
         const downloadBtn = document.getElementById('downloadBtn');
 
-        generateBtn.addEventListener('click', async () => {
+        generateBtn.addEventListener('click', () => {
             const rawPrompt = promptInput.value.trim();
             if (!rawPrompt) {
                 alert("দয়া করে একটি প্রম্পট লিখুন!");
                 return;
             }
 
-            // বাটন ও লোডার স্টেট সেট করা
+            // বাটন লক ও স্টেট ক্লিয়ার
             generateBtn.disabled = true;
             placeholder.style.display = 'none';
             outputImg.style.display = 'none';
             downloadBtn.style.display = 'none';
             loader.style.display = 'flex';
 
-            // সাইজ ঠিক করা
             const [width, height] = aspectRatio.value.split('x');
-            const seed = Math.floor(Math.random() * 9999999);
+            const seed = Math.floor(Math.random() * 99999999);
+            const timestamp = Date.now(); // ক্যাশ প্রতিরোধক
             const engine = engineVersion.value;
 
-            // ছবির শার্পনেস ও কোয়ালিটি নিশ্চিত করার জন্য প্রম্পট এনহ্যান্সার
-            let enhancedPrompt = rawPrompt;
-            if (engine === 'flux-realism') {
-                enhancedPrompt += ", highly detailed, sharp focus, 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3, photorealistic";
-            } else if (engine === 'flux') {
-                enhancedPrompt += ", high resolution, crisp details, photorealistic lighting";
-            }
+            // প্রম্পট এনকোডিং
+            const enhancedPrompt = encodeURIComponent(rawPrompt + ", 8k uhd, photorealistic, sharp focus");
+            
+            // রেন্ডার URL
+            const imageUrl = `https://image.pollinations.ai/prompt/${enhancedPrompt}?width=${width}&height=${height}&model=${engine}&seed=${seed}&nologo=true&t=${timestamp}`;
 
-            const cleanPrompt = encodeURIComponent(enhancedPrompt);
+            // টাইমআউট হ্যান্ডলার (৩০ সেকেন্ড)
+            const requestTimeout = setTimeout(() => {
+                resetUIOnError("সার্ভার রেসপন্স করতে বেশি সময় নিচ্ছে। আবার চেষ্টা করুন।");
+            }, 30000);
 
-            // Pollinations FLUX Engine URL (ওয়াটারমার্ক মুক্ত & ৩০ স্টেপস)
-            const imageUrl = `https://image.pollinations.ai/prompt/${cleanPrompt}?width=${width}&height=${height}&model=${engine}&seed=${seed}&nologo=true&enhance=true&steps=30&quality=heavy`;
+            // নতুন অবজেক্ট দিয়ে ইমেজ প্রিলোড
+            const preloader = new Image();
+            preloader.crossOrigin = "anonymous";
+            preloader.src = imageUrl;
 
-            try {
-                // ছবিটি লোড করা
-                const tempImage = new Image();
-                tempImage.crossOrigin = "anonymous";
-                tempImage.src = imageUrl;
+            preloader.onload = () => {
+                clearTimeout(requestTimeout);
+                outputImg.src = imageUrl;
+                outputImg.style.display = 'block';
+                loader.style.display = 'none';
+                
+                generateBtn.disabled = false;
+                downloadBtn.href = imageUrl;
+                downloadBtn.style.display = 'flex';
+            };
 
-                tempImage.onload = () => {
-                    outputImg.src = imageUrl;
-                    outputImg.style.display = 'block';
-                    loader.style.display = 'none';
-                    generateBtn.disabled = false;
+            preloader.onerror = () => {
+                clearTimeout(requestTimeout);
+                resetUIOnError("ছবি লোড করতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।");
+            };
 
-                    // ডাউনলোড বাটন সক্রিয় করা
-                    downloadBtn.href = imageUrl;
-                    downloadBtn.style.display = 'flex';
-                };
-
-                tempImage.onerror = () => {
-                    throw new Error("ইমেজ লোড হতে সমস্যা হয়েছে");
-                };
-
-            } catch (error) {
-                console.warn("রিট্রাই ট্রাই করা হচ্ছে...");
-                // ব্যাকআপ ট্রাই (Standard Model)
-                const fallbackUrl = `https://image.pollinations.ai/prompt/${cleanPrompt}?width=${width}&height=${height}&model=flux&seed=${seed}&nologo=true`;
-                outputImg.src = fallbackUrl;
-                outputImg.onload = () => {
-                    outputImg.style.display = 'block';
-                    loader.style.display = 'none';
-                    generateBtn.disabled = false;
-                    downloadBtn.href = fallbackUrl;
-                    downloadBtn.style.display = 'flex';
-                };
-                outputImg.onerror = () => {
-                    alert("দুঃখিত, এই মুহূর্তে ছবিটি লোড করা সম্ভব হয়নি। আবার চেষ্টা করুন।");
-                    loader.style.display = 'none';
-                    placeholder.style.display = 'block';
-                    generateBtn.disabled = false;
-                };
+            function resetUIOnError(message) {
+                alert(message);
+                loader.style.display = 'none';
+                placeholder.style.display = 'block';
+                generateBtn.disabled = false;
             }
         });
     </script>
