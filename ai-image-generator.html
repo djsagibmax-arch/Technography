@@ -3,406 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technography - Pro AI Studio</title>
+    <title>AI Image Generator | Technography</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg-dark: #0b0f19;
+            --card-bg: #151d30;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #263352;
+            --accent: #06b6d4;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
         }
 
         body {
-            background-color: #0b0f19;
-            color: #f3f4f6;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
         header {
-            background: #111827;
-            border-bottom: 1px solid #1f2937;
-            padding: 14px 20px;
+            background: rgba(21, 29, 48, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 18px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 50;
         }
 
         .logo {
-            font-size: 18px;
-            font-weight: bold;
-            color: #22d3ee;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .home-btn {
-            background: #1f2937;
-            color: #94a3b8;
-            text-decoration: none;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
+        .logo span {
+            color: var(--primary);
         }
 
-        .container {
-            max-width: 650px;
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
             width: 100%;
-            margin: 0 auto;
-            padding: 20px 15px 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
             flex: 1;
         }
 
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 18px;
-            padding: 18px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 1.3rem;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
         }
 
         textarea {
             width: 100%;
-            height: 90px;
-            background: #0b0f19;
-            border: 1px solid #374151;
-            border-radius: 12px;
-            padding: 12px;
+            height: 130px;
+            background: #0d1322;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
             color: #fff;
-            font-size: 14px;
+            font-size: 1rem;
             resize: none;
             outline: none;
+            transition: border 0.3s;
         }
 
         textarea:focus {
-            border-color: #22d3ee;
+            border-color: var(--primary);
         }
 
-        .grid-2 {
+        .row-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 14px;
-        }
-
-        .field-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #9ca3af;
-            margin-bottom: 6px;
-            display: block;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         select {
             width: 100%;
-            background: #0b0f19;
-            border: 1px solid #374151;
+            background: #0d1322;
+            border: 1px solid var(--border-color);
             border-radius: 10px;
-            padding: 10px;
+            padding: 12px;
             color: #fff;
-            font-size: 13px;
             outline: none;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 18px 0 10px;
-        }
-
-        .section-title {
-            font-size: 13px;
-            font-weight: bold;
-            color: #e5e7eb;
-        }
-
-        .clear-btn {
-            font-size: 12px;
-            color: #f87171;
             cursor: pointer;
-            text-decoration: underline;
         }
 
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .tag {
-            background: #1f2937;
-            color: #d1d5db;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            cursor: pointer;
-            border: 1px solid #374151;
-            transition: all 0.2s;
-            user-select: none;
-        }
-
-        .tag.active {
-            background: #0284c7;
-            color: #fff;
-            border-color: #38bdf8;
-        }
-
-        .btn-gen {
-            width: 100%;
-            background: linear-gradient(135deg, #0284c7, #2563eb);
-            color: #fff;
+        .btn-generate {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
             border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: bold;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 1.05rem;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: opacity 0.3s, transform 0.2s;
         }
 
-        .btn-gen:disabled {
+        .btn-generate:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+        }
+
+        .btn-generate:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+            transform: none;
         }
 
-        #loader {
-            display: none;
+        /* Result Section */
+        .preview-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #0d1322;
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            min-height: 380px;
+        }
+
+        .placeholder-text {
+            color: var(--text-muted);
             text-align: center;
-            padding: 25px;
-            background: #111827;
-            border: 1px dashed #374151;
-            border-radius: 14px;
-            margin-bottom: 20px;
+            font-size: 0.95rem;
+            padding: 20px;
+        }
+
+        .placeholder-text i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--border-color);
+            display: block;
+        }
+
+        .generated-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+            border-radius: 8px;
+        }
+
+        .loader {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            color: var(--accent);
         }
 
         .spinner {
-            width: 32px;
-            height: 32px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top: 3px solid #38bdf8;
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(6, 182, 212, 0.2);
+            border-top: 4px solid var(--accent);
             border-radius: 50%;
-            margin: 0 auto 8px;
-            animation: spin 0.8s linear infinite;
+            animation: spin 1s linear infinite;
         }
 
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-        .single-card {
+        .btn-download {
+            margin-top: 15px;
+            background: #10b981;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
             display: none;
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            overflow: hidden;
-            flex-direction: column;
-        }
-
-        .img-container {
-            position: relative;
-            width: 100%;
-            background: #030712;
-            display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 300px;
-            overflow: hidden;
+            gap: 8px;
+            transition: background 0.3s;
         }
 
-        .img-container img {
-            width: 100%;
-            height: auto;
-            max-height: 80vh;
-            object-fit: contain;
-            display: block;
+        .btn-download:hover {
+            background: #059669;
         }
 
-        .btn-dl {
-            display: block;
+        footer {
             text-align: center;
-            background: #1f2937;
-            color: #38bdf8;
-            padding: 14px;
-            font-size: 14px;
-            font-weight: bold;
-            border-top: 1px solid #374151;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-        }
-
-        .btn-dl:hover {
-            background: #0284c7;
-            color: #fff;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="index.html" class="logo">⚡ Technography AI</a>
-        <a href="index.html" class="home-btn">হোম পেজ</a>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Technography <span>AI</span>
+        </a>
     </header>
 
-    <div class="container">
+    <div class="main-container">
+        <!-- Control Card -->
         <div class="card">
-            <span class="field-label">ছবির বর্ণনা লিখুন (বাংলা বা ইংরেজি):</span>
-            <textarea id="prompt" placeholder="যেমন: সুন্দর একটি মেয়ের ছবি, লাল শাড়ি পরা, প্রাকৃতিক আলো..."></textarea>
+            <h2><i class="fa-solid fa-sliders"></i> ইমেজ কনফিগারেশন</h2>
+            
+            <div class="input-group">
+                <label for="promptInput">আপনার প্রম্পট লিখুন (বাংলা বা ইংরেজি):</label>
+                <textarea id="promptInput" placeholder="যেমন: A beautiful futuristic city with flying cars, sunset, cinematic 8k photorealistic..."></textarea>
+            </div>
 
-            <div class="grid-2">
+            <div class="row-options">
                 <div>
-                    <span class="field-label">AI Engine:</span>
+                    <label for="engineVersion">এআই ইঞ্জিন কোয়ালিটি:</label>
                     <select id="engineVersion">
-                        <option value="flux" selected>FLUX.1 Schnell (Original HD)</option>
+                        <option value="flux-realism" selected>FLUX Realism Ultra (DSLR 8K)</option>
+                        <option value="flux">FLUX.1 Schnell HD</option>
+                        <option value="flux-anime">FLUX Anime Style</option>
+                        <option value="flux-3d">FLUX 3D Render</option>
                     </select>
                 </div>
                 <div>
-                    <span class="field-label">Lighting Style:</span>
-                    <select id="presetStyle">
-                        <option value="raw photograph" selected>Photorealistic</option>
-                        <option value="cinematic 3d render">Cinematic 3D</option>
-                        <option value="anime aesthetic">Anime / Digital Art</option>
+                    <label for="aspectRatio">আকার (Aspect Ratio):</label>
+                    <select id="aspectRatio">
+                        <option value="1024x1024" selected>Square (1:1)</option>
+                        <option value="1280x720">Landscape (16:9)</option>
+                        <option value="720x1280">Story / Reels (9:16)</option>
+                        <option value="1024x768">Standard (4:3)</option>
                     </select>
                 </div>
             </div>
 
-            <div class="section-header">
-                <span class="section-title">Lighting & Quality:</span>
-                <span class="clear-btn" onclick="clearActiveTags()">Clear all</span>
-            </div>
-
-            <div class="tags-container" id="lightingTags">
-                <div class="tag active" onclick="toggleTag(this)" data-val="Studio lighting">Studio lighting</div>
-                <div class="tag active" onclick="toggleTag(this)" data-val="Cinematic lighting">Cinematic lighting</div>
-                <div class="tag active" onclick="toggleTag(this)" data-val="Hyper-realistic">Hyper-realistic</div>
-                <div class="tag active" onclick="toggleTag(this)" data-val="8k resolution">8k resolution</div>
-                <div class="tag" onclick="toggleTag(this)" data-val="Neon lights">Neon lights</div>
-            </div>
-
-            <button class="btn-gen" id="genBtn" onclick="startGeneration()">⚡ ছবি তৈরি করুন</button>
+            <button id="generateBtn" class="btn-generate">
+                <i class="fa-solid fa-bolt"></i> ছবি তৈরি করুন (HD)
+            </button>
         </div>
 
-        <div id="loader">
-            <div class="spinner"></div>
-            <p id="loaderText" style="font-size: 14px; color: #cbd5e1;">ছবি প্রসেস হচ্ছে...</p>
-        </div>
+        <!-- Preview Card -->
+        <div class="card">
+            <h2><i class="fa-solid fa-image"></i> আউটপুট রেজাল্ট</h2>
+            <div class="preview-box">
+                <div class="placeholder-text" id="placeholder">
+                    <i class="fa-regular fa-images"></i>
+                    প্রম্পট লিখে 'ছবি তৈরি করুন' বাটনে চাপ দিন
+                </div>
 
-        <div class="single-card" id="singleCard">
-            <div class="img-container">
-                <img id="mainImg" src="" alt="AI Image">
+                <div class="loader" id="loader">
+                    <div class="spinner"></div>
+                    <p id="loaderText">FLUX AI আল্ট্রা ডিটেইল দিয়ে ছবি তৈরি করছে...</p>
+                </div>
+
+                <img id="outputImg" class="generated-image" alt="AI Generated Image">
             </div>
-            <button class="btn-dl" id="dlBtn" onclick="downloadImage()">ডাউনলোড ওয়াটারমার্ক-মুক্ত Full HD</button>
+
+            <a id="downloadBtn" class="btn-download" href="#" target="_blank" download="technography-ai-image.jpg">
+                <i class="fa-solid fa-download"></i> ফুল এইচডি ছবি ডাউনলোড করুন
+            </a>
         </div>
     </div>
 
+    <footer>
+        &copy; 2026 Technography AI. সর্বস্বত্ব সংরক্ষিত।
+    </footer>
+
     <script>
-        // আপনার লাইভ Render ব্যাকএন্ড লিঙ্ক
-        const API_URL = "https://technography-ai.onrender.com/generate";
+        const generateBtn = document.getElementById('generateBtn');
+        const promptInput = document.getElementById('promptInput');
+        const engineVersion = document.getElementById('engineVersion');
+        const aspectRatio = document.getElementById('aspectRatio');
+        const outputImg = document.getElementById('outputImg');
+        const placeholder = document.getElementById('placeholder');
+        const loader = document.getElementById('loader');
+        const downloadBtn = document.getElementById('downloadBtn');
 
-        function toggleTag(el) {
-            el.classList.toggle('active');
-        }
-
-        function clearActiveTags() {
-            document.querySelectorAll('.tag.active').forEach(t => t.classList.remove('active'));
-        }
-
-        function getSelectedTags() {
-            const activeTags = [];
-            document.querySelectorAll('.tag.active').forEach(t => {
-                activeTags.push(t.getAttribute('data-val'));
-            });
-            return activeTags.join(', ');
-        }
-
-        function hasBengali(text) {
-            return /[\u0980-\u09FF]/.test(text);
-        }
-
-        async function translateText(text) {
-            try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 2500);
-                const res = await fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(text) + "&langpair=bn|en", { signal: controller.signal });
-                clearTimeout(timeoutId);
-                const json = await res.json();
-                if (json && json.responseData && json.responseData.translatedText) {
-                    return json.responseData.translatedText;
-                }
-            } catch(e) {}
-            return text;
-        }
-
-        async function startGeneration() {
-            const promptBox = document.getElementById("prompt");
-            const text = promptBox.value.trim();
-
-            if (!text) {
-                alert("অনুগ্রহ করে ছবির বিবরণ লিখুন!");
+        generateBtn.addEventListener('click', async () => {
+            const rawPrompt = promptInput.value.trim();
+            if (!rawPrompt) {
+                alert("দয়া করে একটি প্রম্পট লিখুন!");
                 return;
             }
 
-            const btn = document.getElementById("genBtn");
-            const loader = document.getElementById("loader");
-            const loaderText = document.getElementById("loaderText");
-            const card = document.getElementById("singleCard");
-            const img = document.getElementById("mainImg");
+            // বাটন ও লোডার স্টেট সেট করা
+            generateBtn.disabled = true;
+            placeholder.style.display = 'none';
+            outputImg.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            loader.style.display = 'flex';
 
-            btn.disabled = true;
-            card.style.display = "none";
-            loader.style.display = "block";
-            loaderText.innerText = "প্রম্পট প্রস্তুত হচ্ছে...";
+            // সাইজ ঠিক করা
+            const [width, height] = aspectRatio.value.split('x');
+            const seed = Math.floor(Math.random() * 9999999);
+            const engine = engineVersion.value;
 
-            let promptEn = text;
-            if (hasBengali(text)) {
-                promptEn = await translateText(text);
+            // ছবির শার্পনেস ও কোয়ালিটি নিশ্চিত করার জন্য প্রম্পট এনহ্যান্সার
+            let enhancedPrompt = rawPrompt;
+            if (engine === 'flux-realism') {
+                enhancedPrompt += ", highly detailed, sharp focus, 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3, photorealistic";
+            } else if (engine === 'flux') {
+                enhancedPrompt += ", high resolution, crisp details, photorealistic lighting";
             }
 
-            const extraStyles = getSelectedTags();
-            const stylePreset = document.getElementById("presetStyle").value;
-            const fullPrompt = `${promptEn}, ${stylePreset}, ${extraStyles}`;
+            const cleanPrompt = encodeURIComponent(enhancedPrompt);
 
-            loaderText.innerText = "FLUX AI দিয়ে আসল হাই-কোয়ালিটি ছবি তৈরি হচ্ছে (কিছুক্ষণ সময় লাগতে পারে)...";
+            // Pollinations FLUX Engine URL (ওয়াটারমার্ক মুক্ত & ৩০ স্টেপস)
+            const imageUrl = `https://image.pollinations.ai/prompt/${cleanPrompt}?width=${width}&height=${height}&model=${engine}&seed=${seed}&nologo=true&enhance=true&steps=30&quality=heavy`;
 
             try {
-                const response = await fetch(API_URL, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ prompt: fullPrompt })
-                });
+                // ছবিটি লোড করা
+                const tempImage = new Image();
+                tempImage.crossOrigin = "anonymous";
+                tempImage.src = imageUrl;
 
-                const data = await response.json();
+                tempImage.onload = () => {
+                    outputImg.src = imageUrl;
+                    outputImg.style.display = 'block';
+                    loader.style.display = 'none';
+                    generateBtn.disabled = false;
 
-                if (data.success && data.image) {
-                    img.src = data.image;
-                    loader.style.display = "none";
-                    card.style.display = "flex";
-                    btn.disabled = false;
-                    btn.innerText = "⚡ নতুন ছবি তৈরি করুন";
-                } else {
-                    throw new Error(data.error || "সার্ভার রেসপন্স দেয়নি");
-                }
-            } catch (err) {
-                console.error(err);
-                loaderText.innerText = "ছবি তৈরিতে সমস্যা হয়েছে। সার্ভার চালু হতে কয়েক সেকেন্ড লাগতে পারে, পুনরায় চেষ্টা করুন।";
-                btn.disabled = false;
+                    // ডাউনলোড বাটন সক্রিয় করা
+                    downloadBtn.href = imageUrl;
+                    downloadBtn.style.display = 'flex';
+                };
+
+                tempImage.onerror = () => {
+                    throw new Error("ইমেজ লোড হতে সমস্যা হয়েছে");
+                };
+
+            } catch (error) {
+                console.warn("রিট্রাই ট্রাই করা হচ্ছে...");
+                // ব্যাকআপ ট্রাই (Standard Model)
+                const fallbackUrl = `https://image.pollinations.ai/prompt/${cleanPrompt}?width=${width}&height=${height}&model=flux&seed=${seed}&nologo=true`;
+                outputImg.src = fallbackUrl;
+                outputImg.onload = () => {
+                    outputImg.style.display = 'block';
+                    loader.style.display = 'none';
+                    generateBtn.disabled = false;
+                    downloadBtn.href = fallbackUrl;
+                    downloadBtn.style.display = 'flex';
+                };
+                outputImg.onerror = () => {
+                    alert("দুঃখিত, এই মুহূর্তে ছবিটি লোড করা সম্ভব হয়নি। আবার চেষ্টা করুন।");
+                    loader.style.display = 'none';
+                    placeholder.style.display = 'block';
+                    generateBtn.disabled = false;
+                };
             }
-        }
-
-        function downloadImage() {
-            const img = document.getElementById("mainImg");
-            if (!img || !img.src) return;
-
-            const a = document.createElement("a");
-            a.download = `technography-flux-${Date.now()}.jpg`;
-            a.href = img.src;
-            a.click();
-        }
+        });
     </script>
 </body>
 </html>
