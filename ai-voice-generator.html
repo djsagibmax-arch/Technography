@@ -26,7 +26,8 @@
     textarea { width: 100%; height: 120px; border-radius: 12px; border: 1px solid #374151; background: #030712; color: #fff; padding: 12px; font-size: 14px; resize: vertical; outline: none; margin-bottom: 15px; }
     textarea:focus { border-color: #22d3ee; }
 
-    select { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #374151; background: #030712; color: #fff; font-size: 14px; outline: none; margin-bottom: 20px; cursor: pointer; }
+    .grid-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    select { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #374151; background: #030712; color: #fff; font-size: 13px; outline: none; cursor: pointer; }
     
     .btn-submit { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, #06b6d4, #2563eb); color: #fff; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
@@ -50,18 +51,35 @@
   <div class="container">
     <div class="card">
       <h2><i class="fa-solid fa-microphone-lines"></i> AI Text to Voice</h2>
-      <p class="subtitle">আপনার টেক্সটকে প্রফেশনাল ভয়েসে রূপান্তর করুন</p>
+      <p class="subtitle">আপনার টেক্সটকে প্রফেশনাল ও ন্যাচারাল ভয়েসে রূপান্তর করুন</p>
 
       <label for="ttsInput">টেক্সট লিখুন:</label>
-      <textarea id="ttsInput" placeholder="এখানে বাংলা বা ইংরেজি লিখুন (সর্বোচ্চ ১৫০০ অক্ষর)..."></textarea>
+      <textarea id="ttsInput" placeholder="এখানে বাংলা বা ইংরেজি লিখুন..."></textarea>
 
-      <label for="ttsVoice">ভয়েস সিলেক্ট করুন:</label>
-      <select id="ttsVoice">
-        <option value="bn-BD-PradeepNeural">🇧🇩 বাংলা (বাংলাদেশ) - প্রদীপ (পুরুষ)</option>
-        <option value="bn-BD-NabanitaNeural">🇧🇩 বাংলা (বাংলাদেশ) - নবনীতা (নারী)</option>
-        <option value="en-US-ChristopherNeural">🇺🇸 English (US) - Christopher (Male)</option>
-        <option value="en-US-JennyNeural">🇺🇸 English (US) - Jenny (Female)</option>
-      </select>
+      <div class="grid-options">
+        <div>
+          <label for="ttsVoice">ভয়েস সিলেক্ট করুন:</label>
+          <select id="ttsVoice">
+            <!-- সর্বোচ্চ ন্যাচারাল ভয়েস তালিকা -->
+            <option value="bn-IN-BashkarNeural" selected>🇮🇳 ভাস্কর (গভীর ও ন্যাচারাল - পুরুষ)</option>
+            <option value="bn-IN-TanishaaNeural">🇮🇳 তানিশা (মিষ্টি কণ্ঠ - নারী)</option>
+            <option value="bn-BD-PradeepNeural">🇧🇩 প্রদীপ (বাংলাদেশ - পুরুষ)</option>
+            <option value="bn-BD-NabanitaNeural">🇧🇩 নবনীতা (বাংলাদেশ - নারী)</option>
+            <option value="en-US-ChristopherNeural">🇺🇸 Christopher (US - Male)</option>
+            <option value="en-US-JennyNeural">🇺🇸 Jenny (US - Female)</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="ttsSpeed">কথা বলার গতি (Speed):</label>
+          <select id="ttsSpeed">
+            <option value="-10%">ধীর (-10%)</option>
+            <option value="-4%" selected>ন্যাচারাল রিল্যাক্সড (-4%)</option>
+            <option value="+0%">স্বাভাবিক (Normal)</option>
+            <option value="+8%">রিলস/শর্টস ফাস্ট (+8%)</option>
+          </select>
+        </div>
+      </div>
 
       <button id="convertBtn" class="btn-submit" onclick="generateSpeech()">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
@@ -77,12 +95,13 @@
   </div>
 
   <script>
-    // আপনার Render ব্যাকএন্ডের সঠিক লাইভ লিংক
+    // আপনার লাইভ Render ব্যাকএন্ড লিঙ্ক
     const BACKEND_URL = "https://technograpy-ai-voice.onrender.com/generate-audio";
 
     async function generateSpeech() {
       const text = document.getElementById("ttsInput").value;
       const voice = document.getElementById("ttsVoice").value;
+      const rate = document.getElementById("ttsSpeed").value;
       const btn = document.getElementById("convertBtn");
       const status = document.getElementById("statusMsg");
       const player = document.getElementById("audioPlayer");
@@ -102,7 +121,7 @@
         const response = await fetch(BACKEND_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, voice })
+          body: JSON.stringify({ text, voice, rate })
         });
 
         if (!response.ok) {
