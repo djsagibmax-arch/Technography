@@ -192,7 +192,6 @@
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* সিঙ্গেল ফুল-ভিউ ও স্মার্ট ওয়াটারমার্ক প্যাচ এরিয়া */
         .single-card {
             display: none;
             background: #111827;
@@ -219,20 +218,6 @@
             max-height: 80vh;
             object-fit: contain;
             display: block;
-        }
-
-        /* ওয়াটারমার্ক অংশে স্মার্ট ব্লেন্ডিং প্যাচ (ছবি না কেটে ঢেকে দেওয়া) */
-        .watermark-cover {
-            position: absolute;
-            bottom: 6px;
-            right: 6px;
-            width: 145px;
-            height: 28px;
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            background: rgba(0, 0, 0, 0.45);
-            border-radius: 6px;
-            pointer-events: none;
         }
 
         .btn-dl {
@@ -271,16 +256,15 @@
                 <div>
                     <span class="field-label">AI Engine:</span>
                     <select id="engineVersion">
-                        <option value="flux" selected>FLUX (Ultra Realistic)</option>
-                        <option value="sdxl">SDXL (Digital Art/Anime)</option>
+                        <option value="flux" selected>FLUX.1 Schnell (Original HD)</option>
                     </select>
                 </div>
                 <div>
-                    <span class="field-label">Resolutions (সাইজ):</span>
-                    <select id="ratio">
-                        <option value="1024x1024" selected>Square (1:1 - Post)</option>
-                        <option value="768x1344">Portrait (9:16 - Reels/Story)</option>
-                        <option value="1280x720">Landscape (16:9 - YouTube)</option>
+                    <span class="field-label">Lighting Style:</span>
+                    <select id="presetStyle">
+                        <option value="raw photograph" selected>Photorealistic</option>
+                        <option value="cinematic 3d render">Cinematic 3D</option>
+                        <option value="anime aesthetic">Anime / Digital Art</option>
                     </select>
                 </div>
             </div>
@@ -308,14 +292,16 @@
 
         <div class="single-card" id="singleCard">
             <div class="img-container">
-                <img id="mainImg" crossOrigin="anonymous" src="" alt="AI Image">
-                <div class="watermark-cover"></div>
+                <img id="mainImg" src="" alt="AI Image">
             </div>
-            <button class="btn-dl" id="dlBtn" onclick="downloadCleanNoCrop()">ডাউনলোড ওয়াটারমার্ক-মুক্ত Full HD</button>
+            <button class="btn-dl" id="dlBtn" onclick="downloadImage()">ডাউনলোড ওয়াটারমার্ক-মুক্ত Full HD</button>
         </div>
     </div>
 
     <script>
+        // আপনার লাইভ Render ব্যাকএন্ড লিঙ্ক
+        const API_URL = "https://technography-ai.onrender.com/generate";
+
         function toggleTag(el) {
             el.classList.toggle('active');
         }
@@ -339,7 +325,7 @@
         async function translateText(text) {
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 2000);
+                const timeoutId = setTimeout(() => controller.abort(), 2500);
                 const res = await fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(text) + "&langpair=bn|en", { signal: controller.signal });
                 clearTimeout(timeoutId);
                 const json = await res.json();
@@ -353,8 +339,6 @@
         async function startGeneration() {
             const promptBox = document.getElementById("prompt");
             const text = promptBox.value.trim();
-            const engine = document.getElementById("engineVersion").value;
-            const ratio = document.getElementById("ratio").value.split("x");
 
             if (!text) {
                 alert("অনুগ্রহ করে ছবির বিবরণ লিখুন!");
@@ -377,68 +361,46 @@
                 promptEn = await translateText(text);
             }
 
-            loaderText.innerText = "Ultra-HD ছবি আঁকা হচ্ছে...";
-
             const extraStyles = getSelectedTags();
-            const cleanPrompt = promptEn.replace(/watermark|logo|text/gi, "");
-            const finalFullPrompt = encodeURIComponent(`${cleanPrompt}, ${extraStyles}, raw color, tack sharp focus, highly detailed, full body or full portrait`);
-            const negativeFilter = encodeURIComponent("blurry, out of focus, distorted face, bad anatomy, deformed eyes, cropped, bad framing, low quality");
+            const stylePreset = document.getElementById("presetStyle").value;
+            const fullPrompt = `${promptEn}, ${stylePreset}, ${extraStyles}`;
 
-            const w = ratio[0];
-            const h = ratio[1];
-            const seed = Math.floor(Math.random() * 899999);
+            loaderText.innerText = "FLUX AI দিয়ে আসল হাই-কোয়ালিটি ছবি তৈরি হচ্ছে (কিছুক্ষণ সময় লাগতে পারে)...";
 
-            const imgUrl = `https://image.pollinations.ai/prompt/${finalFullPrompt}?negative=${negativeFilter}&width=${w}&height=${h}&model=${engine}&seed=${seed}&nologo=true&nofeed=true&enhance=false`;
+            try {
+                const response = await fetch(API_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ prompt: fullPrompt })
+                });
 
-            img.src = imgUrl;
+                const data = await response.json();
 
-            img.onload = () => {
-                loader.style.display = "none";
-                card.style.display = "flex";
+                if (data.success && data.image) {
+                    img.src = data.image;
+                    loader.style.display = "none";
+                    card.style.display = "flex";
+                    btn.disabled = false;
+                    btn.innerText = "⚡ নতুন ছবি তৈরি করুন";
+                } else {
+                    throw new Error(data.error || "সার্ভার রেসপন্স দেয়নি");
+                }
+            } catch (err) {
+                console.error(err);
+                loaderText.innerText = "ছবি তৈরিতে সমস্যা হয়েছে। সার্ভার চালু হতে কয়েক সেকেন্ড লাগতে পারে, পুনরায় চেষ্টা করুন।";
                 btn.disabled = false;
-                btn.innerText = "⚡ নতুন ছবি তৈরি করুন";
-            };
-
-            img.onerror = () => {
-                loaderText.innerText = "ছবি লোড হতে সমস্যা হয়েছে। আবার চেষ্টা করুন।";
-                btn.disabled = false;
-            };
+            }
         }
 
-        // ছবি না কেটে ক্যানভাস দিয়ে সুনির্দিষ্ট ওয়াটারমার্ক ব্লেন্ড করে ডাউনলোড করার মেথড
-        function downloadCleanNoCrop() {
+        function downloadImage() {
             const img = document.getElementById("mainImg");
-            if (!img || !img.naturalWidth) return;
+            if (!img || !img.src) return;
 
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d");
-
-            // ছবির আসল সাইজ ১০০% অপরিবর্তিত রাখা
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-
-            // সম্পূর্ণ মূল ছবিটি ড্র করা
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-            // ওয়াটারমার্ক এরিয়ার মাপ (ডানপাশের কোণা)
-            const patchWidth = 160;
-            const patchHeight = 35;
-            const patchX = canvas.width - patchWidth - 8;
-            const patchY = canvas.height - patchHeight - 8;
-
-            // ঠিক ওয়াটারমার্কের উপরের ব্যাকগ্রাউন্ড পিক্সেল কপি করে ওয়াটারমার্কের ওপর ব্লেন্ড করা
-            ctx.filter = "blur(4px)";
-            ctx.drawImage(
-                img,
-                patchX, patchY - 20, patchWidth, patchHeight, // আশপাশের ক্লিয়ার ব্যাকগ্রাউন্ডের স্যাম্পল
-                patchX, patchY, patchWidth, patchHeight        // ওয়াটারমার্কের ওপর স্থাপন
-            );
-            ctx.filter = "none";
-
-            // ডাউনলোড লিংক এক্সিকিউট
             const a = document.createElement("a");
-            a.download = `technography-hd-${Date.now()}.jpg`;
-            a.href = canvas.toDataURL("image/jpeg", 0.96);
+            a.download = `technography-flux-${Date.now()}.jpg`;
+            a.href = img.src;
             a.click();
         }
     </script>
