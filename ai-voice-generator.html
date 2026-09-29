@@ -6,35 +6,38 @@
   <title>AI Voice Generator - Technography</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: #0b1120; color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: #030712; color: #f3f4f6; min-height: 100vh; display: flex; flex-direction: column; }
     
-    /* হেডার বার */
+    /* হেডার */
     header { background: #0f172a; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; }
-    .brand { font-size: 20px; font-weight: bold; color: #38bdf8; text-decoration: none; }
+    .brand { font-size: 20px; font-weight: bold; color: #22d3ee; text-decoration: none; }
     .back-btn { color: #94a3b8; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 6px; }
     .back-btn:hover { color: #fff; }
 
-    /* মেইন কন্টেইনার */
+    /* মেইন কার্ড */
     .container { flex: 1; display: flex; justify-content: center; align-items: center; padding: 25px 15px; }
-    .card { background: #131c31; border: 1px solid #1e293b; width: 100%; max-width: 550px; border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .card h2 { text-align: center; color: #38bdf8; margin-bottom: 8px; font-size: 22px; }
-    .card p.subtitle { text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 20px; }
+    .card { background: #111827; border: 1px solid #1f2937; width: 100%; max-width: 550px; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
+    .card h2 { text-align: center; color: #22d3ee; margin-bottom: 8px; font-size: 22px; font-weight: 800; }
+    .card p.subtitle { text-align: center; color: #9ca3af; font-size: 13px; margin-bottom: 22px; }
 
-    /* ইনপুট ও বাটন */
-    label { font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block; }
-    textarea { width: 100%; height: 120px; border-radius: 10px; border: 1px solid #334155; background: #0b1120; color: #fff; padding: 12px; font-size: 14px; resize: vertical; outline: none; margin-bottom: 15px; }
-    textarea:focus { border-color: #38bdf8; }
+    /* ইনপুট ফিল্ড ও বাটন */
+    label { font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block; font-weight: 600; }
+    textarea { width: 100%; height: 120px; border-radius: 12px; border: 1px solid #374151; background: #030712; color: #fff; padding: 12px; font-size: 14px; resize: vertical; outline: none; margin-bottom: 15px; }
+    textarea:focus { border-color: #22d3ee; }
 
-    select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155; background: #0b1120; color: #fff; font-size: 14px; outline: none; margin-bottom: 20px; cursor: pointer; }
+    select { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #374151; background: #030712; color: #fff; font-size: 14px; outline: none; margin-bottom: 20px; cursor: pointer; }
     
-    .btn-submit { width: 100%; padding: 14px; border-radius: 10px; border: none; background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-    .btn-submit:hover { opacity: 0.9; }
-    .btn-submit:disabled { background: #334155; cursor: not-allowed; }
+    .btn-submit { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, #06b6d4, #2563eb); color: #fff; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-submit:disabled { background: #374151; cursor: not-allowed; opacity: 0.6; }
 
     /* স্ট্যাটাস ও অডিও প্লেয়ার */
-    #statusMsg { text-align: center; margin-top: 15px; font-size: 14px; color: #38bdf8; }
+    #statusMsg { text-align: center; margin-top: 15px; font-size: 13px; color: #22d3ee; font-weight: 500; }
     audio { width: 100%; margin-top: 20px; display: none; outline: none; }
+    
+    .download-link { display: none; text-align: center; margin-top: 15px; color: #34d399; font-size: 14px; text-decoration: none; font-weight: bold; }
+    .download-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -49,8 +52,8 @@
       <h2><i class="fa-solid fa-microphone-lines"></i> AI Text to Voice</h2>
       <p class="subtitle">আপনার টেক্সটকে প্রফেশনাল ভয়েসে রূপান্তর করুন</p>
 
-      <label for="ttsInput">আপনার টেক্সট লিখুন:</label>
-      <textarea id="ttsInput" placeholder="এখানে বাংলা বা ইংরেজি লিখুন..."></textarea>
+      <label for="ttsInput">টেক্সট লিখুন:</label>
+      <textarea id="ttsInput" placeholder="এখানে বাংলা বা ইংরেজি লিখুন (সর্বোচ্চ ১৫০০ অক্ষর)..."></textarea>
 
       <label for="ttsVoice">ভয়েস সিলেক্ট করুন:</label>
       <select id="ttsVoice">
@@ -60,16 +63,22 @@
         <option value="en-US-JennyNeural">🇺🇸 English (US) - Jenny (Female)</option>
       </select>
 
-      <button id="convertBtn" class="btn-submit" onclick="generateSpeech()">ভয়েস তৈরি করুন</button>
+      <button id="convertBtn" class="btn-submit" onclick="generateSpeech()">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span>ভয়েস তৈরি করুন</span>
+      </button>
 
       <div id="statusMsg"></div>
       <audio id="audioPlayer" controls></audio>
+      <a id="downloadBtn" class="download-link" href="#" download="technography_voice.mp3">
+        <i class="fa-solid fa-download"></i> অডিও ডাউনলোড করুন
+      </a>
     </div>
   </div>
 
   <script>
-    // এখানে আপনার Render-এ ডিপ্লয় করা পাইথন ব্যাকএন্ডের লিংক বসাবেন
-    const BACKEND_URL = "https://YOUR-APP-NAME.onrender.com/generate-audio";
+    // আপনার Render ব্যাকএন্ডের সঠিক লাইভ লিংক
+    const BACKEND_URL = "https://technograpy-ai-voice.onrender.com/generate-audio";
 
     async function generateSpeech() {
       const text = document.getElementById("ttsInput").value;
@@ -77,6 +86,7 @@
       const btn = document.getElementById("convertBtn");
       const status = document.getElementById("statusMsg");
       const player = document.getElementById("audioPlayer");
+      const downloadBtn = document.getElementById("downloadBtn");
 
       if (!text.trim()) {
         alert("দয়া করে কিছু টেক্সট লিখুন!");
@@ -84,8 +94,9 @@
       }
 
       btn.disabled = true;
-      status.innerText = "ভয়েস তৈরি হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...";
+      status.innerText = "ভয়েস তৈরি হচ্ছে, অনুগ্রহ করে কয়েক সেকেন্ড অপেক্ষা করুন...";
       player.style.display = "none";
+      downloadBtn.style.display = "none";
 
       try {
         const response = await fetch(BACKEND_URL, {
@@ -94,13 +105,22 @@
           body: JSON.stringify({ text, voice })
         });
 
-        if (!response.ok) throw new Error("সার্ভার থেকে সাড়া পাওয়া যায়নি");
+        if (!response.ok) {
+          const errData = await response.json().catch(() => ({}));
+          throw new Error(errData.detail || "সার্ভার থেকে সাড়া পাওয়া যায়নি");
+        }
 
         const blob = await response.blob();
-        player.src = URL.createObjectURL(blob);
+        const audioUrl = URL.createObjectURL(blob);
+
+        player.src = audioUrl;
         player.style.display = "block";
         player.play();
-        status.innerText = "✅ ভয়েস তৈরি সম্পন্ন!";
+
+        downloadBtn.href = audioUrl;
+        downloadBtn.style.display = "block";
+
+        status.innerText = "✅ ভয়েস সফলভাবে তৈরি হয়েছে!";
       } catch (err) {
         status.innerText = "❌ সমস্যা হয়েছে: " + err.message;
       } finally {
