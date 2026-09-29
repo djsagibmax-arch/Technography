@@ -56,24 +56,14 @@
             color: var(--primary);
         }
 
-        .back-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .back-link:hover { color: #fff; }
-
         .main-container {
             max-width: 1100px;
-            margin: 25px auto;
+            margin: 30px auto;
             padding: 0 15px;
             width: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 25px;
             flex: 1;
         }
 
@@ -88,7 +78,7 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 14px;
-            padding: 20px;
+            padding: 22px;
             display: flex;
             flex-direction: column;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -116,7 +106,7 @@
 
         textarea {
             width: 100%;
-            height: 120px;
+            height: 130px;
             background: #0d1322;
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -132,25 +122,6 @@
             border-color: var(--primary);
         }
 
-        .row-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        select {
-            width: 100%;
-            background: #0d1322;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 10px;
-            color: #fff;
-            outline: none;
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-
         .btn-generate {
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
@@ -164,6 +135,7 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
+            margin-top: 10px;
             transition: opacity 0.3s;
         }
 
@@ -236,6 +208,7 @@
             margin-top: 15px;
             background: #10b981;
             color: white;
+            text-decoration: none;
             border-radius: 8px;
             padding: 12px;
             text-align: center;
@@ -245,10 +218,6 @@
             justify-content: center;
             gap: 8px;
             cursor: pointer;
-            border: none;
-            width: 100%;
-            font-size: 0.95rem;
-            text-decoration: none;
         }
 
         .btn-download:hover {
@@ -268,10 +237,7 @@
 
     <header>
         <a href="index.html" class="logo">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Technography <span>AI</span>
-        </a>
-        <a href="index.html" class="back-link">
-            <i class="fa-solid fa-arrow-left"></i> হোমপেজে ফিরুন
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Technography <span>AI Engine</span>
         </a>
     </header>
 
@@ -281,37 +247,16 @@
             <h2><i class="fa-solid fa-sliders"></i> ইমেজ কনফিগারেশন</h2>
             
             <div class="input-group">
-                <label for="promptInput">ছবির প্রম্পট লিখুন (বাংলা বা ইংরেজি):</label>
-                <textarea id="promptInput" placeholder="A beautiful girl walking in a flower garden, cinematic 8k..."></textarea>
+                <label for="promptInput">ছবির বিবরণ (Prompt) লিখুন:</label>
+                <textarea id="promptInput" placeholder="A handsome young man portrait, photorealistic, 8k uhd, cinematic lighting..."></textarea>
             </div>
 
-            <div class="row-options">
-                <div>
-                    <label for="imageStyle">স্টাইল বেছে নিন:</label>
-                    <select id="imageStyle">
-                        <option value="" selected>Default (স্বাভাবিক)</option>
-                        <option value=", highly realistic photograph, ultra sharp, 8k">Realism Ultra (বাস্তবসম্মত)</option>
-                        <option value=", anime aesthetic style, studio anime art">Anime Art (অ্যানিমে)</option>
-                        <option value=", 3d render, octane render, smooth 3d model">3D Render (থ্রিডি)</option>
-                        <option value=", cinematic lighting, epic composition, hyperrealistic">Cinematic (সিনেমাটিক)</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="aspectRatio">রেশিও:</label>
-                    <select id="aspectRatio">
-                        <option value="512x512" selected>Square (1:1 - সুপার ফাস্ট)</option>
-                        <option value="768x432">Landscape (16:9)</option>
-                        <option value="432x768">Reels / Shorts (9:16)</option>
-                    </select>
-                </div>
-            </div>
-
-            <button id="generateBtn" class="btn-generate" onclick="handleGenerate()">
+            <button id="generateBtn" class="btn-generate">
                 <i class="fa-solid fa-bolt"></i> ছবি তৈরি করুন
             </button>
         </div>
 
-        <!-- Output Card -->
+        <!-- Result Card -->
         <div class="card">
             <h2><i class="fa-solid fa-image"></i> আউটপুট রেজাল্ট</h2>
             <div class="preview-box">
@@ -322,123 +267,79 @@
 
                 <div class="loader" id="loader">
                     <div class="spinner"></div>
-                    <p id="loaderText">AI ছবি তৈরি করছে, কয়েক সেকেন্ড অপেক্ষা করুন...</p>
+                    <p id="loaderText">Render ব্যাকএন্ড ছবি প্রসেস করছে...<br><small style="color: #94a3b8;">(সার্ভার স্লিপ থাকলে প্রথমবার ৪০-৫০ সেকেন্ড লাগতে পারে)</small></p>
                 </div>
 
-                <img id="outputImg" class="generated-image" alt="Generated Output">
+                <img id="outputImg" class="generated-image" alt="AI Generated Image">
             </div>
 
-            <a id="downloadBtn" class="btn-download" href="#" target="_blank" download="technography-ai.jpg">
+            <a id="downloadBtn" class="btn-download" href="#" download="technography-ai.jpg">
                 <i class="fa-solid fa-download"></i> ছবি ডাউনলোড করুন
             </a>
         </div>
     </div>
 
     <footer>
-        &copy; 2026 Technography AI. সর্বস্বত্ব সংরক্ষিত।
+        &copy; 2026 Technography AI. Powered by Render & Hugging Face.
     </footer>
 
     <script>
+        // আপনার লাইভ Render ব্যাকএন্ড URL
+        const BACKEND_URL = "https://technography-ai.onrender.com";
+
         const generateBtn = document.getElementById('generateBtn');
         const promptInput = document.getElementById('promptInput');
-        const imageStyle = document.getElementById('imageStyle');
-        const aspectRatio = document.getElementById('aspectRatio');
         const outputImg = document.getElementById('outputImg');
         const placeholder = document.getElementById('placeholder');
         const loader = document.getElementById('loader');
         const downloadBtn = document.getElementById('downloadBtn');
 
-        // বাংলা টেক্সট অনুবাদ লজিক
-        async function translateIfNeeded(text) {
-            const hasBengali = /[\u0980-\u09FF]/.test(text);
-            if (!hasBengali) return text;
-
-            try {
-                const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=bn|en`);
-                const data = await res.json();
-                if (data.responseData && data.responseData.translatedText) {
-                    return data.responseData.translatedText;
-                }
-            } catch (e) {
-                console.log("Translation bypassed");
-            }
-            return text;
-        }
-
-        async function handleGenerate() {
+        generateBtn.addEventListener('click', async () => {
             const rawPrompt = promptInput.value.trim();
             if (!rawPrompt) {
-                alert("দয়া করে একটি প্রম্পট লিখুন!");
+                alert("দয়া করে একটি প্রম্পট লিখুন!");
                 return;
             }
 
-            // বাটন ডিজেবল ও পূর্বের ইমেজ ক্লিয়ার করা
+            // বাটন লক ও লোডার প্রদর্শন
             generateBtn.disabled = true;
             placeholder.style.display = 'none';
             outputImg.style.display = 'none';
             downloadBtn.style.display = 'none';
             loader.style.display = 'flex';
 
-            // পূর্ববর্তী ইমেজ মেমোরি রিসেট
-            outputImg.src = "";
+            try {
+                const response = await fetch(`${BACKEND_URL}/generate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt: rawPrompt })
+                });
 
-            const finalPrompt = await translateIfNeeded(rawPrompt);
-            const [width, height] = aspectRatio.value.split('x');
-            const fullText = finalPrompt + imageStyle.value;
-            const encoded = encodeURIComponent(fullText);
+                const result = await response.json();
 
-            // ৩টি স্বতন্ত্র এআই ইমেজ রুটের লিস্ট (একটি হ্যাং হলে স্বয়ংক্রিয়ভাবে অন্যটি চলবে)
-            const randomSeed = Math.floor(Math.random() * 999999999);
-            const uniqueTime = Date.now();
-
-            const sources = [
-                `https://image.pollinations.ai/prompt/${encoded}?width=${width}&height=${height}&seed=${randomSeed}&nologo=true`,
-                `https://image.pollinations.ai/prompt/${encoded}?width=${width}&height=${height}&model=turbo&seed=${randomSeed}&nologo=true&t=${uniqueTime}`,
-                `https://image.pollinations.ai/prompt/${encoded}?width=${width}&height=${height}&model=flux&seed=${randomSeed}&nologo=true`
-            ];
-
-            let sourceIndex = 0;
-
-            function tryLoadNextSource() {
-                if (sourceIndex >= sources.length) {
-                    alert("সার্ভার ব্যস্ততার কারণে ছবি তৈরিতে সাময়িক সমস্যা হচ্ছে। দয়া করে কিছুক্ষণ পর আবার চেষ্টা করুন।");
-                    loader.style.display = 'none';
-                    placeholder.style.display = 'block';
-                    generateBtn.disabled = false;
-                    return;
-                }
-
-                const testImg = new Image();
-                const currentUrl = sources[sourceIndex];
-                sourceIndex++;
-
-                // কোনো কারণে ৬ সেকেন্ডে রেসপন্স না দিলে পরবর্তী সোর্সে যাবে
-                const timer = setTimeout(() => {
-                    testImg.onload = null;
-                    testImg.onerror = null;
-                    tryLoadNextSource();
-                }, 7000);
-
-                testImg.onload = () => {
-                    clearTimeout(timer);
-                    outputImg.src = currentUrl;
+                if (result.success && result.image) {
+                    outputImg.src = result.image;
                     outputImg.style.display = 'block';
                     loader.style.display = 'none';
                     generateBtn.disabled = false;
-                    downloadBtn.href = currentUrl;
+
+                    // ডাউনলোড বাটন রেডি করা
+                    downloadBtn.href = result.image;
                     downloadBtn.style.display = 'flex';
-                };
+                } else {
+                    throw new Error(result.error || "ছবি তৈরি করা সম্ভব হয়নি");
+                }
 
-                testImg.onerror = () => {
-                    clearTimeout(timer);
-                    tryLoadNextSource();
-                };
-
-                testImg.src = currentUrl;
+            } catch (error) {
+                console.error(error);
+                alert("ত্রুটি: " + error.message);
+                loader.style.display = 'none';
+                placeholder.style.display = 'block';
+                generateBtn.disabled = false;
             }
-
-            tryLoadNextSource();
-        }
+        });
     </script>
 </body>
 </html>
