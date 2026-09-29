@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Image Generator | Technography</title>
+    <title>Technography AI Studio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --bg-dark: #0b0f19;
-            --card-bg: #151d30;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #263352;
-            --accent: #06b6d4;
+            --primary: #ff3366;
+            --primary-gradient: linear-gradient(135deg, #ff3366, #ff6b8b);
+            --bg-dark: #0d1117;
+            --card-bg: #161b22;
+            --surface-bg: #21262d;
+            --border-color: #30363d;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
         }
 
         * {
@@ -34,16 +34,16 @@
         }
 
         header {
-            background: rgba(21, 29, 48, 0.8);
+            background: rgba(22, 27, 34, 0.9);
             border-bottom: 1px solid var(--border-color);
-            padding: 16px 20px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #fff;
             text-decoration: none;
@@ -52,81 +52,166 @@
             gap: 10px;
         }
 
-        .logo span {
-            color: var(--primary);
-        }
+        .logo span { color: #ff3366; }
 
         .main-container {
-            max-width: 1100px;
-            margin: 30px auto;
+            max-width: 1200px;
+            margin: 20px auto;
             padding: 0 15px;
             width: 100%;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.2fr 1fr;
             gap: 25px;
             flex: 1;
         }
 
-        @media (max-width: 768px) {
-            .main-container {
-                grid-template-columns: 1fr;
-                margin: 15px auto;
-            }
+        @media (max-width: 900px) {
+            .main-container { grid-template-columns: 1fr; }
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 22px;
+            border-radius: 16px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            gap: 16px;
         }
 
-        h2 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: var(--accent);
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            gap: 8px;
+            color: #fff;
         }
 
         textarea {
             width: 100%;
-            height: 130px;
-            background: #0d1322;
+            height: 90px;
+            background: var(--surface-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 12px;
             color: #fff;
             font-size: 0.95rem;
             resize: none;
             outline: none;
-            transition: border 0.3s;
         }
 
-        textarea:focus {
-            border-color: var(--primary);
+        textarea:focus { border-color: #ff3366; }
+
+        /* Consistency Box */
+        .consistency-box {
+            background: rgba(255, 51, 102, 0.08);
+            border: 1px dashed var(--primary);
+            border-radius: 12px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
+
+        .consistency-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .consistency-info span {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .consistency-info small {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 24px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #30363d;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        /* Style Selection Grid */
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+            gap: 10px;
+            max-height: 190px;
+            overflow-y: auto;
+            padding: 2px;
+        }
+
+        .style-item {
+            background: var(--surface-bg);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .style-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .style-item span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .style-item.active {
+            border-color: #ff3366;
+            background: rgba(255, 51, 102, 0.15);
+        }
+
+        .style-item.active span { color: #fff; font-weight: 600; }
 
         .btn-generate {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: var(--primary-gradient);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 14px;
             font-size: 1rem;
             font-weight: 600;
@@ -135,25 +220,22 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
-            margin-top: 10px;
-            transition: opacity 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 51, 102, 0.3);
         }
 
-        .btn-generate:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
+        .btn-generate:disabled { opacity: 0.6; cursor: not-allowed; }
 
+        /* Output Box */
         .preview-box {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: #0d1322;
+            background: var(--surface-bg);
             border: 2px dashed var(--border-color);
-            border-radius: 10px;
-            min-height: 320px;
+            border-radius: 14px;
+            min-height: 380px;
             position: relative;
             overflow: hidden;
         }
@@ -162,12 +244,12 @@
             color: var(--text-muted);
             text-align: center;
             font-size: 0.9rem;
-            padding: 15px;
+            padding: 20px;
         }
 
         .placeholder-text i {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 3rem;
+            margin-bottom: 12px;
             color: var(--border-color);
             display: block;
         }
@@ -177,7 +259,6 @@
             height: 100%;
             object-fit: contain;
             display: none;
-            border-radius: 6px;
         }
 
         .loader {
@@ -185,31 +266,27 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
-            color: var(--accent);
+            color: #ff3366;
             text-align: center;
-            padding: 15px;
+            padding: 20px;
         }
 
         .spinner {
             width: 42px;
             height: 42px;
-            border: 3px solid rgba(6, 182, 212, 0.2);
-            border-top: 3px solid var(--accent);
+            border: 4px solid rgba(255, 51, 102, 0.2);
+            border-top: 4px solid #ff3366;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .btn-download {
-            margin-top: 15px;
-            background: #10b981;
+            background: #238636;
             color: white;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 12px;
             text-align: center;
             font-weight: 600;
@@ -217,19 +294,6 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            cursor: pointer;
-        }
-
-        .btn-download:hover {
-            background: #059669;
-        }
-
-        footer {
-            text-align: center;
-            padding: 15px;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
@@ -237,55 +301,103 @@
 
     <header>
         <a href="index.html" class="logo">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Technography <span>AI Engine</span>
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Technography <span>Studio</span>
         </a>
     </header>
 
     <div class="main-container">
-        <!-- Control Card -->
+        <!-- Input & Controls -->
         <div class="card">
-            <h2><i class="fa-solid fa-sliders"></i> ইমেজ কনফিগারেশন</h2>
-            
-            <div class="input-group">
-                <label for="promptInput">ছবির বিবরণ (Prompt) লিখুন:</label>
-                <textarea id="promptInput" placeholder="A handsome young man portrait, photorealistic, 8k uhd, cinematic lighting..."></textarea>
+            <div>
+                <div class="section-title"><i class="fa-solid fa-pen-nib"></i> প্রম্পট লিখুন</div>
+                <textarea id="promptInput" placeholder="যেমন: একটি ছেলে নীল টি-শার্ট পরে দাঁড়িয়ে হাসছে..."></textarea>
+            </div>
+
+            <!-- Character Consistency Lock -->
+            <div class="consistency-box">
+                <div class="consistency-info">
+                    <span><i class="fa-solid fa-lock"></i> আগের চরিত্রের মিল রাখুন (Consistency)</span>
+                    <small id="seedStatus">নতুন সিড তৈরি হবে</small>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="keepCharacterToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Styles Carousel -->
+            <div>
+                <div class="section-title"><i class="fa-solid fa-palette"></i> স্টাইল বেছে নিন</div>
+                <div class="style-grid" id="styleGrid">
+                    <div class="style-item active" data-style="">
+                        <div style="width:50px;height:50px;background:#30363d;border-radius:8px;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-ban"></i></div>
+                        <span>None</span>
+                    </div>
+                    <div class="style-item" data-style="Cinematic, Photorealistic, 8k uhd">
+                        <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=120&auto=format&fit=crop&q=60" alt="Realistic">
+                        <span>Realistic</span>
+                    </div>
+                    <div class="style-item" data-style="Futuristic retro cyberpunk, neon colors">
+                        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=120&auto=format&fit=crop&q=60" alt="Cyberpunk">
+                        <span>Cyberpunk</span>
+                    </div>
+                    <div class="style-item" data-style="Anime style, Makoto Shinkai aesthetic, detailed">
+                        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=120&auto=format&fit=crop&q=60" alt="Anime">
+                        <span>Anime</span>
+                    </div>
+                    <div class="style-item" data-style="3D Render, Octane render, Cinema 4D">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=120&auto=format&fit=crop&q=60" alt="3D Render">
+                        <span>3D Render</span>
+                    </div>
+                    <div class="style-item" data-style="Watercolor painting, artistic brush strokes">
+                        <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=120&auto=format&fit=crop&q=60" alt="Watercolor">
+                        <span>Watercolor</span>
+                    </div>
+                </div>
             </div>
 
             <button id="generateBtn" class="btn-generate">
-                <i class="fa-solid fa-bolt"></i> ছবি তৈরি করুন
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Image
             </button>
         </div>
 
-        <!-- Result Card -->
+        <!-- Result Box -->
         <div class="card">
-            <h2><i class="fa-solid fa-image"></i> আউটপুট রেজাল্ট</h2>
+            <div class="section-title"><i class="fa-regular fa-image"></i> আউটপুট</div>
             <div class="preview-box">
                 <div class="placeholder-text" id="placeholder">
-                    <i class="fa-regular fa-images"></i>
-                    প্রম্পট লিখে 'ছবি তৈরি করুন' বাটনে চাপ দিন
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    প্রম্পট লিখে 'Generate Image'-এ ট্যাপ করুন
                 </div>
 
                 <div class="loader" id="loader">
                     <div class="spinner"></div>
-                    <p id="loaderText">Render ব্যাকএন্ড ছবি প্রসেস করছে...<br><small style="color: #94a3b8;">(সার্ভার স্লিপ থাকলে প্রথমবার ৪০-৫০ সেকেন্ড লাগতে পারে)</small></p>
+                    <p>AI ছবি তৈরি করছে...</p>
                 </div>
 
-                <img id="outputImg" class="generated-image" alt="AI Generated Image">
+                <img id="outputImg" class="generated-image" alt="AI Output">
             </div>
 
-            <a id="downloadBtn" class="btn-download" href="#" download="technography-ai.jpg">
+            <a id="downloadBtn" class="btn-download" href="#" download="technography-consistent.jpg">
                 <i class="fa-solid fa-download"></i> ছবি ডাউনলোড করুন
             </a>
         </div>
     </div>
 
-    <footer>
-        &copy; 2026 Technography AI. Powered by Render & Hugging Face.
-    </footer>
-
     <script>
-        // আপনার লাইভ Render ব্যাকএন্ড URL
         const BACKEND_URL = "https://technography-ai.onrender.com";
+
+        let selectedStyle = "";
+        let currentSeed = null;
+
+        // স্টাইল ক্লিক নির্বাচন
+        document.querySelectorAll('.style-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.style-item').forEach(el => el.classList.remove('active'));
+                item.classList.add('active');
+                selectedStyle = item.getAttribute('data-style');
+            });
+        });
 
         const generateBtn = document.getElementById('generateBtn');
         const promptInput = document.getElementById('promptInput');
@@ -293,15 +405,38 @@
         const placeholder = document.getElementById('placeholder');
         const loader = document.getElementById('loader');
         const downloadBtn = document.getElementById('downloadBtn');
+        const keepCharacterToggle = document.getElementById('keepCharacterToggle');
+        const seedStatus = document.getElementById('seedStatus');
+
+        keepCharacterToggle.addEventListener('change', () => {
+            if (keepCharacterToggle.checked) {
+                if (!currentSeed) {
+                    alert("প্রথমে একটি সাধারণ ছবি তৈরি করুন, তারপর সেই চরিত্রের মিল রাখার অপশনটি অন করুন।");
+                    keepCharacterToggle.checked = false;
+                    return;
+                }
+                seedStatus.innerText = "চরিত্র লক করা আছে (Seed: " + currentSeed + ")";
+                seedStatus.style.color = "#ff3366";
+            } else {
+                seedStatus.innerText = "নতুন চরিত্র/সিড তৈরি হবে";
+                seedStatus.style.color = "#8b949e";
+            }
+        });
 
         generateBtn.addEventListener('click', async () => {
             const rawPrompt = promptInput.value.trim();
             if (!rawPrompt) {
-                alert("দয়া করে একটি প্রম্পট লিখুন!");
+                alert("দয়া করে কোনো প্রম্পট লিখুন!");
                 return;
             }
 
-            // বাটন লক ও লোডার প্রদর্শন
+            let finalPromptParts = [rawPrompt];
+            if (selectedStyle) finalPromptParts.push(selectedStyle);
+            const promptToSend = finalPromptParts.join(", ");
+
+            // টগল অন থাকলে আগের সিড পাঠানো হবে, না থাকলে নতুন সিড যাবে
+            let seedToSend = keepCharacterToggle.checked ? currentSeed : null;
+
             generateBtn.disabled = true;
             placeholder.style.display = 'none';
             outputImg.style.display = 'none';
@@ -309,32 +444,38 @@
             loader.style.display = 'flex';
 
             try {
-                const response = await fetch(`${BACKEND_URL}/generate`, {
+                const res = await fetch(`${BACKEND_URL}/generate`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ prompt: rawPrompt })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        prompt: promptToSend,
+                        seed: seedToSend
+                    })
                 });
 
-                const result = await response.json();
+                const data = await res.json();
 
-                if (result.success && result.image) {
-                    outputImg.src = result.image;
+                if (data.success && data.image) {
+                    outputImg.src = data.image;
                     outputImg.style.display = 'block';
                     loader.style.display = 'none';
                     generateBtn.disabled = false;
 
-                    // ডাউনলোড বাটন রেডি করা
-                    downloadBtn.href = result.image;
+                    // সিড সংরক্ষণ করা
+                    currentSeed = data.seed;
+                    if (keepCharacterToggle.checked) {
+                        seedStatus.innerText = "একই চরিত্র বজায় রাখা হচ্ছে (Seed: " + currentSeed + ")";
+                    } else {
+                        seedStatus.innerText = "পূর্ববর্তী সিড: " + currentSeed;
+                    }
+
+                    downloadBtn.href = data.image;
                     downloadBtn.style.display = 'flex';
                 } else {
-                    throw new Error(result.error || "ছবি তৈরি করা সম্ভব হয়নি");
+                    throw new Error(data.error || "ছবি তৈরি করা যায়নি");
                 }
-
-            } catch (error) {
-                console.error(error);
-                alert("ত্রুটি: " + error.message);
+            } catch (err) {
+                alert("ত্রুটি: " + err.message);
                 loader.style.display = 'none';
                 placeholder.style.display = 'block';
                 generateBtn.disabled = false;
