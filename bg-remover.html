@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Background Remover - Technography</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- ইন-ব্রাউজার ফ্রি এআই ব্যাকগ্রাউন্ড রিমুভার লাইব্রেরি -->
-  <script src="https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/bundle.js"></script>
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
@@ -23,22 +21,18 @@
     h2 { color: #22d3ee; margin-bottom: 8px; font-size: 24px; font-weight: 800; }
     p.subtitle { color: #9ca3af; font-size: 14px; margin-bottom: 25px; }
 
-    /* আপলোড ড্রপজোন */
     .drop-zone { border: 2px dashed #374151; border-radius: 16px; padding: 35px 20px; cursor: pointer; transition: 0.3s; background: #0b0f19; margin-bottom: 20px; }
     .drop-zone:hover { border-color: #22d3ee; background: #0f172a; }
     .drop-zone i { font-size: 40px; color: #22d3ee; margin-bottom: 12px; }
     .drop-zone p { font-size: 14px; color: #cbd5e1; }
     #fileInput { display: none; }
 
-    /* প্রিভিউ বক্স */
     .preview-container { display: none; margin-top: 20px; flex-direction: column; align-items: center; gap: 15px; }
     .img-box { position: relative; max-width: 100%; max-height: 320px; border-radius: 12px; overflow: hidden; border: 1px solid #374151; background: repeating-conic-gradient(#1f2937 0% 25%, #111827 0% 50%) 50% / 20px 20px; }
     .img-box img { max-width: 100%; max-height: 320px; display: block; object-fit: contain; }
 
-    /* বাটন ও প্রগ্রেস */
     .btn-action { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, #06b6d4, #2563eb); color: #fff; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; margin-top: 10px; }
     .btn-action:hover { opacity: 0.9; }
-    .btn-action:disabled { background: #374151; cursor: not-allowed; opacity: 0.6; }
 
     #statusMsg { font-size: 13px; color: #22d3ee; margin-top: 12px; font-weight: 500; min-height: 20px; }
   </style>
@@ -55,16 +49,14 @@
       <h2><i class="fa-solid fa-wand-magic-sparkles"></i> AI ব্যাকগ্রাউন্ড রিমুভার</h2>
       <p class="subtitle">১ ক্লিকে ছবির ব্যাকগ্রাউন্ড সম্পূর্ণ ফ্রিতে স্বচ্ছ (Transparent) করুন</p>
 
-      <!-- ফাইল আপলোড এরিয়া -->
-      <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+      <div class="drop-zone" id="dropArea">
         <i class="fa-solid fa-cloud-arrow-up"></i>
         <p>ছবি নির্বাচন করতে এখানে ক্লিক করুন (JPG, PNG)</p>
-        <input type="file" id="fileInput" accept="image/*" onchange="handleImageUpload(event)">
+        <input type="file" id="fileInput" accept="image/*">
       </div>
 
       <div id="statusMsg"></div>
 
-      <!-- ফলাফল ও প্রিভিউ এরিয়া -->
       <div class="preview-container" id="previewArea">
         <div class="img-box">
           <img id="resultImage" src="" alt="Processed Image">
@@ -76,32 +68,36 @@
     </div>
   </div>
 
-  <script>
-    async function handleImageUpload(event) {
+  <!-- আধুনিক ES Module স্ক্রিপ্ট -->
+  <script type="module">
+    import imglyRemoveBackground from "https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.8/+esm";
+
+    const fileInput = document.getElementById("fileInput");
+    const dropArea = document.getElementById("dropArea");
+    const status = document.getElementById("statusMsg");
+    const previewArea = document.getElementById("previewArea");
+    const resultImg = document.getElementById("resultImage");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    dropArea.addEventListener("click", () => fileInput.click());
+
+    fileInput.addEventListener("change", async (event) => {
       const file = event.target.files[0];
       if (!file) return;
 
-      const status = document.getElementById("statusMsg");
-      const previewArea = document.getElementById("previewArea");
-      const resultImg = document.getElementById("resultImage");
-      const downloadBtn = document.getElementById("downloadBtn");
-
       previewArea.style.display = "none";
-      status.innerText = "⏳ এআই মডেল লোড হচ্ছে এবং ব্যাকগ্রাউন্ড রিমুভ করা হচ্ছে...";
+      status.innerText = "⏳ এআই মডেল লোড হচ্ছে, অনুগ্রহ করে একটু অপেক্ষা করুন...";
 
       try {
-        // imgly AI ব্যাকগ্রাউন্ড রিমুভার ফাংশন কল
         const blob = await imglyRemoveBackground(file, {
           progress: (key, current, total) => {
-            if (key.includes("fetch")) {
-              status.innerText = "মডেল ফাইল প্রস্তুত হচ্ছে...";
-            } else if (key.includes("compute")) {
-              status.innerText = "ব্যাকগ্রাউন্ড প্রসেসিং চলছে...";
+            const percent = Math.round((current / total) * 100);
+            if (!isNaN(percent)) {
+              status.innerText = `⏳ প্রসেসিং চলছে: ${percent}%...`;
             }
           }
         });
 
-        // আউটপুট ইমেজ লিঙ্ক তৈরি
         const imageUrl = URL.createObjectURL(blob);
         resultImg.src = imageUrl;
         downloadBtn.href = imageUrl;
@@ -112,7 +108,7 @@
         console.error(error);
         status.innerText = "❌ প্রসেস করতে ব্যর্থ হয়েছে: " + error.message;
       }
-    }
+    });
   </script>
 
 </body>
