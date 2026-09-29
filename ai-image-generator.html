@@ -103,27 +103,28 @@
 
         textarea:focus { border-color: #ff3366; }
 
-        /* Consistency Box */
+        /* Memory / Consistency Control Box */
         .consistency-box {
             background: rgba(255, 51, 102, 0.08);
             border: 1px dashed var(--primary);
             border-radius: 12px;
             padding: 12px 15px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .consistency-info {
+        .consistency-header {
             display: flex;
-            flex-direction: column;
-            gap: 3px;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .consistency-info span {
             font-size: 0.88rem;
             font-weight: 600;
             color: #fff;
+            display: block;
         }
 
         .consistency-info small {
@@ -164,12 +165,31 @@
         input:checked + .slider { background-color: var(--primary); }
         input:checked + .slider:before { transform: translateX(22px); }
 
+        .btn-reset-memory {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            align-self: flex-start;
+            display: none;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-reset-memory:hover {
+            color: #fff;
+            border-color: #ff3366;
+        }
+
         /* Style Selection Grid */
         .style-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
             gap: 10px;
-            max-height: 190px;
+            max-height: 210px;
             overflow-y: auto;
             padding: 2px;
         }
@@ -310,22 +330,27 @@
         <div class="card">
             <div>
                 <div class="section-title"><i class="fa-solid fa-pen-nib"></i> প্রম্পট লিখুন</div>
-                <textarea id="promptInput" placeholder="যেমন: একটি ছেলে নীল টি-শার্ট পরে দাঁড়িয়ে হাসছে..."></textarea>
+                <textarea id="promptInput" placeholder="যেমন: একটি ছেলে নীল টি-শার্ট পরে দাঁড়িয়ে আছে..."></textarea>
             </div>
 
-            <!-- Character Consistency Lock -->
+            <!-- Client-Side State / Memory Toggle -->
             <div class="consistency-box">
-                <div class="consistency-info">
-                    <span><i class="fa-solid fa-lock"></i> আগের চরিত্রের মিল রাখুন (Consistency)</span>
-                    <small id="seedStatus">নতুন সিড তৈরি হবে</small>
+                <div class="consistency-header">
+                    <div class="consistency-info">
+                        <span><i class="fa-solid fa-brain"></i> ক্যারেক্টার মেমোরি (Consistency)</span>
+                        <small id="memoryStatus">বর্তমানে কোনো চরিত্র সেভ করা নেই</small>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="keepCharacterToggle">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <label class="switch">
-                    <input type="checkbox" id="keepCharacterToggle">
-                    <span class="slider"></span>
-                </label>
+                <button id="resetMemoryBtn" class="btn-reset-memory">
+                    <i class="fa-solid fa-rotate-left"></i> মেমোরি মুছে নতুন চরিত্র শুরু করুন
+                </button>
             </div>
 
-            <!-- Styles Carousel -->
+            <!-- Styles Grid -->
             <div>
                 <div class="section-title"><i class="fa-solid fa-palette"></i> স্টাইল বেছে নিন</div>
                 <div class="style-grid" id="styleGrid">
@@ -333,25 +358,29 @@
                         <div style="width:50px;height:50px;background:#30363d;border-radius:8px;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-ban"></i></div>
                         <span>None</span>
                     </div>
-                    <div class="style-item" data-style="Cinematic, Photorealistic, 8k uhd">
-                        <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=120&auto=format&fit=crop&q=60" alt="Realistic">
-                        <span>Realistic</span>
+                    <div class="style-item" data-style="3D Disney Pixar animation style, cute character, smooth lighting, highly detailed render">
+                        <img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=120&auto=format&fit=crop&q=60" alt="3D Cartoon">
+                        <span>3D Cartoon</span>
                     </div>
-                    <div class="style-item" data-style="Futuristic retro cyberpunk, neon colors">
-                        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=120&auto=format&fit=crop&q=60" alt="Cyberpunk">
-                        <span>Cyberpunk</span>
+                    <div class="style-item" data-style="Cute 3D claymation style, plasticine texture, soft pastel studio lighting, miniature toy">
+                        <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=120&auto=format&fit=crop&q=60" alt="Clay Toy">
+                        <span>Clay Toy</span>
                     </div>
-                    <div class="style-item" data-style="Anime style, Makoto Shinkai aesthetic, detailed">
+                    <div class="style-item" data-style="Vintage retro comic book art, vibrant pop art lines, dynamic halftone illustration">
+                        <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=120&auto=format&fit=crop&q=60" alt="Comic Book">
+                        <span>Comic</span>
+                    </div>
+                    <div class="style-item" data-style="Anime aesthetic, Makoto Shinkai style, expressive eyes, vibrant colors">
                         <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=120&auto=format&fit=crop&q=60" alt="Anime">
                         <span>Anime</span>
                     </div>
-                    <div class="style-item" data-style="3D Render, Octane render, Cinema 4D">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=120&auto=format&fit=crop&q=60" alt="3D Render">
-                        <span>3D Render</span>
+                    <div class="style-item" data-style="Cinematic, Photorealistic, 8k uhd, masterpiece">
+                        <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=120&auto=format&fit=crop&q=60" alt="Realistic">
+                        <span>Realistic</span>
                     </div>
-                    <div class="style-item" data-style="Watercolor painting, artistic brush strokes">
-                        <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=120&auto=format&fit=crop&q=60" alt="Watercolor">
-                        <span>Watercolor</span>
+                    <div class="style-item" data-style="Futuristic retro cyberpunk, neon colors, glow">
+                        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=120&auto=format&fit=crop&q=60" alt="Cyberpunk">
+                        <span>Cyberpunk</span>
                     </div>
                 </div>
             </div>
@@ -378,7 +407,7 @@
                 <img id="outputImg" class="generated-image" alt="AI Output">
             </div>
 
-            <a id="downloadBtn" class="btn-download" href="#" download="technography-consistent.jpg">
+            <a id="downloadBtn" class="btn-download" href="#" download="technography-image.jpg">
                 <i class="fa-solid fa-download"></i> ছবি ডাউনলোড করুন
             </a>
         </div>
@@ -388,16 +417,10 @@
         const BACKEND_URL = "https://technography-ai.onrender.com";
 
         let selectedStyle = "";
-        let currentSeed = null;
 
-        // স্টাইল ক্লিক নির্বাচন
-        document.querySelectorAll('.style-item').forEach(item => {
-            item.addEventListener('click', () => {
-                document.querySelectorAll('.style-item').forEach(el => el.classList.remove('active'));
-                item.classList.add('active');
-                selectedStyle = item.getAttribute('data-style');
-            });
-        });
+        // ব্রাউজারের নিজস্ব মেমোরি রিড করা (ইউজারের ডিভাইসে সেভ থাকে)
+        let savedSeed = localStorage.getItem("tg_seed") || null;
+        let savedBasePrompt = localStorage.getItem("tg_base_prompt") || "";
 
         const generateBtn = document.getElementById('generateBtn');
         const promptInput = document.getElementById('promptInput');
@@ -406,21 +429,56 @@
         const loader = document.getElementById('loader');
         const downloadBtn = document.getElementById('downloadBtn');
         const keepCharacterToggle = document.getElementById('keepCharacterToggle');
-        const seedStatus = document.getElementById('seedStatus');
+        const memoryStatus = document.getElementById('memoryStatus');
+        const resetMemoryBtn = document.getElementById('resetMemoryBtn');
+
+        function updateMemoryUI() {
+            if (savedSeed && savedBasePrompt) {
+                resetMemoryBtn.style.display = "inline-flex";
+                if (keepCharacterToggle.checked) {
+                    memoryStatus.innerText = "চরিত্র লক করা আছে (মিল বজায় রাখা হবে)";
+                    memoryStatus.style.color = "#ff3366";
+                } else {
+                    memoryStatus.innerText = "একটি চরিত্র মেমোরিতে আছে (লক করতে টগল অন করুন)";
+                    memoryStatus.style.color = "#8b949e";
+                }
+            } else {
+                resetMemoryBtn.style.display = "none";
+                memoryStatus.innerText = "কোনো চরিত্র সেভ নেই (নতুন ক্যারেক্টার তৈরি হবে)";
+                memoryStatus.style.color = "#8b949e";
+                keepCharacterToggle.checked = false;
+            }
+        }
+
+        updateMemoryUI();
+
+        // স্টাইল সিলেকশন
+        document.querySelectorAll('.style-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.style-item').forEach(el => el.classList.remove('active'));
+                item.classList.add('active');
+                selectedStyle = item.getAttribute('data-style');
+            });
+        });
 
         keepCharacterToggle.addEventListener('change', () => {
-            if (keepCharacterToggle.checked) {
-                if (!currentSeed) {
-                    alert("প্রথমে একটি সাধারণ ছবি তৈরি করুন, তারপর সেই চরিত্রের মিল রাখার অপশনটি অন করুন।");
-                    keepCharacterToggle.checked = false;
-                    return;
-                }
-                seedStatus.innerText = "চরিত্র লক করা আছে (Seed: " + currentSeed + ")";
-                seedStatus.style.color = "#ff3366";
-            } else {
-                seedStatus.innerText = "নতুন চরিত্র/সিড তৈরি হবে";
-                seedStatus.style.color = "#8b949e";
+            if (keepCharacterToggle.checked && (!savedSeed || !savedBasePrompt)) {
+                alert("প্রথমে একটি চরিত্র বা দৃশ্যের ছবি বানান, তারপর এই সুইচটি অন করুন।");
+                keepCharacterToggle.checked = false;
+                return;
             }
+            updateMemoryUI();
+        });
+
+        // মেমোরি রিসেট করা
+        resetMemoryBtn.addEventListener('click', () => {
+            localStorage.removeItem("tg_seed");
+            localStorage.removeItem("tg_base_prompt");
+            savedSeed = null;
+            savedBasePrompt = "";
+            keepCharacterToggle.checked = false;
+            updateMemoryUI();
+            alert("মেমোরি ক্লিয়ার করা হয়েছে। এবার সম্পূর্ণ নতুন চরিত্র তৈরি হবে।");
         });
 
         generateBtn.addEventListener('click', async () => {
@@ -430,12 +488,18 @@
                 return;
             }
 
-            let finalPromptParts = [rawPrompt];
-            if (selectedStyle) finalPromptParts.push(selectedStyle);
-            const promptToSend = finalPromptParts.join(", ");
+            // Consistency চালু থাকলে প্রম্পট মেমোরি থেকে যুক্ত হবে
+            let promptToSend = rawPrompt;
+            let seedToSend = null;
 
-            // টগল অন থাকলে আগের সিড পাঠানো হবে, না থাকলে নতুন সিড যাবে
-            let seedToSend = keepCharacterToggle.checked ? currentSeed : null;
+            if (keepCharacterToggle.checked && savedBasePrompt) {
+                promptToSend = `Same character from: (${savedBasePrompt}), exact facial features, identical clothing and appearance, now performing: ${rawPrompt}`;
+                seedToSend = savedSeed;
+            }
+
+            if (selectedStyle) {
+                promptToSend += `, ${selectedStyle}`;
+            }
 
             generateBtn.disabled = true;
             placeholder.style.display = 'none';
@@ -461,13 +525,15 @@
                     loader.style.display = 'none';
                     generateBtn.disabled = false;
 
-                    // সিড সংরক্ষণ করা
-                    currentSeed = data.seed;
-                    if (keepCharacterToggle.checked) {
-                        seedStatus.innerText = "একই চরিত্র বজায় রাখা হচ্ছে (Seed: " + currentSeed + ")";
-                    } else {
-                        seedStatus.innerText = "পূর্ববর্তী সিড: " + currentSeed;
+                    // টগল বন্ধ অবস্থায় ছবি বানালে নতুন চরিত্র ডিভাইসে সেভ হবে
+                    if (!keepCharacterToggle.checked) {
+                        savedSeed = data.seed;
+                        savedBasePrompt = rawPrompt;
+                        localStorage.setItem("tg_seed", data.seed);
+                        localStorage.setItem("tg_base_prompt", rawPrompt);
                     }
+
+                    updateMemoryUI();
 
                     downloadBtn.href = data.image;
                     downloadBtn.style.display = 'flex';
