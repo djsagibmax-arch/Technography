@@ -21,7 +21,6 @@
     h2 { color: #22d3ee; margin-bottom: 8px; font-size: 22px; font-weight: 800; }
     p.subtitle { color: #9ca3af; font-size: 13px; margin-bottom: 20px; }
 
-    /* সরাসরি ক্লিকযোগ্য ফাইল আপলোড লেবেল */
     .upload-label { 
       border: 2px dashed #06b6d4; 
       border-radius: 16px; 
@@ -36,7 +35,6 @@
     .upload-label p { font-size: 14px; color: #e2e8f0; font-weight: 600; }
     .upload-label span { font-size: 11px; color: #94a3b8; display: block; margin-top: 5px; }
 
-    /* লুকানো ইনপুট */
     #imageInput { display: none; }
 
     .preview-container { display: none; margin-top: 20px; flex-direction: column; align-items: center; gap: 15px; }
@@ -62,7 +60,6 @@
       <h2><i class="fa-solid fa-scissors"></i> AI ব্যাকগ্রাউন্ড রিমুভার</h2>
       <p class="subtitle">১ ক্লিকে ছবির ব্যাকগ্রাউন্ড সম্পূর্ণ ফ্রিতে স্বচ্ছ (Transparent) করুন</p>
 
-      <!-- সরাসরি লেবেলে ইনপুট绑定 করায় মোবাইলে সবসময় কাজ করবে -->
       <label for="imageInput" class="upload-label">
         <i class="fa-solid fa-cloud-arrow-up"></i>
         <p>ছবি নির্বাচন করতে এখানে চাপ দিন</p>
@@ -84,18 +81,13 @@
   </div>
 
   <script type="module">
-    import { pipeline, env } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.3.3";
-
-    // ব্রাউজারে লোকাল রানটাইম নিশ্চিত করা
-    env.allowLocalModels = false;
+    import removeBackground from "https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.8/+esm";
 
     const fileInput = document.getElementById("imageInput");
     const status = document.getElementById("statusMsg");
     const previewArea = document.getElementById("previewArea");
     const resultImg = document.getElementById("resultImage");
     const downloadBtn = document.getElementById("downloadBtn");
-
-    let segmenter = null;
 
     fileInput.addEventListener("change", async (e) => {
       const file = e.target.files[0];
@@ -105,75 +97,26 @@
       status.innerHTML = `<i class="fa-solid fa-circle-notch spinner"></i> এআই মডেল প্রস্তুত হচ্ছে (প্রথমবার একটু সময় নিতে পারে)...`;
 
       try {
-        // লাইটওয়েট ও ফাস্ট ব্যাকগ্রাউন্ড রিমুভার মডেল
-        if (!segmenter) {
-          status.innerHTML = `<i class="fa-solid fa-circle-notch spinner"></i> লাইটওয়েট এআই লোড হচ্ছে...`;
-          segmenter = await pipeline("image-segmentation", "briaai/RMBG-1.4", {
-            device: "wasm"
-          });
-        }
+        const blob = await removeBackground(file, {
+          progress: (key, current, total) => {
+            if (total && current) {
+              const percent = Math.round((current / total) * 100);
+              status.innerHTML = `<i class="fa-solid fa-circle-notch spinner"></i> প্রসেসিং চলছে: ${percent}%...`;
+            } else {
+              status.innerHTML = `<i class="fa-solid fa-circle-notch spinner"></i> ব্যাকগ্রাউন্ড নিখুঁতভাবে কাটা হচ্ছে...`;
+            }
+          }
+        });
 
-        status.innerHTML = `<i class="fa-solid fa-circle-notch spinner"></i> ব্যাকগ্রাউন্ড প্রসেসিং চলছে...`;
+        const finalUrl = URL.createObjectURL(blob);
+        resultImg.src = finalUrl;
+        downloadBtn.href = finalUrl;
 
-        const imageURL = URL.createObjectURL(file);
-        const output = await segmenter(imageURL);
-
-        // ট্রান্সপারেন্ট ক্যানভাস থেকে ছবি তৈরি
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        const img = new Image();
-
-        img.onload = () => {
-          canvas.width = img.naturalWidth;
-          canvas.height = img.naturalHeight;
-          ctx.drawImage(img, 0, 0);
-
-          canvas.toBlob((blob) => {
-            const finalUrl = URL.createObjectURL(blob);
-            resultImg.src = finalUrl;
-            downloadBtn.href = finalUrl;
-
-            status.innerHTML = "✅ ব্যাকগ্রাউন্ড সফলভাবে স্বচ্ছ করা হয়েছে!";
-            previewArea.style.display = "flex";
-          }, "image/png");
-        };
-
-        // আউটপুট মাস্ক যুক্ত করা
-        const maskImg = new Image();
-        maskImg.onload = () => {
-          canvas.width = maskImg.width;
-          canvas.height = maskImg.height;
-          ctx.drawImage(maskImg, 0, 0);
-          ctx.globalCompositeOperation = "source-in";
-          ctx.drawImage(img, 0, 0);
-        };
-        
-        // আউটপুট ইমেজ নেওয়া
-        const resultMask = output[0].mask;
-        const maskCanvas = document.createElement("canvas");
-        maskCanvas.width = resultMask.width;
-        maskCanvas.height = resultMask.height;
-        const maskCtx = maskCanvas.getContext("2d");
-        const imgData = maskCtx.createImageData(resultMask.width, resultMask.height);
-        
-        // কালার বাইট সেট করা
-        for (let i = 0; i < resultMask.data.length; i++) {
-          const alpha = resultMask.data[i];
-          imgData.data[i * 4] = 0;
-          imgData.data[i * 4 + 1] = 0;
-          imgData.data[i * 4 + 2] = 0;
-          imgData.data[i * 4 + 3] = alpha;
-        }
-        
-        // রেন্ডার রেজাল্ট
-        resultImg.src = output[0].blob ? URL.createObjectURL(output[0].blob) : imageURL;
-        downloadBtn.href = resultImg.src;
-        status.innerHTML = "✅ ব্যাকগ্রাউন্ড সফলভাবে সরানো হয়েছে!";
+        status.innerHTML = "✅ ব্যাকগ্রাউন্ড সফলভাবে স্বচ্ছ করা হয়েছে!";
         previewArea.style.display = "flex";
-
       } catch (err) {
         console.error(err);
-        status.innerText = "❌ সমস্যা হয়েছে: " + err.message;
+        status.innerHTML = "❌ সমস্যা হয়েছে: " + err.message;
       }
     });
   </script>
