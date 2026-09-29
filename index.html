@@ -206,23 +206,30 @@
         </a>
     </aside>
 
-    <!-- হেডার (AI Image Generator লিঙ্ক সহ) -->
+    <!-- হেডার (AI Image ও AI Voice টুল লিঙ্ক সহ) -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/90 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="text-xl font-bold tracking-wider text-cyan-400">
+            <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400 no-underline">
                 Technography
-            </div>
+            </a>
 
-            <div class="flex items-center gap-3">
-                <!-- AI Generator পেজের লিঙ্ক বাটন -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- AI Image Tool লিঙ্ক বাটন -->
                 <a href="ai-image-generator.html"
-                   class="inline-flex items-center gap-1.5 bg-purple-950/80 hover:bg-purple-900/90 text-purple-300 border border-purple-500/40 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition">
+                   class="inline-flex items-center gap-1.5 bg-purple-950/80 hover:bg-purple-900/90 text-purple-300 border border-purple-500/40 px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition">
                     <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i>
-                    <span>AI Image Tool</span>
+                    <span class="hidden xs:inline">AI Image</span>
+                </a>
+
+                <!-- AI Voice Tool লিঙ্ক বাটন (নতুন যুক্ত) -->
+                <a href="ai-voice-generator.html"
+                   class="inline-flex items-center gap-1.5 bg-cyan-950/80 hover:bg-cyan-900/90 text-cyan-300 border border-cyan-500/40 px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition">
+                    <i class="fa-solid fa-microphone-lines text-cyan-400"></i>
+                    <span>AI Voice</span>
                 </a>
 
                 <a href="select-payment.html?product=1"
-                   class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow transition">
+                   class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow transition whitespace-nowrap">
                     এখনই কিনুন
                 </a>
             </div>
@@ -296,7 +303,7 @@
 
 
         <!-- এআই ইমেজ জেনারেটর প্রমো ব্যানার কার্ড -->
-        <div class="my-10 max-w-4xl mx-auto bg-gradient-to-r from-purple-950/60 via-slate-900 to-cyan-950/60 border border-purple-500/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+        <div class="my-6 max-w-4xl mx-auto bg-gradient-to-r from-purple-950/60 via-slate-900 to-cyan-950/60 border border-purple-500/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
             <div class="text-left">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold mb-2">
                     <i class="fa-solid fa-sparkles"></i> নতুন ফ্রি টুল
@@ -311,6 +318,26 @@
             <a href="ai-image-generator.html"
                class="whitespace-nowrap bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold px-6 py-3 rounded-xl text-sm shadow-lg transition flex items-center gap-2">
                 <span>ছবি তৈরি শুরু করুন</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- এআই ভয়েস জেনারেটর প্রমো ব্যানার কার্ড (নতুন যুক্ত) -->
+        <div class="my-6 max-w-4xl mx-auto bg-gradient-to-r from-cyan-950/60 via-slate-900 to-blue-950/60 border border-cyan-500/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold mb-2">
+                    <i class="fa-solid fa-microphone-lines"></i> নতুন AI ভয়েস টুল
+                </div>
+                <h3 class="text-xl sm:text-2xl font-black text-white mb-2">
+                    Technography AI টেক্সট টু ভয়েস
+                </h3>
+                <p class="text-slate-400 text-xs sm:text-sm max-w-lg">
+                    বাংলা ও ইংরেজি টেক্সট দিয়ে আকর্ষণীয় ভয়েসওভার (Voiceover) তৈরি করুন এবং সরাসরি ডাউনলোড করে রিলস ও শর্টসে ব্যবহার করুন।
+                </p>
+            </div>
+            <a href="ai-voice-generator.html"
+               class="whitespace-nowrap bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold px-6 py-3 rounded-xl text-sm shadow-lg transition flex items-center gap-2">
+                <span>ভয়েস তৈরি করুন</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
