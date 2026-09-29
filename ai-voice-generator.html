@@ -9,19 +9,16 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
     body { background-color: #030712; color: #f3f4f6; min-height: 100vh; display: flex; flex-direction: column; }
     
-    /* হেডার */
     header { background: #0f172a; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; }
     .brand { font-size: 20px; font-weight: bold; color: #22d3ee; text-decoration: none; }
     .back-btn { color: #94a3b8; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 6px; }
     .back-btn:hover { color: #fff; }
 
-    /* মেইন কার্ড */
     .container { flex: 1; display: flex; justify-content: center; align-items: center; padding: 25px 15px; }
     .card { background: #111827; border: 1px solid #1f2937; width: 100%; max-width: 550px; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
     .card h2 { text-align: center; color: #22d3ee; margin-bottom: 8px; font-size: 22px; font-weight: 800; }
     .card p.subtitle { text-align: center; color: #9ca3af; font-size: 13px; margin-bottom: 22px; }
 
-    /* ইনপুট ফিল্ড ও বাটন */
     label { font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block; font-weight: 600; }
     textarea { width: 100%; height: 120px; border-radius: 12px; border: 1px solid #374151; background: #030712; color: #fff; padding: 12px; font-size: 14px; resize: vertical; outline: none; margin-bottom: 15px; }
     textarea:focus { border-color: #22d3ee; }
@@ -33,7 +30,6 @@
     .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
     .btn-submit:disabled { background: #374151; cursor: not-allowed; opacity: 0.6; }
 
-    /* স্ট্যাটাস ও অডিও প্লেয়ার */
     #statusMsg { text-align: center; margin-top: 15px; font-size: 13px; color: #22d3ee; font-weight: 500; }
     audio { width: 100%; margin-top: 20px; display: none; outline: none; }
     
@@ -50,19 +46,19 @@
 
   <div class="container">
     <div class="card">
-      <h2><i class="fa-solid fa-microphone-lines"></i> AI Text to Voice</h2>
-      <p class="subtitle">আপনার টেক্সটকে প্রফেশনাল ও ন্যাচারাল ভয়েসে রূপান্তর করুন</p>
+      <h2><i class="fa-solid fa-microphone-lines"></i> AI Studio Voice</h2>
+      <p class="subtitle">মানুষের মতো স্বাভাবিক ও প্রাণবন্ত ভয়েস তৈরি করুন</p>
 
-      <label for="ttsInput">টেক্সট লিখুন:</label>
-      <textarea id="ttsInput" placeholder="এখানে বাংলা বা ইংরেজি লিখুন..."></textarea>
+      <label for="ttsInput">টেক্সট লিখুন (দাঁড়ি ও কমা ব্যবহার করুন):</label>
+      <textarea id="ttsInput" placeholder="ভিডিও ভাইরাল হচ্ছে না? প্রতিদিন ভালো কনটেন্ট বানানোর সময় পাচ্ছেন না? আর কোনো চিন্তা নেই!"></textarea>
 
       <div class="grid-options">
         <div>
           <label for="ttsVoice">ভয়েস সিলেক্ট করুন:</label>
           <select id="ttsVoice">
-            <!-- সর্বোচ্চ ন্যাচারাল ভয়েস তালিকা -->
-            <option value="bn-IN-BashkarNeural" selected>🇮🇳 ভাস্কর (গভীর ও ন্যাচারাল - পুরুষ)</option>
-            <option value="bn-IN-TanishaaNeural">🇮🇳 তানিশা (মিষ্টি কণ্ঠ - নারী)</option>
+            <!-- সর্বোচ্চ ক্লিয়ার ও বাস্তবসম্মত ভয়েস -->
+            <option value="bn-IN-BashkarNeural" selected>🇮🇳 ভাস্কর (গম্ভীর ও ন্যাচারাল পুরুষ)</option>
+            <option value="bn-IN-TanishaaNeural">🇮🇳 তানিশা (মিষ্টি ও স্পষ্ট নারী)</option>
             <option value="bn-BD-PradeepNeural">🇧🇩 প্রদীপ (বাংলাদেশ - পুরুষ)</option>
             <option value="bn-BD-NabanitaNeural">🇧🇩 নবনীতা (বাংলাদেশ - নারী)</option>
             <option value="en-US-ChristopherNeural">🇺🇸 Christopher (US - Male)</option>
@@ -71,12 +67,11 @@
         </div>
 
         <div>
-          <label for="ttsSpeed">কথা বলার গতি (Speed):</label>
+          <label for="ttsSpeed">কথা বলার টোন:</label>
           <select id="ttsSpeed">
-            <option value="-10%">ধীর (-10%)</option>
-            <option value="-4%" selected>ন্যাচারাল রিল্যাক্সড (-4%)</option>
-            <option value="+0%">স্বাভাবিক (Normal)</option>
-            <option value="+8%">রিলস/শর্টস ফাস্ট (+8%)</option>
+            <option value="-6%" selected>ন্যাচারাল কথা বলা (-6%)</option>
+            <option value="-2%">স্বাভাবিক স্পষ্ট (-2%)</option>
+            <option value="+5%">দ্রুত রিলস স্টাইল (+5%)</option>
           </select>
         </div>
       </div>
@@ -95,7 +90,6 @@
   </div>
 
   <script>
-    // আপনার লাইভ Render ব্যাকএন্ড লিঙ্ক
     const BACKEND_URL = "https://technograpy-ai-voice.onrender.com/generate-audio";
 
     async function generateSpeech() {
@@ -113,7 +107,7 @@
       }
 
       btn.disabled = true;
-      status.innerText = "ভয়েস তৈরি হচ্ছে, অনুগ্রহ করে কয়েক সেকেন্ড অপেক্ষা করুন...";
+      status.innerText = "স্টুডিও কোয়ালিটি ভয়েস তৈরি হচ্ছে, অপেক্ষা করুন...";
       player.style.display = "none";
       downloadBtn.style.display = "none";
 
@@ -121,7 +115,12 @@
         const response = await fetch(BACKEND_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, voice, rate })
+          body: JSON.stringify({ 
+            text: text, 
+            voice: voice, 
+            rate: rate,
+            pitch: voice.includes("Bashkar") ? "-3Hz" : "+0Hz"
+          })
         });
 
         if (!response.ok) {
@@ -139,7 +138,7 @@
         downloadBtn.href = audioUrl;
         downloadBtn.style.display = "block";
 
-        status.innerText = "✅ ভয়েস সফলভাবে তৈরি হয়েছে!";
+        status.innerText = "✅ মানুষের মতো স্বাভাবিক ভয়েস তৈরি সম্পন্ন!";
       } catch (err) {
         status.innerText = "❌ সমস্যা হয়েছে: " + err.message;
       } finally {
