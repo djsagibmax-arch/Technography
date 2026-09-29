@@ -265,15 +265,15 @@
             
             <div class="input-group">
                 <label for="promptInput">ছবির প্রম্পট লিখুন:</label>
-                <textarea id="promptInput" placeholder="A futuristic car on a neon highway, cinematic lighting, ultra-detailed 8k..."></textarea>
+                <textarea id="promptInput" placeholder="A boy in a garden, ultra detailed, 8k..."></textarea>
             </div>
 
             <div class="row-options">
                 <div>
                     <label for="engineVersion">এআই মডেল:</label>
                     <select id="engineVersion">
-                        <option value="flux-realism" selected>FLUX Realism Ultra</option>
-                        <option value="flux">FLUX Schnell HD</option>
+                        <option value="flux" selected>FLUX Schnell (দ্রুত ও উন্নত)</option>
+                        <option value="flux-realism">FLUX Realism Ultra</option>
                         <option value="flux-anime">Anime Style</option>
                         <option value="flux-3d">3D Render</option>
                     </select>
@@ -304,14 +304,14 @@
 
                 <div class="loader" id="loader">
                     <div class="spinner"></div>
-                    <p id="loaderText">FLUX AI ছবি রেন্ডার করছে...</p>
+                    <p id="loaderText">AI ছবি তৈরি করছে...</p>
                 </div>
 
                 <img id="outputImg" class="generated-image" alt="Generated Output">
             </div>
 
             <a id="downloadBtn" class="btn-download" href="#" target="_blank" download="technography-ai.jpg">
-                <i class="fa-solid fa-download"></i> ফুল এইচডি ছবি ডাউনলোড
+                <i class="fa-solid fa-download"></i> ছবি ডাউনলোড করুন
             </a>
         </div>
     </div>
@@ -337,7 +337,7 @@
                 return;
             }
 
-            // বাটন লক ও স্টেট ক্লিয়ার
+            // স্টেট পরিবর্তন
             generateBtn.disabled = true;
             placeholder.style.display = 'none';
             outputImg.style.display = 'none';
@@ -345,48 +345,33 @@
             loader.style.display = 'flex';
 
             const [width, height] = aspectRatio.value.split('x');
-            const seed = Math.floor(Math.random() * 99999999);
-            const timestamp = Date.now(); // ক্যাশ প্রতিরোধক
+            const seed = Math.floor(Math.random() * 9999999);
             const engine = engineVersion.value;
 
             // প্রম্পট এনকোডিং
-            const enhancedPrompt = encodeURIComponent(rawPrompt + ", 8k uhd, photorealistic, sharp focus");
+            const encodedPrompt = encodeURIComponent(rawPrompt);
             
-            // রেন্ডার URL
-            const imageUrl = `https://image.pollinations.ai/prompt/${enhancedPrompt}?width=${width}&height=${height}&model=${engine}&seed=${seed}&nologo=true&t=${timestamp}`;
+            // রেন্ডার URL (ক্লিন ও ব্লক-মুক্ত লিংক)
+            const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&model=${engine}&seed=${seed}&nologo=true`;
 
-            // টাইমআউট হ্যান্ডলার (৩০ সেকেন্ড)
-            const requestTimeout = setTimeout(() => {
-                resetUIOnError("সার্ভার রেসপন্স করতে বেশি সময় নিচ্ছে। আবার চেষ্টা করুন।");
-            }, 30000);
-
-            // নতুন অবজেক্ট দিয়ে ইমেজ প্রিলোড
-            const preloader = new Image();
-            preloader.crossOrigin = "anonymous";
-            preloader.src = imageUrl;
-
-            preloader.onload = () => {
-                clearTimeout(requestTimeout);
-                outputImg.src = imageUrl;
+            // সরাসরি ইমেজ ট্যাগে সোর্স সেট করে লোড নিশ্চিত করা
+            outputImg.onload = () => {
                 outputImg.style.display = 'block';
                 loader.style.display = 'none';
-                
                 generateBtn.disabled = false;
                 downloadBtn.href = imageUrl;
                 downloadBtn.style.display = 'flex';
             };
 
-            preloader.onerror = () => {
-                clearTimeout(requestTimeout);
-                resetUIOnError("ছবি লোড করতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।");
-            };
-
-            function resetUIOnError(message) {
-                alert(message);
+            outputImg.onerror = () => {
+                alert("দুঃখিত, ছবিটি লোড করা সম্ভব হয়নি। আবার চেষ্টা করুন।");
                 loader.style.display = 'none';
                 placeholder.style.display = 'block';
                 generateBtn.disabled = false;
-            }
+            };
+
+            // ইমেজ লোড শুরু করা
+            outputImg.src = imageUrl;
         });
     </script>
 </body>
