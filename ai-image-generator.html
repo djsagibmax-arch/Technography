@@ -236,7 +236,6 @@
             margin-top: 15px;
             background: #10b981;
             color: white;
-            text-decoration: none;
             border-radius: 8px;
             padding: 12px;
             text-align: center;
@@ -247,6 +246,8 @@
             gap: 8px;
             cursor: pointer;
             border: none;
+            width: 100%;
+            font-size: 0.95rem;
         }
 
         .btn-download:hover {
@@ -279,8 +280,8 @@
             <h2><i class="fa-solid fa-sliders"></i> ইমেজ কনফিগারেশন</h2>
             
             <div class="input-group">
-                <label for="promptInput">ছবির প্রম্পট লিখুন (ইংরেজি বা বাংলা):</label>
-                <textarea id="promptInput" placeholder="A futuristic city in Bangladesh, ultra realistic 8k..."></textarea>
+                <label for="promptInput">ছবির প্রম্পট লিখুন:</label>
+                <textarea id="promptInput" placeholder="A handsome boy walking on a street, 8k, cinematic..."></textarea>
             </div>
 
             <div class="row-options">
@@ -288,10 +289,10 @@
                     <label for="imageStyle">স্টাইল বেছে নিন:</label>
                     <select id="imageStyle">
                         <option value="" selected>Default (স্বাভাবিক)</option>
-                        <option value=", highly realistic, 8k photograph, cinematic lighting">Realism Ultra (বাস্তবসম্মত)</option>
-                        <option value=", modern anime style, makoto shinkai visual, highly detailed art">Anime Art (অ্যানিমে)</option>
-                        <option value=", 3d render, blender octane render, smooth 3d character">3D Render (থ্রিডি)</option>
-                        <option value=", cyberpunk style, neon glowing lights, futuristic">Cyberpunk (সাইবারপাঙ্ক)</option>
+                        <option value=", highly realistic photograph, 8k, photorealistic">Realism Ultra (বাস্তবসম্মত)</option>
+                        <option value=", modern anime style, makoto shinkai aesthetic">Anime Art (অ্যানিমে)</option>
+                        <option value=", 3d render, blender octane render, character design">3D Render (থ্রিডি)</option>
+                        <option value=", cyberpunk style, neon lights, futuristic city">Cyberpunk (সাইবারপাঙ্ক)</option>
                     </select>
                 </div>
                 <div>
@@ -304,7 +305,7 @@
                 </div>
             </div>
 
-            <button id="generateBtn" class="btn-generate">
+            <button id="generateBtn" class="btn-generate" onclick="handleGenerate()">
                 <i class="fa-solid fa-bolt"></i> ছবি তৈরি করুন
             </button>
         </div>
@@ -323,10 +324,10 @@
                     <p id="loaderText">AI ছবি তৈরি করছে, ১০-১৫ সেকেন্ড সময় লাগতে পারে...</p>
                 </div>
 
-                <img id="outputImg" class="generated-image" alt="Generated Output">
+                <img id="outputImg" class="generated-image" alt="Generated Output" crossorigin="anonymous">
             </div>
 
-            <button id="downloadBtn" class="btn-download" onclick="downloadImage()">
+            <button id="downloadBtn" class="btn-download" onclick="triggerDownload()">
                 <i class="fa-solid fa-download"></i> ছবি ডাউনলোড করুন
             </button>
         </div>
@@ -346,16 +347,16 @@
         const loader = document.getElementById('loader');
         const downloadBtn = document.getElementById('downloadBtn');
 
-        let currentImageBlobUrl = null;
+        let currentActiveUrl = "";
 
-        generateBtn.addEventListener('click', async () => {
+        function handleGenerate() {
             const rawPrompt = promptInput.value.trim();
             if (!rawPrompt) {
-                alert("দয়া করে একটি প্রম্পট লিখুন!");
+                alert("দয়া করে একটি প্রম্পট লিখুন!");
                 return;
             }
 
-            // বাটন ও লোডার স্টেট হ্যান্ডলিং
+            // বাটন ডিজেবল ও লোডার চালু
             generateBtn.disabled = true;
             placeholder.style.display = 'none';
             outputImg.style.display = 'none';
@@ -363,49 +364,61 @@
             loader.style.display = 'flex';
 
             const [width, height] = aspectRatio.value.split('x');
-            const seed = Math.floor(Math.random() * 9999999);
-            const style = imageStyle.value;
-
-            // প্রম্পটের সাথে স্টাইল যুক্ত করা এবং এনকোড করা
-            const fullPrompt = rawPrompt + style;
+            // প্রতিবার সম্পূর্ণ নতুন সীড এবং ইউনিক টাইমস্ট্যাম্প তৈরি যাতে ব্রাউজার ক্যাশ না করে
+            const seed = Math.floor(Math.random() * 99999999);
+            const timestamp = Date.now();
+            const fullPrompt = rawPrompt + imageStyle.value;
             const encodedPrompt = encodeURIComponent(fullPrompt);
-            
-            // বৈধ মডেল `flux` ব্যবহার করে রিকোয়েস্ট
-            const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&model=flux&seed=${seed}&nologo=true`;
 
-            try {
-                // Fetch ব্যবহার করে ইমেজ আনা যাতে এরর সহজে ধরা যায় এবং ডাউনলোডে সমস্যা না হয়
-                const response = await fetch(imageUrl);
-                if (!response.ok) throw new Error("ছবি তৈরিতে সমস্যা হয়েছে");
+            // নতুন রিকোয়েস্ট URL
+            const targetUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&model=flux&seed=${seed}&nologo=true&t=${timestamp}`;
+            currentActiveUrl = targetUrl;
 
-                const blob = await response.blob();
-                
-                // আগের blob url খালি করা
-                if (currentImageBlobUrl) URL.revokeObjectURL(currentImageBlobUrl);
-                currentImageBlobUrl = URL.createObjectURL(blob);
+            // নতুন ইমেজ অবজেক্ট তৈরি করে ব্যাকগ্রাউন্ডে লোড নিশ্চিত করা
+            const preloader = new Image();
+            preloader.crossOrigin = "anonymous";
 
-                outputImg.src = currentImageBlobUrl;
+            preloader.onload = () => {
+                outputImg.src = preloader.src;
                 outputImg.style.display = 'block';
                 loader.style.display = 'none';
                 downloadBtn.style.display = 'flex';
-            } catch (err) {
-                alert("দুঃখিত, ছবিটি লোড করা সম্ভব হয়নি। সার্ভার ব্যস্ত থাকতে পারে, আবার চেষ্টা করুন।");
+                generateBtn.disabled = false;
+            };
+
+            preloader.onerror = () => {
+                alert("ছবি তৈরিতে সমস্যা হয়েছে। সার্ভার ব্যস্ত থাকতে পারে, দয়া করে আবার চেষ্টা করুন।");
                 loader.style.display = 'none';
                 placeholder.style.display = 'block';
-            } finally {
                 generateBtn.disabled = false;
-            }
-        });
+            };
 
-        // ব্রাউজার থেকে সরাসরি গ্যালারিতে ছবি সেভ করার ফাংশন
-        function downloadImage() {
-            if (!currentImageBlobUrl) return;
-            const a = document.createElement('a');
-            a.href = currentImageBlobUrl;
-            a.download = `technography-ai-${Date.now()}.jpg`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+            // ইমেজ লোড শুরু করা
+            preloader.src = targetUrl;
+        }
+
+        // ক্যানভাস দিয়ে সরাসরি এক ক্লিকে ডাউনলোড
+        function triggerDownload() {
+            if (!outputImg.src) return;
+
+            try {
+                const canvas = document.createElement("canvas");
+                canvas.width = outputImg.naturalWidth || 1024;
+                canvas.height = outputImg.naturalHeight || 1024;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(outputImg, 0, 0);
+
+                const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+                const a = document.createElement("a");
+                a.href = dataUrl;
+                a.download = `technography-ai-${Date.now()}.jpg`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } catch (e) {
+                // ক্যানভাস ফেইল করলে সরাসরি উইন্ডো ওপেন দিয়ে ফলব্যাক ডাউনলোড
+                window.open(currentActiveUrl, '_blank');
+            }
         }
     </script>
 </body>
