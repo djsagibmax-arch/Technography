@@ -31,6 +31,7 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
+  <!-- হেডার -->
   <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/90 border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
       <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400 no-underline">
@@ -42,6 +43,7 @@
     </div>
   </header>
 
+  <!-- মূল কন্টেইনার -->
   <main class="flex-1 flex items-center justify-center px-4 py-8">
     <div class="neon-card w-full max-w-lg rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden">
       
@@ -56,6 +58,7 @@
         যেকোনো ছবির ব্যাকগ্রাউন্ড মাত্র ১ ক্লিকে রিমুভ করে স্বচ্ছ PNG ডাউনলোড করুন
       </p>
 
+      <!-- ১. আপলোড বক্স -->
       <div id="uploadBox" class="relative border-2 border-dashed border-cyan-500/40 hover:border-cyan-400 bg-slate-950/60 rounded-2xl p-8 transition cursor-pointer">
         <input type="file" id="imageInput" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
         <div class="w-16 h-16 mx-auto rounded-full bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-2xl mb-3">
@@ -69,6 +72,7 @@
         </span>
       </div>
 
+      <!-- ২. সিলেক্ট করা ছবির প্রিভিউ -->
       <div id="previewArea" class="hidden mt-6 space-y-4">
         <div class="bg-emerald-950/40 border border-emerald-500/40 rounded-2xl p-3 flex items-center justify-between">
           <div class="flex items-center gap-2.5 text-left">
@@ -95,11 +99,13 @@
         </button>
       </div>
 
+      <!-- ৩. স্ট্যাটাস এরিয়া -->
       <div id="statusBox" class="hidden mt-5 bg-slate-900/90 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-cyan-300 flex items-center justify-center gap-2">
         <i class="fa-solid fa-circle-notch spinner text-base"></i>
         <span id="statusText">AI ব্যাকগ্রাউন্ড প্রসেস করছে...</span>
       </div>
 
+      <!-- ৪. স্বচ্ছ রেজাল্ট এরিয়া -->
       <div id="resultArea" class="hidden mt-6 flex-col items-center gap-4">
         <p class="text-xs font-bold text-emerald-400 flex items-center gap-1.5 self-start">
           <i class="fa-solid fa-circle-check"></i> ব্যাকগ্রাউন্ড স্বচ্ছ করা সম্পন্ন!
@@ -107,7 +113,7 @@
         <div class="w-full max-h-72 rounded-2xl overflow-hidden border border-emerald-500/40 checkered-bg flex items-center justify-center p-2">
           <img id="outputImg" class="max-h-64 object-contain rounded-lg" alt="Transparent Result">
         </div>
-        <a id="downloadLink" href="#" download="technography_transparent.png" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-4 px-4 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition">
+        <a id="downloadLink" href="#" download="technography_cutout.png" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-4 px-4 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition">
           <i class="fa-solid fa-download text-base"></i>
           <span>স্বচ্ছ PNG ছবি ডাউনলোড করুন</span>
         </a>
@@ -121,9 +127,8 @@
   </footer>
 
   <script>
-    // গুরুত্বপূর্ণ: এখানে আপনার ইমেজ জেনারেটর সার্ভারের Render URL বসান
-    // আপনার ai-image-generator.html ফাইলে যে লিঙ্কটি ব্যবহার করেছেন, সেই লিঙ্কের শেষভাগে /remove-bg দিয়ে দিন
-    const BACKEND_URL = "https://technograpy-ai-voice.onrender.com/remove-bg";
+    // আপনার সঠিক Render সার্ভিস লিঙ্ক
+    const BACKEND_URL = "https://technography-ai.onrender.com/remove-bg";
 
     let selectedImageFile = null;
 
@@ -141,7 +146,6 @@
     const btnText = document.getElementById("btnText");
     const btnIcon = document.getElementById("btnIcon");
 
-    // ছবি নির্বাচন হ্যান্ডলার
     imageInput.addEventListener("change", function(e) {
       const file = this.files[0];
       if (!file) return;
@@ -170,7 +174,6 @@
       statusBox.classList.add("hidden");
     }
 
-    // বাটনে ক্লিক হ্যান্ডলার (সরাসরি ইভেন্ট লিসেনার)
     processBtn.addEventListener("click", async function() {
       if (!selectedImageFile) {
         alert("দয়া করে প্রথমে একটি ছবি নির্বাচন করুন!");
@@ -210,7 +213,7 @@
         resultArea.classList.add("flex");
       } catch (err) {
         console.error(err);
-        alert("ত্রুটি: " + err.message + "\n\n(Render সার্ভার স্লিপ মোডে থাকলে প্রথমবার ১৫-২০ সেকেন্ড সময় নিতে পারে, একটু পর আবার চেষ্টা করুন)");
+        alert("ত্রুটি: " + err.message);
         statusText.textContent = "❌ ব্যর্থ হয়েছে: " + err.message;
       } finally {
         processBtn.disabled = false;
