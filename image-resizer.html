@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Free Image Resizer Online | Technography</title>
+
+    <meta name="description" content="Technography Free Image Resizer দিয়ে অনলাইনে JPG, PNG ও WebP ছবি সহজেই Resize করুন। কোনো সফটওয়্যার বা আপলোড সার্ভার প্রয়োজন নেই।">
+
+    <link rel="canonical" href="https://technographybd.xyz/image-resizer.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(6,182,212,.12), transparent 35%),
+                radial-gradient(circle at top right, rgba(139,92,246,.12), transparent 35%),
+                #030712;
+            color: #f3f4f6;
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+        }
+
+        .glass {
+            background: rgba(15,23,42,.82);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,.08);
+            box-shadow: 0 20px 60px rgba(0,0,0,.45);
+        }
+
+        .drop-zone {
+            border: 2px dashed rgba(34,211,238,.45);
+            transition: .3s;
+        }
+
+        .drop-zone:hover,
+        .drop-zone.dragover {
+            border-color: #22d3ee;
+            background: rgba(34,211,238,.06);
+            transform: translateY(-2px);
+        }
+
+        .preview-box {
+            background-image:
+                linear-gradient(45deg,#1e293b 25%,transparent 25%),
+                linear-gradient(-45deg,#1e293b 25%,transparent 25%),
+                linear-gradient(45deg,transparent 75%,#1e293b 75%),
+                linear-gradient(-45deg,transparent 75%,#1e293b 75%);
+            background-size: 25px 25px;
+            background-position: 0 0,0 12.5px,12.5px -12.5px,-12.5px 0;
+            background-color:#0f172a;
+        }
+
+        .glow {
+            box-shadow: 0 0 30px rgba(34,211,238,.15);
+        }
+
+        input[type="range"] {
+            accent-color: #06b6d4;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+
+        <a href="index.html"
+           class="text-xl font-black text-cyan-400 tracking-wide">
+            Technography
+        </a>
+
+        <div class="flex items-center gap-2">
+
+            <a href="ai-image-generator.html"
+               class="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-full bg-purple-950/70 border border-purple-500/30 text-purple-300 text-xs font-bold">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                AI Image
+            </a>
+
+            <a href="bg-remover.html"
+               class="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
+                <i class="fa-solid fa-scissors"></i>
+                BG Remover
+            </a>
+
+            <a href="image-compressor.html"
+               class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-amber-950/70 border border-amber-500/30 text-amber-300 text-xs font-bold">
+                <i class="fa-solid fa-compress"></i>
+                <span class="hidden sm:inline">Compress</span>
+            </a>
+
+        </div>
+    </div>
+</header>
+
+
+<main class="max-w-5xl mx-auto px-4 py-8 sm:py-12">
+
+    <!-- Hero -->
+    <section class="text-center mb-8">
+
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full
+                    bg-cyan-500/10 border border-cyan-400/30
+                    text-cyan-300 text-xs font-bold mb-4">
+
+            <i class="fa-solid fa-expand"></i>
+            ১০০% ফ্রি ব্রাউজার টুল
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-black mb-4">
+            <span class="text-white">Image</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+                Resizer
+            </span>
+        </h1>
+
+        <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
+            JPG, PNG বা WebP ছবি সহজেই Resize করুন।
+            আপনার ছবি কোনো সার্ভারে আপলোড না করেই সরাসরি ব্রাউজারে প্রসেস হবে।
+        </p>
+
+    </section>
+
+
+    <!-- Main Tool -->
+    <section class="glass rounded-3xl p-5 sm:p-8 glow">
+
+        <!-- Upload -->
+        <div id="dropZone"
+             class="drop-zone rounded-3xl p-8 sm:p-12 text-center cursor-pointer">
+
+            <div class="w-20 h-20 mx-auto rounded-3xl
+                        bg-cyan-500/10 border border-cyan-400/30
+                        flex items-center justify-center mb-5">
+
+                <i class="fa-solid fa-cloud-arrow-up text-4xl text-cyan-400"></i>
+
+            </div>
+
+            <h2 class="text-xl sm:text-2xl font-black text-white mb-2">
+                ছবি আপলোড করুন
+            </h2>
+
+            <p class="text-slate-400 text-sm mb-5">
+                ছবি এখানে Drag & Drop করুন অথবা নিচের বাটনে চাপুন
+            </p>
+
+            <button type="button"
+                    onclick="document.getElementById('fileInput').click()"
+                    class="bg-gradient-to-r from-cyan-500 to-blue-600
+                           hover:from-cyan-400 hover:to-blue-500
+                           text-white font-black px-7 py-3 rounded-xl
+                           shadow-lg transition">
+
+                <i class="fa-solid fa-image mr-2"></i>
+                ছবি নির্বাচন করুন
+            </button>
+
+            <input
+                type="file"
+                id="fileInput"
+                accept="image/jpeg,image/png,image/webp"
+                class="hidden">
+
+            <p class="text-[11px] text-slate-500 mt-4">
+                JPG • PNG • WebP
+            </p>
+
+        </div>
+
+
+        <!-- Editor -->
+        <div id="editor" class="hidden mt-8">
+
+            <div class="grid lg:grid-cols-2 gap-6">
+
+                <!-- Preview -->
+                <div>
+                    <h3 class="font-bold text-cyan-300 mb-3">
+                        <i class="fa-solid fa-eye mr-1"></i>
+                        Preview
+                    </h3>
+
+                    <div class="preview-box rounded-2xl min-h-[280px]
+                                flex items-center justify-center p-4">
+
+                        <img id="previewImage"
+                             class="max-w-full max-h-[400px] rounded-xl object-contain"
+                             alt="Preview">
+
+                    </div>
+
+                    <div id="originalInfo"
+                         class="text-xs text-slate-400 mt-3 text-center">
+                    </div>
+                </div>
+
+
+                <!-- Settings -->
+                <div class="bg-slate-950/70 rounded-2xl border border-slate-800 p-5">
+
+                    <h3 class="text-lg font-black text-white mb-5">
+                        <i class="fa-solid fa-sliders text-cyan-400 mr-2"></i>
+                        Resize Settings
+                    </h3>
+
+
+                    <div class="grid grid-cols-2 gap-3">
+
+                        <div>
+                            <label class="text-xs text-slate-400 mb-2 block">
+                                Width (px)
+                            </label>
+
+                            <input
+                                id="widthInput"
+                                type="number"
+                                min="1"
+                                class="w-full bg-slate-900 border border-slate-700
+                                       rounded-xl px-4 py-3 text-white
+                                       focus:outline-none focus:border-cyan-400">
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-slate-400 mb-2 block">
+                                Height (px)
+                            </label>
+
+                            <input
+                                id="heightInput"
+                                type="number"
+                                min="1"
+                                class="w-full bg-slate-900 border border-slate-700
+                                       rounded-xl px-4 py-3 text-white
+                                       focus:outline-none focus:border-cyan-400">
+                        </div>
+
+                    </div>
+
+
+                    <label class="flex items-center gap-3 mt-4 cursor-pointer">
+
+                        <input
+                            id="lockRatio"
+                            type="checkbox"
+                            checked
+                            class="w-4 h-4 accent-cyan-500">
+
+                        <span class="text-sm text-slate-300">
+                            Aspect Ratio Lock
+                        </span>
+
+                    </label>
+
+
+                    <!-- Presets -->
+                    <div class="mt-6">
+
+                        <p class="text-xs text-slate-400 mb-2">
+                            Quick Size
+                        </p>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+
+                            <button onclick="setPreset(1080,1080)"
+                                    class="preset">
+                                1080 × 1080
+                            </button>
+
+                            <button onclick="setPreset(1080,1920)"
+                                    class="preset">
+                                1080 × 1920
+                            </button>
+
+                            <button onclick="setPreset(1280,720)"
+                                    class="preset">
+                                1280 × 720
+                            </button>
+
+                            <button onclick="setPreset(1920,1080)"
+                                    class="preset">
+                                1920 × 1080
+                            </button>
+
+                            <button onclick="setPreset(1200,630)"
+                                    class="preset">
+                                1200 × 630
+                            </button>
+
+                            <button onclick="setPreset(1080,1350)"
+                                    class="preset">
+                                1080 × 1350
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mt-6">
+
+                        <label class="text-xs text-slate-400 mb-2 block">
+                            Output Format
+                        </label>
+
+                        <select id="formatSelect"
+                                class="w-full bg-slate-900 border border-slate-700
+                                       rounded-xl px-4 py-3 text-white">
+
+                            <option value="image/jpeg">JPG</option>
+                            <option value="image/png">PNG</option>
+                            <option value="image/webp">WebP</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button onclick="resizeImage()"
+                            class="w-full mt-6 bg-gradient-to-r from-cyan-500 to-blue-600
+                                   hover:from-cyan-400 hover:to-blue-500
+                                   text-white font-black py-3.5 rounded-xl
+                                   shadow-lg transition">
+
+                        <i class="fa-solid fa-expand mr-2"></i>
+                        Resize & Download
+                    </button>
+
+
+                    <button onclick="resetTool()"
+                            class="w-full mt-2 bg-slate-800 hover:bg-slate-700
+                                   text-slate-300 font-bold py-3 rounded-xl">
+
+                        <i class="fa-solid fa-rotate-left mr-2"></i>
+                        নতুন ছবি
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Features -->
+    <section class="grid sm:grid-cols-3 gap-4 mt-8">
+
+        <div class="glass rounded-2xl p-5 text-center">
+            <i class="fa-solid fa-shield-halved text-2xl text-emerald-400 mb-3"></i>
+            <h3 class="font-bold mb-1">Privacy Friendly</h3>
+            <p class="text-xs text-slate-400">
+                ছবি সার্ভারে পাঠানো হয় না।
+            </p>
+        </div>
+
+        <div class="glass rounded-2xl p-5 text-center">
+            <i class="fa-solid fa-bolt text-2xl text-amber-400 mb-3"></i>
+            <h3 class="font-bold mb-1">Fast Processing</h3>
+            <p class="text-xs text-slate-400">
+                সরাসরি ব্রাউজারে প্রসেসিং।
+            </p>
+        </div>
+
+        <div class="glass rounded-2xl p-5 text-center">
+            <i class="fa-solid fa-infinity text-2xl text-purple-400 mb-3"></i>
+            <h3 class="font-bold mb-1">Unlimited Use</h3>
+            <p class="text-xs text-slate-400">
+                API limit নেই।
+            </p>
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="border-t border-slate-800 py-6 text-center text-slate-500 text-xs">
+    © 2026 Technography. All rights reserved.
+</footer>
+
+
+<style>
+    .preset {
+        background:#1e293b;
+        border:1px solid #334155;
+        color:#cbd5e1;
+        padding:9px 5px;
+        border-radius:10px;
+        font-size:11px;
+        font-weight:700;
+        transition:.2s;
+    }
+
+    .preset:hover {
+        border-color:#22d3ee;
+        color:#22d3ee;
+        transform:translateY(-1px);
+    }
+</style>
+
+
+<script>
+
+let originalImage = null;
+let originalWidth = 0;
+let originalHeight = 0;
+
+const fileInput = document.getElementById("fileInput");
+const dropZone = document.getElementById("dropZone");
+
+fileInput.addEventListener("change", function(e) {
+    if(e.target.files[0]) {
+        loadImage(e.target.files[0]);
+    }
+});
+
+
+dropZone.addEventListener("dragover", function(e) {
+    e.preventDefault();
+    dropZone.classList.add("dragover");
+});
+
+dropZone.addEventListener("dragleave", function() {
+    dropZone.classList.remove("dragover");
+});
+
+dropZone.addEventListener("drop", function(e) {
+
+    e.preventDefault();
+
+    dropZone.classList.remove("dragover");
+
+    const file = e.dataTransfer.files[0];
+
+    if(file && file.type.startsWith("image/")) {
+        loadImage(file);
+    }
+
+});
+
+
+function loadImage(file) {
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+
+        const img = new Image();
+
+        img.onload = function() {
+
+            originalImage = img;
+            originalWidth = img.width;
+            originalHeight = img.height;
+
+            document.getElementById("previewImage").src = e.target.result;
+
+            document.getElementById("widthInput").value = img.width;
+            document.getElementById("heightInput").value = img.height;
+
+            document.getElementById("originalInfo").textContent =
+                `Original: ${img.width} × ${img.height}px • ${(file.size / 1024).toFixed(1)} KB`;
+
+            dropZone.classList.add("hidden");
+            document.getElementById("editor").classList.remove("hidden");
+
+        };
+
+        img.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+}
+
+
+document.getElementById("widthInput").addEventListener("input", function() {
+
+    if(!document.getElementById("lockRatio").checked || !originalImage) return;
+
+    const width = parseInt(this.value);
+
+    if(width > 0) {
+
+        const height = Math.round(
+            width * originalHeight / originalWidth
+        );
+
+        document.getElementById("heightInput").value = height;
+    }
+
+});
+
+
+document.getElementById("heightInput").addEventListener("input", function() {
+
+    if(!document.getElementById("lockRatio").checked || !originalImage) return;
+
+    const height = parseInt(this.value);
+
+    if(height > 0) {
+
+        const width = Math.round(
+            height * originalWidth / originalHeight
+        );
+
+        document.getElementById("widthInput").value = width;
+    }
+
+});
+
+
+function setPreset(width, height) {
+
+    document.getElementById("widthInput").value = width;
+    document.getElementById("heightInput").value = height;
+
+    document.getElementById("lockRatio").checked = false;
+}
+
+
+function resizeImage() {
+
+    if(!originalImage) {
+        alert("প্রথমে একটি ছবি নির্বাচন করুন।");
+        return;
+    }
+
+    const width = parseInt(document.getElementById("widthInput").value);
+    const height = parseInt(document.getElementById("heightInput").value);
+
+    if(!width || !height || width < 1 || height < 1) {
+        alert("সঠিক Width এবং Height দিন।");
+        return;
+    }
+
+    const format = document.getElementById("formatSelect").value;
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+
+    if(format === "image/jpeg") {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0,0,width,height);
+    }
+
+    ctx.drawImage(
+        originalImage,
+        0,
+        0,
+        width,
+        height
+    );
+
+    canvas.toBlob(function(blob) {
+
+        if(!blob) {
+            alert("ছবি প্রসেস করা যায়নি।");
+            return;
+        }
+
+        const extension =
+            format === "image/png" ? "png" :
+            format === "image/webp" ? "webp" : "jpg";
+
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+
+        a.href = url;
+        a.download = `technography-resized-${width}x${height}.${extension}`;
+
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        URL.revokeObjectURL(url);
+
+    }, format, format === "image/jpeg" ? 0.92 : 1);
+
+}
+
+
+function resetTool() {
+
+    originalImage = null;
+
+    fileInput.value = "";
+
+    document.getElementById("editor").classList.add("hidden");
+    dropZone.classList.remove("hidden");
+
+    document.getElementById("previewImage").src = "";
+
+}
+
+
+</script>
+
+</body>
+</html>
