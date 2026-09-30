@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>AI Auto Subtitle | Technography</title>
 
@@ -14,28 +14,24 @@
 }
 
 body{
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:#030712;
     color:#f8fafc;
     min-height:100vh;
 }
 
 header{
-    background:rgba(15,23,42,.95);
+    background:#0f172a;
     border-bottom:1px solid #1e293b;
     padding:15px 20px;
-    position:sticky;
-    top:0;
-    z-index:100;
 }
 
-.header-inner{
+.header{
     max-width:1200px;
     margin:auto;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:15px;
+    align-items:center;
 }
 
 .logo{
@@ -45,23 +41,18 @@ header{
     text-decoration:none;
 }
 
-.home-btn{
-    text-decoration:none;
+.home{
     color:#cbd5e1;
+    text-decoration:none;
     border:1px solid #334155;
     padding:8px 14px;
-    border-radius:10px;
-    font-size:13px;
-}
-
-.home-btn:hover{
-    background:#1e293b;
+    border-radius:9px;
 }
 
 .container{
     width:95%;
-    max-width:1200px;
-    margin:25px auto 50px;
+    max-width:1100px;
+    margin:25px auto 60px;
 }
 
 .hero{
@@ -70,14 +61,13 @@ header{
 }
 
 .hero h1{
-    font-size:clamp(27px,5vw,46px);
     color:#22d3ee;
+    font-size:clamp(28px,6vw,48px);
     margin-bottom:10px;
 }
 
 .hero p{
     color:#94a3b8;
-    font-size:14px;
     line-height:1.7;
 }
 
@@ -87,41 +77,38 @@ header{
     border-radius:18px;
     padding:20px;
     margin-bottom:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
-.card-title{
+.title{
     color:#67e8f9;
-    font-size:17px;
-    font-weight:700;
+    font-size:18px;
+    font-weight:bold;
     margin-bottom:15px;
 }
 
-.upload-area{
+.upload{
     border:2px dashed #334155;
-    border-radius:16px;
+    border-radius:15px;
     padding:35px 20px;
     text-align:center;
     cursor:pointer;
-    transition:.2s;
 }
 
-.upload-area:hover{
+.upload:hover{
     border-color:#22d3ee;
-    background:#0c1a29;
+    background:#0b1625;
 }
 
 .upload-icon{
-    font-size:42px;
+    font-size:45px;
     margin-bottom:10px;
 }
 
-.upload-area h3{
-    font-size:18px;
+.upload h3{
     margin-bottom:8px;
 }
 
-.upload-area p{
+.upload p{
     color:#94a3b8;
     font-size:13px;
 }
@@ -130,7 +117,7 @@ input[type=file]{
     display:none;
 }
 
-.file-name{
+.file{
     margin-top:12px;
     color:#34d399;
     font-size:13px;
@@ -139,11 +126,11 @@ input[type=file]{
 
 .settings{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr 1fr;
     gap:15px;
 }
 
-.field label{
+label{
     display:block;
     color:#cbd5e1;
     font-size:13px;
@@ -151,228 +138,166 @@ input[type=file]{
 }
 
 select,
-input[type=text],
-input[type=number],
-input[type=color]{
+input[type=text]{
     width:100%;
+    padding:12px;
     background:#020617;
-    color:#fff;
+    color:white;
     border:1px solid #334155;
     border-radius:10px;
-    padding:11px;
     outline:none;
 }
 
 select:focus,
-input:focus{
+input[type=text]:focus{
     border-color:#22d3ee;
 }
 
-.video-box{
+.video{
     background:#000;
     border-radius:14px;
     overflow:hidden;
     position:relative;
-    width:100%;
-    max-width:850px;
-    margin:auto;
 }
 
 video{
     width:100%;
+    max-height:600px;
     display:block;
-    max-height:550px;
     background:#000;
 }
 
-.subtitle-preview{
+.subtitle{
     position:absolute;
-    left:50%;
-    bottom:9%;
-    transform:translateX(-50%);
+    left:5%;
     width:90%;
+    bottom:8%;
     text-align:center;
-    font-size:28px;
-    font-weight:700;
-    color:#fff;
+    font-size:25px;
+    font-weight:bold;
+    color:white;
     text-shadow:
-        -2px -2px 0 #000,
-         2px -2px 0 #000,
-        -2px  2px 0 #000,
-         2px  2px 0 #000;
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000;
     pointer-events:none;
-    line-height:1.35;
-}
-
-.controls{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-    margin-top:20px;
-}
-
-.control-group{
-    background:#020617;
-    border:1px solid #1e293b;
-    border-radius:12px;
-    padding:14px;
-}
-
-.control-group label{
-    display:block;
-    font-size:12px;
-    color:#94a3b8;
-    margin-bottom:8px;
-}
-
-.range-row{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-input[type=range]{
-    width:100%;
-}
-
-.range-value{
-    min-width:45px;
-    color:#22d3ee;
-    font-size:12px;
-    text-align:right;
 }
 
 .buttons{
     display:flex;
-    flex-wrap:wrap;
     gap:10px;
-    margin-top:20px;
+    flex-wrap:wrap;
+    margin-top:18px;
 }
 
 button{
-    border:none;
+    border:0;
+    padding:12px 18px;
     border-radius:10px;
-    padding:11px 17px;
-    font-weight:700;
+    color:white;
+    font-weight:bold;
     cursor:pointer;
-    color:#fff;
-    background:#334155;
 }
 
-button:hover{
-    filter:brightness(1.15);
-}
-
-.btn-primary{
+.primary{
     background:linear-gradient(135deg,#0891b2,#2563eb);
 }
 
-.btn-green{
+.green{
     background:linear-gradient(135deg,#059669,#0d9488);
 }
 
-.btn-purple{
-    background:linear-gradient(135deg,#7c3aed,#4f46e5);
-}
-
-.btn-danger{
+.red{
     background:#991b1b;
 }
 
-.progress-wrap{
+button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.status{
+    background:#020617;
+    border:1px solid #1e293b;
+    border-radius:12px;
+    padding:15px;
     margin-top:18px;
+    line-height:1.7;
+    font-size:13px;
+    color:#94a3b8;
+}
+
+.progress-box{
+    margin-top:15px;
     display:none;
 }
 
-.progress-bar{
+.progress-bg{
     width:100%;
     height:12px;
     background:#020617;
+    border:1px solid #334155;
     border-radius:20px;
     overflow:hidden;
-    border:1px solid #334155;
 }
 
 .progress{
     width:0%;
     height:100%;
     background:linear-gradient(90deg,#06b6d4,#8b5cf6);
-    transition:.3s;
+    transition:.2s;
 }
 
 .progress-text{
     text-align:center;
-    margin-top:8px;
     color:#94a3b8;
     font-size:12px;
+    margin-top:7px;
 }
 
 .subtitle-list{
-    margin-top:20px;
+    margin-top:15px;
 }
 
-.subtitle-item{
+.sub-item{
     background:#020617;
     border:1px solid #1e293b;
-    border-radius:12px;
+    border-radius:10px;
     padding:12px;
     margin-bottom:10px;
 }
 
-.subtitle-top{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:8px;
-}
-
-.time{
+.sub-time{
     color:#22d3ee;
     font-size:12px;
+    margin-bottom:7px;
 }
 
-.delete-btn{
-    padding:5px 9px;
-    font-size:11px;
-    background:#7f1d1d;
-}
-
-.empty{
-    text-align:center;
-    padding:25px;
-    color:#64748b;
-    font-size:13px;
+.sub-text{
+    color:#f8fafc;
+    line-height:1.6;
 }
 
 .notice{
+    margin-top:15px;
     background:#082f49;
     border:1px solid #0e7490;
     color:#bae6fd;
     padding:13px;
-    border-radius:12px;
+    border-radius:10px;
     font-size:13px;
     line-height:1.6;
-    margin-top:15px;
 }
 
 @media(max-width:700px){
 
-    .header-inner{
-        align-items:center;
-    }
-
-    .settings,
-    .controls{
+    .settings{
         grid-template-columns:1fr;
     }
 
     .card{
         padding:15px;
-    }
-
-    .subtitle-preview{
-        font-size:20px;
-        bottom:8%;
     }
 
     .buttons{
@@ -382,6 +307,10 @@ button:hover{
     button{
         width:100%;
     }
+
+    .subtitle{
+        font-size:18px;
+    }
 }
 </style>
 </head>
@@ -389,587 +318,861 @@ button:hover{
 <body>
 
 <header>
-    <div class="header-inner">
-        <a href="index.html" class="logo">Technography</a>
-        <a href="index.html" class="home-btn">← Home</a>
-    </div>
+<div class="header">
+
+<a href="index.html" class="logo">
+Technography
+</a>
+
+<a href="index.html" class="home">
+← Home
+</a>
+
+</div>
 </header>
 
-<main class="container">
+<div class="container">
 
-    <section class="hero">
-        <h1>AI Auto Subtitle</h1>
-        <p>
-            যেকোনো ভাষার ভিডিও থেকে Subtitle তৈরি করার জন্য
-            Mobile & Computer Friendly Subtitle Studio
-        </p>
-    </section>
+<div class="hero">
 
-    <!-- VIDEO UPLOAD -->
-    <section class="card">
+<h1>🤖 AI Auto Subtitle</h1>
 
-        <div class="card-title">
-            🎬 ১. ভিডিও আপলোড করুন
-        </div>
+<p>
+ভিডিও আপলোড করুন → AI ভিডিওর কথা শুনবে →
+Automatic Subtitle তৈরি করবে
+</p>
 
-        <label class="upload-area" for="videoInput">
+</div>
 
-            <div class="upload-icon">🎥</div>
 
-            <h3>ভিডিও নির্বাচন করুন</h3>
+<!-- VIDEO UPLOAD -->
 
-            <p>
-                MP4, WebM, MOV সহ সাধারণ ভিডিও ফাইল নির্বাচন করুন
-            </p>
+<div class="card">
 
-            <div class="file-name" id="fileName"></div>
+<div class="title">
+🎬 ১. ভিডিও আপলোড
+</div>
 
-        </label>
+<label class="upload" for="videoInput">
 
-        <input
-            type="file"
-            id="videoInput"
-            accept="video/*"
-        >
+<div class="upload-icon">
+🎥
+</div>
 
-    </section>
+<h3>
+ভিডিও নির্বাচন করুন
+</h3>
 
-    <!-- LANGUAGE -->
-    <section class="card">
+<p>
+MP4 / WebM / MOV
+</p>
 
-        <div class="card-title">
-            🌐 ২. ভাষা নির্বাচন
-        </div>
+<div class="file" id="fileName"></div>
 
-        <div class="settings">
+</label>
 
-            <div class="field">
-                <label>ভিডিওর ভাষা</label>
+<input
+type="file"
+id="videoInput"
+accept="video/*"
+>
 
-                <select id="sourceLanguage">
+</div>
 
-                    <option value="auto">
-                        Auto Detect
-                    </option>
 
-                    <option value="bn">
-                        বাংলা
-                    </option>
+<!-- LANGUAGE -->
 
-                    <option value="en">
-                        English
-                    </option>
+<div class="card">
 
-                    <option value="hi">
-                        Hindi
-                    </option>
+<div class="title">
+🌐 ২. ভাষা নির্বাচন
+</div>
 
-                    <option value="ar">
-                        Arabic
-                    </option>
+<div class="settings">
 
-                    <option value="ur">
-                        Urdu
-                    </option>
+<div>
 
-                    <option value="es">
-                        Spanish
-                    </option>
+<label>
+ভিডিওর ভাষা
+</label>
 
-                    <option value="fr">
-                        French
-                    </option>
+<select id="sourceLanguage">
 
-                    <option value="de">
-                        German
-                    </option>
+<option value="auto">
+🤖 Auto Detect
+</option>
 
-                    <option value="ja">
-                        Japanese
-                    </option>
+<option value="bn">
+বাংলা
+</option>
 
-                    <option value="ko">
-                        Korean
-                    </option>
+<option value="en">
+English
+</option>
 
-                    <option value="zh">
-                        Chinese
-                    </option>
+<option value="hi">
+Hindi
+</option>
 
-                </select>
-            </div>
+<option value="ar">
+Arabic
+</option>
 
+<option value="ur">
+Urdu
+</option>
 
-            <div class="field">
+<option value="es">
+Spanish
+</option>
 
-                <label>Subtitle কোন ভাষায় হবে?</label>
+<option value="fr">
+French
+</option>
 
-                <select id="targetLanguage">
+<option value="de">
+German
+</option>
 
-                    <option value="bn">
-                        বাংলা
-                    </option>
+<option value="ja">
+Japanese
+</option>
 
-                    <option value="en">
-                        English
-                    </option>
+<option value="ko">
+Korean
+</option>
 
-                    <option value="hi">
-                        Hindi
-                    </option>
+<option value="zh">
+Chinese
+</option>
 
-                    <option value="ar">
-                        Arabic
-                    </option>
+</select>
 
-                    <option value="ur">
-                        Urdu
-                    </option>
+</div>
 
-                    <option value="es">
-                        Spanish
-                    </option>
 
-                    <option value="fr">
-                        French
-                    </option>
+<div>
 
-                    <option value="de">
-                        German
-                    </option>
+<label>
+Subtitle ভাষা
+</label>
 
-                    <option value="ja">
-                        Japanese
-                    </option>
+<select id="targetLanguage">
 
-                    <option value="ko">
-                        Korean
-                    </option>
+<option value="bn">
+বাংলা
+</option>
 
-                    <option value="zh">
-                        Chinese
-                    </option>
+<option value="en">
+English
+</option>
 
-                </select>
+<option value="hi">
+Hindi
+</option>
 
-            </div>
+<option value="ar">
+Arabic
+</option>
 
-        </div>
+<option value="ur">
+Urdu
+</option>
 
-        <div class="buttons">
+<option value="es">
+Spanish
+</option>
 
-            <button
-                class="btn-primary"
-                onclick="startAI()"
-            >
-                🤖 AI Auto Subtitle
-            </button>
+<option value="fr">
+French
+</option>
 
-            <button
-                class="btn-purple"
-                onclick="addSubtitle()"
-            >
-                ＋ Subtitle যোগ করুন
-            </button>
+<option value="de">
+German
+</option>
 
-        </div>
+<option value="ja">
+Japanese
+</option>
 
-        <div class="progress-wrap" id="progressWrap">
+<option value="ko">
+Korean
+</option>
 
-            <div class="progress-bar">
+<option value="zh">
+Chinese
+</option>
 
-                <div
-                    class="progress"
-                    id="progress"
-                ></div>
+</select>
 
-            </div>
+</div>
 
-            <div
-                class="progress-text"
-                id="progressText"
-            >
-                প্রস্তুত হচ্ছে...
-            </div>
+</div>
 
-        </div>
 
-        <div class="notice">
-            ℹ️ এই প্রথম ভার্সনে AI Processing-এর interface প্রস্তুত করা হয়েছে।
-            পরবর্তী ধাপে Browser-based Speech Recognition / Whisper Model
-            যুক্ত করা হবে।
-        </div>
+<div class="buttons">
 
-    </section>
+<button
+class="primary"
+id="aiButton"
+onclick="startAI()"
+>
+🤖 AI Auto Subtitle
+</button>
 
+</div>
 
-    <!-- VIDEO PREVIEW -->
-    <section class="card">
 
-        <div class="card-title">
-            👀 ৩. ভিডিও Preview
-        </div>
+<div
+class="progress-box"
+id="progressBox"
+>
 
-        <div class="video-box">
+<div class="progress-bg">
 
-            <video
-                id="videoPreview"
-                controls
-            ></video>
+<div
+class="progress"
+id="progress"
+></div>
 
-            <div
-                id="subtitlePreview"
-                class="subtitle-preview"
-            >
-                আপনার Subtitle এখানে দেখা যাবে
-            </div>
+</div>
 
-        </div>
+<div
+class="progress-text"
+id="progressText"
+>
+AI প্রস্তুত হচ্ছে...
+</div>
 
-    </section>
+</div>
 
 
-    <!-- STYLE -->
-    <section class="card">
+<div
+class="status"
+id="status"
+>
+AI Engine এখনো চালু করা হয়নি।
+</div>
 
-        <div class="card-title">
-            🎨 ৪. Subtitle Design
-        </div>
+</div>
 
-        <div class="controls">
 
-            <div class="control-group">
+<!-- VIDEO -->
 
-                <label>Font Size</label>
+<div class="card">
 
-                <div class="range-row">
+<div class="title">
+👀 ৩. Video Preview
+</div>
 
-                    <input
-                        type="range"
-                        id="fontSize"
-                        min="12"
-                        max="60"
-                        value="28"
-                    >
+<div class="video">
 
-                    <span
-                        class="range-value"
-                        id="fontSizeValue"
-                    >
-                        28px
-                    </span>
+<video
+id="videoPreview"
+controls
+playsinline
+></video>
 
-                </div>
+<div
+id="subtitlePreview"
+class="subtitle"
+>
+</div>
 
-            </div>
+</div>
 
+</div>
 
-            <div class="control-group">
 
-                <label>Text Color</label>
+<!-- SUBTITLE -->
 
-                <input
-                    type="color"
-                    id="textColor"
-                    value="#ffffff"
-                >
+<div class="card">
 
-            </div>
+<div class="title">
+📝 ৪. AI Subtitle Result
+</div>
 
+<div
+id="subtitleList"
+class="subtitle-list"
+>
 
-            <div class="control-group">
+<div class="notice">
+ভিডিও আপলোড করে
+<strong>AI Auto Subtitle</strong>
+চাপুন।
+</div>
 
-                <label>Subtitle Position</label>
+</div>
 
-                <div class="range-row">
+</div>
 
-                    <input
-                        type="range"
-                        id="subtitlePosition"
-                        min="2"
-                        max="45"
-                        value="9"
-                    >
 
-                    <span
-                        class="range-value"
-                        id="positionValue"
-                    >
-                        9%
-                    </span>
+<!-- CLEAR -->
 
-                </div>
+<div class="card">
 
-            </div>
+<div class="title">
+⚙️ Control
+</div>
 
+<div class="buttons">
 
-            <div class="control-group">
+<button
+class="red"
+onclick="clearAll()"
+>
+🗑️ সব মুছে ফেলুন
+</button>
 
-                <label>Subtitle Text</label>
+</div>
 
-                <input
-                    type="text"
-                    id="manualSubtitle"
-                    placeholder="এখানে subtitle লিখুন..."
-                    value="আপনার Subtitle এখানে দেখা যাবে"
-                >
+</div>
 
-            </div>
+</div>
 
-        </div>
 
-    </section>
+<script type="module">
 
+/*
+=================================================
+TRANSFORMERS.JS
+Browser AI
+=================================================
+*/
 
-    <!-- SUBTITLE LIST -->
-    <section class="card">
+import {
+    pipeline
+} from
+"https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.0.1";
 
-        <div class="card-title">
-            📝 ৫. Subtitle List
-        </div>
-
-        <div id="subtitleList">
-
-            <div class="empty">
-                এখনো কোনো Subtitle যোগ করা হয়নি।
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- EXPORT -->
-    <section class="card">
-
-        <div class="card-title">
-            🔥 ৬. Export
-        </div>
-
-        <p style="color:#94a3b8;font-size:13px;line-height:1.7;">
-            Subtitle প্রস্তুত হলে ভিডিওর মধ্যে Subtitle স্থায়ীভাবে
-            বসিয়ে MP4 Export করা হবে।
-        </p>
-
-        <div class="buttons">
-
-            <button
-                class="btn-green"
-                onclick="exportVideo()"
-            >
-                🔥 Export MP4
-            </button>
-
-            <button
-                class="btn-danger"
-                onclick="clearAll()"
-            >
-                🗑️ সব মুছে ফেলুন
-            </button>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<script>
 
 const videoInput =
-    document.getElementById("videoInput");
+document.getElementById("videoInput");
 
 const videoPreview =
-    document.getElementById("videoPreview");
+document.getElementById("videoPreview");
 
 const fileName =
-    document.getElementById("fileName");
+document.getElementById("fileName");
 
-const subtitlePreview =
-    document.getElementById("subtitlePreview");
+const aiButton =
+document.getElementById("aiButton");
 
-const manualSubtitle =
-    document.getElementById("manualSubtitle");
+const statusBox =
+document.getElementById("status");
 
-const fontSize =
-    document.getElementById("fontSize");
+const progressBox =
+document.getElementById("progressBox");
 
-const fontSizeValue =
-    document.getElementById("fontSizeValue");
+const progress =
+document.getElementById("progress");
 
-const textColor =
-    document.getElementById("textColor");
-
-const subtitlePosition =
-    document.getElementById("subtitlePosition");
-
-const positionValue =
-    document.getElementById("positionValue");
+const progressText =
+document.getElementById("progressText");
 
 const subtitleList =
-    document.getElementById("subtitleList");
+document.getElementById("subtitleList");
 
+const subtitlePreview =
+document.getElementById("subtitlePreview");
+
+const sourceLanguage =
+document.getElementById("sourceLanguage");
+
+
+let videoFile = null;
 
 let subtitles = [];
 
+let transcriber = null;
 
-// VIDEO UPLOAD
-videoInput.addEventListener("change", function(){
 
-    const file = this.files[0];
+/*
+=================================================
+VIDEO UPLOAD
+=================================================
+*/
 
-    if(!file){
+videoInput.addEventListener(
+"change",
+function(){
+
+    videoFile = this.files[0];
+
+    if(!videoFile){
         return;
     }
 
     fileName.textContent =
-        "নির্বাচিত: " + file.name;
+    "নির্বাচিত: " +
+    videoFile.name;
 
     const url =
-        URL.createObjectURL(file);
+    URL.createObjectURL(videoFile);
 
     videoPreview.src = url;
 
     videoPreview.load();
 
-});
-
-
-// TEXT PREVIEW
-manualSubtitle.addEventListener("input", function(){
-
-    subtitlePreview.textContent =
-        this.value || "";
+    statusBox.innerHTML =
+    "✅ ভিডিও প্রস্তুত। এখন <strong>AI Auto Subtitle</strong> চাপুন।";
 
 });
 
 
-// FONT SIZE
-fontSize.addEventListener("input", function(){
+/*
+=================================================
+LOAD WHISPER
+=================================================
+*/
 
-    const value = this.value;
+async function loadWhisper(){
 
-    subtitlePreview.style.fontSize =
-        value + "px";
-
-    fontSizeValue.textContent =
-        value + "px";
-
-});
-
-
-// COLOR
-textColor.addEventListener("input", function(){
-
-    subtitlePreview.style.color =
-        this.value;
-
-});
-
-
-// POSITION
-subtitlePosition.addEventListener("input", function(){
-
-    const value = this.value;
-
-    subtitlePreview.style.bottom =
-        value + "%";
-
-    positionValue.textContent =
-        value + "%";
-
-});
-
-
-// ADD SUBTITLE
-function addSubtitle(){
-
-    if(!videoPreview.src){
-
-        alert("প্রথমে একটি ভিডিও আপলোড করুন।");
-
+    if(transcriber){
         return;
     }
 
-    const text =
-        manualSubtitle.value.trim();
+    statusBox.innerHTML =
+    "⏳ Whisper AI Model ডাউনলোড হচ্ছে... প্রথমবার কিছুটা সময় লাগতে পারে।";
 
-    if(!text){
+    progressBox.style.display =
+    "block";
 
-        alert("Subtitle লিখুন।");
+    progress.style.width =
+    "5%";
 
-        return;
-    }
+    progressText.textContent =
+    "AI Model Loading...";
 
-    const start =
-        videoPreview.currentTime;
 
-    const subtitle = {
+    /*
+    multilingual Whisper model
 
-        id: Date.now(),
+    tiny model ব্যবহার করা হচ্ছে যাতে
+    browser/mobile-এ তুলনামূলকভাবে সহজে চলে।
+    */
 
-        start: start,
+    transcriber =
+    await pipeline(
+        "automatic-speech-recognition",
+        "Xenova/whisper-tiny",
+        {
 
-        end: start + 3,
+            dtype:"q8",
 
-        text: text
+            progress_callback:
+            function(data){
 
-    };
+                if(
+                    data &&
+                    data.progress !== undefined
+                ){
 
-    subtitles.push(subtitle);
+                    let p =
+                    Math.round(
+                        data.progress
+                    );
 
-    renderSubtitles();
+                    if(p > 95){
+                        p = 95;
+                    }
+
+                    progress.style.width =
+                    p + "%";
+
+                    progressText.textContent =
+                    "AI Model Download: " +
+                    p +
+                    "%";
+
+                }
+
+            }
+
+        }
+    );
+
+
+    progress.style.width =
+    "100%";
+
+    progressText.textContent =
+    "AI Model Ready";
 
 }
 
 
-// RENDER SUBTITLES
-function renderSubtitles(){
+/*
+=================================================
+START AI
+=================================================
+*/
 
-    if(subtitles.length === 0){
+window.startAI =
+async function(){
 
-        subtitleList.innerHTML =
-        '<div class="empty">এখনো কোনো Subtitle যোগ করা হয়নি।</div>';
+    if(!videoFile){
+
+        alert(
+        "প্রথমে একটি ভিডিও আপলোড করুন।"
+        );
 
         return;
     }
 
+
+    aiButton.disabled =
+    true;
+
+
+    try{
+
+        await loadWhisper();
+
+
+        statusBox.innerHTML =
+        "🎧 ভিডিওর Audio বিশ্লেষণ করা হচ্ছে...";
+
+
+        progressBox.style.display =
+        "block";
+
+
+        /*
+        Browser-এ video element থেকে
+        audio নেওয়ার চেষ্টা।
+        */
+
+        const audio =
+        await extractAudio(videoFile);
+
+
+        statusBox.innerHTML =
+        "🤖 Whisper AI কথা শনাক্ত করছে...";
+
+
+        progress.style.width =
+        "20%";
+
+
+        /*
+        Whisper transcription
+        */
+
+        const selectedLanguage =
+        sourceLanguage.value;
+
+
+        let options = {
+
+            chunk_length_s:30,
+
+            stride_length_s:5,
+
+            return_timestamps:true,
+
+            callback_function:
+            function(){
+
+                /*
+                কিছু browser-এ callback
+                নিয়মিত progress দিতে পারে।
+                */
+
+            }
+
+        };
+
+
+        if(
+            selectedLanguage !== "auto"
+        ){
+
+            const languageMap = {
+
+                bn:"bengali",
+
+                en:"english",
+
+                hi:"hindi",
+
+                ar:"arabic",
+
+                ur:"urdu",
+
+                es:"spanish",
+
+                fr:"french",
+
+                de:"german",
+
+                ja:"japanese",
+
+                ko:"korean",
+
+                zh:"chinese"
+
+            };
+
+
+            options.language =
+            languageMap[
+                selectedLanguage
+            ];
+
+        }
+
+
+        const result =
+        await transcriber(
+            audio,
+            options
+        );
+
+
+        progress.style.width =
+        "100%";
+
+
+        progressText.textContent =
+        "Subtitle তৈরি সম্পন্ন";
+
+
+        /*
+        Result থেকে subtitle বানানো
+        */
+
+        subtitles = [];
+
+
+        if(
+            result &&
+            result.chunks
+        ){
+
+            result.chunks.forEach(
+            function(chunk){
+
+                if(
+                    !chunk.timestamp
+                ){
+                    return;
+                }
+
+
+                let start =
+                chunk.timestamp[0];
+
+                let end =
+                chunk.timestamp[1];
+
+
+                if(
+                    start === null ||
+                    start === undefined
+                ){
+                    return;
+                }
+
+
+                if(
+                    end === null ||
+                    end === undefined
+                ){
+
+                    end =
+                    start + 2;
+
+                }
+
+
+                const text =
+                (chunk.text || "")
+                .trim();
+
+
+                if(!text){
+                    return;
+                }
+
+
+                subtitles.push({
+
+                    start:start,
+
+                    end:end,
+
+                    text:text
+
+                });
+
+            });
+
+        }
+
+
+        renderSubtitles();
+
+
+        statusBox.innerHTML =
+        "✅ AI Subtitle তৈরি হয়েছে। " +
+        subtitles.length +
+        "টি subtitle পাওয়া গেছে।";
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        statusBox.innerHTML =
+        "❌ AI Processing-এ সমস্যা হয়েছে।";
+
+
+        alert(
+        "AI চালাতে সমস্যা হয়েছে। Browser Console-এ বিস্তারিত Error দেখা যাবে।\n\n" +
+        error.message
+        );
+
+
+    }
+
+
+    aiButton.disabled =
+    false;
+
+};
+
+
+/*
+=================================================
+AUDIO EXTRACTION
+=================================================
+
+Browser-এ ভিডিওর audio track থেকে
+Float32 PCM বানানোর চেষ্টা।
+
+=================================================
+*/
+
+async function extractAudio(file){
+
+    const arrayBuffer =
+    await file.arrayBuffer();
+
+
+    const audioContext =
+    new (
+        window.AudioContext ||
+        window.webkitAudioContext
+    )();
+
+
+    const audioBuffer =
+    await audioContext.decodeAudioData(
+        arrayBuffer
+    );
+
+
+    /*
+    Whisper সাধারণত 16kHz audio চায়।
+    */
+
+    const targetRate =
+    16000;
+
+
+    const offline =
+    new OfflineAudioContext(
+        1,
+        Math.ceil(
+            audioBuffer.duration *
+            targetRate
+        ),
+        targetRate
+    );
+
+
+    const source =
+    offline.createBufferSource();
+
+
+    source.buffer =
+    audioBuffer;
+
+
+    source.connect(
+        offline.destination
+    );
+
+
+    source.start();
+
+
+    const rendered =
+    await offline.startRendering();
+
+
+    const channel =
+    rendered.getChannelData(0);
+
+
+    return channel;
+
+}
+
+
+/*
+=================================================
+RENDER SUBTITLES
+=================================================
+*/
+
+function renderSubtitles(){
+
     subtitleList.innerHTML = "";
 
-    subtitles.forEach(function(sub){
+
+    if(subtitles.length === 0){
+
+        subtitleList.innerHTML =
+        `
+        <div class="notice">
+        কোনো Subtitle পাওয়া যায়নি।
+        </div>
+        `;
+
+        return;
+
+    }
+
+
+    subtitles.forEach(
+    function(sub,index){
 
         const item =
-            document.createElement("div");
+        document.createElement("div");
 
         item.className =
-            "subtitle-item";
+        "sub-item";
 
-        item.innerHTML = `
 
-            <div class="subtitle-top">
+        item.innerHTML =
+        `
+        <div class="sub-time">
+        #${index + 1}
+        &nbsp;
+        ${formatTime(sub.start)}
+        →
+        ${formatTime(sub.end)}
+        </div>
 
-                <span class="time">
-                    ${formatTime(sub.start)}
-                    →
-                    ${formatTime(sub.end)}
-                </span>
-
-                <button
-                    class="delete-btn"
-                    onclick="deleteSubtitle(${sub.id})"
-                >
-                    Delete
-                </button>
-
-            </div>
-
-            <input
-                type="text"
-                value="${escapeHtml(sub.text)}"
-                onchange="updateSubtitle(${sub.id}, this.value)"
-            >
-
+        <div class="sub-text">
+        ${escapeHTML(sub.text)}
+        </div>
         `;
+
 
         subtitleList.appendChild(item);
 
@@ -978,218 +1181,160 @@ function renderSubtitles(){
 }
 
 
-// DELETE
-function deleteSubtitle(id){
+/*
+=================================================
+SHOW ACTIVE SUBTITLE
+=================================================
+*/
 
-    subtitles =
-        subtitles.filter(
-            s => s.id !== id
-        );
-
-    renderSubtitles();
-
-}
-
-
-// UPDATE
-function updateSubtitle(id, text){
-
-    const item =
-        subtitles.find(
-            s => s.id === id
-        );
-
-    if(item){
-
-        item.text = text;
-
-    }
-
-}
-
-
-// SHOW ACTIVE SUBTITLE
-videoPreview.addEventListener("timeupdate", function(){
+videoPreview.addEventListener(
+"timeupdate",
+function(){
 
     const current =
-        videoPreview.currentTime;
+    videoPreview.currentTime;
+
 
     const active =
-        subtitles.find(
-            s =>
-            current >= s.start &&
-            current <= s.end
-        );
+    subtitles.find(
+        function(sub){
+
+            return (
+                current >= sub.start &&
+                current <= sub.end
+            );
+
+        }
+    );
+
 
     if(active){
 
         subtitlePreview.textContent =
-            active.text;
+        active.text;
 
     }else{
 
         subtitlePreview.textContent =
-            manualSubtitle.value || "";
+        "";
 
     }
 
 });
 
 
-// FORMAT TIME
+/*
+=================================================
+TIME FORMAT
+=================================================
+*/
+
 function formatTime(seconds){
 
-    const min =
-        Math.floor(seconds / 60);
-
-    const sec =
-        Math.floor(seconds % 60);
-
-    return String(min).padStart(2,"0")
-        + ":" +
-        String(sec).padStart(2,"0");
-
-}
+    const total =
+    Math.max(
+        0,
+        Math.floor(seconds)
+    );
 
 
-// ESCAPE
-function escapeHtml(text){
-
-    return text
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
+    const hours =
+    Math.floor(
+        total / 3600
+    );
 
 
-// AI START
-function startAI(){
+    const minutes =
+    Math.floor(
+        (total % 3600) / 60
+    );
 
-    if(!videoPreview.src){
 
-        alert(
-            "প্রথমে একটি ভিডিও আপলোড করুন।"
+    const secs =
+    total % 60;
+
+
+    if(hours > 0){
+
+        return (
+            String(hours).padStart(2,"0") +
+            ":" +
+            String(minutes).padStart(2,"0") +
+            ":" +
+            String(secs).padStart(2,"0")
         );
 
-        return;
     }
 
-    const progressWrap =
-        document.getElementById(
-            "progressWrap"
-        );
 
-    const progress =
-        document.getElementById(
-            "progress"
-        );
-
-    const progressText =
-        document.getElementById(
-            "progressText"
-        );
-
-    progressWrap.style.display =
-        "block";
-
-    let value = 0;
-
-    const timer =
-        setInterval(function(){
-
-            value += 5;
-
-            progress.style.width =
-                value + "%";
-
-            if(value < 30){
-
-                progressText.textContent =
-                    "ভিডিও প্রস্তুত করা হচ্ছে...";
-
-            }else if(value < 60){
-
-                progressText.textContent =
-                    "Speech Analysis প্রস্তুত হচ্ছে...";
-
-            }else if(value < 90){
-
-                progressText.textContent =
-                    "Subtitle Timing প্রস্তুত হচ্ছে...";
-
-            }else{
-
-                progressText.textContent =
-                    "প্রসেসিং শেষ হচ্ছে...";
-
-            }
-
-            if(value >= 100){
-
-                clearInterval(timer);
-
-                progressText.textContent =
-                    "বর্তমান UI Version প্রস্তুত।";
-
-                alert(
-                    "AI Engine এখনো যুক্ত করা হয়নি। পরবর্তী ধাপে Browser Whisper AI যুক্ত করলে ভিডিওর কথা নিজে শুনে Subtitle তৈরি হবে।"
-                );
-
-            }
-
-        },100);
-
-}
-
-
-// EXPORT
-function exportVideo(){
-
-    if(!videoPreview.src){
-
-        alert(
-            "প্রথমে একটি ভিডিও আপলোড করুন।"
-        );
-
-        return;
-    }
-
-    alert(
-        "MP4 Subtitle Burn-in Engine পরবর্তী ধাপে FFmpeg দিয়ে যুক্ত করা হবে।"
+    return (
+        String(minutes).padStart(2,"0") +
+        ":" +
+        String(secs).padStart(2,"0")
     );
 
 }
 
 
-// CLEAR
-function clearAll(){
+/*
+=================================================
+HTML SECURITY
+=================================================
+*/
+
+function escapeHTML(text){
+
+    return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/*
+=================================================
+CLEAR
+=================================================
+*/
+
+window.clearAll =
+function(){
 
     subtitles = [];
 
+    videoFile = null;
+
     videoInput.value = "";
 
-    videoPreview.removeAttribute("src");
+    videoPreview.removeAttribute(
+        "src"
+    );
 
     videoPreview.load();
 
     fileName.textContent = "";
 
-    manualSubtitle.value =
-        "আপনার Subtitle এখানে দেখা যাবে";
+    subtitlePreview.textContent = "";
 
-    subtitlePreview.textContent =
-        manualSubtitle.value;
+    subtitleList.innerHTML =
+    `
+    <div class="notice">
+    ভিডিও আপলোড করে
+    <strong>AI Auto Subtitle</strong>
+    চাপুন।
+    </div>
+    `;
 
-    renderSubtitles();
+    statusBox.innerHTML =
+    "AI Engine এখনো চালু করা হয়নি।";
 
-}
+    progressBox.style.display =
+    "none";
 
-
-// INITIAL
-renderSubtitles();
+};
 
 </script>
 
