@@ -93,11 +93,17 @@
       const file = e.target.files[0];
       if (!file) return;
 
+      if (!file.type.startsWith("image/")) {
+        alert("দয়া করে শুধুমাত্র ছবি (JPG, PNG, WebP) ফাইল নির্বাচন করুন।");
+        return;
+      }
+
       previewArea.style.display = "none";
-      status.innerHTML = `<i class="fa-solid fa-circle-notch spinner"></i> এআই মডেল প্রস্তুত হচ্ছে (প্রথমবার একটু সময় নিতে পারে)...`;
+      status.innerHTML = `<i class="fa-solid fa-circle-notch spinner"></i> এআই মডেল প্রস্তুত হচ্ছে, অনুগ্রহ করে কয়েক সেকেন্ড অপেক্ষা করুন...`;
 
       try {
         const blob = await removeBackground(file, {
+          publicPath: "https://cdn.jsdelivr.net/npm/@imgly/background-removal-data@1.5.8/dist/",
           progress: (key, current, total) => {
             if (total && current) {
               const percent = Math.round((current / total) * 100);
@@ -116,7 +122,7 @@
         previewArea.style.display = "flex";
       } catch (err) {
         console.error(err);
-        status.innerHTML = "❌ সমস্যা হয়েছে: " + err.message;
+        status.innerHTML = "❌ প্রসেস ব্যর্থ হয়েছে: " + err.message;
       }
     });
   </script>
