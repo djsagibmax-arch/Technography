@@ -1,228 +1,1074 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Background Remover | Technography</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    AI Background Remover | Technography
+  </title>
+
+  <meta
+    name="description"
+    content="Technography AI Background Remover - যেকোনো ছবির ব্যাকগ্রাউন্ড দ্রুত রিমুভ করুন এবং স্বচ্ছ PNG ডাউনলোড করুন।"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  >
+
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
+
     body {
+
       background-color: #030712;
+
       color: #f3f4f6;
-      font-family: system-ui, -apple-system, sans-serif;
+
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
     }
+
     .neon-card {
-      background: rgba(17, 24, 39, 0.95);
-      border: 1px solid rgba(34, 211, 238, 0.25);
-      box-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.8), 0 0 25px rgba(6, 182, 212, 0.15);
+
+      background:
+        rgba(17, 24, 39, 0.95);
+
+      border:
+        1px solid rgba(34, 211, 238, 0.25);
+
+      box-shadow:
+        0 10px 35px -5px rgba(0, 0, 0, 0.8),
+        0 0 25px rgba(6, 182, 212, 0.15);
+
     }
+
     .checkered-bg {
-      background: repeating-conic-gradient(#1f2937 0% 25%, #111827 0% 50%) 50% / 20px 20px;
+
+      background:
+        repeating-conic-gradient(
+          #1f2937 0% 25%,
+          #111827 0% 50%
+        )
+        50% / 20px 20px;
+
     }
+
     @keyframes spin {
-      100% { transform: rotate(360deg); }
+
+      100% {
+
+        transform:
+          rotate(360deg);
+
+      }
+
     }
+
     .spinner {
-      animation: spin 1s linear infinite;
+
+      animation:
+        spin 1s linear infinite;
+
     }
+
   </style>
+
 </head>
-<body class="min-h-screen flex flex-col justify-between">
 
-  <!-- হেডার -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/90 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400 no-underline">
-        Technography
-      </a>
-      <a href="index.html" class="text-xs sm:text-sm text-slate-400 hover:text-white flex items-center gap-1.5 transition">
-        <i class="fa-solid fa-arrow-left"></i> হোমপেজে ফিরুন
-      </a>
+
+<body
+  class="min-h-screen flex flex-col justify-between"
+>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header
+  class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/90 border-b border-slate-800"
+>
+
+  <div
+    class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between"
+  >
+
+    <a
+      href="index.html"
+      class="text-xl font-bold tracking-wider text-cyan-400 no-underline"
+    >
+
+      Technography
+
+    </a>
+
+
+    <a
+      href="index.html"
+      class="text-xs sm:text-sm text-slate-400 hover:text-white flex items-center gap-1.5 transition"
+    >
+
+      <i class="fa-solid fa-arrow-left"></i>
+
+      হোমপেজে ফিরুন
+
+    </a>
+
+  </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main
+  class="flex-1 flex items-center justify-center px-4 py-8"
+>
+
+  <div
+    class="neon-card w-full max-w-lg rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden"
+  >
+
+
+    <!-- Badge -->
+
+    <div
+      class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold mb-3"
+    >
+
+      <i
+        class="fa-solid fa-wand-magic-sparkles text-cyan-400"
+      ></i>
+
+      <span>
+        AI Background Remover
+      </span>
+
     </div>
-  </header>
 
-  <!-- মূল কন্টেইনার -->
-  <main class="flex-1 flex items-center justify-center px-4 py-8">
-    <div class="neon-card w-full max-w-lg rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden">
-      
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold mb-3">
-        <i class="fa-solid fa-wand-magic-sparkles text-cyan-400"></i>
-        <span>১০০% ফ্রি ও আনলিমিটেড AI টুল</span>
+
+    <!-- Title -->
+
+    <h1
+      class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2"
+    >
+
+      AI ব্যাকগ্রাউন্ড রিমুভার
+
+    </h1>
+
+
+    <p
+      class="text-xs sm:text-sm text-slate-400 mb-6"
+    >
+
+      যেকোনো ছবির ব্যাকগ্রাউন্ড AI দিয়ে রিমুভ করে
+      স্বচ্ছ PNG ডাউনলোড করুন
+
+    </p>
+
+
+
+    <!-- =================================================
+         UPLOAD BOX
+    ================================================== -->
+
+    <div
+      id="uploadBox"
+      class="relative border-2 border-dashed border-cyan-500/40 hover:border-cyan-400 bg-slate-950/60 rounded-2xl p-8 transition cursor-pointer"
+    >
+
+      <input
+        type="file"
+        id="imageInput"
+        accept="image/png,image/jpeg,image/webp,image/jpg"
+        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+      >
+
+
+      <div
+        class="w-16 h-16 mx-auto rounded-full bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-2xl mb-3"
+      >
+
+        <i
+          class="fa-solid fa-cloud-arrow-up"
+        ></i>
+
       </div>
-      <h1 class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
-        AI ব্যাকগ্রাউন্ড রিমুভার
-      </h1>
-      <p class="text-xs sm:text-sm text-slate-400 mb-6">
-        যেকোনো ছবির ব্যাকগ্রাউন্ড মাত্র ১ ক্লিকে রিমুভ করে স্বচ্ছ PNG ডাউনলোড করুন
+
+
+      <span
+        class="block text-base font-bold text-slate-100"
+      >
+
+        গ্যালারি থেকে ছবি সিলেক্ট করুন
+
+      </span>
+
+
+      <span
+        class="block text-xs text-slate-400 mt-1"
+      >
+
+        JPG, PNG অথবা WebP — সর্বোচ্চ ১০ MB
+
+      </span>
+
+    </div>
+
+
+
+    <!-- =================================================
+         PREVIEW AREA
+    ================================================== -->
+
+    <div
+      id="previewArea"
+      class="hidden mt-6 space-y-4"
+    >
+
+
+      <!-- File Info -->
+
+      <div
+        class="bg-emerald-950/40 border border-emerald-500/40 rounded-2xl p-3 flex items-center justify-between"
+      >
+
+        <div
+          class="flex items-center gap-2.5 text-left"
+        >
+
+          <div
+            class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm"
+          >
+
+            <i
+              class="fa-solid fa-circle-check"
+            ></i>
+
+          </div>
+
+
+          <div>
+
+            <p
+              class="text-xs font-bold text-emerald-300"
+            >
+
+              ছবি সফলভাবে নেওয়া হয়েছে
+
+            </p>
+
+
+            <p
+              id="fileDetail"
+              class="text-[11px] text-slate-400 truncate max-w-[200px]"
+            ></p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          onclick="resetUpload()"
+          class="text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700"
+        >
+
+          পরিবর্তন
+
+        </button>
+
+      </div>
+
+
+
+      <!-- Source Preview -->
+
+      <div
+        class="w-full max-h-64 rounded-2xl overflow-hidden border border-cyan-500/30 bg-slate-950 flex items-center justify-center p-2"
+      >
+
+        <img
+          id="sourcePreview"
+          src=""
+          class="max-h-60 max-w-full object-contain rounded-xl"
+          alt="Selected Image"
+        >
+
+      </div>
+
+
+
+      <!-- Process Button -->
+
+      <button
+        id="processBtn"
+        type="button"
+        class="w-full bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 hover:opacity-95 text-white font-bold py-4 px-4 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition active:scale-95"
+      >
+
+        <i
+          id="btnIcon"
+          class="fa-solid fa-scissors text-base"
+        ></i>
+
+        <span id="btnText">
+          ম্যাজিক ব্যাকগ্রাউন্ড রিমুভ করুন
+        </span>
+
+      </button>
+
+    </div>
+
+
+
+    <!-- =================================================
+         STATUS
+    ================================================== -->
+
+    <div
+      id="statusBox"
+      class="hidden mt-5 bg-slate-900/90 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-cyan-300 flex items-center justify-center gap-2"
+    >
+
+      <i
+        class="fa-solid fa-circle-notch spinner text-base"
+      ></i>
+
+      <span id="statusText">
+        AI ব্যাকগ্রাউন্ড প্রসেস করছে...
+      </span>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ERROR BOX
+    ================================================== -->
+
+    <div
+      id="errorBox"
+      class="hidden mt-4 bg-red-950/40 border border-red-500/40 rounded-xl p-4 text-left"
+    >
+
+      <div
+        class="flex items-start gap-3"
+      >
+
+        <i
+          class="fa-solid fa-circle-exclamation text-red-400 mt-0.5"
+        ></i>
+
+        <div>
+
+          <p
+            class="text-sm font-bold text-red-300"
+          >
+
+            প্রসেসিং ব্যর্থ হয়েছে
+
+          </p>
+
+          <p
+            id="errorText"
+            class="text-xs text-red-200/80 mt-1 break-words"
+          ></p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         RESULT
+    ================================================== -->
+
+    <div
+      id="resultArea"
+      class="hidden mt-6 flex-col items-center gap-4"
+    >
+
+      <p
+        class="text-xs font-bold text-emerald-400 flex items-center gap-1.5 self-start"
+      >
+
+        <i
+          class="fa-solid fa-circle-check"
+        ></i>
+
+        ব্যাকগ্রাউন্ড স্বচ্ছ করা সম্পন্ন!
+
       </p>
 
-      <!-- ১. আপলোড বক্স -->
-      <div id="uploadBox" class="relative border-2 border-dashed border-cyan-500/40 hover:border-cyan-400 bg-slate-950/60 rounded-2xl p-8 transition cursor-pointer">
-        <input type="file" id="imageInput" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-        <div class="w-16 h-16 mx-auto rounded-full bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-2xl mb-3">
-          <i class="fa-solid fa-cloud-arrow-up"></i>
-        </div>
-        <span class="block text-base font-bold text-slate-100">
-          গ্যালারি থেকে ছবি সিলেক্ট করুন
+
+      <div
+        class="w-full max-h-72 rounded-2xl overflow-hidden border border-emerald-500/40 checkered-bg flex items-center justify-center p-2"
+      >
+
+        <img
+          id="outputImg"
+          class="max-h-64 max-w-full object-contain rounded-lg"
+          alt="Transparent Result"
+        >
+
+      </div>
+
+
+      <a
+        id="downloadLink"
+        href="#"
+        download="technography_cutout.png"
+        class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-4 px-4 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition"
+      >
+
+        <i
+          class="fa-solid fa-download text-base"
+        ></i>
+
+        <span>
+          স্বচ্ছ PNG ছবি ডাউনলোড করুন
         </span>
-        <span class="block text-xs text-slate-400 mt-1">
-          এখানে ট্যাপ করে ছবি বেছে নিন
-        </span>
-      </div>
 
-      <!-- ২. সিলেক্ট করা ছবির প্রিভিউ -->
-      <div id="previewArea" class="hidden mt-6 space-y-4">
-        <div class="bg-emerald-950/40 border border-emerald-500/40 rounded-2xl p-3 flex items-center justify-between">
-          <div class="flex items-center gap-2.5 text-left">
-            <div class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm">
-              <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-emerald-300">ছবি সফলভাবে নেওয়া হয়েছে</p>
-              <p id="fileDetail" class="text-[11px] text-slate-400 truncate max-w-[200px]"></p>
-            </div>
-          </div>
-          <button type="button" onclick="resetUpload()" class="text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700">
-            পরিবর্তন
-          </button>
-        </div>
-
-        <div class="w-full max-h-64 rounded-2xl overflow-hidden border border-cyan-500/30 bg-slate-950 flex items-center justify-center p-2">
-          <img id="sourcePreview" src="" class="max-h-60 object-contain rounded-xl" alt="Preview">
-        </div>
-
-        <button id="processBtn" type="button" class="w-full bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 hover:opacity-95 text-white font-bold py-4 px-4 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition active:scale-95">
-          <i id="btnIcon" class="fa-solid fa-scissors text-base"></i>
-          <span id="btnText">ম্যাজিক ব্যাকগ্রাউন্ড রিমুভ করুন</span>
-        </button>
-      </div>
-
-      <!-- ৩. স্ট্যাটাস এরিয়া -->
-      <div id="statusBox" class="hidden mt-5 bg-slate-900/90 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-cyan-300 flex items-center justify-center gap-2">
-        <i class="fa-solid fa-circle-notch spinner text-base"></i>
-        <span id="statusText">AI ব্যাকগ্রাউন্ড প্রসেস করছে...</span>
-      </div>
-
-      <!-- ৪. স্বচ্ছ রেজাল্ট এরিয়া -->
-      <div id="resultArea" class="hidden mt-6 flex-col items-center gap-4">
-        <p class="text-xs font-bold text-emerald-400 flex items-center gap-1.5 self-start">
-          <i class="fa-solid fa-circle-check"></i> ব্যাকগ্রাউন্ড স্বচ্ছ করা সম্পন্ন!
-        </p>
-        <div class="w-full max-h-72 rounded-2xl overflow-hidden border border-emerald-500/40 checkered-bg flex items-center justify-center p-2">
-          <img id="outputImg" class="max-h-64 object-contain rounded-lg" alt="Transparent Result">
-        </div>
-        <a id="downloadLink" href="#" download="technography_cutout.png" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-4 px-4 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition">
-          <i class="fa-solid fa-download text-base"></i>
-          <span>স্বচ্ছ PNG ছবি ডাউনলোড করুন</span>
-        </a>
-      </div>
+      </a>
 
     </div>
-  </main>
 
-  <footer class="bg-slate-950 border-t border-slate-800 py-4 text-center text-slate-500 text-xs">
-    <p>&copy; 2026 Technography. All rights reserved.</p>
-  </footer>
 
-  <script>
-    // আপনার সঠিক Render সার্ভিস লিঙ্ক
-    const BACKEND_URL = "https://technography-ai.onrender.com/remove-bg";
+  </div>
 
-    let selectedImageFile = null;
+</main>
 
-    const imageInput = document.getElementById("imageInput");
-    const uploadBox = document.getElementById("uploadBox");
-    const previewArea = document.getElementById("previewArea");
-    const sourcePreview = document.getElementById("sourcePreview");
-    const fileDetail = document.getElementById("fileDetail");
-    const statusBox = document.getElementById("statusBox");
-    const statusText = document.getElementById("statusText");
-    const resultArea = document.getElementById("resultArea");
-    const outputImg = document.getElementById("outputImg");
-    const downloadLink = document.getElementById("downloadLink");
-    const processBtn = document.getElementById("processBtn");
-    const btnText = document.getElementById("btnText");
-    const btnIcon = document.getElementById("btnIcon");
 
-    imageInput.addEventListener("change", function(e) {
-      const file = this.files[0];
-      if (!file) return;
 
-      selectedImageFile = file;
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        sourcePreview.src = event.target.result;
-        fileDetail.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
-        
-        uploadBox.classList.add("hidden");
-        previewArea.classList.remove("hidden");
-        resultArea.classList.add("hidden");
-        statusBox.classList.add("hidden");
-      };
-      reader.readAsDataURL(file);
-    });
+<footer
+  class="bg-slate-950 border-t border-slate-800 py-4 text-center text-slate-500 text-xs"
+>
 
-    function resetUpload() {
-      imageInput.value = "";
-      selectedImageFile = null;
-      uploadBox.classList.remove("hidden");
-      previewArea.classList.add("hidden");
-      resultArea.classList.add("hidden");
-      statusBox.classList.add("hidden");
+  <p>
+    &copy; 2026 Technography. All rights reserved.
+  </p>
+
+</footer>
+
+
+
+<script>
+
+/* =====================================================
+   BACKEND
+===================================================== */
+
+const BACKEND_BASE =
+  "https://technography-ai.onrender.com";
+
+const BACKGROUND_REMOVE_URL =
+  BACKEND_BASE + "/remove-bg";
+
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let selectedImageFile = null;
+
+let currentObjectUrl = null;
+
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const imageInput =
+  document.getElementById("imageInput");
+
+const uploadBox =
+  document.getElementById("uploadBox");
+
+const previewArea =
+  document.getElementById("previewArea");
+
+const sourcePreview =
+  document.getElementById("sourcePreview");
+
+const fileDetail =
+  document.getElementById("fileDetail");
+
+const statusBox =
+  document.getElementById("statusBox");
+
+const statusText =
+  document.getElementById("statusText");
+
+const errorBox =
+  document.getElementById("errorBox");
+
+const errorText =
+  document.getElementById("errorText");
+
+const resultArea =
+  document.getElementById("resultArea");
+
+const outputImg =
+  document.getElementById("outputImg");
+
+const downloadLink =
+  document.getElementById("downloadLink");
+
+const processBtn =
+  document.getElementById("processBtn");
+
+const btnText =
+  document.getElementById("btnText");
+
+const btnIcon =
+  document.getElementById("btnIcon");
+
+
+
+/* =====================================================
+   FILE SELECT
+===================================================== */
+
+imageInput.addEventListener(
+  "change",
+  function () {
+
+    const file =
+      this.files &&
+      this.files[0];
+
+    if (!file) {
+      return;
     }
 
-    processBtn.addEventListener("click", async function() {
-      if (!selectedImageFile) {
-        alert("দয়া করে প্রথমে একটি ছবি নির্বাচন করুন!");
-        return;
-      }
 
-      processBtn.disabled = true;
-      processBtn.classList.add("opacity-50", "cursor-not-allowed");
-      btnIcon.className = "fa-solid fa-circle-notch spinner text-base";
-      btnText.textContent = "প্রসেসিং হচ্ছে...";
+    /* File Type */
 
-      statusBox.classList.remove("hidden");
-      statusText.textContent = "AI সার্ভারে ব্যাকগ্রাউন্ড কাটা হচ্ছে (১০-১৫ সেকেন্ড অপেক্ষা করুন)...";
+    if (!file.type.startsWith("image/")) {
 
-      try {
-        const formData = new FormData();
-        formData.append("file", selectedImageFile);
+      showError(
+        "দয়া করে JPG, PNG অথবা WebP ছবি নির্বাচন করুন।"
+      );
 
-        const response = await fetch(BACKEND_URL, {
-          method: "POST",
-          body: formData
-        });
+      this.value = "";
 
-        if (!response.ok) {
-          const errData = await response.json().catch(() => ({}));
-          throw new Error(errData.error || errData.detail || `সার্ভার এরর কোড: ${response.status}`);
+      return;
+    }
+
+
+    /* File Size */
+
+    if (
+      file.size >
+      10 * 1024 * 1024
+    ) {
+
+      showError(
+        "ছবির সাইজ ১০ MB-এর বেশি হতে পারবে না।"
+      );
+
+      this.value = "";
+
+      return;
+    }
+
+
+    selectedImageFile =
+      file;
+
+
+    /* File Reader */
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload =
+      function (event) {
+
+        sourcePreview.src =
+          event.target.result;
+
+        fileDetail.textContent =
+          `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+
+
+        uploadBox.classList.add(
+          "hidden"
+        );
+
+        previewArea.classList.remove(
+          "hidden"
+        );
+
+        resultArea.classList.add(
+          "hidden"
+        );
+
+        statusBox.classList.add(
+          "hidden"
+        );
+
+        errorBox.classList.add(
+          "hidden"
+        );
+
+      };
+
+
+    reader.onerror =
+      function () {
+
+        showError(
+          "ছবিটি পড়তে সমস্যা হয়েছে।"
+        );
+
+      };
+
+
+    reader.readAsDataURL(file);
+
+  }
+);
+
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+function resetUpload() {
+
+  imageInput.value =
+    "";
+
+  selectedImageFile =
+    null;
+
+
+  if (currentObjectUrl) {
+
+    URL.revokeObjectURL(
+      currentObjectUrl
+    );
+
+    currentObjectUrl =
+      null;
+
+  }
+
+
+  sourcePreview.src =
+    "";
+
+  outputImg.src =
+    "";
+
+  downloadLink.href =
+    "#";
+
+
+  uploadBox.classList.remove(
+    "hidden"
+  );
+
+  previewArea.classList.add(
+    "hidden"
+  );
+
+  resultArea.classList.add(
+    "hidden"
+  );
+
+  statusBox.classList.add(
+    "hidden"
+  );
+
+  errorBox.classList.add(
+    "hidden"
+  );
+
+}
+
+
+
+/* =====================================================
+   SHOW ERROR
+===================================================== */
+
+function showError(message) {
+
+  errorText.textContent =
+    message;
+
+  errorBox.classList.remove(
+    "hidden"
+  );
+
+  statusBox.classList.add(
+    "hidden"
+  );
+
+}
+
+
+
+/* =====================================================
+   PROCESS IMAGE
+===================================================== */
+
+processBtn.addEventListener(
+  "click",
+  async function () {
+
+    if (!selectedImageFile) {
+
+      showError(
+        "দয়া করে প্রথমে একটি ছবি নির্বাচন করুন।"
+      );
+
+      return;
+    }
+
+
+    /* Button Loading */
+
+    processBtn.disabled =
+      true;
+
+    processBtn.classList.add(
+      "opacity-50",
+      "cursor-not-allowed"
+    );
+
+
+    btnIcon.className =
+      "fa-solid fa-circle-notch spinner text-base";
+
+    btnText.textContent =
+      "AI দিয়ে ব্যাকগ্রাউন্ড রিমুভ হচ্ছে...";
+
+
+    statusBox.classList.remove(
+      "hidden"
+    );
+
+    errorBox.classList.add(
+      "hidden"
+    );
+
+    resultArea.classList.add(
+      "hidden"
+    );
+
+
+    statusText.textContent =
+      "AI সার্ভারে ছবি পাঠানো হচ্ছে...";
+
+
+    try {
+
+      /* -------------------------------------------
+         Form Data
+      ------------------------------------------- */
+
+      const formData =
+        new FormData();
+
+      formData.append(
+        "file",
+        selectedImageFile
+      );
+
+
+      statusText.textContent =
+        "AI ব্যাকগ্রাউন্ড বিশ্লেষণ করছে...";
+
+
+      /* -------------------------------------------
+         Request
+      ------------------------------------------- */
+
+      const response =
+        await fetch(
+          BACKGROUND_REMOVE_URL,
+          {
+            method: "POST",
+            body: formData
+          }
+        );
+
+
+      /* -------------------------------------------
+         Response Content Type
+      ------------------------------------------- */
+
+      const contentType =
+        response.headers.get(
+          "content-type"
+        ) || "";
+
+
+      /* -------------------------------------------
+         Error Response
+      ------------------------------------------- */
+
+      if (!response.ok) {
+
+        let message =
+          `সার্ভার এরর কোড: ${response.status}`;
+
+
+        if (
+          contentType.includes(
+            "application/json"
+          )
+        ) {
+
+          try {
+
+            const data =
+              await response.json();
+
+            message =
+              data.error ||
+              data.message ||
+              message;
+
+          }
+
+          catch (e) {}
+
         }
 
-        const blob = await response.blob();
-        const transparentUrl = URL.createObjectURL(blob);
+        else {
 
-        outputImg.src = transparentUrl;
-        downloadLink.href = transparentUrl;
+          try {
 
-        statusBox.classList.add("hidden");
-        resultArea.classList.remove("hidden");
-        resultArea.classList.add("flex");
-      } catch (err) {
-        console.error(err);
-        alert("ত্রুটি: " + err.message);
-        statusText.textContent = "❌ ব্যর্থ হয়েছে: " + err.message;
-      } finally {
-        processBtn.disabled = false;
-        processBtn.classList.remove("opacity-50", "cursor-not-allowed");
-        btnIcon.className = "fa-solid fa-scissors text-base";
-        btnText.textContent = "ম্যাজিক ব্যাকগ্রাউন্ড রিমুভ করুন";
+            const text =
+              await response.text();
+
+            if (text) {
+
+              message =
+                text.substring(
+                  0,
+                  500
+                );
+
+            }
+
+          }
+
+          catch (e) {}
+
+        }
+
+
+        throw new Error(
+          message
+        );
+
       }
-    });
-  </script>
+
+
+      /* -------------------------------------------
+         Must be PNG/Image
+      ------------------------------------------- */
+
+      if (
+        !contentType.startsWith(
+          "image/"
+        )
+      ) {
+
+        let message =
+          "সার্ভার ছবি ফেরত দেয়নি।";
+
+
+        try {
+
+          const data =
+            await response.json();
+
+          message =
+            data.error ||
+            message;
+
+        }
+
+        catch (e) {}
+
+
+        throw new Error(
+          message
+        );
+
+      }
+
+
+      /* -------------------------------------------
+         Get Blob
+      ------------------------------------------- */
+
+      const blob =
+        await response.blob();
+
+
+      if (!blob.size) {
+
+        throw new Error(
+          "সার্ভার থেকে খালি ছবি এসেছে।"
+        );
+
+      }
+
+
+      /* -------------------------------------------
+         Object URL
+      ------------------------------------------- */
+
+      if (currentObjectUrl) {
+
+        URL.revokeObjectURL(
+          currentObjectUrl
+        );
+
+      }
+
+
+      currentObjectUrl =
+        URL.createObjectURL(
+          blob
+        );
+
+
+      /* -------------------------------------------
+         Show Result
+      ------------------------------------------- */
+
+      outputImg.src =
+        currentObjectUrl;
+
+      downloadLink.href =
+        currentObjectUrl;
+
+      downloadLink.download =
+        "technography_cutout.png";
+
+
+      statusBox.classList.add(
+        "hidden"
+      );
+
+      resultArea.classList.remove(
+        "hidden"
+      );
+
+      resultArea.classList.add(
+        "flex"
+      );
+
+
+      btnText.textContent =
+        "আবার ব্যাকগ্রাউন্ড রিমুভ করুন";
+
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Background Removal Error:",
+        error
+      );
+
+
+      showError(
+        error.message ||
+        "অজানা সার্ভার সমস্যা হয়েছে।"
+      );
+
+
+      btnText.textContent =
+        "আবার চেষ্টা করুন";
+
+    }
+
+
+    finally {
+
+      processBtn.disabled =
+        false;
+
+      processBtn.classList.remove(
+        "opacity-50",
+        "cursor-not-allowed"
+      );
+
+
+      btnIcon.className =
+        "fa-solid fa-scissors text-base";
+
+    }
+
+  }
+);
+
+
+
+/* =====================================================
+   PAGE CLEANUP
+===================================================== */
+
+window.addEventListener(
+  "beforeunload",
+  function () {
+
+    if (currentObjectUrl) {
+
+      URL.revokeObjectURL(
+        currentObjectUrl
+      );
+
+    }
+
+  }
+);
+
+</script>
+
 
 </body>
+
 </html>
