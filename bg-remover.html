@@ -31,7 +31,6 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
-  <!-- হেডার -->
   <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/90 border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
       <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400 no-underline">
@@ -43,14 +42,12 @@
     </div>
   </header>
 
-  <!-- মূল কন্টেইনার -->
   <main class="flex-1 flex items-center justify-center px-4 py-8">
     <div class="neon-card w-full max-w-lg rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden">
       
-      <!-- হেডিং -->
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold mb-3">
         <i class="fa-solid fa-wand-magic-sparkles text-cyan-400"></i>
-        <span>১০০% ফ্রি ও আনলিমিটেড BEN2 AI</span>
+        <span>১০০% ফ্রি ও আনলিমিটেড AI টুল</span>
       </div>
       <h1 class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
         AI ব্যাকগ্রাউন্ড রিমুভার
@@ -59,7 +56,6 @@
         যেকোনো ছবির ব্যাকগ্রাউন্ড মাত্র ১ ক্লিকে নিখুঁতভাবে রিমুভ করে স্বচ্ছ PNG ডাউনলোড করুন
       </p>
 
-      <!-- ছবি আপলোড বক্স -->
       <label for="imageInput" class="group block border-2 border-dashed border-cyan-500/40 hover:border-cyan-400 bg-slate-950/60 rounded-2xl p-6 cursor-pointer transition">
         <div class="w-16 h-16 mx-auto rounded-full bg-cyan-950/50 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl group-hover:scale-110 transition mb-3">
           <i class="fa-solid fa-cloud-arrow-up"></i>
@@ -73,7 +69,6 @@
       </label>
       <input type="file" id="imageInput" accept="image/*" class="hidden">
 
-      <!-- অ্যাকশন এরিয়া -->
       <div id="actionArea" class="hidden mt-6 space-y-4">
         <div class="flex items-center justify-center gap-3 bg-slate-900 border border-slate-800 p-2.5 rounded-2xl">
           <img id="sourceThumb" src="" class="w-14 h-14 object-cover rounded-xl border border-slate-700" alt="Selected">
@@ -94,18 +89,16 @@
         </button>
       </div>
 
-      <!-- স্ট্যাটাস লোডার -->
       <div id="statusBox" class="hidden mt-4 text-xs font-semibold text-cyan-300 flex items-center justify-center gap-2">
         <i class="fa-solid fa-circle-notch spinner text-base"></i>
-        <span id="statusText">BEN2 AI লোড হচ্ছে...</span>
+        <span id="statusText">প্রসেসিং চলছে...</span>
       </div>
 
-      <!-- রেজাল্ট ও ডাউনলোড -->
       <div id="resultArea" class="hidden mt-6 flex-col items-center gap-4">
         <div class="w-full max-h-72 rounded-2xl overflow-hidden border border-slate-700 checkered-bg flex items-center justify-center p-2">
-          <canvas id="outputCanvas" class="max-h-64 object-contain rounded-lg"></canvas>
+          <img id="outputImg" class="max-h-64 object-contain rounded-lg" alt="Transparent Result">
         </div>
-        <a id="downloadLink" href="#" download="technography_cutout.png" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-3.5 px-4 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition">
+        <a id="downloadLink" href="#" download="technography_transparent.png" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-3.5 px-4 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition">
           <i class="fa-solid fa-download"></i>
           <span>স্বচ্ছ ছবি ডাউনলোড করুন (PNG)</span>
         </a>
@@ -118,12 +111,9 @@
     <p>&copy; 2026 Technography. All rights reserved.</p>
   </footer>
 
-  <!-- BEN2 AI ইঞ্জিন স্ক্রিপ্ট -->
   <script type="module">
-    import { pipeline, env } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.3.3";
-    env.allowLocalModels = false;
+    import removeBackground from "https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.8/+esm";
 
-    let segmenter = null;
     let selectedFile = null;
 
     const fileInput = document.getElementById("imageInput");
@@ -133,7 +123,7 @@
     const statusBox = document.getElementById("statusBox");
     const statusText = document.getElementById("statusText");
     const resultArea = document.getElementById("resultArea");
-    const outputCanvas = document.getElementById("outputCanvas");
+    const outputImg = document.getElementById("outputImg");
     const downloadLink = document.getElementById("downloadLink");
     const processBtn = document.getElementById("processBtn");
 
@@ -164,45 +154,29 @@
       processBtn.disabled = true;
       processBtn.classList.add("opacity-50", "cursor-not-allowed");
       statusBox.classList.remove("hidden");
-      statusText.textContent = "BEN2 AI মডেল লোড হচ্ছে (প্রথমবার একটু সময় নিতে পারে)...";
+      statusText.textContent = "AI ইঞ্জিন সক্রিয় হচ্ছে (প্রথমবার একটু সময় নিতে পারে)...";
 
       try {
-        if (!segmenter) {
-          // আপনার স্ক্রিনশটের ৪ নম্বরে উল্লেখিত BEN2 মডেল
-          segmenter = await pipeline("image-segmentation", "onnx-community/BEN2-ONNX", {
-            device: "wasm"
-          });
-        }
+        // মডেল এসেটস সরাসরি অফিসিয়াল ক্লাউড সিডিএন থেকে লোড হবে
+        const blob = await removeBackground(selectedFile, {
+          publicPath: "https://staticimgly.com/@imgly/background-removal-data/1.5.8/dist/",
+          progress: (key, current, total) => {
+            if (total && current) {
+              const percent = Math.round((current / total) * 100);
+              statusText.textContent = `প্রসেসিং চলছে: ${percent}%...`;
+            } else {
+              statusText.textContent = "ব্যাকগ্রাউন্ড আলাদা করা হচ্ছে...";
+            }
+          }
+        });
 
-        statusText.textContent = "সূক্ষ্মভাবে ব্যাকগ্রাউন্ড অপসারণ চলছে...";
-        const imageUrl = URL.createObjectURL(selectedFile);
-        const output = await segmenter(imageUrl);
+        const finalUrl = URL.createObjectURL(blob);
+        outputImg.src = finalUrl;
+        downloadLink.href = finalUrl;
 
-        // ক্যানভাসে স্বচ্ছ ছবি প্রস্তুত
-        const maskCanvas = output[0].mask.toCanvas();
-        const ctx = outputCanvas.getContext("2d");
-        const originalImg = new Image();
-
-        originalImg.onload = () => {
-          outputCanvas.width = originalImg.naturalWidth;
-          outputCanvas.height = originalImg.naturalHeight;
-
-          // ড্র মাস্ক
-          ctx.drawImage(maskCanvas, 0, 0, outputCanvas.width, outputCanvas.height);
-          ctx.globalCompositeOperation = "source-in";
-          ctx.drawImage(originalImg, 0, 0);
-
-          // ডাউনলোড লিঙ্ক তৈরি
-          outputCanvas.toBlob((blob) => {
-            const finalUrl = URL.createObjectURL(blob);
-            downloadLink.href = finalUrl;
-            statusBox.classList.add("hidden");
-            resultArea.classList.remove("hidden");
-            resultArea.classList.add("flex");
-          }, "image/png");
-        };
-        originalImg.src = imageUrl;
-
+        statusBox.classList.add("hidden");
+        resultArea.classList.remove("hidden");
+        resultArea.classList.add("flex");
       } catch (err) {
         console.error(err);
         statusText.textContent = "❌ সমস্যা হয়েছে: " + err.message;
