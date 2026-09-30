@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Free Image Compressor Online | Technography</title>
+
+<meta name="description"
+      content="Technography Free Image Compressor দিয়ে JPG, PNG ও WebP ছবির ফাইল সাইজ কমান। কোনো সার্ভারে ছবি আপলোড ছাড়াই ব্রাউজারে ছবি Compress করুন।">
+
+<link rel="canonical"
+      href="https://technographybd.xyz/image-compressor.html">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+<style>
+
+body {
+    background:
+        radial-gradient(circle at top left, rgba(16,185,129,.12), transparent 35%),
+        radial-gradient(circle at top right, rgba(6,182,212,.12), transparent 35%),
+        #030712;
+    color:#f3f4f6;
+    font-family:system-ui,-apple-system,sans-serif;
+    min-height:100vh;
+}
+
+.glass {
+    background:rgba(15,23,42,.82);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.drop-zone {
+    border:2px dashed rgba(16,185,129,.45);
+    transition:.3s;
+}
+
+.drop-zone:hover,
+.drop-zone.dragover {
+    border-color:#34d399;
+    background:rgba(16,185,129,.06);
+    transform:translateY(-2px);
+}
+
+.preview-box {
+    background-image:
+        linear-gradient(45deg,#1e293b 25%,transparent 25%),
+        linear-gradient(-45deg,#1e293b 25%,transparent 25%),
+        linear-gradient(45deg,transparent 75%,#1e293b 75%),
+        linear-gradient(-45deg,transparent 75%,#1e293b 75%);
+    background-size:25px 25px;
+    background-position:
+        0 0,
+        0 12.5px,
+        12.5px -12.5px,
+        -12.5px 0;
+    background-color:#0f172a;
+}
+
+.glow {
+    box-shadow:0 0 35px rgba(16,185,129,.14);
+}
+
+input[type="range"] {
+    width:100%;
+    accent-color:#10b981;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
+
+<div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+
+<a href="index.html"
+   class="text-xl font-black text-cyan-400 tracking-wide">
+
+    Technography
+
+</a>
+
+
+<div class="flex items-center gap-2">
+
+<a href="image-resizer.html"
+   class="inline-flex items-center gap-2
+          px-3 py-2 rounded-full
+          bg-cyan-950/70
+          border border-cyan-500/30
+          text-cyan-300 text-xs font-bold">
+
+    <i class="fa-solid fa-expand"></i>
+
+    <span class="hidden sm:inline">
+        Resize
+    </span>
+
+</a>
+
+
+<a href="bg-remover.html"
+   class="hidden sm:inline-flex items-center gap-2
+          px-3 py-2 rounded-full
+          bg-emerald-950/70
+          border border-emerald-500/30
+          text-emerald-300 text-xs font-bold">
+
+    <i class="fa-solid fa-scissors"></i>
+
+    BG Remover
+
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+
+<main class="max-w-5xl mx-auto px-4 py-8 sm:py-12">
+
+
+<section class="text-center mb-8">
+
+<div class="inline-flex items-center gap-2
+            px-4 py-2 rounded-full
+            bg-emerald-500/10
+            border border-emerald-400/30
+            text-emerald-300
+            text-xs font-bold mb-4">
+
+    <i class="fa-solid fa-compress"></i>
+
+    ১০০% ফ্রি ব্রাউজার টুল
+
+</div>
+
+
+<h1 class="text-3xl sm:text-5xl font-black mb-4">
+
+<span class="text-white">
+    Image
+</span>
+
+<span class="text-transparent bg-clip-text
+             bg-gradient-to-r from-emerald-400 to-cyan-400">
+
+    Compressor
+
+</span>
+
+</h1>
+
+
+<p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
+
+ছবির Quality যতটা সম্ভব ভালো রেখে ফাইলের Size কমান।
+কোনো সার্ভারে ছবি পাঠানো হয় না—সবকিছু আপনার ব্রাউজারেই প্রসেস হয়।
+
+</p>
+
+</section>
+
+
+
+<section class="glass rounded-3xl p-5 sm:p-8 glow">
+
+
+<div id="dropZone"
+     class="drop-zone rounded-3xl p-8 sm:p-12
+            text-center cursor-pointer">
+
+
+<div class="w-20 h-20 mx-auto rounded-3xl
+            bg-emerald-500/10
+            border border-emerald-400/30
+            flex items-center justify-center mb-5">
+
+<i class="fa-solid fa-file-image
+          text-4xl text-emerald-400"></i>
+
+</div>
+
+
+<h2 class="text-xl sm:text-2xl
+           font-black text-white mb-2">
+
+    ছবি Compress করুন
+
+</h2>
+
+
+<p class="text-slate-400 text-sm mb-5">
+
+    ছবি এখানে Drag & Drop করুন অথবা নির্বাচন করুন
+
+</p>
+
+
+<button type="button"
+        onclick="document.getElementById('fileInput').click()"
+        class="bg-gradient-to-r from-emerald-500 to-teal-600
+               hover:from-emerald-400 hover:to-teal-500
+               text-white font-black px-7 py-3
+               rounded-xl shadow-lg transition">
+
+    <i class="fa-solid fa-upload mr-2"></i>
+
+    ছবি নির্বাচন করুন
+
+</button>
+
+
+<input type="file"
+       id="fileInput"
+       accept="image/jpeg,image/png,image/webp"
+       class="hidden">
+
+
+<p class="text-[11px] text-slate-500 mt-4">
+
+    JPG • PNG • WebP
+
+</p>
+
+</div>
+
+
+
+<div id="editor" class="hidden mt-8">
+
+
+<div class="grid lg:grid-cols-2 gap-6">
+
+
+<div>
+
+<h3 class="font-bold text-emerald-300 mb-3">
+
+<i class="fa-solid fa-eye mr-1"></i>
+
+Preview
+
+</h3>
+
+
+<div class="preview-box rounded-2xl
+            min-h-[280px]
+            flex items-center justify-center p-4">
+
+<img id="previewImage"
+     class="max-w-full max-h-[400px]
+            rounded-xl object-contain"
+     alt="Image Preview">
+
+</div>
+
+
+<div id="fileInfo"
+     class="text-xs text-slate-400
+            mt-3 text-center">
+</div>
+
+
+</div>
+
+
+
+<div class="bg-slate-950/70
+            rounded-2xl
+            border border-slate-800
+            p-5">
+
+
+<h3 class="text-lg font-black
+           text-white mb-6">
+
+<i class="fa-solid fa-sliders
+          text-emerald-400 mr-2"></i>
+
+Compression Settings
+
+</h3>
+
+
+
+<div>
+
+<div class="flex items-center
+            justify-between mb-2">
+
+<label class="text-xs text-slate-400">
+
+    Image Quality
+
+</label>
+
+<span id="qualityValue"
+      class="text-emerald-400
+             font-black text-sm">
+
+    80%
+
+</span>
+
+</div>
+
+
+<input id="quality"
+       type="range"
+       min="10"
+       max="100"
+       value="80">
+
+</div>
+
+
+
+<div class="mt-6">
+
+<label class="text-xs
+              text-slate-400 mb-2 block">
+
+    Output Format
+
+</label>
+
+
+<select id="formatSelect"
+        class="w-full bg-slate-900
+               border border-slate-700
+               rounded-xl px-4 py-3
+               text-white">
+
+<option value="image/jpeg">
+    JPG
+</option>
+
+<option value="image/webp">
+    WebP
+</option>
+
+</select>
+
+</div>
+
+
+
+<div class="mt-6
+            bg-slate-900
+            border border-slate-800
+            rounded-xl p-4">
+
+<div class="flex justify-between
+            text-xs mb-2">
+
+<span class="text-slate-400">
+    Original Size
+</span>
+
+<strong id="originalSize"
+        class="text-white">
+    -
+</strong>
+
+</div>
+
+
+<div class="flex justify-between
+            text-xs">
+
+<span class="text-slate-400">
+    Estimated Quality
+</span>
+
+<strong id="qualityText"
+        class="text-emerald-400">
+    80%
+</strong>
+
+</div>
+
+</div>
+
+
+
+<button onclick="compressImage()"
+        class="w-full mt-6
+               bg-gradient-to-r
+               from-emerald-500
+               to-teal-600
+               hover:from-emerald-400
+               hover:to-teal-500
+               text-white font-black
+               py-3.5 rounded-xl
+               shadow-lg transition">
+
+<i class="fa-solid fa-compress mr-2"></i>
+
+Compress & Download
+
+</button>
+
+
+
+<button onclick="resetTool()"
+        class="w-full mt-2
+               bg-slate-800
+               hover:bg-slate-700
+               text-slate-300
+               font-bold py-3
+               rounded-xl">
+
+<i class="fa-solid fa-rotate-left mr-2"></i>
+
+নতুন ছবি
+
+</button>
+
+
+</div>
+
+</div>
+
+
+<div id="result"
+     class="hidden mt-6
+            bg-emerald-950/30
+            border border-emerald-500/30
+            rounded-2xl p-5">
+
+<div class="text-center">
+
+<div class="text-emerald-400
+            text-3xl mb-2">
+
+<i class="fa-solid fa-circle-check"></i>
+
+</div>
+
+
+<h3 class="font-black
+           text-lg text-white">
+
+    Compression Complete
+
+</h3>
+
+
+<p id="resultText"
+   class="text-sm
+          text-slate-400 mt-2">
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<section class="grid sm:grid-cols-3 gap-4 mt-8">
+
+
+<div class="glass rounded-2xl
+            p-5 text-center">
+
+<i class="fa-solid fa-shield-halved
+          text-2xl text-emerald-400 mb-3"></i>
+
+<h3 class="font-bold mb-1">
+    Privacy
+</h3>
+
+<p class="text-xs text-slate-400">
+    ছবি সার্ভারে যায় না।
+</p>
+
+</div>
+
+
+<div class="glass rounded-2xl
+            p-5 text-center">
+
+<i class="fa-solid fa-bolt
+          text-2xl text-amber-400 mb-3"></i>
+
+<h3 class="font-bold mb-1">
+    Fast
+</h3>
+
+<p class="text-xs text-slate-400">
+    ব্রাউজারেই দ্রুত প্রসেসিং।
+</p>
+
+</div>
+
+
+<div class="glass rounded-2xl
+            p-5 text-center">
+
+<i class="fa-solid fa-infinity
+          text-2xl text-cyan-400 mb-3"></i>
+
+<h3 class="font-bold mb-1">
+    No API Limit
+</h3>
+
+<p class="text-xs text-slate-400">
+    API request প্রয়োজন নেই।
+</p>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+
+<footer class="border-t border-slate-800
+               py-6 text-center
+               text-slate-500 text-xs">
+
+© 2026 Technography. All rights reserved.
+
+</footer>
+
+
+
+<script>
+
+let originalImage = null;
+let originalFile = null;
+
+
+const fileInput =
+    document.getElementById("fileInput");
+
+const dropZone =
+    document.getElementById("dropZone");
+
+const quality =
+    document.getElementById("quality");
+
+
+quality.addEventListener("input", function() {
+
+    document.getElementById("qualityValue")
+        .textContent = this.value + "%";
+
+    document.getElementById("qualityText")
+        .textContent = this.value + "%";
+
+});
+
+
+
+fileInput.addEventListener("change", function(e) {
+
+    if(e.target.files[0]) {
+
+        loadImage(e.target.files[0]);
+
+    }
+
+});
+
+
+
+dropZone.addEventListener("dragover", function(e) {
+
+    e.preventDefault();
+
+    dropZone.classList.add("dragover");
+
+});
+
+
+dropZone.addEventListener("dragleave", function() {
+
+    dropZone.classList.remove("dragover");
+
+});
+
+
+dropZone.addEventListener("drop", function(e) {
+
+    e.preventDefault();
+
+    dropZone.classList.remove("dragover");
+
+    const file = e.dataTransfer.files[0];
+
+    if(file && file.type.startsWith("image/")) {
+
+        loadImage(file);
+
+    }
+
+});
+
+
+
+function loadImage(file) {
+
+    originalFile = file;
+
+    const reader = new FileReader();
+
+
+    reader.onload = function(e) {
+
+        const img = new Image();
+
+
+        img.onload = function() {
+
+            originalImage = img;
+
+            document.getElementById("previewImage")
+                .src = e.target.result;
+
+
+            const size =
+                formatBytes(file.size);
+
+
+            document.getElementById("fileInfo")
+                .textContent =
+                `${img.width} × ${img.height}px • ${size}`;
+
+
+            document.getElementById("originalSize")
+                .textContent = size;
+
+
+            dropZone.classList.add("hidden");
+
+            document.getElementById("editor")
+                .classList.remove("hidden");
+
+        };
+
+
+        img.src = e.target.result;
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+
+function compressImage() {
+
+    if(!originalImage) {
+
+        alert("প্রথমে একটি ছবি নির্বাচন করুন।");
+
+        return;
+
+    }
+
+
+    const format =
+        document.getElementById("formatSelect").value;
+
+
+    const qualityValue =
+        parseInt(quality.value) / 100;
+
+
+    const canvas =
+        document.createElement("canvas");
+
+
+    canvas.width = originalImage.width;
+
+    canvas.height = originalImage.height;
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    if(format === "image/jpeg") {
+
+        ctx.fillStyle = "#ffffff";
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    }
+
+
+    ctx.imageSmoothingEnabled = true;
+
+    ctx.imageSmoothingQuality = "high";
+
+
+    ctx.drawImage(
+        originalImage,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    canvas.toBlob(function(blob) {
+
+        if(!blob) {
+
+            alert("Compression করা যায়নি।");
+
+            return;
+
+        }
+
+
+        const originalSize =
+            originalFile.size;
+
+
+        const newSize =
+            blob.size;
+
+
+        const saved =
+            Math.max(
+                0,
+                ((originalSize - newSize) /
+                originalSize) * 100
+            );
+
+
+        const reduction =
+            ((originalSize - newSize) /
+            originalSize) * 100;
+
+
+        document.getElementById("result")
+            .classList.remove("hidden");
+
+
+        document.getElementById("resultText")
+            .innerHTML =
+            `Original: <b>${formatBytes(originalSize)}</b>
+            <br>
+            Compressed: <b>${formatBytes(newSize)}</b>
+            <br>
+            ${
+                reduction > 0
+                ? `<span class="text-emerald-400">
+                    প্রায় ${reduction.toFixed(1)}% Size কমেছে
+                   </span>`
+                : `<span class="text-amber-400">
+                    এই Quality-তে Size কমেনি
+                   </span>`
+            }`;
+
+
+        const extension =
+            format === "image/webp"
+            ? "webp"
+            : "jpg";
+
+
+        const url =
+            URL.createObjectURL(blob);
+
+
+        const a =
+            document.createElement("a");
+
+
+        a.href = url;
+
+        a.download =
+            `technography-compressed.${extension}`;
+
+
+        document.body.appendChild(a);
+
+        a.click();
+
+        a.remove();
+
+
+        setTimeout(function() {
+
+            URL.revokeObjectURL(url);
+
+        }, 1000);
+
+
+    }, format, qualityValue);
+
+}
+
+
+
+function formatBytes(bytes) {
+
+    if(bytes === 0)
+        return "0 Bytes";
+
+
+    const sizes =
+        ["Bytes","KB","MB","GB"];
+
+
+    const i =
+        Math.floor(
+            Math.log(bytes) /
+            Math.log(1024)
+        );
+
+
+    return (
+        parseFloat(
+            (bytes /
+            Math.pow(1024,i))
+            .toFixed(2)
+        )
+        + " "
+        + sizes[i]
+    );
+
+}
+
+
+
+function resetTool() {
+
+    originalImage = null;
+
+    originalFile = null;
+
+    fileInput.value = "";
+
+    document.getElementById("editor")
+        .classList.add("hidden");
+
+    document.getElementById("result")
+        .classList.add("hidden");
+
+    dropZone.classList.remove("hidden");
+
+    document.getElementById("previewImage")
+        .src = "";
+
+}
+
+
+</script>
+
+
+</body>
+</html>
