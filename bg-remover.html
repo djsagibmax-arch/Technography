@@ -1,1074 +1,1650 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
+    <meta charset="UTF-8">
 
-  <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+    <meta name="theme-color" content="#07101f">
 
-  <title>
-    AI Background Remover | Technography
-  </title>
+    <title>AI Background Remover | Technography</title>
 
-  <meta
-    name="description"
-    content="Technography AI Background Remover - যেকোনো ছবির ব্যাকগ্রাউন্ড দ্রুত রিমুভ করুন এবং স্বচ্ছ PNG ডাউনলোড করুন।"
-  >
+    <meta name="description"
+          content="Technography AI Background Remover - Remove image background directly in your browser.">
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  >
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-  <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <style>
+    <style>
 
-    body {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-      background-color: #030712;
+        html {
+            scroll-behavior: smooth;
+        }
 
-      color: #f3f4f6;
+        body {
+            font-family:
+                Arial,
+                "Noto Sans Bengali",
+                "Noto Sans",
+                sans-serif;
 
-      font-family:
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+            background:
+                radial-gradient(
+                    circle at top,
+                    #10213d 0%,
+                    #07101f 45%,
+                    #030711 100%
+                );
 
-    }
+            color: #ffffff;
+            min-height: 100vh;
+        }
 
-    .neon-card {
+        button,
+        input {
+            font-family: inherit;
+        }
 
-      background:
-        rgba(17, 24, 39, 0.95);
+        /* =========================
+           HEADER
+        ========================= */
 
-      border:
-        1px solid rgba(34, 211, 238, 0.25);
+        .header {
+            width: 100%;
+            height: 74px;
 
-      box-shadow:
-        0 10px 35px -5px rgba(0, 0, 0, 0.8),
-        0 0 25px rgba(6, 182, 212, 0.15);
+            background: rgba(8, 17, 34, 0.96);
 
-    }
+            border-bottom: 1px solid rgba(0, 217, 255, 0.18);
 
-    .checkered-bg {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-      background:
-        repeating-conic-gradient(
-          #1f2937 0% 25%,
-          #111827 0% 50%
-        )
-        50% / 20px 20px;
+            padding: 0 28px;
 
-    }
+            position: sticky;
+            top: 0;
+            z-index: 1000;
 
-    @keyframes spin {
+            backdrop-filter: blur(15px);
+        }
 
-      100% {
+        .logo {
+            font-size: 31px;
+            font-weight: 800;
+            color: #19d9ff;
+            letter-spacing: 0.3px;
+        }
 
-        transform:
-          rotate(360deg);
+        .home-btn {
+            color: #a7b2c5;
+            text-decoration: none;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
 
-      }
+        .home-btn:hover {
+            color: #ffffff;
+        }
 
-    }
+        /* =========================
+           MAIN
+        ========================= */
 
-    .spinner {
+        .container {
+            width: min(720px, calc(100% - 28px));
+            margin: 35px auto 60px;
+        }
 
-      animation:
-        spin 1s linear infinite;
+        .card {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15, 27, 49, 0.98),
+                    rgba(7, 16, 31, 0.98)
+                );
 
-    }
+            border: 1px solid rgba(0, 217, 255, 0.23);
 
-  </style>
+            border-radius: 28px;
 
+            padding: 28px;
+
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.45);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .title h1 {
+            font-size: 31px;
+            line-height: 1.3;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #16d9ff,
+                    #5b7cff,
+                    #a66cff
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #9da9bc;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        /* =========================
+           PRIVACY BADGE
+        ========================= */
+
+        .privacy {
+            border: 1px solid rgba(0, 255, 180, 0.25);
+            background: rgba(0, 255, 180, 0.06);
+
+            border-radius: 14px;
+
+            padding: 13px 15px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #82fbd3;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .privacy i {
+            font-size: 18px;
+        }
+
+        /* =========================
+           UPLOAD AREA
+        ========================= */
+
+        .upload-box {
+            border: 2px dashed rgba(28, 213, 255, 0.35);
+
+            background:
+                rgba(5, 17, 33, 0.75);
+
+            border-radius: 22px;
+
+            min-height: 190px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 25px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .upload-box:hover {
+            border-color: #16d9ff;
+            background: rgba(12, 35, 59, 0.8);
+            transform: translateY(-1px);
+        }
+
+        .upload-box.dragging {
+            border-color: #00ffc8;
+            background: rgba(0, 255, 200, 0.08);
+        }
+
+        .upload-icon {
+            width: 68px;
+            height: 68px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0bd6ff,
+                    #536bff
+                );
+
+            box-shadow:
+                0 10px 35px rgba(25, 190, 255, 0.25);
+
+            margin-bottom: 14px;
+        }
+
+        .upload-icon i {
+            font-size: 27px;
+        }
+
+        .upload-box h2 {
+            font-size: 20px;
+            margin-bottom: 7px;
+        }
+
+        .upload-box p {
+            color: #8997ad;
+            font-size: 13px;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        /* =========================
+           IMAGE PREVIEW
+        ========================= */
+
+        .preview-section {
+            display: none;
+            margin-top: 22px;
+        }
+
+        .section-label {
+            color: #aebbd0;
+            font-size: 14px;
+            margin-bottom: 9px;
+        }
+
+        .preview-wrapper {
+            border-radius: 20px;
+            overflow: hidden;
+
+            background: #02060d;
+
+            border: 1px solid rgba(0, 217, 255, 0.2);
+
+            text-align: center;
+        }
+
+        #previewImage {
+            display: block;
+
+            width: 100%;
+            max-height: 480px;
+
+            object-fit: contain;
+
+            margin: auto;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .btn {
+            border: none;
+            cursor: pointer;
+
+            border-radius: 15px;
+
+            padding: 15px 18px;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 9px;
+
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            flex: 1;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    #0dbcd7,
+                    #0fc9a4,
+                    #356cff
+                );
+
+            box-shadow:
+                0 10px 30px rgba(24, 145, 255, 0.18);
+        }
+
+        .btn-secondary {
+            background: #17243a;
+            color: #cbd5e5;
+
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 17px;
+
+            border-radius: 17px;
+
+            border: 1px solid rgba(24, 218, 255, 0.2);
+
+            background: rgba(0, 170, 255, 0.055);
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .spinner {
+            width: 25px;
+            height: 25px;
+
+            border-radius: 50%;
+
+            border: 3px solid rgba(255,255,255,0.18);
+            border-top-color: #19d9ff;
+
+            animation: spin 0.8s linear infinite;
+
+            flex-shrink: 0;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .status-title {
+            font-weight: 700;
+            color: #dce7f6;
+        }
+
+        .status-text {
+            color: #8997ad;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        /* =========================
+           PROGRESS
+        ========================= */
+
+        .progress {
+            height: 7px;
+
+            background: #101b2c;
+
+            border-radius: 50px;
+
+            overflow: hidden;
+
+            margin-top: 14px;
+        }
+
+        .progress-bar {
+            width: 0%;
+
+            height: 100%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00d9ff,
+                    #00ffc3,
+                    #596eff
+                );
+
+            transition: width 0.25s ease;
+        }
+
+        /* =========================
+           RESULT
+        ========================= */
+
+        .result-section {
+            display: none;
+
+            margin-top: 25px;
+        }
+
+        .result-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .checkerboard {
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            border: 1px solid rgba(0, 217, 255, 0.22);
+
+            background-color: #fff;
+
+            background-image:
+                linear-gradient(45deg, #d9d9d9 25%, transparent 25%),
+                linear-gradient(-45deg, #d9d9d9 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #d9d9d9 75%),
+                linear-gradient(-45deg, transparent 75%, #d9d9d9 75%);
+
+            background-size: 30px 30px;
+
+            background-position:
+                0 0,
+                0 15px,
+                15px -15px,
+                -15px 0px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-height: 260px;
+        }
+
+        #resultImage {
+            display: block;
+
+            width: 100%;
+
+            max-height: 550px;
+
+            object-fit: contain;
+        }
+
+        .download-btn {
+            display: flex;
+
+            width: 100%;
+
+            margin-top: 15px;
+
+            text-decoration: none;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    #00b894,
+                    #00c9a7,
+                    #087fdd
+                );
+
+            color: white;
+
+            padding: 16px;
+
+            border-radius: 15px;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error-box {
+            display: none;
+
+            margin-top: 18px;
+
+            border: 1px solid rgba(255, 70, 90, 0.45);
+
+            background:
+                rgba(120, 10, 30, 0.18);
+
+            border-radius: 16px;
+
+            padding: 15px;
+
+            color: #ffb4bd;
+        }
+
+        .error-title {
+            font-size: 16px;
+            font-weight: 800;
+
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            margin-bottom: 5px;
+        }
+
+        .error-message {
+            font-size: 13px;
+            color: #d9aeb5;
+
+            word-break: break-word;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.09);
+
+            padding: 30px 15px;
+
+            text-align: center;
+
+            color: #68758b;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           MODEL LOADING
+        ========================= */
+
+        .model-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            background: rgba(90, 110, 255, 0.1);
+
+            border: 1px solid rgba(90, 110, 255, 0.2);
+
+            color: #aeb8ff;
+
+            border-radius: 50px;
+
+            padding: 7px 11px;
+
+            font-size: 12px;
+
+            margin-top: 10px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .header {
+                height: 65px;
+                padding: 0 17px;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            .home-btn {
+                font-size: 14px;
+            }
+
+            .container {
+                width: calc(100% - 18px);
+                margin-top: 20px;
+            }
+
+            .card {
+                padding: 18px 14px 22px;
+                border-radius: 22px;
+            }
+
+            .title h1 {
+                font-size: 25px;
+            }
+
+            .subtitle {
+                font-size: 13px;
+            }
+
+            .upload-box {
+                min-height: 175px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn-secondary {
+                width: 100%;
+            }
+
+            #previewImage {
+                max-height: 390px;
+            }
+        }
+
+    </style>
 </head>
 
+<body>
 
-<body
-  class="min-h-screen flex flex-col justify-between"
->
+<header class="header">
 
+    <div class="logo">
+        Technography
+    </div>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header
-  class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/90 border-b border-slate-800"
->
-
-  <div
-    class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between"
-  >
-
-    <a
-      href="index.html"
-      class="text-xl font-bold tracking-wider text-cyan-400 no-underline"
-    >
-
-      Technography
-
+    <a href="/" class="home-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        হোমপেজে ফিরুন
     </a>
-
-
-    <a
-      href="index.html"
-      class="text-xs sm:text-sm text-slate-400 hover:text-white flex items-center gap-1.5 transition"
-    >
-
-      <i class="fa-solid fa-arrow-left"></i>
-
-      হোমপেজে ফিরুন
-
-    </a>
-
-  </div>
 
 </header>
 
 
+<main class="container">
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+    <div class="card">
 
-<main
-  class="flex-1 flex items-center justify-center px-4 py-8"
->
+        <div class="title">
 
-  <div
-    class="neon-card w-full max-w-lg rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden"
-  >
+            <h1>
+                AI Background Remover
+            </h1>
 
+            <div class="model-badge">
+                <i class="fa-solid fa-microchip"></i>
+                Browser AI
+            </div>
 
-    <!-- Badge -->
+        </div>
 
-    <div
-      class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold mb-3"
-    >
-
-      <i
-        class="fa-solid fa-wand-magic-sparkles text-cyan-400"
-      ></i>
-
-      <span>
-        AI Background Remover
-      </span>
-
-    </div>
+        <p class="subtitle">
+            ছবির ব্যাকগ্রাউন্ড স্বয়ংক্রিয়ভাবে মুছে ফেলুন।
+            কোনো ছবি আপনার সার্ভারে আপলোড করার প্রয়োজন নেই।
+        </p>
 
 
-    <!-- Title -->
+        <div class="privacy">
 
-    <h1
-      class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2"
-    >
+            <i class="fa-solid fa-shield-halved"></i>
 
-      AI ব্যাকগ্রাউন্ড রিমুভার
+            <span>
+                আপনার ছবি ব্রাউজারেই প্রসেস হবে।
+                Background removal-এর জন্য Render server প্রয়োজন নেই।
+            </span>
 
-    </h1>
-
-
-    <p
-      class="text-xs sm:text-sm text-slate-400 mb-6"
-    >
-
-      যেকোনো ছবির ব্যাকগ্রাউন্ড AI দিয়ে রিমুভ করে
-      স্বচ্ছ PNG ডাউনলোড করুন
-
-    </p>
+        </div>
 
 
+        <!-- UPLOAD -->
 
-    <!-- =================================================
-         UPLOAD BOX
-    ================================================== -->
-
-    <div
-      id="uploadBox"
-      class="relative border-2 border-dashed border-cyan-500/40 hover:border-cyan-400 bg-slate-950/60 rounded-2xl p-8 transition cursor-pointer"
-    >
-
-      <input
-        type="file"
-        id="imageInput"
-        accept="image/png,image/jpeg,image/webp,image/jpg"
-        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-      >
-
-
-      <div
-        class="w-16 h-16 mx-auto rounded-full bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-2xl mb-3"
-      >
-
-        <i
-          class="fa-solid fa-cloud-arrow-up"
-        ></i>
-
-      </div>
-
-
-      <span
-        class="block text-base font-bold text-slate-100"
-      >
-
-        গ্যালারি থেকে ছবি সিলেক্ট করুন
-
-      </span>
-
-
-      <span
-        class="block text-xs text-slate-400 mt-1"
-      >
-
-        JPG, PNG অথবা WebP — সর্বোচ্চ ১০ MB
-
-      </span>
-
-    </div>
-
-
-
-    <!-- =================================================
-         PREVIEW AREA
-    ================================================== -->
-
-    <div
-      id="previewArea"
-      class="hidden mt-6 space-y-4"
-    >
-
-
-      <!-- File Info -->
-
-      <div
-        class="bg-emerald-950/40 border border-emerald-500/40 rounded-2xl p-3 flex items-center justify-between"
-      >
-
-        <div
-          class="flex items-center gap-2.5 text-left"
+        <label
+            class="upload-box"
+            id="uploadBox"
+            for="fileInput"
         >
 
-          <div
-            class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm"
-          >
+            <div class="upload-icon">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
 
-            <i
-              class="fa-solid fa-circle-check"
-            ></i>
+            <h2>
+                ছবি নির্বাচন করুন
+            </h2>
 
-          </div>
-
-
-          <div>
-
-            <p
-              class="text-xs font-bold text-emerald-300"
-            >
-
-              ছবি সফলভাবে নেওয়া হয়েছে
-
+            <p>
+                JPG, JPEG, PNG, WEBP — সর্বোচ্চ 15MB
             </p>
 
+        </label>
 
-            <p
-              id="fileDetail"
-              class="text-[11px] text-slate-400 truncate max-w-[200px]"
-            ></p>
+        <input
+            type="file"
+            id="fileInput"
+            accept="image/jpeg,image/png,image/webp"
+        >
 
-          </div>
+
+        <!-- PREVIEW -->
+
+        <section
+            class="preview-section"
+            id="previewSection"
+        >
+
+            <div class="section-label">
+                <i class="fa-regular fa-image"></i>
+                আপনার ছবি
+            </div>
+
+            <div class="preview-wrapper">
+
+                <img
+                    id="previewImage"
+                    alt="Selected image"
+                >
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    class="btn btn-primary"
+                    id="removeButton"
+                    type="button"
+                >
+
+                    <i class="fa-solid fa-scissors"></i>
+
+                    ব্যাকগ্রাউন্ড রিমুভ করুন
+
+                </button>
+
+
+                <button
+                    class="btn btn-secondary"
+                    id="changeButton"
+                    type="button"
+                >
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    পরিবর্তন
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATUS -->
+
+        <div
+            class="status"
+            id="statusBox"
+        >
+
+            <div class="status-row">
+
+                <div class="spinner"></div>
+
+                <div>
+
+                    <div
+                        class="status-title"
+                        id="statusTitle"
+                    >
+                        AI প্রস্তুত হচ্ছে...
+                    </div>
+
+                    <div
+                        class="status-text"
+                        id="statusText"
+                    >
+                        প্রথমবার মডেল ডাউনলোড হতে কিছুটা সময় লাগতে পারে।
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    id="progressBar"
+                ></div>
+
+            </div>
 
         </div>
 
 
-        <button
-          type="button"
-          onclick="resetUpload()"
-          class="text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700"
+        <!-- ERROR -->
+
+        <div
+            class="error-box"
+            id="errorBox"
         >
 
-          পরিবর্তন
+            <div class="error-title">
 
-        </button>
+                <i class="fa-solid fa-circle-exclamation"></i>
 
-      </div>
+                <span>
+                    প্রসেসিং ব্যর্থ হয়েছে
+                </span>
 
+            </div>
 
-
-      <!-- Source Preview -->
-
-      <div
-        class="w-full max-h-64 rounded-2xl overflow-hidden border border-cyan-500/30 bg-slate-950 flex items-center justify-center p-2"
-      >
-
-        <img
-          id="sourcePreview"
-          src=""
-          class="max-h-60 max-w-full object-contain rounded-xl"
-          alt="Selected Image"
-        >
-
-      </div>
-
-
-
-      <!-- Process Button -->
-
-      <button
-        id="processBtn"
-        type="button"
-        class="w-full bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 hover:opacity-95 text-white font-bold py-4 px-4 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition active:scale-95"
-      >
-
-        <i
-          id="btnIcon"
-          class="fa-solid fa-scissors text-base"
-        ></i>
-
-        <span id="btnText">
-          ম্যাজিক ব্যাকগ্রাউন্ড রিমুভ করুন
-        </span>
-
-      </button>
-
-    </div>
-
-
-
-    <!-- =================================================
-         STATUS
-    ================================================== -->
-
-    <div
-      id="statusBox"
-      class="hidden mt-5 bg-slate-900/90 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-cyan-300 flex items-center justify-center gap-2"
-    >
-
-      <i
-        class="fa-solid fa-circle-notch spinner text-base"
-      ></i>
-
-      <span id="statusText">
-        AI ব্যাকগ্রাউন্ড প্রসেস করছে...
-      </span>
-
-    </div>
-
-
-
-    <!-- =================================================
-         ERROR BOX
-    ================================================== -->
-
-    <div
-      id="errorBox"
-      class="hidden mt-4 bg-red-950/40 border border-red-500/40 rounded-xl p-4 text-left"
-    >
-
-      <div
-        class="flex items-start gap-3"
-      >
-
-        <i
-          class="fa-solid fa-circle-exclamation text-red-400 mt-0.5"
-        ></i>
-
-        <div>
-
-          <p
-            class="text-sm font-bold text-red-300"
-          >
-
-            প্রসেসিং ব্যর্থ হয়েছে
-
-          </p>
-
-          <p
-            id="errorText"
-            class="text-xs text-red-200/80 mt-1 break-words"
-          ></p>
+            <div
+                class="error-message"
+                id="errorMessage"
+            ></div>
 
         </div>
 
-      </div>
 
-    </div>
+        <!-- RESULT -->
 
-
-
-    <!-- =================================================
-         RESULT
-    ================================================== -->
-
-    <div
-      id="resultArea"
-      class="hidden mt-6 flex-col items-center gap-4"
-    >
-
-      <p
-        class="text-xs font-bold text-emerald-400 flex items-center gap-1.5 self-start"
-      >
-
-        <i
-          class="fa-solid fa-circle-check"
-        ></i>
-
-        ব্যাকগ্রাউন্ড স্বচ্ছ করা সম্পন্ন!
-
-      </p>
-
-
-      <div
-        class="w-full max-h-72 rounded-2xl overflow-hidden border border-emerald-500/40 checkered-bg flex items-center justify-center p-2"
-      >
-
-        <img
-          id="outputImg"
-          class="max-h-64 max-w-full object-contain rounded-lg"
-          alt="Transparent Result"
+        <section
+            class="result-section"
+            id="resultSection"
         >
 
-      </div>
+            <div class="result-title">
+
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                ব্যাকগ্রাউন্ড রিমুভ করা হয়েছে
+
+            </div>
 
 
-      <a
-        id="downloadLink"
-        href="#"
-        download="technography_cutout.png"
-        class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-4 px-4 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition"
-      >
+            <div class="checkerboard">
 
-        <i
-          class="fa-solid fa-download text-base"
-        ></i>
+                <img
+                    id="resultImage"
+                    alt="Background removed result"
+                >
 
-        <span>
-          স্বচ্ছ PNG ছবি ডাউনলোড করুন
-        </span>
+            </div>
 
-      </a>
+
+            <a
+                href="#"
+                class="download-btn"
+                id="downloadButton"
+                download="technography-background-removed.png"
+            >
+
+                <i class="fa-solid fa-download"></i>
+
+                PNG ডাউনলোড করুন
+
+            </a>
+
+        </section>
 
     </div>
-
-
-  </div>
 
 </main>
 
 
+<footer>
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer
-  class="bg-slate-950 border-t border-slate-800 py-4 text-center text-slate-500 text-xs"
->
-
-  <p>
-    &copy; 2026 Technography. All rights reserved.
-  </p>
+    © 2026 Technography. All rights reserved.
 
 </footer>
 
 
+<!-- =====================================================
+     TRANSFORMERS.JS
+===================================================== -->
 
-<script>
+<script type="module">
 
-/* =====================================================
-   BACKEND
-===================================================== */
+    import {
+        pipeline,
+        env
+    } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0";
 
-const BACKEND_BASE =
-  "https://technography-ai.onrender.com";
 
-const BACKGROUND_REMOVE_URL =
-  BACKEND_BASE + "/remove-bg";
+    /* =====================================================
+       CONFIG
+    ===================================================== */
 
+    const MODEL = "Xenova/modnet";
 
 
-/* =====================================================
-   VARIABLES
-===================================================== */
+    /*
+       Browser cache ব্যবহার করবে।
 
-let selectedImageFile = null;
+       ফলে প্রথমবার model download হওয়ার পর
+       পরেরবার আবার পুরো model download করার
+       প্রয়োজন হবে না।
+    */
 
-let currentObjectUrl = null;
+    env.allowLocalModels = false;
+    env.useBrowserCache = true;
 
 
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+    const fileInput =
+        document.getElementById("fileInput");
 
-const imageInput =
-  document.getElementById("imageInput");
+    const uploadBox =
+        document.getElementById("uploadBox");
 
-const uploadBox =
-  document.getElementById("uploadBox");
+    const previewSection =
+        document.getElementById("previewSection");
 
-const previewArea =
-  document.getElementById("previewArea");
+    const previewImage =
+        document.getElementById("previewImage");
 
-const sourcePreview =
-  document.getElementById("sourcePreview");
+    const resultSection =
+        document.getElementById("resultSection");
 
-const fileDetail =
-  document.getElementById("fileDetail");
+    const resultImage =
+        document.getElementById("resultImage");
 
-const statusBox =
-  document.getElementById("statusBox");
+    const downloadButton =
+        document.getElementById("downloadButton");
 
-const statusText =
-  document.getElementById("statusText");
+    const removeButton =
+        document.getElementById("removeButton");
 
-const errorBox =
-  document.getElementById("errorBox");
+    const changeButton =
+        document.getElementById("changeButton");
 
-const errorText =
-  document.getElementById("errorText");
+    const statusBox =
+        document.getElementById("statusBox");
 
-const resultArea =
-  document.getElementById("resultArea");
+    const statusTitle =
+        document.getElementById("statusTitle");
 
-const outputImg =
-  document.getElementById("outputImg");
+    const statusText =
+        document.getElementById("statusText");
 
-const downloadLink =
-  document.getElementById("downloadLink");
+    const progressBar =
+        document.getElementById("progressBar");
 
-const processBtn =
-  document.getElementById("processBtn");
+    const errorBox =
+        document.getElementById("errorBox");
 
-const btnText =
-  document.getElementById("btnText");
+    const errorMessage =
+        document.getElementById("errorMessage");
 
-const btnIcon =
-  document.getElementById("btnIcon");
 
+    /* =====================================================
+       VARIABLES
+    ===================================================== */
 
+    let selectedFile = null;
 
-/* =====================================================
-   FILE SELECT
-===================================================== */
+    let originalObjectURL = null;
 
-imageInput.addEventListener(
-  "change",
-  function () {
+    let resultObjectURL = null;
 
-    const file =
-      this.files &&
-      this.files[0];
+    let remover = null;
 
-    if (!file) {
-      return;
-    }
+    let modelLoading = false;
 
+    let modelReady = false;
 
-    /* File Type */
 
-    if (!file.type.startsWith("image/")) {
+    /* =====================================================
+       STATUS
+    ===================================================== */
 
-      showError(
-        "দয়া করে JPG, PNG অথবা WebP ছবি নির্বাচন করুন।"
-      );
+    function showStatus(title, text, progress = null) {
 
-      this.value = "";
+        statusBox.style.display = "block";
 
-      return;
-    }
+        statusTitle.textContent = title;
 
+        statusText.textContent = text;
 
-    /* File Size */
+        if (progress !== null) {
 
-    if (
-      file.size >
-      10 * 1024 * 1024
-    ) {
-
-      showError(
-        "ছবির সাইজ ১০ MB-এর বেশি হতে পারবে না।"
-      );
-
-      this.value = "";
-
-      return;
-    }
-
-
-    selectedImageFile =
-      file;
-
-
-    /* File Reader */
-
-    const reader =
-      new FileReader();
-
-
-    reader.onload =
-      function (event) {
-
-        sourcePreview.src =
-          event.target.result;
-
-        fileDetail.textContent =
-          `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
-
-
-        uploadBox.classList.add(
-          "hidden"
-        );
-
-        previewArea.classList.remove(
-          "hidden"
-        );
-
-        resultArea.classList.add(
-          "hidden"
-        );
-
-        statusBox.classList.add(
-          "hidden"
-        );
-
-        errorBox.classList.add(
-          "hidden"
-        );
-
-      };
-
-
-    reader.onerror =
-      function () {
-
-        showError(
-          "ছবিটি পড়তে সমস্যা হয়েছে।"
-        );
-
-      };
-
-
-    reader.readAsDataURL(file);
-
-  }
-);
-
-
-
-/* =====================================================
-   RESET
-===================================================== */
-
-function resetUpload() {
-
-  imageInput.value =
-    "";
-
-  selectedImageFile =
-    null;
-
-
-  if (currentObjectUrl) {
-
-    URL.revokeObjectURL(
-      currentObjectUrl
-    );
-
-    currentObjectUrl =
-      null;
-
-  }
-
-
-  sourcePreview.src =
-    "";
-
-  outputImg.src =
-    "";
-
-  downloadLink.href =
-    "#";
-
-
-  uploadBox.classList.remove(
-    "hidden"
-  );
-
-  previewArea.classList.add(
-    "hidden"
-  );
-
-  resultArea.classList.add(
-    "hidden"
-  );
-
-  statusBox.classList.add(
-    "hidden"
-  );
-
-  errorBox.classList.add(
-    "hidden"
-  );
-
-}
-
-
-
-/* =====================================================
-   SHOW ERROR
-===================================================== */
-
-function showError(message) {
-
-  errorText.textContent =
-    message;
-
-  errorBox.classList.remove(
-    "hidden"
-  );
-
-  statusBox.classList.add(
-    "hidden"
-  );
-
-}
-
-
-
-/* =====================================================
-   PROCESS IMAGE
-===================================================== */
-
-processBtn.addEventListener(
-  "click",
-  async function () {
-
-    if (!selectedImageFile) {
-
-      showError(
-        "দয়া করে প্রথমে একটি ছবি নির্বাচন করুন।"
-      );
-
-      return;
-    }
-
-
-    /* Button Loading */
-
-    processBtn.disabled =
-      true;
-
-    processBtn.classList.add(
-      "opacity-50",
-      "cursor-not-allowed"
-    );
-
-
-    btnIcon.className =
-      "fa-solid fa-circle-notch spinner text-base";
-
-    btnText.textContent =
-      "AI দিয়ে ব্যাকগ্রাউন্ড রিমুভ হচ্ছে...";
-
-
-    statusBox.classList.remove(
-      "hidden"
-    );
-
-    errorBox.classList.add(
-      "hidden"
-    );
-
-    resultArea.classList.add(
-      "hidden"
-    );
-
-
-    statusText.textContent =
-      "AI সার্ভারে ছবি পাঠানো হচ্ছে...";
-
-
-    try {
-
-      /* -------------------------------------------
-         Form Data
-      ------------------------------------------- */
-
-      const formData =
-        new FormData();
-
-      formData.append(
-        "file",
-        selectedImageFile
-      );
-
-
-      statusText.textContent =
-        "AI ব্যাকগ্রাউন্ড বিশ্লেষণ করছে...";
-
-
-      /* -------------------------------------------
-         Request
-      ------------------------------------------- */
-
-      const response =
-        await fetch(
-          BACKGROUND_REMOVE_URL,
-          {
-            method: "POST",
-            body: formData
-          }
-        );
-
-
-      /* -------------------------------------------
-         Response Content Type
-      ------------------------------------------- */
-
-      const contentType =
-        response.headers.get(
-          "content-type"
-        ) || "";
-
-
-      /* -------------------------------------------
-         Error Response
-      ------------------------------------------- */
-
-      if (!response.ok) {
-
-        let message =
-          `সার্ভার এরর কোড: ${response.status}`;
-
-
-        if (
-          contentType.includes(
-            "application/json"
-          )
-        ) {
-
-          try {
-
-            const data =
-              await response.json();
-
-            message =
-              data.error ||
-              data.message ||
-              message;
-
-          }
-
-          catch (e) {}
+            progressBar.style.width =
+                Math.max(0, Math.min(100, progress)) + "%";
 
         }
 
-        else {
+    }
 
-          try {
 
-            const text =
-              await response.text();
+    function hideStatus() {
 
-            if (text) {
+        statusBox.style.display = "none";
 
-              message =
-                text.substring(
-                  0,
-                  500
+    }
+
+
+    /* =====================================================
+       ERROR
+    ===================================================== */
+
+    function showError(message) {
+
+        errorBox.style.display = "block";
+
+        errorMessage.textContent =
+            message || "অজানা সমস্যা হয়েছে।";
+
+    }
+
+
+    function hideError() {
+
+        errorBox.style.display = "none";
+
+        errorMessage.textContent = "";
+
+    }
+
+
+    /* =====================================================
+       LOAD AI MODEL
+    ===================================================== */
+
+    async function loadModel() {
+
+        if (modelReady && remover) {
+            return remover;
+        }
+
+        if (modelLoading) {
+
+            while (modelLoading) {
+
+                await new Promise(resolve =>
+                    setTimeout(resolve, 100)
                 );
 
             }
 
-          }
-
-          catch (e) {}
-
+            return remover;
         }
 
 
-        throw new Error(
-          message
-        );
-
-      }
-
-
-      /* -------------------------------------------
-         Must be PNG/Image
-      ------------------------------------------- */
-
-      if (
-        !contentType.startsWith(
-          "image/"
-        )
-      ) {
-
-        let message =
-          "সার্ভার ছবি ফেরত দেয়নি।";
-
+        modelLoading = true;
 
         try {
 
-          const data =
-            await response.json();
+            showStatus(
+                "AI মডেল প্রস্তুত হচ্ছে...",
+                "প্রথমবার মডেল ডাউনলোড হতে সময় লাগতে পারে।",
+                5
+            );
 
-          message =
-            data.error ||
-            message;
+
+            /*
+              Transformers.js browser-এর ভিতরেই model চালায়।
+              কোনো Render API call এখানে নেই।
+            */
+
+            remover = await pipeline(
+                "background-removal",
+                MODEL,
+                {
+
+                    progress_callback: (progress) => {
+
+                        try {
+
+                            if (
+                                progress &&
+                                typeof progress.progress === "number"
+                            ) {
+
+                                const value =
+                                    Math.round(progress.progress);
+
+                                progressBar.style.width =
+                                    value + "%";
+
+                            }
+
+                            if (
+                                progress &&
+                                progress.status === "progress"
+                            ) {
+
+                                statusText.textContent =
+                                    "AI মডেল ডাউনলোড হচ্ছে...";
+
+                            }
+
+                        } catch (e) {
+
+                            console.log(
+                                "Progress callback:",
+                                e
+                            );
+
+                        }
+
+                    }
+
+                }
+            );
+
+
+            modelReady = true;
+
+            progressBar.style.width = "100%";
+
+            showStatus(
+                "AI প্রস্তুত",
+                "এখন আপনার ছবির ব্যাকগ্রাউন্ড রিমুভ করা হচ্ছে...",
+                100
+            );
+
+
+            return remover;
+
+        } catch (error) {
+
+            console.error(
+                "Model loading error:",
+                error
+            );
+
+            throw new Error(
+                "AI মডেল লোড করা যায়নি। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।"
+            );
+
+        } finally {
+
+            modelLoading = false;
 
         }
 
-        catch (e) {}
-
-
-        throw new Error(
-          message
-        );
-
-      }
-
-
-      /* -------------------------------------------
-         Get Blob
-      ------------------------------------------- */
-
-      const blob =
-        await response.blob();
-
-
-      if (!blob.size) {
-
-        throw new Error(
-          "সার্ভার থেকে খালি ছবি এসেছে।"
-        );
-
-      }
-
-
-      /* -------------------------------------------
-         Object URL
-      ------------------------------------------- */
-
-      if (currentObjectUrl) {
-
-        URL.revokeObjectURL(
-          currentObjectUrl
-        );
-
-      }
-
-
-      currentObjectUrl =
-        URL.createObjectURL(
-          blob
-        );
-
-
-      /* -------------------------------------------
-         Show Result
-      ------------------------------------------- */
-
-      outputImg.src =
-        currentObjectUrl;
-
-      downloadLink.href =
-        currentObjectUrl;
-
-      downloadLink.download =
-        "technography_cutout.png";
-
-
-      statusBox.classList.add(
-        "hidden"
-      );
-
-      resultArea.classList.remove(
-        "hidden"
-      );
-
-      resultArea.classList.add(
-        "flex"
-      );
-
-
-      btnText.textContent =
-        "আবার ব্যাকগ্রাউন্ড রিমুভ করুন";
-
-
-    }
-
-    catch (error) {
-
-      console.error(
-        "Background Removal Error:",
-        error
-      );
-
-
-      showError(
-        error.message ||
-        "অজানা সার্ভার সমস্যা হয়েছে।"
-      );
-
-
-      btnText.textContent =
-        "আবার চেষ্টা করুন";
-
     }
 
 
-    finally {
+    /* =====================================================
+       FILE SELECT
+    ===================================================== */
 
-      processBtn.disabled =
-        false;
+    fileInput.addEventListener(
+        "change",
+        function () {
 
-      processBtn.classList.remove(
-        "opacity-50",
-        "cursor-not-allowed"
-      );
+            const file =
+                this.files && this.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            selectImage(file);
+
+        }
+    );
 
 
-      btnIcon.className =
-        "fa-solid fa-scissors text-base";
+    function selectImage(file) {
+
+        hideError();
+
+        hideStatus();
+
+        resultSection.style.display = "none";
+
+
+        if (!file.type.startsWith("image/")) {
+
+            showError(
+                "শুধু JPG, PNG অথবা WEBP ছবি নির্বাচন করুন।"
+            );
+
+            return;
+
+        }
+
+
+        if (file.size > 15 * 1024 * 1024) {
+
+            showError(
+                "ছবির সাইজ সর্বোচ্চ 15MB হতে হবে।"
+            );
+
+            return;
+
+        }
+
+
+        selectedFile = file;
+
+
+        /*
+          আগের preview URL delete
+        */
+
+        if (originalObjectURL) {
+
+            URL.revokeObjectURL(
+                originalObjectURL
+            );
+
+        }
+
+
+        originalObjectURL =
+            URL.createObjectURL(file);
+
+
+        previewImage.src =
+            originalObjectURL;
+
+
+        previewSection.style.display =
+            "block";
+
+
+        /*
+          আগের result পরিষ্কার
+        */
+
+        if (resultObjectURL) {
+
+            URL.revokeObjectURL(
+                resultObjectURL
+            );
+
+            resultObjectURL = null;
+
+        }
+
+
+        downloadButton.removeAttribute(
+            "href"
+        );
+
+
+        /*
+          file input reset করলে
+          একই ছবি আবার নির্বাচন করা যাবে।
+        */
+
+        fileInput.value = "";
 
     }
 
-  }
-);
+
+    /* =====================================================
+       CHANGE IMAGE
+    ===================================================== */
+
+    changeButton.addEventListener(
+        "click",
+        function () {
+
+            fileInput.click();
+
+        }
+    );
 
 
+    /* =====================================================
+       DRAG & DROP
+    ===================================================== */
 
-/* =====================================================
-   PAGE CLEANUP
-===================================================== */
+    [
+        "dragenter",
+        "dragover"
+    ].forEach(eventName => {
 
-window.addEventListener(
-  "beforeunload",
-  function () {
+        uploadBox.addEventListener(
+            eventName,
+            event => {
 
-    if (currentObjectUrl) {
+                event.preventDefault();
 
-      URL.revokeObjectURL(
-        currentObjectUrl
-      );
+                uploadBox.classList.add(
+                    "dragging"
+                );
 
-    }
+            }
+        );
 
-  }
-);
+    });
+
+
+    [
+        "dragleave",
+        "drop"
+    ].forEach(eventName => {
+
+        uploadBox.addEventListener(
+            eventName,
+            event => {
+
+                event.preventDefault();
+
+                uploadBox.classList.remove(
+                    "dragging"
+                );
+
+            }
+        );
+
+    });
+
+
+    uploadBox.addEventListener(
+        "drop",
+        event => {
+
+            const file =
+                event.dataTransfer.files &&
+                event.dataTransfer.files[0];
+
+            if (file) {
+
+                selectImage(file);
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       REMOVE BACKGROUND
+    ===================================================== */
+
+    removeButton.addEventListener(
+        "click",
+        async function () {
+
+            if (!selectedFile) {
+
+                showError(
+                    "আগে একটি ছবি নির্বাচন করুন।"
+                );
+
+                return;
+
+            }
+
+
+            hideError();
+
+
+            removeButton.disabled = true;
+
+            changeButton.disabled = true;
+
+
+            try {
+
+                /*
+                  Model load
+                */
+
+                const ai =
+                    await loadModel();
+
+
+                showStatus(
+                    "ব্যাকগ্রাউন্ড রিমুভ হচ্ছে...",
+                    "ছবিটি আপনার ব্রাউজারেই AI দিয়ে প্রসেস হচ্ছে।",
+                    100
+                );
+
+
+                /*
+                  Browser AI processing
+                */
+
+                const output =
+                    await ai(selectedFile);
+
+
+                /*
+                  Transformers.js background-removal
+                  pipeline RawImage RGBA output দিতে পারে।
+                */
+
+                const canvas =
+                    document.createElement("canvas");
+
+
+                canvas.width =
+                    output.width;
+
+                canvas.height =
+                    output.height;
+
+
+                const ctx =
+                    canvas.getContext(
+                        "2d",
+                        {
+                            willReadFrequently: true
+                        }
+                    );
+
+
+                /*
+                  RawImage -> ImageData
+                */
+
+                const imageData =
+                    new ImageData(
+                        new Uint8ClampedArray(
+                            output.data
+                        ),
+                        output.width,
+                        output.height
+                    );
+
+
+                ctx.putImageData(
+                    imageData,
+                    0,
+                    0
+                );
+
+
+                showStatus(
+                    "PNG তৈরি হচ্ছে...",
+                    "Transparent image প্রস্তুত করা হচ্ছে।",
+                    100
+                );
+
+
+                /*
+                  Canvas থেকে PNG
+                */
+
+                const blob =
+                    await new Promise(
+                        resolve =>
+                            canvas.toBlob(
+                                resolve,
+                                "image/png"
+                            )
+                    );
+
+
+                if (!blob) {
+
+                    throw new Error(
+                        "PNG তৈরি করা যায়নি।"
+                    );
+
+                }
+
+
+                /*
+                  আগের result URL delete
+                */
+
+                if (resultObjectURL) {
+
+                    URL.revokeObjectURL(
+                        resultObjectURL
+                    );
+
+                }
+
+
+                resultObjectURL =
+                    URL.createObjectURL(
+                        blob
+                    );
+
+
+                /*
+                  Result দেখানো
+                */
+
+                resultImage.src =
+                    resultObjectURL;
+
+
+                downloadButton.href =
+                    resultObjectURL;
+
+
+                resultSection.style.display =
+                    "block";
+
+
+                hideStatus();
+
+
+                /*
+                  Result-এর দিকে scroll
+                */
+
+                setTimeout(() => {
+
+                    resultSection.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+                }, 150);
+
+
+            } catch (error) {
+
+                console.error(
+                    "Background removal error:",
+                    error
+                );
+
+
+                showError(
+                    error && error.message
+                        ? error.message
+                        : "Background removal ব্যর্থ হয়েছে।"
+                );
+
+
+                hideStatus();
+
+            } finally {
+
+                removeButton.disabled =
+                    false;
+
+                changeButton.disabled =
+                    false;
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CLEANUP
+    ===================================================== */
+
+    window.addEventListener(
+        "beforeunload",
+        function () {
+
+            if (originalObjectURL) {
+
+                URL.revokeObjectURL(
+                    originalObjectURL
+                );
+
+            }
+
+            if (resultObjectURL) {
+
+                URL.revokeObjectURL(
+                    resultObjectURL
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIAL MESSAGE
+    ===================================================== */
+
+    console.log(
+        "Technography Browser AI Background Remover loaded."
+    );
+
+    console.log(
+        "Model:",
+        MODEL
+    );
 
 </script>
 
-
 </body>
-
 </html>
