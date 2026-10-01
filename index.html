@@ -182,6 +182,20 @@
         .contact-btn-fb {
             background: linear-gradient(135deg, #1877F2 0%, #0c56be 100%);
         }
+
+        /* মেনুবার ড্রপডাউন ডিজাইন */
+        .ai-dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.2s ease-in-out;
+        }
+        .ai-dropdown-container:hover .ai-dropdown-menu,
+        .ai-dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
     </style>
 </head>
 
@@ -206,60 +220,104 @@
         </a>
     </aside>
 
-    <!-- হেডার -->
+    <!-- হেডার ও অল-ইন-ওয়ান AI মেনুবার -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/90 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400 no-underline">
                 Technography
             </a>
 
-            <div class="flex items-center gap-1.5 sm:gap-2.5 flex-wrap justify-end">
+            <!-- ন্যাভিগেশন মেনুবার -->
+            <div class="flex items-center gap-3">
 
-                <!-- AI Image Tool -->
-                <a href="ai-image-generator.html"
-                   class="inline-flex items-center gap-1.5 bg-purple-950/80 hover:bg-purple-900/90 text-purple-300 border border-purple-500/40 px-2 sm:px-3 py-1.5 rounded-full text-xs font-semibold transition">
-                    <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i>
-                    <span class="hidden sm:inline">AI Image</span>
-                </a>
+                <!-- AI টুলস ড্রপডাউন মেনু (ডেস্কটপ ও ট্যাবলেট) -->
+                <div class="relative ai-dropdown-container">
+                    <button id="aiMenuBtn" onclick="toggleDropdown()" class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-900/60 to-cyan-900/60 hover:from-purple-800 hover:to-cyan-800 text-cyan-300 border border-cyan-500/40 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-md transition">
+                        <i class="fa-solid fa-wand-magic-sparkles text-cyan-400"></i>
+                        <span>AI Tools</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] ml-0.5 text-slate-400"></i>
+                    </button>
 
-                <!-- AI Voice Tool -->
-                <a href="ai-voice-generator.html"
-                   class="inline-flex items-center gap-1.5 bg-cyan-950/80 hover:bg-cyan-900/90 text-cyan-300 border border-cyan-500/40 px-2 sm:px-3 py-1.5 rounded-full text-xs font-semibold transition">
-                    <i class="fa-solid fa-microphone-lines text-cyan-400"></i>
-                    <span class="hidden sm:inline">AI Voice</span>
-                </a>
+                    <!-- ড্রপডাউন আইটেম গ্রিড -->
+                    <div id="aiDropdownMenu" class="ai-dropdown-menu absolute right-0 mt-2 w-72 sm:w-80 bg-slate-900/95 border border-cyan-500/30 rounded-2xl p-2.5 shadow-2xl backdrop-blur-xl z-50">
+                        <div class="px-3 py-2 border-b border-slate-800 mb-1 flex items-center justify-between">
+                            <span class="text-xs font-bold text-slate-300">সকল ফ্রি AI টুলস</span>
+                            <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full font-bold">Free Tools</span>
+                        </div>
 
-                <!-- AI Auto Subtitle Tool -->
-                <a href="ai-auto-subtitle.html"
-                   class="inline-flex items-center gap-1.5 bg-pink-950/80 hover:bg-pink-900/90 text-pink-300 border border-pink-500/40 px-2 sm:px-3 py-1.5 rounded-full text-xs font-semibold transition">
-                    <i class="fa-solid fa-closed-captioning text-pink-400"></i>
-                    <span class="hidden sm:inline">AI Subtitle</span>
-                </a>
+                        <div class="flex flex-col gap-1">
+                            <!-- 1. AI Image Generator -->
+                            <a href="ai-image-generator.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/80 transition group">
+                                <div class="w-8 h-8 rounded-lg bg-purple-950/80 text-purple-400 flex items-center justify-center text-sm border border-purple-500/30 group-hover:scale-105 transition">
+                                    <i class="fa-solid fa-image"></i>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-xs font-bold text-slate-200 group-hover:text-purple-300 transition">AI Image Generator</div>
+                                    <div class="text-[10px] text-slate-400">প্রম্পট থেকে ফ্রি ছবি তৈরি</div>
+                                </div>
+                            </a>
 
-                <!-- AI BG Remover -->
-                <a href="bg-remover.html"
-                   class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/90 text-emerald-300 border border-emerald-500/40 px-2 sm:px-3 py-1.5 rounded-full text-xs font-semibold transition">
-                    <i class="fa-solid fa-scissors text-emerald-400"></i>
-                    <span>BG Remover</span>
-                </a>
+                            <!-- 2. AI Background Remover -->
+                            <a href="bg-remover.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/80 transition group">
+                                <div class="w-8 h-8 rounded-lg bg-emerald-950/80 text-emerald-400 flex items-center justify-center text-sm border border-emerald-500/30 group-hover:scale-105 transition">
+                                    <i class="fa-solid fa-scissors"></i>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-xs font-bold text-slate-200 group-hover:text-emerald-300 transition">AI Background Remover</div>
+                                    <div class="text-[10px] text-slate-400">১ ক্লিকে স্বচ্ছ PNG কাটআউট</div>
+                                </div>
+                            </a>
 
-                <!-- Image Resize Tool -->
-                <a href="image-resizer.html"
-                   class="inline-flex items-center gap-1.5 bg-blue-950/80 hover:bg-blue-900/90 text-blue-300 border border-blue-500/40 px-2 sm:px-3 py-1.5 rounded-full text-xs font-semibold transition">
-                    <i class="fa-solid fa-expand text-blue-400"></i>
-                    <span class="hidden sm:inline">Resize</span>
-                </a>
+                            <!-- 3. AI Voice Generator -->
+                            <a href="ai-voice-generator.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/80 transition group">
+                                <div class="w-8 h-8 rounded-lg bg-cyan-950/80 text-cyan-400 flex items-center justify-center text-sm border border-cyan-500/30 group-hover:scale-105 transition">
+                                    <i class="fa-solid fa-microphone-lines"></i>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-xs font-bold text-slate-200 group-hover:text-cyan-300 transition">AI Voice Generator</div>
+                                    <div class="text-[10px] text-slate-400">বাংলা ও ইংরেজি ভয়েসওভার</div>
+                                </div>
+                            </a>
 
-                <!-- Image Compressor Tool -->
-                <a href="image-compressor.html"
-                   class="inline-flex items-center gap-1.5 bg-amber-950/80 hover:bg-amber-900/90 text-amber-300 border border-amber-500/40 px-2 sm:px-3 py-1.5 rounded-full text-xs font-semibold transition">
-                    <i class="fa-solid fa-compress text-amber-400"></i>
-                    <span class="hidden sm:inline">Compress</span>
-                </a>
+                            <!-- 4. AI Auto Subtitle -->
+                            <a href="ai-auto-subtitle.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/80 transition group">
+                                <div class="w-8 h-8 rounded-lg bg-pink-950/80 text-pink-400 flex items-center justify-center text-sm border border-pink-500/30 group-hover:scale-105 transition">
+                                    <i class="fa-solid fa-closed-captioning"></i>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-xs font-bold text-slate-200 group-hover:text-pink-300 transition">AI Auto Subtitle</div>
+                                    <div class="text-[10px] text-slate-400">ভিডিওর জন্য অটো ক্যাপশন</div>
+                                </div>
+                            </a>
 
-                <!-- Purchase -->
+                            <!-- 5. Image Resizer -->
+                            <a href="image-resizer.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/80 transition group">
+                                <div class="w-8 h-8 rounded-lg bg-blue-950/80 text-blue-400 flex items-center justify-center text-sm border border-blue-500/30 group-hover:scale-105 transition">
+                                    <i class="fa-solid fa-expand"></i>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-xs font-bold text-slate-200 group-hover:text-blue-300 transition">Image Resizer</div>
+                                    <div class="text-[10px] text-slate-400">সাইজ ও রেজুলেশন পরিবর্তন</div>
+                                </div>
+                            </a>
+
+                            <!-- 6. Image Compressor -->
+                            <a href="image-compressor.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/80 transition group">
+                                <div class="w-8 h-8 rounded-lg bg-amber-950/80 text-amber-400 flex items-center justify-center text-sm border border-amber-500/30 group-hover:scale-105 transition">
+                                    <i class="fa-solid fa-compress"></i>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-xs font-bold text-slate-200 group-hover:text-amber-300 transition">Image Compressor</div>
+                                    <div class="text-[10px] text-slate-400">ছবির সাইজ (KB) কমান</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- অর্ডার বাটন -->
                 <a href="select-payment.html?product=1"
-                   class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-3 sm:px-4 py-1.5 rounded-full text-xs font-medium shadow transition whitespace-nowrap">
+                   class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow transition whitespace-nowrap">
                     এখনই কিনুন
                 </a>
             </div>
@@ -329,101 +387,6 @@
                     <i class="fa-solid fa-tag text-emerald-400 text-2xl"></i>
                 </div>
             </div>
-        </div>
-
-
-        <!-- এআই ইমেজ জেনারেটর প্রমো ব্যানার কার্ড -->
-        <div class="my-6 max-w-4xl mx-auto bg-gradient-to-r from-purple-950/60 via-slate-900 to-cyan-950/60 border border-purple-500/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-            <div class="text-left">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold mb-2">
-                    <i class="fa-solid fa-sparkles"></i> নতুন ফ্রি টুল
-                </div>
-                <h3 class="text-xl sm:text-2xl font-black text-white mb-2">
-                    Technography AI ইমেজ স্টুডিও
-                </h3>
-                <p class="text-slate-400 text-xs sm:text-sm max-w-lg">
-                    রিলস, থাম্বনেইল বা সোশ্যাল মিডিয়ার জন্য সম্পূর্ণ ফ্রিতে প্রফেশনাল এআই ছবি তৈরি ও ডাউনলোড করুন কোনো প্রকার সাবস্ক্রিপশন ছাড়াই।
-                </p>
-            </div>
-            <a href="ai-image-generator.html"
-               class="whitespace-nowrap bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold px-6 py-3 rounded-xl text-sm shadow-lg transition flex items-center gap-2">
-                <span>ছবি তৈরি শুরু করুন</span>
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-        </div>
-
-        <!-- এআই ভয়েস জেনারেটর প্রমো ব্যানার কার্ড -->
-        <div class="my-6 max-w-4xl mx-auto bg-gradient-to-r from-cyan-950/60 via-slate-900 to-blue-950/60 border border-cyan-500/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-            <div class="text-left">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold mb-2">
-                    <i class="fa-solid fa-microphone-lines"></i> নতুন AI ভয়েস টুল
-                </div>
-                <h3 class="text-xl sm:text-2xl font-black text-white mb-2">
-                    Technography AI টেক্সট টু ভয়েস
-                </h3>
-                <p class="text-slate-400 text-xs sm:text-sm max-w-lg">
-                    বাংলা ও ইংরেজি টেক্সট দিয়ে আকর্ষণীয় ভয়েসওভার (Voiceover) তৈরি করুন এবং সরাসরি ডাউনলোড করে রিলস ও শর্টসে ব্যবহার করুন।
-                </p>
-            </div>
-            <a href="ai-voice-generator.html"
-               class="whitespace-nowrap bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold px-6 py-3 rounded-xl text-sm shadow-lg transition flex items-center gap-2">
-                <span>ভয়েস তৈরি করুন</span>
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-        </div>
-
-        <!-- এআই ব্যাকগ্রাউন্ড রিমুভার প্রমো ব্যানার কার্ড -->
-        <div class="my-6 max-w-4xl mx-auto bg-gradient-to-r from-emerald-950/60 via-slate-900 to-teal-950/60 border border-emerald-500/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-            <div class="text-left">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold mb-2">
-                    <i class="fa-solid fa-scissors"></i> ১০০% ফ্রি এআই টুল
-                </div>
-                <h3 class="text-xl sm:text-2xl font-black text-white mb-2">
-                    Technography AI ব্যাকগ্রাউন্ড রিমুভার
-                </h3>
-                <p class="text-slate-400 text-xs sm:text-sm max-w-lg">
-                    যেকোনো ছবির ব্যাকগ্রাউন্ড মাত্র ১ ক্লিকে নিখুঁতভাবে রিমুভ করুন এবং স্বচ্ছ ব্যাকগ্রাউন্ড সহ হাই-কোয়ালিটি PNG ছবি ডাউনলোড করুন।
-                </p>
-            </div>
-            <a href="bg-remover.html"
-               class="whitespace-nowrap bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold px-6 py-3 rounded-xl text-sm shadow-lg transition flex items-center gap-2">
-                <span>ব্যাকগ্রাউন্ড রিমুভ করুন</span>
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-        </div>
-
-
-        <!-- এআই অটো সাবটাইটেল প্রমো ব্যানার কার্ড -->
-        <div class="my-6 max-w-4xl mx-auto bg-gradient-to-r from-pink-950/60 via-slate-900 to-purple-950/60 border border-pink-500/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-
-            <div class="text-left">
-
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 text-xs font-bold mb-2">
-                    <i class="fa-solid fa-closed-captioning"></i>
-                    নতুন AI ভিডিও টুল
-                </div>
-
-                <h3 class="text-xl sm:text-2xl font-black text-white mb-2">
-                    Technography AI Auto Subtitle
-                </h3>
-
-                <p class="text-slate-400 text-xs sm:text-sm max-w-lg">
-                    যেকোনো ভিডিও আপলোড করে AI-এর মাধ্যমে ভিডিওর কথা শনাক্ত করে
-                    স্বয়ংক্রিয়ভাবে Subtitle তৈরি করুন। বাংলা, English, Hindi,
-                    Arabic সহ বিভিন্ন ভাষার জন্য Subtitle তৈরি করার সুবিধা।
-                </p>
-
-            </div>
-
-            <a href="ai-auto-subtitle.html"
-               class="whitespace-nowrap bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold px-6 py-3 rounded-xl text-sm shadow-lg transition flex items-center gap-2">
-
-                <span>Subtitle তৈরি করুন</span>
-
-                <i class="fa-solid fa-arrow-right"></i>
-
-            </a>
-
         </div>
 
 
@@ -803,6 +766,21 @@
 
     <!-- স্ক্রিপ্টস -->
     <script>
+    // ড্রপডাউন টগল হ্যান্ডলার (মোবাইল ও ক্লিক সাপোর্ট)
+    function toggleDropdown() {
+        const menu = document.getElementById('aiDropdownMenu');
+        menu.classList.toggle('active');
+    }
+
+    // ড্রপডাউনের বাইরে ক্লিক করলে বন্ধ করা
+    document.addEventListener('click', function(e) {
+        const container = document.querySelector('.ai-dropdown-container');
+        const menu = document.getElementById('aiDropdownMenu');
+        if (container && !container.contains(e.target)) {
+            menu.classList.remove('active');
+        }
+    });
+
     // লাইভ ও অনবরত কাউন্টডাউন টাইমার
     function initializeContinuousCountdown() {
         const STORAGE_KEY = 'technography_deal_end_time';
