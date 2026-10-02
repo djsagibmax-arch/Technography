@@ -141,7 +141,7 @@
     </footer>
 
     <script>
-        // সরাসরি সংযুক্ত Groq API Key
+        // সরাসরি সঠিক ও ভ্যালিড Groq API Key
         const GROQ_API_KEY = "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";
 
         const videoInput = document.getElementById('videoInput');
@@ -170,7 +170,7 @@
             try {
                 // ১. ভিডিও থেকে অরিজিনাল অডিও এক্সট্র্যাক্ট
                 statusTitle.textContent = "ধাপ ১/২: ভিডিওর অডিও নিষ্কাশন হচ্ছে...";
-                statusSub.textContent = "শব্দ বিশ্লেষণ করে অডিও স্ট্রিম প্রস্তুত করা হচ্ছে...";
+                statusSub.textContent = "শব্দ বিশ্লেষণ করে অডিও ফাইল প্রস্তুত করা হচ্ছে...";
                 const audioBlob = await extractAudioBlob(file);
 
                 // ২. ক্লাউড Whisper API-তে কল
@@ -194,7 +194,7 @@
             }
         });
 
-        // অডিও এক্সট্র্যাক্ট করে WAV তৈরি
+        // অডিও এক্সট্র্যাক্ট করে 16kHz WAV তৈরি
         async function extractAudioBlob(file) {
             const arrayBuffer = await file.arrayBuffer();
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
