@@ -94,12 +94,12 @@
 
             <!-- ভিডিও আপলোড বক্স -->
             <label for="videoInput" class="relative border-2 border-dashed border-pink-500/40 hover:border-pink-400 bg-slate-950/60 rounded-2xl p-8 block cursor-pointer transition">
-                <input type="file" id="videoInput" accept="video/*" class="hidden">
+                <input type="file" id="videoInput" accept="video/mp4,video/webm,video/quicktime,video/*" class="hidden">
                 <div class="w-16 h-16 mx-auto rounded-full bg-pink-950/60 border border-pink-500/40 flex items-center justify-center text-pink-400 text-3xl mb-3">
                     <i class="fa-solid fa-file-video"></i>
                 </div>
                 <span class="block text-base font-bold text-slate-100">ভিডিও ফাইল নির্বাচন করুন</span>
-                <span class="block text-xs text-slate-400 mt-1">MP4, WebM, MOV ইত্যাদি</span>
+                <span class="block text-xs text-slate-400 mt-1">MP4, WebM, MOV (সর্বোচ্চ ২৫MB)</span>
             </label>
 
             <!-- প্রসেসিং স্ট্যাটাস -->
@@ -107,7 +107,7 @@
                 <i class="fa-solid fa-circle-notch spinner text-pink-400 text-lg"></i>
                 <div class="text-left">
                     <p id="statusTitle" class="text-xs font-bold text-slate-200">ভিডিও প্রসেসিং শুরু হচ্ছে...</p>
-                    <p id="statusSub" class="text-[11px] text-slate-400">অডিও আলাদা করে ক্লাউড এআই দিয়ে সাবটাইটেল তৈরি হচ্ছে...</p>
+                    <p id="statusSub" class="text-[11px] text-slate-400">ক্লাউড এআই দিয়ে সাবটাইটেল তৈরি হচ্ছে...</p>
                 </div>
             </div>
         </div>
@@ -141,8 +141,8 @@
     </footer>
 
     <script>
-        // সরাসরি সঠিক ও ভ্যালিড Groq API Key
-        const GROQ_API_KEY = "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";
+        // সরাসরি সক্রিয় Groq API Key
+        const GROQ_API_KEY = "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".trim();
 
         const videoInput = document.getElementById('videoInput');
         const audioLang = document.getElementById('audioLang');
@@ -162,25 +162,27 @@
             const file = this.files[0];
             if (!file) return;
 
+            // ২৫MB সাইজ লিমিট যাচাই
+            if (file.size > 25 * 1024 * 1024) {
+                alert("⚠️ ভিডিও ফাইলের সাইজ ২৫MB-এর বেশি। অনুগ্রহ করে ছোট রিলস বা ক্লিপ দিন।");
+                this.value = '';
+                return;
+            }
+
             videoElement.src = URL.createObjectURL(file);
             statusBox.classList.remove('hidden');
             previewArea.classList.add('hidden');
             subtitlesData = [];
 
             try {
-                // ১. ভিডিও থেকে অরিজিনাল অডিও এক্সট্র্যাক্ট
-                statusTitle.textContent = "ধাপ ১/২: ভিডিওর অডিও নিষ্কাশন হচ্ছে...";
-                statusSub.textContent = "শব্দ বিশ্লেষণ করে অডিও ফাইল প্রস্তুত করা হচ্ছে...";
-                const audioBlob = await extractAudioBlob(file);
+                statusTitle.textContent = "Whisper-Large-v3 কথা শনাক্ত করছে...";
+                statusSub.textContent = "ক্লাউড এআই দিয়ে নিখুঁত বাংলা টাইমকোড প্রস্তুত হচ্ছে...";
 
-                // ২. ক্লাউড Whisper API-তে কল
-                statusTitle.textContent = "ধাপ ২/২: Whisper-v3 কথা শনাক্ত করছে...";
-                statusSub.textContent = "বাংলা উচ্চারণ বিশ্লেষণ করে টাইমকোড তৈরি হচ্ছে...";
-                
-                await requestGroqWhisper(audioBlob, GROQ_API_KEY, audioLang.value);
+                // সরাসরি ভিডিও ফাইল পাঠিয়ে প্রসেসিং
+                await requestGroqWhisper(file, GROQ_API_KEY, audioLang.value);
 
-                if (subtitlesData.length === 0) {
-                    throw new Error("ভিডিও থেকে কোনো কথা শনাক্ত করা যায়নি। স্পষ্ট অডিও সহ ভিডিও আপলোড করুন।");
+                if (!subtitlesData || subtitlesData.length === 0) {
+                    throw new Error("ভিডিওতে স্পষ্ট কোনো কথা শনাক্ত করা যায়নি। স্পষ্ট অডিও সহ ভিডিও দিন।");
                 }
 
                 statusBox.classList.add('hidden');
@@ -194,56 +196,10 @@
             }
         });
 
-        // অডিও এক্সট্র্যাক্ট করে 16kHz WAV তৈরি
-        async function extractAudioBlob(file) {
-            const arrayBuffer = await file.arrayBuffer();
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const decoded = await audioCtx.decodeAudioData(arrayBuffer);
-
-            const sampleRate = 16000;
-            const offlineCtx = new OfflineAudioContext(1, Math.ceil(decoded.duration * sampleRate), sampleRate);
-            const src = offlineCtx.createBufferSource();
-            src.buffer = decoded;
-            src.connect(offlineCtx.destination);
-            src.start(0);
-
-            const rendered = await offlineCtx.startRendering();
-            const channel = rendered.getChannelData(0);
-
-            const buffer = new ArrayBuffer(44 + channel.length * 2);
-            const view = new DataView(buffer);
-
-            const writeString = (offset, str) => {
-                for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
-            };
-
-            writeString(0, 'RIFF');
-            view.setUint32(4, 36 + channel.length * 2, true);
-            writeString(8, 'WAVE');
-            writeString(12, 'fmt ');
-            view.setUint32(16, 16, true);
-            view.setUint16(20, 1, true); // PCM
-            view.setUint16(22, 1, true); // Mono
-            view.setUint32(24, sampleRate, true);
-            view.setUint32(28, sampleRate * 2, true);
-            view.setUint16(32, 2, true);
-            view.setUint16(34, 16, true);
-            writeString(36, 'data');
-            view.setUint32(40, channel.length * 2, true);
-
-            let offset = 44;
-            for (let i = 0; i < channel.length; i++, offset += 2) {
-                let s = Math.max(-1, Math.min(1, channel[i]));
-                view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
-            }
-
-            return new Blob([view], { type: 'audio/wav' });
-        }
-
-        // Groq API কল
-        async function requestGroqWhisper(audioBlob, apiKey, lang) {
+        // সরাসরি Groq API কল (MP4/WebM সরাসরি সাপোর্ট করে)
+        async function requestGroqWhisper(mediaFile, apiKey, lang) {
             const formData = new FormData();
-            formData.append('file', audioBlob, 'audio.wav');
+            formData.append('file', mediaFile);
             formData.append('model', 'whisper-large-v3-turbo');
             formData.append('response_format', 'verbose_json');
             formData.append('language', lang);
@@ -258,13 +214,14 @@
 
             if (!response.ok) {
                 const errData = await response.json().catch(() => ({}));
-                throw new Error(errData.error?.message || `সার্ভার রেসপন্স দেয়নি (${response.status})`);
+                const msg = errData.error?.message || `সার্ভার এরর (${response.status})`;
+                throw new Error(msg);
             }
 
             const data = await response.json();
             subtitlesData = [];
 
-            if (data.segments && Array.isArray(data.segments)) {
+            if (data.segments && Array.isArray(data.segments) && data.segments.length > 0) {
                 data.segments.forEach(seg => {
                     const text = seg.text ? seg.text.trim() : '';
                     if (text) {
@@ -275,7 +232,7 @@
                         });
                     }
                 });
-            } else if (data.text) {
+            } else if (data.text && data.text.trim().length > 0) {
                 subtitlesData.push({
                     start: 0,
                     end: videoElement.duration || 5,
@@ -301,7 +258,7 @@
             });
         }
 
-        // ভিডিও চলার সাথে সাথে সাবটাইটেল প্রদর্শন
+        // ভিডিও চলার সাথে সাথে সাবটাইটেল সিঙ্ক
         videoElement.addEventListener('timeupdate', function() {
             const curTime = videoElement.currentTime;
             const currentSub = subtitlesData.find(s => curTime >= s.start && curTime <= s.end);
@@ -328,7 +285,7 @@
             return `${h}:${m}:${s},${ms}`;
         }
 
-        // SRT ডাউনলোড
+        // SRT ফাইল ডাউনলোড
         downloadSrtBtn.addEventListener('click', function() {
             if (subtitlesData.length === 0) return;
 
