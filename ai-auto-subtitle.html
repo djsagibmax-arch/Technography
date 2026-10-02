@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>AI Auto Subtitle | Technography</title>
-    <meta name="description" content="Technography AI Auto Subtitle Generator - ভিডিও থেকে স্বয়ংক্রিয়ভাবে Subtitle তৈরি করুন।">
+    <meta name="description" content="Technography AI Auto Subtitle Generator - ভিডিও থেকে দ্রুত ও স্বয়ংক্রিয়ভাবে সাবটাইটেল তৈরি করুন।">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -18,644 +18,304 @@
                         radial-gradient(circle at 90% 100%, rgba(139,92,246,.14), transparent 35%),
                         #030712;
             color: #fff;
-            font-family: Arial, "Noto Sans Bengali", sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
         }
         .glass {
-            background: rgba(15,23,42,.78);
+            background: rgba(15,23,42,.85);
             border: 1px solid rgba(148,163,184,.14);
             backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
         }
-        .glow { box-shadow: 0 0 40px rgba(236,72,153,.08); }
+        .glow { box-shadow: 0 0 30px rgba(236,72,153,.15); }
         .upload-box {
-            border: 2px dashed rgba(236,72,153,.40);
+            border: 2px dashed rgba(236,72,153,.45);
             transition: .25s ease;
         }
         .upload-box:hover {
-            border-color: rgba(236,72,153,.90);
-            background: rgba(236,72,153,.04);
-        }
-        .upload-box.dragging {
             border-color: #ec4899;
-            background: rgba(236,72,153,.10);
+            background: rgba(236,72,153,.05);
         }
         video {
-            display: block;
             width: 100%;
-            max-height: 520px;
+            max-height: 480px;
             background: #000;
             border-radius: 16px;
         }
-        .progress-track {
-            width: 100%;
-            height: 8px;
-            overflow: hidden;
-            border-radius: 999px;
-            background: #1e293b;
-        }
-        .progress-value {
-            height: 100%;
-            width: 0%;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #ec4899, #8b5cf6);
-            transition: width .2s ease;
-        }
-        .spinner {
-            width: 26px;
-            height: 26px;
-            border: 3px solid rgba(255,255,255,.15);
-            border-top-color: #ec4899;
-            border-radius: 50%;
-            animation: spin .8s linear infinite;
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
         .subtitle-item {
             background: rgba(15,23,42,.85);
-            border: 1px solid rgba(148,163,184,.10);
+            border: 1px solid rgba(148,163,184,.12);
             border-radius: 12px;
             padding: 12px;
             cursor: pointer;
             transition: .2s;
         }
-        .subtitle-item:hover { border-color: rgba(236,72,153,.45); }
-        .subtitle-item.active {
-            border-color: rgba(236,72,153,.75);
-            background: rgba(236,72,153,.08);
+        .subtitle-item:hover, .subtitle-item.active {
+            border-color: #ec4899;
+            background: rgba(236,72,153,.1);
         }
         .subtitle-overlay {
             position: absolute;
             left: 15px;
             right: 15px;
-            bottom: 55px;
+            bottom: 45px;
             text-align: center;
             pointer-events: none;
         }
         .subtitle-overlay span {
             display: inline-block;
             max-width: 90%;
-            padding: 7px 12px;
-            border-radius: 7px;
-            background: rgba(0,0,0,.78);
-            color: white;
-            font-weight: 700;
-            font-size: clamp(14px, 3vw, 23px);
-            line-height: 1.5;
-            text-shadow: 0 1px 2px #000;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: rgba(0,0,0,.8);
+            color: #fff;
+            font-weight: bold;
+            font-size: clamp(14px, 3.5vw, 22px);
+            text-shadow: 0 1px 3px #000;
         }
-        .log-box {
-            max-height: 180px;
-            overflow-y: auto;
-            background: #020617;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 12px;
-            font-family: monospace;
-            font-size: 11px;
-            color: #94a3b8;
-        }
-        .hidden { display: none !important; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .spinner { animation: spin 1s linear infinite; }
     </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- হেডার -->
 <header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800">
-    <div class="max-w-6xl mx-auto px-4 py-3">
-        <div class="flex items-center justify-between gap-3">
-            <a href="index.html" class="font-black text-lg sm:text-xl">
-                <span class="text-pink-400">TECHNO</span><span class="text-white">GRAPHY</span>
-            </a>
-            <a href="index.html" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full text-xs sm:text-sm">
-                <i class="fa-solid fa-house mr-1"></i> Home
-            </a>
-        </div>
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="index.html" class="font-black text-lg sm:text-xl">
+            <span class="text-pink-400">TECHNO</span><span class="text-white">GRAPHY</span>
+        </a>
+        <a href="index.html" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full text-xs font-semibold">
+            <i class="fa-solid fa-house mr-1"></i> Home
+        </a>
     </div>
 </header>
 
-<!-- MAIN -->
-<main class="max-w-6xl mx-auto px-4 py-8 sm:py-12">
+<main class="max-w-4xl mx-auto px-4 py-8">
 
-    <!-- TITLE -->
-    <section class="text-center mb-8">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs font-bold mb-4">
-            <i class="fa-solid fa-closed-captioning"></i> AI VIDEO TOOL
+    <div class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs font-bold mb-3">
+            <i class="fa-solid fa-bolt"></i> ফাস্ট ও আল্ট্রা-লাইট AI
         </div>
-        <h1 class="text-3xl sm:text-5xl font-black mb-4">AI Auto Subtitle</h1>
-        <p class="max-w-2xl mx-auto text-slate-400 text-sm sm:text-base">
-            ভিডিও আপলোড করুন। AI স্বয়ংক্রিয়ভাবে ভিডিওর কথা শুনে Subtitle তৈরি করবে।
+        <h1 class="text-3xl sm:text-4xl font-black mb-3">AI Auto Subtitle</h1>
+        <p class="text-slate-400 text-xs sm:text-sm">
+            ভিডিও আপলোড করুন। কোনো দীর্ঘ অপেক্ষা ছাড়াই খাঁটি বাংলায় দ্রুত সাবটাইটেল তৈরি হবে।
         </p>
-    </section>
+    </div>
 
-    <!-- MODEL STATUS -->
-    <section class="glass glow rounded-2xl p-5 mb-6">
-        <div class="flex items-center gap-3">
-            <div id="statusIcon" class="w-11 h-11 rounded-full bg-slate-800 flex items-center justify-center shrink-0">
-                <i class="fa-solid fa-microchip text-pink-400"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-                <div class="font-bold text-sm">AI Model Status</div>
-                <div id="statusText" class="text-xs text-slate-400 mt-1">ভিডিও নির্বাচন করুন।</div>
-            </div>
+    <!-- ভাষা নির্বাচন ও আপলোড বক্স -->
+    <div class="glass glow rounded-2xl p-6 sm:p-8 mb-6 text-center">
+        <div class="max-w-xs mx-auto mb-5 text-left">
+            <label class="block text-xs font-bold text-slate-300 mb-1.5">ভিডিওর ভাষা নির্বাচন করুন:</label>
+            <select id="langSelect" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-pink-500">
+                <option value="bn-BD">বাংলা (Bengali)</option>
+                <option value="en-US">English</option>
+                <option value="hi-IN">Hindi</option>
+            </select>
         </div>
 
-        <div id="modelProgressBox" class="hidden mt-5">
-            <div class="flex justify-between gap-3 text-xs text-slate-400 mb-2">
-                <span id="modelProgressText">AI Model প্রস্তুত হচ্ছে...</span>
-                <span id="modelProgressPercent">0%</span>
+        <label for="videoInput" class="upload-box rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer">
+            <div class="w-16 h-16 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-400 text-3xl mb-3">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
             </div>
-            <div class="progress-track">
-                <div id="modelProgress" class="progress-value"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- UPLOAD -->
-    <section class="glass glow rounded-2xl p-5 sm:p-8 mb-6">
-        <label id="uploadBox" for="videoInput" class="upload-box rounded-2xl p-8 sm:p-12 flex flex-col items-center justify-center text-center cursor-pointer">
-            <div class="w-20 h-20 rounded-full bg-pink-500/10 flex items-center justify-center mb-5">
-                <i class="fa-solid fa-cloud-arrow-up text-4xl text-pink-400"></i>
-            </div>
-            <h2 class="text-xl sm:text-2xl font-black mb-2">ভিডিও আপলোড করুন</h2>
-            <p class="text-slate-400 text-sm mb-5">MP4, WebM, MOV সহ সাধারণ ভিডিও ফরম্যাট</p>
-            <span class="inline-flex items-center gap-2 bg-pink-600 hover:bg-pink-500 px-5 py-3 rounded-xl font-bold text-sm">
-                <i class="fa-solid fa-video"></i> ভিডিও নির্বাচন করুন
+            <h2 class="text-lg font-bold mb-1">ভিডিও সিলেক্ট করুন</h2>
+            <p class="text-slate-400 text-xs mb-4">MP4, WebM, MOV ইত্যাদি</p>
+            <span class="bg-pink-600 hover:bg-pink-500 px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-lg">
+                <i class="fa-solid fa-video"></i> ফাইল বেছে নিন
             </span>
             <input id="videoInput" type="file" accept="video/*" class="hidden">
         </label>
+    </div>
 
-        <div id="fileInfo" class="hidden mt-5 bg-slate-900 rounded-xl p-4">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center">
-                    <i class="fa-solid fa-file-video text-pink-400"></i>
-                </div>
-                <div class="flex-1 min-w-0">
-                    <div id="fileName" class="font-bold text-sm truncate"></div>
-                    <div id="fileSize" class="text-xs text-slate-500 mt-1"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PREVIEW -->
-    <section id="previewSection" class="hidden glass rounded-2xl p-4 sm:p-6 mb-6">
-        <h2 class="text-xl font-black mb-4">
-            <i class="fa-solid fa-play text-pink-400 mr-2"></i> ভিডিও Preview
-        </h2>
-        <div class="relative">
-            <video id="videoPreview" controls playsinline></video>
+    <!-- প্রিভিউ এবং প্রসেসিং সেকশন -->
+    <div id="previewArea" class="hidden glass rounded-2xl p-4 sm:p-6 mb-6 space-y-4">
+        <div class="relative overflow-hidden rounded-xl">
+            <video id="videoElement" controls playsinline></video>
             <div class="subtitle-overlay">
-                <span id="activeSubtitle" class="hidden"></span>
+                <span id="activeSubtitleText" class="hidden"></span>
             </div>
         </div>
-    </section>
 
-    <!-- PROCESS STATUS -->
-    <section id="processSection" class="hidden glass rounded-2xl p-5 mb-6">
-        <div class="flex items-center gap-3">
-            <div id="spinner" class="spinner"></div>
-            <div class="flex-1">
-                <div id="processTitle" class="font-bold text-sm">AI কাজ করছে...</div>
-                <div id="processText" class="text-xs text-slate-500 mt-1">অনুগ্রহ করে অপেক্ষা করুন।</div>
-            </div>
-        </div>
-        <div class="mt-5">
-            <div class="flex justify-between text-xs text-slate-500 mb-2">
-                <span>Processing</span>
-                <span id="processPercent">0%</span>
-            </div>
-            <div class="progress-track">
-                <div id="processProgress" class="progress-value"></div>
-            </div>
-        </div>
-    </section>
+        <button id="startProcessBtn" type="button" class="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold py-3.5 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>সাবটাইটেল তৈরি শুরু করুন</span>
+        </button>
 
-    <!-- RESULT -->
-    <section id="resultSection" class="hidden glass rounded-2xl p-5 sm:p-6 mb-6">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
-            <h2 class="text-xl font-black">
-                <i class="fa-solid fa-closed-captioning text-pink-400 mr-2"></i> Generated Subtitle
-            </h2>
-            <button id="downloadSrtBtn" class="bg-pink-600 hover:bg-pink-500 px-4 py-2 rounded-lg text-xs font-bold">
-                <i class="fa-solid fa-download mr-1"></i> SRT Download
+        <div id="statusInfo" class="hidden bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs text-pink-300 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-notch spinner text-sm"></i>
+            <span id="statusMessage">AI কথা শনাক্ত করছে...</span>
+        </div>
+    </div>
+
+    <!-- রেজাল্ট সেকশন -->
+    <div id="resultArea" class="hidden glass rounded-2xl p-5 mb-6 space-y-4">
+        <div class="flex items-center justify-between">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-closed-captioning text-pink-400"></i>
+                <span>Generated Subtitles</span>
+            </h3>
+            <button id="downloadBtn" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5">
+                <i class="fa-solid fa-download"></i> SRT ডাউনলোড
             </button>
         </div>
-        <div id="subtitleCount" class="text-xs text-slate-500 mb-4"></div>
-        <div id="subtitleList" class="max-h-[500px] overflow-y-auto space-y-2"></div>
-    </section>
 
-    <!-- ERROR -->
-    <section id="errorSection" class="hidden rounded-2xl p-5 bg-red-500/5 border border-red-500/20 mb-6">
-        <div class="flex gap-3">
-            <i class="fa-solid fa-circle-exclamation text-red-400 mt-1"></i>
-            <div>
-                <div class="font-bold text-red-300 text-sm">সমস্যা হয়েছে</div>
-                <div id="errorText" class="text-xs text-slate-400 mt-2 leading-6"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DEBUG LOG -->
-    <details class="mb-6">
-        <summary class="cursor-pointer text-xs text-slate-500">Technical Log</summary>
-        <div id="logBox" class="log-box mt-3"></div>
-    </details>
-
-    <!-- INFO -->
-    <section class="p-4 rounded-xl bg-blue-500/5 border border-blue-500/20">
-        <p class="text-xs text-slate-400 leading-6">
-            <i class="fa-solid fa-circle-info text-blue-400 mr-1"></i>
-            প্রথমবার AI Model ডাউনলোড হতে সামান্য সময় লাগবে। এরপর ব্রাউজারের ক্যাশে সেভ থাকায় বারবার ডাউনলোড করতে হবে না।
-        </p>
-    </section>
+        <div id="subtitlesList" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
+    </div>
 
 </main>
 
-<footer class="border-t border-slate-800 mt-10">
-    <div class="max-w-6xl mx-auto px-4 py-6 text-center">
-        <p class="text-xs text-slate-500">© 2026 Technography. All Rights Reserved.</p>
-    </div>
-</footer>
+<script>
+const videoInput = document.getElementById('videoInput');
+const langSelect = document.getElementById('langSelect');
+const previewArea = document.getElementById('previewArea');
+const videoElement = document.getElementById('videoElement');
+const startProcessBtn = document.getElementById('startProcessBtn');
+const statusInfo = document.getElementById('statusInfo');
+const statusMessage = document.getElementById('statusMessage');
+const resultArea = document.getElementById('resultArea');
+const subtitlesList = document.getElementById('subtitlesList');
+const activeSubtitleText = document.getElementById('activeSubtitleText');
+const downloadBtn = document.getElementById('downloadBtn');
 
-<!-- JS MODULE SCRIPT -->
-<script type="module">
-import { pipeline, env } from "https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2";
+let subtitlesData = [];
 
-// ক্যাশিং এবং রিমোট মডেল এনভায়রনমেন্ট
-env.allowLocalModels = false;
-env.useBrowserCache = true;
-
-// আল্ট্রা-লাইট Whisper মডেল যা মোবাইলের জন্য অপ্টিমাইজড
-const MODEL = "Xenova/whisper-tiny";
-
-const videoInput = document.getElementById("videoInput");
-const uploadBox = document.getElementById("uploadBox");
-const fileInfo = document.getElementById("fileInfo");
-const fileName = document.getElementById("fileName");
-const fileSize = document.getElementById("fileSize");
-const videoPreview = document.getElementById("videoPreview");
-const previewSection = document.getElementById("previewSection");
-const statusText = document.getElementById("statusText");
-const statusIcon = document.getElementById("statusIcon");
-const modelProgressBox = document.getElementById("modelProgressBox");
-const modelProgress = document.getElementById("modelProgress");
-const modelProgressText = document.getElementById("modelProgressText");
-const modelProgressPercent = document.getElementById("modelProgressPercent");
-const processSection = document.getElementById("processSection");
-const processTitle = document.getElementById("processTitle");
-const processText = document.getElementById("processText");
-const processProgress = document.getElementById("processProgress");
-const processPercent = document.getElementById("processPercent");
-const resultSection = document.getElementById("resultSection");
-const subtitleList = document.getElementById("subtitleList");
-const subtitleCount = document.getElementById("subtitleCount");
-const activeSubtitle = document.getElementById("activeSubtitle");
-const downloadSrtBtn = document.getElementById("downloadSrtBtn");
-const errorSection = document.getElementById("errorSection");
-const errorText = document.getElementById("errorText");
-const logBox = document.getElementById("logBox");
-
-let transcriber = null;
-let selectedFile = null;
-let videoURL = null;
-let subtitles = [];
-let modelPromise = null;
-let processing = false;
-
-function log(message) {
-    console.log("[Technography]", message);
-    const time = new Date().toLocaleTimeString();
-    logBox.innerHTML += `<div>[${time}] ${escapeHTML(String(message))}</div>`;
-    logBox.scrollTop = logBox.scrollHeight;
-}
-
-function setStatus(message, type = "normal") {
-    statusText.textContent = message;
-    if (type === "success") {
-        statusIcon.innerHTML = `<i class="fa-solid fa-check text-green-400"></i>`;
-        statusIcon.className = "w-11 h-11 rounded-full bg-green-500/10 flex items-center justify-center shrink-0";
-    } else if (type === "error") {
-        statusIcon.innerHTML = `<i class="fa-solid fa-xmark text-red-400"></i>`;
-        statusIcon.className = "w-11 h-11 rounded-full bg-red-500/10 flex items-center justify-center shrink-0";
-    } else {
-        statusIcon.innerHTML = `<i class="fa-solid fa-microchip text-pink-400"></i>`;
-        statusIcon.className = "w-11 h-11 rounded-full bg-slate-800 flex items-center justify-center shrink-0";
-    }
-}
-
-function showError(message, error = null) {
-    if (error) {
-        console.error(error);
-        log(error.stack || error.message || error);
-    }
-    errorText.textContent = message;
-    errorSection.classList.remove("hidden");
-    setStatus("সমস্যা হয়েছে", "error");
-}
-
-function hideError() {
-    errorSection.classList.add("hidden");
-    errorText.textContent = "";
-}
-
-function formatBytes(bytes) {
-    if (!bytes || bytes <= 0) return "0 Bytes";
-    const units = ["Bytes", "KB", "MB", "GB"];
-    const index = Math.floor(Math.log(bytes) / Math.log(1024));
-    return parseFloat((bytes / Math.pow(1024, index)).toFixed(2)) + " " + units[index];
-}
-
-function formatTime(seconds) {
-    seconds = Number(seconds) || 0;
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
-}
-
-function formatSRTTime(seconds) {
-    seconds = Math.max(0, Number(seconds) || 0);
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = Math.floor(seconds % 60);
-    const milliseconds = Math.floor((seconds % 1) * 1000);
-    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")},${String(milliseconds).padStart(3, "0")}`;
-}
-
-function escapeHTML(text) {
-    return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-}
-
-async function loadModel() {
-    if (transcriber) return transcriber;
-    if (modelPromise) return modelPromise;
-
-    modelPromise = (async () => {
-        try {
-            hideError();
-            modelProgressBox.classList.remove("hidden");
-            modelProgress.style.width = "0%";
-            modelProgressPercent.textContent = "0%";
-            modelProgressText.textContent = "AI Model লোড হচ্ছে...";
-            setStatus("লাইটওয়েট Whisper AI ডাউনলোড হচ্ছে...");
-
-            // Xenova/whisper-tiny কোয়ান্টাইজড মডেল লোড
-            const pipe = await pipeline("automatic-speech-recognition", MODEL, {
-                quantized: true,
-                progress_callback: (progress) => {
-                    if (!progress) return;
-                    if (progress.status === "progress") {
-                        const val = Number(progress.progress);
-                        if (isFinite(val)) {
-                            const percent = Math.max(0, Math.min(100, Math.round(val)));
-                            modelProgress.style.width = percent + "%";
-                            modelProgressPercent.textContent = percent + "%";
-                        }
-                        if (progress.file) {
-                            modelProgressText.textContent = "ডাউনলোড হচ্ছে: " + progress.file;
-                        }
-                    }
-                }
-            });
-
-            log("AI pipeline loaded successfully.");
-            modelProgress.style.width = "100%";
-            modelProgressPercent.textContent = "100%";
-            modelProgressText.textContent = "AI Model Ready";
-            setStatus("AI Model প্রস্তুত।", "success");
-
-            transcriber = pipe;
-            setTimeout(() => { modelProgressBox.classList.add("hidden"); }, 1000);
-            return pipe;
-        } catch (error) {
-            modelPromise = null;
-            transcriber = null;
-            log("MODEL ERROR: " + (error.message || error));
-            throw error;
-        }
-    })();
-
-    return modelPromise;
-}
-
-async function extractAudio(file) {
-    log("Starting audio extraction...");
-    processTitle.textContent = "ভিডিও থেকে Audio নেওয়া হচ্ছে...";
-    processText.textContent = "ভিডিওর Audio decode করা হচ্ছে।";
-    setProcessProgress(10);
-
-    const arrayBuffer = await file.arrayBuffer();
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContextClass) throw new Error("AudioContext সাপোর্ট করে না।");
-
-    let audioContext = null;
-    try {
-        audioContext = new AudioContextClass();
-        setProcessProgress(15);
-        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer.slice(0));
-
-        const targetRate = 16000;
-        const targetLength = Math.ceil(audioBuffer.duration * targetRate);
-
-        if (targetLength > 16000 * 60 * 30) {
-            throw new Error("ভিডিওটি খুব বড়। ছোট ভিডিও দিয়ে পরীক্ষা করুন।");
-        }
-
-        setProcessProgress(25);
-        const offlineContext = new OfflineAudioContext(1, targetLength, targetRate);
-        const source = offlineContext.createBufferSource();
-        source.buffer = audioBuffer;
-        source.connect(offlineContext.destination);
-        source.start(0);
-
-        const rendered = await offlineContext.startRendering();
-        const audioData = rendered.getChannelData(0);
-
-        setProcessProgress(35);
-        log("Audio converted to 16kHz mono.");
-        return { audio: audioData, duration: audioBuffer.duration };
-    } finally {
-        if (audioContext) {
-            try { await audioContext.close(); } catch (e) {}
-        }
-    }
-}
-
-function setProcessProgress(value) {
-    const percent = Math.max(0, Math.min(100, Math.round(value)));
-    processProgress.style.width = percent + "%";
-    processPercent.textContent = percent + "%";
-}
-
-function normalizeResult(output) {
-    const result = [];
-    if (output && Array.isArray(output.chunks)) {
-        output.chunks.forEach((chunk) => {
-            if (!chunk || !chunk.text) return;
-            const text = String(chunk.text).trim();
-            if (!text) return;
-
-            let start = Array.isArray(chunk.timestamp) ? Number(chunk.timestamp[0]) || 0 : 0;
-            let end = Array.isArray(chunk.timestamp) ? Number(chunk.timestamp[1]) : start + 3;
-            if (!isFinite(end) || end <= start) end = start + 3;
-
-            result.push({ start, end, text });
-        });
-    }
-
-    if (result.length === 0 && output && output.text) {
-        result.push({
-            start: 0,
-            end: videoPreview.duration || 5,
-            text: String(output.text).trim()
-        });
-    }
-    return result;
-}
-
-function renderSubtitles() {
-    subtitleList.innerHTML = "";
-    subtitleCount.textContent = subtitles.length + "টি subtitle তৈরি হয়েছে।";
-
-    subtitles.forEach((subtitle, index) => {
-        const div = document.createElement("div");
-        div.className = "subtitle-item";
-        div.dataset.index = index;
-        div.innerHTML = `
-            <div class="flex items-start gap-3">
-                <div class="min-w-[75px] text-pink-400 text-xs font-bold">
-                    ${formatTime(subtitle.start)}
-                </div>
-                <div class="flex-1 text-sm leading-6 text-slate-200">
-                    ${escapeHTML(subtitle.text)}
-                </div>
-            </div>
-        `;
-        div.addEventListener("click", () => {
-            videoPreview.currentTime = subtitle.start;
-            videoPreview.play().catch(() => {});
-        });
-        subtitleList.appendChild(div);
-    });
-}
-
-videoPreview.addEventListener("timeupdate", () => {
-    if (!subtitles.length) return;
-    const current = videoPreview.currentTime;
-    let active = -1;
-
-    for (let i = 0; i < subtitles.length; i++) {
-        if (current >= subtitles[i].start && current <= subtitles[i].end) {
-            active = i;
-            break;
-        }
-    }
-
-    if (active >= 0) {
-        activeSubtitle.textContent = subtitles[active].text;
-        activeSubtitle.classList.remove("hidden");
-    } else {
-        activeSubtitle.classList.add("hidden");
-    }
-
-    document.querySelectorAll(".subtitle-item").forEach((el, idx) => {
-        el.classList.toggle("active", idx === active);
-    });
-});
-
-downloadSrtBtn.addEventListener("click", () => {
-    if (!subtitles.length) return;
-    let srt = "";
-    subtitles.forEach((sub, i) => {
-        srt += `${i + 1}\n${formatSRTTime(sub.start)} --> ${formatSRTTime(sub.end)}\n${sub.text}\n\n`;
-    });
-    const blob = new Blob([srt], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "technography-subtitles.srt";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-});
-
-async function processVideo(file) {
-    if (processing) return;
-    processing = true;
-    hideError();
-    resultSection.classList.add("hidden");
-    subtitles = [];
-    subtitleList.innerHTML = "";
-    processSection.classList.remove("hidden");
-    setProcessProgress(0);
-
-    try {
-        processTitle.textContent = "AI প্রস্তুত হচ্ছে...";
-        processText.textContent = "AI Model এবং ভিডিও Audio প্রস্তুত করা হচ্ছে।";
-        
-        const [model, extracted] = await Promise.all([loadModel(), extractAudio(file)]);
-
-        processTitle.textContent = "AI কথা শনাক্ত করছে...";
-        processText.textContent = "Whisper কথা বিশ্লেষণ করছে (অপেক্ষা করুন)...";
-        setProcessProgress(45);
-
-        const output = await model(extracted.audio, {
-            return_timestamps: true,
-            chunk_length_s: 30,
-            stride_length_s: 5
-        });
-
-        setProcessProgress(90);
-        subtitles = normalizeResult(output);
-
-        if (subtitles.length === 0) {
-            throw new Error("ভিডিও থেকে কোনো কথা শনাক্ত করা যায়নি।");
-        }
-
-        renderSubtitles();
-        setProcessProgress(100);
-        processTitle.textContent = "Subtitle তৈরি সম্পন্ন!";
-        processText.textContent = subtitles.length + "টি Subtitle পাওয়া গেছে।";
-        setStatus("AI Subtitle সফলভাবে প্রস্তুত।", "success");
-        resultSection.classList.remove("hidden");
-
-        setTimeout(() => {
-            resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 300);
-    } catch (error) {
-        showError(error.message || String(error), error);
-        processTitle.textContent = "Processing ব্যর্থ হয়েছে";
-        processText.textContent = error.message || "ত্রুটি ঘটেছে";
-    } finally {
-        processing = false;
-    }
-}
-
-videoInput.addEventListener("change", async (e) => {
-    const file = e.target.files?.[0];
+// ভিডিও ফাইল নির্বাচন
+videoInput.addEventListener('change', function(e) {
+    const file = this.files[0];
     if (!file) return;
-    if (!file.type.startsWith("video/")) {
-        showError("দয়া করে ভিডিও ফাইল সিলেক্ট করুন।");
+
+    videoElement.src = URL.createObjectURL(file);
+    previewArea.classList.remove('hidden');
+    resultArea.classList.add('hidden');
+    subtitlesData = [];
+});
+
+// দ্রুত স্পিচ রিকগনিশন ইঞ্জিন
+startProcessBtn.addEventListener('click', function() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+        alert("⚠️ আপনার ব্রাউজারে স্পিচ রিকগনিশন সাপোর্ট নেই। দয়া করে গুগল ক্রোম (Google Chrome) ব্যবহার করুন।");
         return;
     }
 
-    selectedFile = file;
-    hideError();
-    fileInfo.classList.remove("hidden");
-    fileName.textContent = file.name;
-    fileSize.textContent = formatBytes(file.size);
+    startProcessBtn.disabled = true;
+    startProcessBtn.classList.add('opacity-50');
+    statusInfo.classList.remove('hidden');
+    statusMessage.textContent = "AI অডিও ট্র্যাক বিশ্লেষণ করে কথা শুনছে...";
 
-    if (videoURL) URL.revokeObjectURL(videoURL);
-    videoURL = URL.createObjectURL(file);
-    videoPreview.src = videoURL;
-    previewSection.classList.remove("hidden");
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = false;
+    recognition.lang = langSelect.value;
 
-    await processVideo(file);
+    subtitlesData = [];
+    videoElement.currentTime = 0;
+    videoElement.muted = false;
+
+    let segmentStart = 0;
+
+    recognition.onresult = function(event) {
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                const text = event.results[i][0].transcript.trim();
+                const currentTime = videoElement.currentTime;
+
+                if (text) {
+                    subtitlesData.push({
+                        start: Math.max(0, segmentStart),
+                        end: Math.max(segmentStart + 1.5, currentTime),
+                        text: text
+                    });
+                    segmentStart = currentTime;
+                    renderSubtitles();
+                }
+            }
+        }
+    };
+
+    recognition.onerror = function(err) {
+        console.error("Speech Recognition Error:", err);
+    };
+
+    recognition.onend = function() {
+        startProcessBtn.disabled = false;
+        startProcessBtn.classList.remove('opacity-50');
+        statusInfo.classList.add('hidden');
+        if (subtitlesData.length > 0) {
+            resultArea.classList.remove('hidden');
+        }
+    };
+
+    videoElement.play();
+    recognition.start();
+
+    videoElement.onended = function() {
+        recognition.stop();
+        statusMessage.textContent = "সাবটাইটেল তৈরি সম্পন্ন!";
+        setTimeout(() => statusInfo.classList.add('hidden'), 1000);
+        resultArea.classList.remove('hidden');
+    };
+});
+
+function formatTime(sec) {
+    const m = Math.floor(sec / 60).toString().padStart(2, '0');
+    const s = Math.floor(sec % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+}
+
+function formatSRTTime(seconds) {
+    const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+    const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+    const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+    const ms = Math.floor((seconds % 1) * 1000).toString().padStart(3, '0');
+    return `${h}:${m}:${s},${ms}`;
+}
+
+function renderSubtitles() {
+    subtitlesList.innerHTML = '';
+    subtitlesData.forEach((sub, i) => {
+        const item = document.createElement('div');
+        item.className = "subtitle-item flex items-center justify-between text-xs";
+        item.innerHTML = `
+            <span class="text-pink-400 font-bold">${formatTime(sub.start)}</span>
+            <span class="text-slate-200 flex-1 ml-3">${sub.text}</span>
+        `;
+        item.onclick = () => { videoElement.currentTime = sub.start; videoElement.play(); };
+        subtitlesList.appendChild(item);
+    });
+}
+
+// ভিডিও প্লে হওয়ার সাথে সাথে স্ক্রিনে ক্যাপশন প্রদর্শন
+videoElement.addEventListener('timeupdate', function() {
+    const cur = videoElement.currentTime;
+    const active = subtitlesData.find(s => cur >= s.start && cur <= s.end);
+
+    if (active) {
+        activeSubtitleText.textContent = active.text;
+        activeSubtitleText.classList.remove('hidden');
+    } else {
+        activeSubtitleText.classList.add('hidden');
+    }
+});
+
+// SRT ফাইল ডাউনলোড
+downloadBtn.addEventListener('click', function() {
+    if (subtitlesData.length === 0) return;
+
+    let srtText = "";
+    subtitlesData.forEach((sub, i) => {
+        srtText += `${i + 1}\n${formatSRTTime(sub.start)} --> ${formatSRTTime(sub.end)}\n${sub.text}\n\n`;
+    });
+
+    const blob = new Blob([srtText], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "technography-subtitles.srt";
+    a.click();
+    URL.revokeObjectURL(url);
 });
 </script>
+
 </body>
 </html>
