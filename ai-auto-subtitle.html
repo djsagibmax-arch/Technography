@@ -94,11 +94,11 @@
 
     <div class="text-center mb-8">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs font-bold mb-3">
-            <i class="fa-solid fa-bolt"></i> ফাস্ট ও আল্ট্রা-লাইট AI
+            <i class="fa-solid fa-bolt"></i> ফাস্ট ও সরাসরি AI সাবটাইটেল
         </div>
         <h1 class="text-3xl sm:text-4xl font-black mb-3">AI Auto Subtitle</h1>
         <p class="text-slate-400 text-xs sm:text-sm">
-            ভিডিও আপলোড করুন। কোনো দীর্ঘ অপেক্ষা ছাড়াই খাঁটি বাংলায় দ্রুত সাবটাইটেল তৈরি হবে।
+            ভিডিও আপলোড করে প্লে করুন। কথা শনাক্ত হয়ে খাঁটি বাংলায় সাবটাইটেল তৈরি হবে।
         </p>
     </div>
 
@@ -142,7 +142,7 @@
 
         <div id="statusInfo" class="hidden bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs text-pink-300 flex items-center justify-center gap-2">
             <i class="fa-solid fa-circle-notch spinner text-sm"></i>
-            <span id="statusMessage">AI কথা শনাক্ত করছে...</span>
+            <span id="statusMessage">AI অডিও ট্র্যাক বিশ্লেষণ করে কথা শুনছে...</span>
         </div>
     </div>
 
@@ -177,8 +177,8 @@ const activeSubtitleText = document.getElementById('activeSubtitleText');
 const downloadBtn = document.getElementById('downloadBtn');
 
 let subtitlesData = [];
+let recognition = null;
 
-// ভিডিও ফাইল নির্বাচন
 videoInput.addEventListener('change', function(e) {
     const file = this.files[0];
     if (!file) return;
@@ -189,23 +189,23 @@ videoInput.addEventListener('change', function(e) {
     subtitlesData = [];
 });
 
-// দ্রুত স্পিচ রিকগনিশন ইঞ্জিন
-startProcessBtn.addEventListener('click', function() {
+startProcessBtn.addEventListener('click', async function() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-        alert("⚠️ আপনার ব্রাউজারে স্পিচ রিকগনিশন সাপোর্ট নেই। দয়া করে গুগল ক্রোম (Google Chrome) ব্যবহার করুন।");
+        alert("⚠️ আপনার ব্রাউজারে স্পিচ রিকগনিশন সাপোর্ট নেই। দয়া করে গুগল ক্রোম (Google Chrome) ব্রাউজারে চেষ্টা করুন।");
         return;
     }
 
     startProcessBtn.disabled = true;
     startProcessBtn.classList.add('opacity-50');
     statusInfo.classList.remove('hidden');
-    statusMessage.textContent = "AI অডিও ট্র্যাক বিশ্লেষণ করে কথা শুনছে...";
+    statusMessage.textContent = "কথা শনাক্ত হচ্ছে (ভিডিওর সাউন্ড স্পষ্ট থাকতে হবে)...";
 
-    const recognition = new SpeechRecognition();
+    // স্পিচ ইঞ্জিন শুরু
+    recognition = new SpeechRecognition();
     recognition.continuous = true;
-    recognition.interimResults = false;
+    recognition.interimResults = true;
     recognition.lang = langSelect.value;
 
     subtitlesData = [];
@@ -216,44 +216,51 @@ startProcessBtn.addEventListener('click', function() {
 
     recognition.onresult = function(event) {
         for (let i = event.resultIndex; i < event.results.length; ++i) {
-            if (event.results[i].isFinal) {
-                const text = event.results[i][0].transcript.trim();
-                const currentTime = videoElement.currentTime;
+            const transcript = event.results[i][0].transcript.trim();
+            const currentTime = videoElement.currentTime;
 
-                if (text) {
-                    subtitlesData.push({
-                        start: Math.max(0, segmentStart),
-                        end: Math.max(segmentStart + 1.5, currentTime),
-                        text: text
-                    });
-                    segmentStart = currentTime;
-                    renderSubtitles();
-                }
+            if (event.results[i].isFinal && transcript) {
+                subtitlesData.push({
+                    start: Math.max(0, segmentStart),
+                    end: Math.max(segmentStart + 1.2, currentTime),
+                    text: transcript
+                });
+                segmentStart = currentTime;
+                renderSubtitles();
+                resultArea.classList.remove('hidden');
             }
         }
     };
 
     recognition.onerror = function(err) {
-        console.error("Speech Recognition Error:", err);
-    };
-
-    recognition.onend = function() {
-        startProcessBtn.disabled = false;
-        startProcessBtn.classList.remove('opacity-50');
-        statusInfo.classList.add('hidden');
-        if (subtitlesData.length > 0) {
-            resultArea.classList.remove('hidden');
+        console.warn("Speech recognition notice:", err.error);
+        if (err.error === 'not-allowed') {
+            alert("⚠️ দয়া করে ব্রাউজারে মাইক্রোফোন পারমিশন এলাউ (Allow) করুন যাতে ভিডিওর অডিও ডিটেক্ট হতে পারে।");
         }
     };
 
-    videoElement.play();
-    recognition.start();
+    recognition.onend = function() {
+        if (!videoElement.ended && !videoElement.paused) {
+            try { recognition.start(); } catch(e) {}
+        } else {
+            startProcessBtn.disabled = false;
+            startProcessBtn.classList.remove('opacity-50');
+            statusInfo.classList.add('hidden');
+            if (subtitlesData.length > 0) resultArea.classList.remove('hidden');
+        }
+    };
+
+    try {
+        await videoElement.play();
+        recognition.start();
+    } catch (e) {
+        console.error(e);
+    }
 
     videoElement.onended = function() {
-        recognition.stop();
+        try { recognition.stop(); } catch(e) {}
         statusMessage.textContent = "সাবটাইটেল তৈরি সম্পন্ন!";
         setTimeout(() => statusInfo.classList.add('hidden'), 1000);
-        resultArea.classList.remove('hidden');
     };
 });
 
@@ -285,7 +292,6 @@ function renderSubtitles() {
     });
 }
 
-// ভিডিও প্লে হওয়ার সাথে সাথে স্ক্রিনে ক্যাপশন প্রদর্শন
 videoElement.addEventListener('timeupdate', function() {
     const cur = videoElement.currentTime;
     const active = subtitlesData.find(s => cur >= s.start && cur <= s.end);
@@ -298,7 +304,6 @@ videoElement.addEventListener('timeupdate', function() {
     }
 });
 
-// SRT ফাইল ডাউনলোড
 downloadBtn.addEventListener('click', function() {
     if (subtitlesData.length === 0) return;
 
