@@ -268,7 +268,7 @@
     <section class="p-4 rounded-xl bg-blue-500/5 border border-blue-500/20">
         <p class="text-xs text-slate-400 leading-6">
             <i class="fa-solid fa-circle-info text-blue-400 mr-1"></i>
-            প্রথমবার AI Model ডাউনলোড হতে সামান্য সময় লাগবে। এরপর Browser Cache থেকে দ্রুত চলবে।
+            প্রথমবার AI Model ডাউনলোড হতে সামান্য সময় লাগবে। এরপর ব্রাউজারের ক্যাশে সেভ থাকায় বারবার ডাউনলোড করতে হবে না।
         </p>
     </section>
 
@@ -280,15 +280,16 @@
     </div>
 </footer>
 
-<!-- JS SCRIPT -->
+<!-- JS MODULE SCRIPT -->
 <script type="module">
-import { pipeline, env } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.3.3";
+import { pipeline, env } from "https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2";
 
+// ক্যাশিং এবং রিমোট মডেল এনভায়রনমেন্ট
 env.allowLocalModels = false;
-env.allowRemoteModels = true;
 env.useBrowserCache = true;
 
-const MODEL = "onnx-community/whisper-tiny";
+// আল্ট্রা-লাইট Whisper মডেল যা মোবাইলের জন্য অপ্টিমাইজড
+const MODEL = "Xenova/whisper-tiny";
 
 const videoInput = document.getElementById("videoInput");
 const uploadBox = document.getElementById("uploadBox");
@@ -388,10 +389,6 @@ function escapeHTML(text) {
     return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 
-function hasWebGPU() {
-    return !!(navigator.gpu);
-}
-
 async function loadModel() {
     if (transcriber) return transcriber;
     if (modelPromise) return modelPromise;
@@ -403,13 +400,11 @@ async function loadModel() {
             modelProgress.style.width = "0%";
             modelProgressPercent.textContent = "0%";
             modelProgressText.textContent = "AI Model লোড হচ্ছে...";
-            setStatus("Whisper AI Model ডাউনলোড হচ্ছে...");
+            setStatus("লাইটওয়েট Whisper AI ডাউনলোড হচ্ছে...");
 
-            const webgpu = hasWebGPU();
-            log("WebGPU available: " + webgpu);
-
-            // সঠিক ও নিরাপদ সেটিংস (যে ফাইলগুলো রিপোজিটরিতে নিশ্চিতভাবে আছে)
-            const pipeOptions = {
+            // Xenova/whisper-tiny কোয়ান্টাইজড মডেল লোড
+            const pipe = await pipeline("automatic-speech-recognition", MODEL, {
+                quantized: true,
                 progress_callback: (progress) => {
                     if (!progress) return;
                     if (progress.status === "progress") {
@@ -420,21 +415,11 @@ async function loadModel() {
                             modelProgressPercent.textContent = percent + "%";
                         }
                         if (progress.file) {
-                            modelProgressText.textContent = "Downloading: " + progress.file;
+                            modelProgressText.textContent = "ডাউনলোড হচ্ছে: " + progress.file;
                         }
                     }
                 }
-            };
-
-            if (webgpu) {
-                pipeOptions.device = "webgpu";
-                pipeOptions.dtype = "fp32";
-            } else {
-                pipeOptions.device = "wasm";
-                pipeOptions.dtype = "q8";
-            }
-
-            const pipe = await pipeline("automatic-speech-recognition", MODEL, pipeOptions);
+            });
 
             log("AI pipeline loaded successfully.");
             modelProgress.style.width = "100%";
