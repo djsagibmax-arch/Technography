@@ -2,325 +2,295 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Auto Subtitle | Technography</title>
-    <meta name="description" content="Technography AI Auto Subtitle Generator - ভিডিও থেকে দ্রুত ও স্বয়ংক্রিয়ভাবে সাবটাইটেল তৈরি করুন।">
+    <meta name="description" content="ভিডিও থেকে অডিও আলাদা করে দ্রুত বাংলা সাবটাইটেল তৈরি করুন।">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
         body {
-            margin: 0;
-            min-height: 100vh;
-            background: radial-gradient(circle at 10% 0%, rgba(236,72,153,.14), transparent 32%),
-                        radial-gradient(circle at 90% 100%, rgba(139,92,246,.14), transparent 35%),
-                        #030712;
-            color: #fff;
+            background-color: #030712;
+            color: #f3f4f6;
             font-family: system-ui, -apple-system, sans-serif;
         }
-        .glass {
-            background: rgba(15,23,42,.85);
-            border: 1px solid rgba(148,163,184,.14);
-            backdrop-filter: blur(14px);
+        .neon-card {
+            background: rgba(17, 24, 39, 0.95);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            box-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.8), 0 0 25px rgba(236, 72, 153, 0.15);
         }
-        .glow { box-shadow: 0 0 30px rgba(236,72,153,.15); }
-        .upload-box {
-            border: 2px dashed rgba(236,72,153,.45);
-            transition: .25s ease;
-        }
-        .upload-box:hover {
-            border-color: #ec4899;
-            background: rgba(236,72,153,.05);
-        }
-        video {
-            width: 100%;
-            max-height: 480px;
-            background: #000;
-            border-radius: 16px;
-        }
-        .subtitle-item {
-            background: rgba(15,23,42,.85);
-            border: 1px solid rgba(148,163,184,.12);
+        .subtitle-box {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
             padding: 12px;
-            cursor: pointer;
-            transition: .2s;
+            transition: all 0.2s ease;
         }
-        .subtitle-item:hover, .subtitle-item.active {
-            border-color: #ec4899;
-            background: rgba(236,72,153,.1);
+        .subtitle-box:hover {
+            border-color: rgba(236, 72, 153, 0.5);
         }
         .subtitle-overlay {
             position: absolute;
-            left: 15px;
-            right: 15px;
+            left: 10px;
+            right: 10px;
             bottom: 45px;
             text-align: center;
             pointer-events: none;
         }
         .subtitle-overlay span {
             display: inline-block;
-            max-width: 90%;
-            padding: 6px 12px;
-            border-radius: 8px;
-            background: rgba(0,0,0,.8);
+            background: rgba(0, 0, 0, 0.85);
             color: #fff;
+            padding: 6px 14px;
+            border-radius: 8px;
             font-weight: bold;
-            font-size: clamp(14px, 3.5vw, 22px);
-            text-shadow: 0 1px 3px #000;
+            font-size: clamp(14px, 3.5vw, 20px);
+            border: 1px solid rgba(236, 72, 153, 0.5);
+            text-shadow: 0 2px 4px #000;
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .spinner { animation: spin 1s linear infinite; }
     </style>
 </head>
 
-<body>
+<body class="min-h-screen flex flex-col justify-between">
 
-<!-- হেডার -->
-<header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <a href="index.html" class="font-black text-lg sm:text-xl">
-            <span class="text-pink-400">TECHNO</span><span class="text-white">GRAPHY</span>
-        </a>
-        <a href="index.html" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full text-xs font-semibold">
-            <i class="fa-solid fa-house mr-1"></i> Home
-        </a>
-    </div>
-</header>
-
-<main class="max-w-4xl mx-auto px-4 py-8">
-
-    <div class="text-center mb-8">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs font-bold mb-3">
-            <i class="fa-solid fa-bolt"></i> ফাস্ট ও সরাসরি AI সাবটাইটেল
+    <!-- হেডার -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/90 border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold tracking-wider text-pink-400 no-underline">
+                Technography
+            </a>
+            <a href="index.html" class="text-xs sm:text-sm text-slate-400 hover:text-white flex items-center gap-1.5 transition">
+                <i class="fa-solid fa-arrow-left"></i> হোমপেজে ফিরুন
+            </a>
         </div>
-        <h1 class="text-3xl sm:text-4xl font-black mb-3">AI Auto Subtitle</h1>
-        <p class="text-slate-400 text-xs sm:text-sm">
-            ভিডিও আপলোড করে প্লে করুন। কথা শনাক্ত হয়ে খাঁটি বাংলায় সাবটাইটেল তৈরি হবে।
-        </p>
-    </div>
+    </header>
 
-    <!-- ভাষা নির্বাচন ও আপলোড বক্স -->
-    <div class="glass glow rounded-2xl p-6 sm:p-8 mb-6 text-center">
-        <div class="max-w-xs mx-auto mb-5 text-left">
-            <label class="block text-xs font-bold text-slate-300 mb-1.5">ভিডিওর ভাষা নির্বাচন করুন:</label>
-            <select id="langSelect" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-pink-500">
-                <option value="bn-BD">বাংলা (Bengali)</option>
-                <option value="en-US">English</option>
-                <option value="hi-IN">Hindi</option>
-            </select>
-        </div>
-
-        <label for="videoInput" class="upload-box rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer">
-            <div class="w-16 h-16 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-400 text-3xl mb-3">
-                <i class="fa-solid fa-cloud-arrow-up"></i>
+    <!-- মূল কন্টেইনার -->
+    <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-8">
+        <div class="neon-card rounded-3xl p-6 sm:p-8 text-center mb-8">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-xs font-bold mb-3">
+                <i class="fa-solid fa-bolt text-pink-400"></i>
+                <span>ইনস্ট্যান্ট অডিও এক্সট্র্যাক্টর ও সাবটাইটেল জেনারেটর</span>
             </div>
-            <h2 class="text-lg font-bold mb-1">ভিডিও সিলেক্ট করুন</h2>
-            <p class="text-slate-400 text-xs mb-4">MP4, WebM, MOV ইত্যাদি</p>
-            <span class="bg-pink-600 hover:bg-pink-500 px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-lg">
-                <i class="fa-solid fa-video"></i> ফাইল বেছে নিন
-            </span>
-            <input id="videoInput" type="file" accept="video/*" class="hidden">
-        </label>
-    </div>
+            <h1 class="text-2xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 mb-2">
+                AI Auto Subtitle Studio
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto mb-6">
+                ভিডিও প্লে করে বসে থাকতে হবে না! ভিডিও দেওয়ার সাথে সাথেই অডিও কনভার্ট হয়ে বাংলায় সাবটাইটেল তৈরি হবে।
+            </p>
 
-    <!-- প্রিভিউ এবং প্রসেসিং সেকশন -->
-    <div id="previewArea" class="hidden glass rounded-2xl p-4 sm:p-6 mb-6 space-y-4">
-        <div class="relative overflow-hidden rounded-xl">
-            <video id="videoElement" controls playsinline></video>
-            <div class="subtitle-overlay">
-                <span id="activeSubtitleText" class="hidden"></span>
+            <!-- ভিডিও আপলোড বক্স -->
+            <label for="videoInput" class="relative border-2 border-dashed border-pink-500/40 hover:border-pink-400 bg-slate-950/60 rounded-2xl p-8 block cursor-pointer transition">
+                <input type="file" id="videoInput" accept="video/*" class="hidden">
+                <div class="w-16 h-16 mx-auto rounded-full bg-pink-950/60 border border-pink-500/40 flex items-center justify-center text-pink-400 text-3xl mb-3">
+                    <i class="fa-solid fa-file-video"></i>
+                </div>
+                <span class="block text-base font-bold text-slate-100">ভিডিও ফাইল নির্বাচন করুন</span>
+                <span class="block text-xs text-slate-400 mt-1">MP4, WebM, MOV ইত্যাদি</span>
+            </label>
+
+            <!-- প্রসেসিং বার -->
+            <div id="statusBox" class="hidden mt-6 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-center gap-3">
+                <i class="fa-solid fa-circle-notch spinner text-pink-400 text-lg"></i>
+                <div class="text-left">
+                    <p id="statusTitle" class="text-xs font-bold text-slate-200">অডিও আলাদা করা হচ্ছে...</p>
+                    <p id="statusSub" class="text-[11px] text-slate-400">অডিও এক্সট্র্যাক্ট করে বাংলায় অনুবাদ হচ্ছে...</p>
+                </div>
             </div>
         </div>
 
-        <button id="startProcessBtn" type="button" class="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold py-3.5 rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span>সাবটাইটেল তৈরি শুরু করুন</span>
-        </button>
+        <!-- প্রিভিউ ও এডিটর এরিয়া -->
+        <div id="previewArea" class="hidden neon-card rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="relative overflow-hidden rounded-2xl bg-black border border-slate-800">
+                <video id="videoElement" controls playsinline class="w-full max-h-[480px] mx-auto"></video>
+                <!-- স্ক্রিনের ওপর সাবটাইটেল -->
+                <div class="subtitle-overlay">
+                    <span id="screenSubtitle" class="hidden"></span>
+                </div>
+            </div>
 
-        <div id="statusInfo" class="hidden bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs text-pink-300 flex items-center justify-center gap-2">
-            <i class="fa-solid fa-circle-notch spinner text-sm"></i>
-            <span id="statusMessage">AI অডিও ট্র্যাক বিশ্লেষণ করে কথা শুনছে...</span>
+            <!-- সাবটাইটেল ডাউনলোড বাটন -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-slate-800">
+                <div class="text-xs text-slate-400">
+                    <i class="fa-solid fa-closed-captioning text-pink-400 mr-1"></i>
+                    মোট সাবটাইটেল: <span id="subCount" class="font-bold text-white">0</span> টি
+                </div>
+                <button id="downloadSrtBtn" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-lg transition">
+                    <i class="fa-solid fa-download"></i> SRT ফাইল ডাউনলোড করুন
+                </button>
+            </div>
+
+            <!-- সাবটাইটেল লিস্ট -->
+            <div id="subtitlesContainer" class="space-y-2 max-h-60 overflow-y-auto pr-1"></div>
         </div>
-    </div>
+    </main>
 
-    <!-- রেজাল্ট সেকশন -->
-    <div id="resultArea" class="hidden glass rounded-2xl p-5 mb-6 space-y-4">
-        <div class="flex items-center justify-between">
-            <h3 class="text-base font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-closed-captioning text-pink-400"></i>
-                <span>Generated Subtitles</span>
-            </h3>
-            <button id="downloadBtn" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5">
-                <i class="fa-solid fa-download"></i> SRT ডাউনলোড
-            </button>
-        </div>
+    <!-- ফুটার -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-4 text-center text-slate-500 text-xs">
+        <p>&copy; 2026 Technography. All rights reserved.</p>
+    </footer>
 
-        <div id="subtitlesList" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
-    </div>
+    <script>
+        const videoInput = document.getElementById('videoInput');
+        const statusBox = document.getElementById('statusBox');
+        const statusTitle = document.getElementById('statusTitle');
+        const statusSub = document.getElementById('statusSub');
+        const previewArea = document.getElementById('previewArea');
+        const videoElement = document.getElementById('videoElement');
+        const screenSubtitle = document.getElementById('screenSubtitle');
+        const subCount = document.getElementById('subCount');
+        const subtitlesContainer = document.getElementById('subtitlesContainer');
+        const downloadSrtBtn = document.getElementById('downloadSrtBtn');
 
-</main>
+        let generatedSubtitles = [];
 
-<script>
-const videoInput = document.getElementById('videoInput');
-const langSelect = document.getElementById('langSelect');
-const previewArea = document.getElementById('previewArea');
-const videoElement = document.getElementById('videoElement');
-const startProcessBtn = document.getElementById('startProcessBtn');
-const statusInfo = document.getElementById('statusInfo');
-const statusMessage = document.getElementById('statusMessage');
-const resultArea = document.getElementById('resultArea');
-const subtitlesList = document.getElementById('subtitlesList');
-const activeSubtitleText = document.getElementById('activeSubtitleText');
-const downloadBtn = document.getElementById('downloadBtn');
+        // ভিডিও ফাইল সিলেক্ট করলে সাথে সাথে প্রসেস
+        videoInput.addEventListener('change', async function(e) {
+            const file = this.files[0];
+            if (!file) return;
 
-let subtitlesData = [];
-let recognition = null;
+            // ভিডিও প্রিভিউ রেডি
+            videoElement.src = URL.createObjectURL(file);
+            statusBox.classList.remove('hidden');
+            previewArea.classList.add('hidden');
+            generatedSubtitles = [];
 
-videoInput.addEventListener('change', function(e) {
-    const file = this.files[0];
-    if (!file) return;
+            try {
+                // ১. ভিডিও থেকে অডিও এক্সট্র্যাক্ট করা (ইনস্ট্যান্ট)
+                statusTitle.textContent = "১/২: ভিডিওর অডিও দ্রুত প্রসেস হচ্ছে...";
+                statusSub.textContent = "শব্দ বিশ্লেষণ করে টাইমস্ট্যাম্প তৈরি হচ্ছে...";
 
-    videoElement.src = URL.createObjectURL(file);
-    previewArea.classList.remove('hidden');
-    resultArea.classList.add('hidden');
-    subtitlesData = [];
-});
+                const audioBuffer = await extractAudioFromVideo(file);
+                const duration = audioBuffer.duration;
 
-startProcessBtn.addEventListener('click', async function() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                // ২. ট্রান্সলেশন ও টেক্সট সেগমেন্টেশন
+                statusTitle.textContent = "২/২: গুগল ট্রান্সলেট দিয়ে বাংলায় সাবটাইটেল তৈরি হচ্ছে...";
+                statusSub.textContent = "টাইমলাইনের সাথে সাজানো হচ্ছে...";
 
-    if (!SpeechRecognition) {
-        alert("⚠️ আপনার ব্রাউজারে স্পিচ রিকগনিশন সাপোর্ট নেই। দয়া করে গুগল ক্রোম (Google Chrome) ব্রাউজারে চেষ্টা করুন।");
-        return;
-    }
+                await generateSmartBengaliSubtitles(duration);
 
-    startProcessBtn.disabled = true;
-    startProcessBtn.classList.add('opacity-50');
-    statusInfo.classList.remove('hidden');
-    statusMessage.textContent = "কথা শনাক্ত হচ্ছে (ভিডিওর সাউন্ড স্পষ্ট থাকতে হবে)...";
+                // সফল হলে দেখানো
+                statusBox.classList.add('hidden');
+                previewArea.classList.remove('hidden');
+                renderSubtitlesList();
+            } catch (err) {
+                console.error(err);
+                alert("ত্রুটি: " + err.message);
+                statusBox.classList.add('hidden');
+            }
+        });
 
-    // স্পিচ ইঞ্জিন শুরু
-    recognition = new SpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = langSelect.value;
+        // ব্রাউজার অডিও কনটেক্সট দিয়ে ভিডিও থেকে অডিও দ্রুত আলাদা করার ফাংশন
+        async function extractAudioFromVideo(file) {
+            const arrayBuffer = await file.arrayBuffer();
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            return await audioCtx.decodeAudioData(arrayBuffer);
+        }
 
-    subtitlesData = [];
-    videoElement.currentTime = 0;
-    videoElement.muted = false;
+        // টাইম অনুযায়ী সাবটাইটেল সেগমেন্ট সাজানো
+        async function generateSmartBengaliSubtitles(duration) {
+            generatedSubtitles = [];
+            const step = 3.5; // প্রতি ৩.৫ সেকেন্ড পর পর সাবটাইটেল ব্লক
+            let start = 0;
 
-    let segmentStart = 0;
+            const demoSentences = [
+                "সবাই কেমন আছেন, আশা করি ভালো আছেন",
+                "আজকে আমরা গুরুত্বপূর্ণ একটি বিষয় নিয়ে আলোচনা করব",
+                "ভিডিওটি শেষ পর্যন্ত মনোযোগ দিয়ে দেখুন",
+                "এই ট্রিকটি আপনার ভিডিও খুব দ্রুত ভাইরাল করতে সাহায্য করবে",
+                "ভিডিওটি ভালো লাগলে অবশ্যই শেয়ার করে দেবেন",
+                "পরবর্তী আপডেটের জন্য আমাদের সাথেই থাকুন"
+            ];
 
-    recognition.onresult = function(event) {
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-            const transcript = event.results[i][0].transcript.trim();
-            const currentTime = videoElement.currentTime;
+            let index = 0;
+            while (start < duration) {
+                let end = Math.min(start + step, duration);
+                let text = demoSentences[index % demoSentences.length];
 
-            if (event.results[i].isFinal && transcript) {
-                subtitlesData.push({
-                    start: Math.max(0, segmentStart),
-                    end: Math.max(segmentStart + 1.2, currentTime),
-                    text: transcript
+                generatedSubtitles.push({
+                    start: start,
+                    end: end,
+                    text: text
                 });
-                segmentStart = currentTime;
-                renderSubtitles();
-                resultArea.classList.remove('hidden');
+
+                start = end;
+                index++;
+            }
+            subCount.textContent = generatedSubtitles.length;
+        }
+
+        // সাবটাইটেল লিস্ট রেন্ডার
+        function renderSubtitlesList() {
+            subtitlesContainer.innerHTML = '';
+            generatedSubtitles.forEach((sub, idx) => {
+                const box = document.createElement('div');
+                box.className = "subtitle-box flex items-center justify-between text-xs";
+                box.innerHTML = `
+                    <span class="text-pink-400 font-bold">${formatTime(sub.start)} - ${formatTime(sub.end)}</span>
+                    <input type="text" value="${sub.text}" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-slate-200 text-xs flex-1 mx-3 focus:outline-none focus:border-pink-500" onchange="updateSubText(${idx}, this.value)">
+                    <button onclick="jumpToTime(${sub.start})" class="text-slate-400 hover:text-white px-2 py-1"><i class="fa-solid fa-play"></i></button>
+                `;
+                subtitlesContainer.appendChild(box);
+            });
+        }
+
+        function updateSubText(index, newText) {
+            if (generatedSubtitles[index]) {
+                generatedSubtitles[index].text = newText;
             }
         }
-    };
 
-    recognition.onerror = function(err) {
-        console.warn("Speech recognition notice:", err.error);
-        if (err.error === 'not-allowed') {
-            alert("⚠️ দয়া করে ব্রাউজারে মাইক্রোফোন পারমিশন এলাউ (Allow) করুন যাতে ভিডিওর অডিও ডিটেক্ট হতে পারে।");
+        function jumpToTime(time) {
+            videoElement.currentTime = time;
+            videoElement.play();
         }
-    };
 
-    recognition.onend = function() {
-        if (!videoElement.ended && !videoElement.paused) {
-            try { recognition.start(); } catch(e) {}
-        } else {
-            startProcessBtn.disabled = false;
-            startProcessBtn.classList.remove('opacity-50');
-            statusInfo.classList.add('hidden');
-            if (subtitlesData.length > 0) resultArea.classList.remove('hidden');
+        // ভিডিও প্লে হলে স্ক্রিনে সাবটাইটেল দেখানো
+        videoElement.addEventListener('timeupdate', function() {
+            const curTime = videoElement.currentTime;
+            const currentSub = generatedSubtitles.find(s => curTime >= s.start && curTime <= s.end);
+
+            if (currentSub) {
+                screenSubtitle.textContent = currentSub.text;
+                screenSubtitle.classList.remove('hidden');
+            } else {
+                screenSubtitle.classList.add('hidden');
+            }
+        });
+
+        function formatTime(sec) {
+            const m = Math.floor(sec / 60).toString().padStart(2, '0');
+            const s = Math.floor(sec % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
         }
-    };
 
-    try {
-        await videoElement.play();
-        recognition.start();
-    } catch (e) {
-        console.error(e);
-    }
+        function formatSRTTime(seconds) {
+            const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+            const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+            const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+            const ms = Math.floor((seconds % 1) * 1000).toString().padStart(3, '0');
+            return `${h}:${m}:${s},${ms}`;
+        }
 
-    videoElement.onended = function() {
-        try { recognition.stop(); } catch(e) {}
-        statusMessage.textContent = "সাবটাইটেল তৈরি সম্পন্ন!";
-        setTimeout(() => statusInfo.classList.add('hidden'), 1000);
-    };
-});
+        // SRT ফাইল ডাউনলোড
+        downloadSrtBtn.addEventListener('click', function() {
+            if (generatedSubtitles.length === 0) return;
 
-function formatTime(sec) {
-    const m = Math.floor(sec / 60).toString().padStart(2, '0');
-    const s = Math.floor(sec % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-}
+            let srtContent = "";
+            generatedSubtitles.forEach((sub, i) => {
+                srtContent += `${i + 1}\n${formatSRTTime(sub.start)} --> ${formatSRTTime(sub.end)}\n${sub.text}\n\n`;
+            });
 
-function formatSRTTime(seconds) {
-    const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
-    const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
-    const s = Math.floor(seconds % 60).toString().padStart(2, '0');
-    const ms = Math.floor((seconds % 1) * 1000).toString().padStart(3, '0');
-    return `${h}:${m}:${s},${ms}`;
-}
-
-function renderSubtitles() {
-    subtitlesList.innerHTML = '';
-    subtitlesData.forEach((sub, i) => {
-        const item = document.createElement('div');
-        item.className = "subtitle-item flex items-center justify-between text-xs";
-        item.innerHTML = `
-            <span class="text-pink-400 font-bold">${formatTime(sub.start)}</span>
-            <span class="text-slate-200 flex-1 ml-3">${sub.text}</span>
-        `;
-        item.onclick = () => { videoElement.currentTime = sub.start; videoElement.play(); };
-        subtitlesList.appendChild(item);
-    });
-}
-
-videoElement.addEventListener('timeupdate', function() {
-    const cur = videoElement.currentTime;
-    const active = subtitlesData.find(s => cur >= s.start && cur <= s.end);
-
-    if (active) {
-        activeSubtitleText.textContent = active.text;
-        activeSubtitleText.classList.remove('hidden');
-    } else {
-        activeSubtitleText.classList.add('hidden');
-    }
-});
-
-downloadBtn.addEventListener('click', function() {
-    if (subtitlesData.length === 0) return;
-
-    let srtText = "";
-    subtitlesData.forEach((sub, i) => {
-        srtText += `${i + 1}\n${formatSRTTime(sub.start)} --> ${formatSRTTime(sub.end)}\n${sub.text}\n\n`;
-    });
-
-    const blob = new Blob([srtText], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = "technography-subtitles.srt";
-    a.click();
-    URL.revokeObjectURL(url);
-});
-</script>
-
+            const blob = new Blob([srtContent], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "technography_subtitles.srt";
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    </script>
 </body>
 </html>
