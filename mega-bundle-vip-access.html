@@ -348,6 +348,20 @@
     </div>
 
 </div>
+<script>
+  // ডুপ্লিকেট পারচেজ ঠেকানোর জন্য সেশন চেক
+  if (!sessionStorage.getItem("purchase_tracked")) {
+    
+    // ফেসবুক ইভেন্ট ম্যানেজারে পারচেজ পাঠানো
+    fbq('track', 'Purchase', {
+      value: 300.00, // এখানে আপনার প্রোডাক্টের আসল দাম বসাবেন (যেমন: ১৯০ বা যা মূল্য)
+      currency: 'BDT'
+    });
+
+    // মার্ক করে রাখা হলো যাতে পেজ রিফ্রেশ বা আবার ঢুকলে ভুল হিসাব না যায়
+    sessionStorage.setItem("purchase_tracked", "true");
+  }
+</script>
 
 </body>
 </html>
