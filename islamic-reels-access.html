@@ -7,6 +7,24 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#070b18">
 
+    <!-- Meta Pixel Base Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1913791776249045');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Base Code -->
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -169,19 +187,35 @@
     <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-900">
         &copy; 2026 Technography. All rights reserved.
     </footer>
-<script>
-  // ডুপ্লিকেট পারচেজ ঠেকানোর জন্য সেশন চেক
-  if (!sessionStorage.getItem("purchase_tracked")) {
-    
-    // ফেসবুক ইভেন্ট ম্যানেজারে পারচেজ পাঠানো
-    fbq('track', 'Purchase', {
-      value: 50.00, // এখানে আপনার প্রোডাক্টের আসল দাম বসাবেন (যেমন: ১৯০ বা যা মূল্য)
-      currency: 'BDT'
-    });
 
-    // মার্ক করে রাখা হলো যাতে পেজ রিফ্রেশ বা আবার ঢুকলে ভুল হিসাব না যায়
-    sessionStorage.setItem("purchase_tracked", "true");
-  }
+<!-- Facebook Purchase Event Tracking Code (Strictly Ad-Only & Duplicate Protected) -->
+<script>
+  (function() {
+    // ১. চেক করা হচ্ছে ব্যবহারকারী ফেসবুক বিজ্ঞাপনে ক্লিক করে এসেছে কি না
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasFbclid = urlParams.has('fbclid');
+    const fromFacebookReferrer = document.referrer.includes('facebook.com') || document.referrer.includes('fb.com');
+
+    // ২. শুধুমাত্র বিজ্ঞাপনের ক্লিক আইডি বা ফেসবুকের রেফারার থাকলে কাজ করবে
+    if (hasFbclid || fromFacebookReferrer) {
+      
+      // ব্রাউজারের স্থায়ী স্টোরেজে চেক করা হচ্ছে আগে কিনেছে কি না
+      if (!localStorage.getItem("islamic_reels_purchased")) {
+        fbq('track', 'Purchase', {
+          value: 50.00, // প্রোডাক্টের সঠিক দাম
+          currency: 'BDT'
+        });
+
+        // আজীবনের জন্য মার্ক করে রাখা হলো যাতে পেজ রিফ্রেশ বা আবার ঢুকলে ভুল হিসাব না যায়
+        localStorage.setItem("islamic_reels_purchased", "true");
+        console.log("Verified Ad Buyer: Purchase event fired!");
+      }
+
+    } else {
+      // বিজ্ঞাপন ছাড়া হোয়াটসঅ্যাপ বা সরাসরি লিংকে ঢুকলে কোনো পারচেজ ফেসবুককে পাঠানো হবে না
+      console.log("Non-Ad / WhatsApp Visit: Purchase tracking ignored.");
+    }
+  })();
 </script>
 
 </body>
