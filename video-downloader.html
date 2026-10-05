@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Video Downloader | Technography</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { 
@@ -13,14 +13,17 @@
             background-color: #030712; 
             color: #f3f4f6; 
         }
+        .glow-effect {
+            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.25);
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-black">
 
     <!-- হেডার -->
-    <header class="bg-slate-900/90 border-b border-slate-800 px-4 py-3.5 flex justify-between items-center sticky top-0 z-30">
-        <a href="index.html" class="text-cyan-400 font-bold text-base sm:text-lg flex items-center gap-2">
-            <i class="fa-solid fa-cloud-arrow-down"></i> Technography Video
+    <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 px-4 sm:px-6 py-3.5 flex justify-between items-center sticky top-0 z-30">
+        <a href="index.html" class="text-cyan-400 font-bold text-base sm:text-lg flex items-center gap-2 tracking-wide">
+            <i class="fa-solid fa-cloud-arrow-down text-xl"></i> Technography Video
         </a>
         <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-slate-700 transition">
             <i class="fa-solid fa-house"></i> হোম
@@ -29,100 +32,202 @@
 
     <!-- মূল কনটেন্ট -->
     <main class="max-w-xl mx-auto px-4 py-8 w-full flex-1 flex flex-col justify-center">
+        <!-- টাইটেল ও প্ল্যাটফর্ম আইকন -->
         <div class="text-center mb-6">
-            <h1 class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
+            <h1 class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 mb-2">
                 Universal Video Downloader
             </h1>
-            <p class="text-slate-400 text-xs sm:text-sm">ইউটিউব, ফেসবুক, ইনস্টাগ্রাম ও টিকটক ভিডিও ডাউনলোড করুন</p>
-            <div class="flex justify-center gap-4 text-xl mt-3 text-slate-400">
-                <i class="fa-brands fa-youtube text-red-500"></i>
-                <i class="fa-brands fa-facebook text-blue-500"></i>
-                <i class="fa-brands fa-instagram text-pink-500"></i>
-                <i class="fa-brands fa-tiktok text-white"></i>
+            <p class="text-slate-400 text-xs sm:text-sm">ইউটিউব, ফেসবুক, ইনস্টাগ্রাম ও টিকটক ভিডিও সহজেই নামিয়ে নিন</p>
+            
+            <div class="flex justify-center items-center gap-5 text-2xl mt-4 text-slate-400">
+                <i class="fa-brands fa-youtube hover:text-red-500 transition duration-200" title="YouTube"></i>
+                <i class="fa-brands fa-facebook hover:text-blue-500 transition duration-200" title="Facebook"></i>
+                <i class="fa-brands fa-instagram hover:text-pink-500 transition duration-200" title="Instagram"></i>
+                <i class="fa-brands fa-tiktok hover:text-white transition duration-200" title="TikTok"></i>
             </div>
         </div>
 
-        <!-- ইনপুট ও বাটন কার্ড -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl">
+        <!-- ইনপুট ও অপশন কার্ড -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 sm:p-6 glow-effect">
             <div class="flex flex-col gap-3">
-                <input type="text" id="videoUrlInput" placeholder="এখানে ভিডিও লিংক পেস্ট করুন..." 
-                       class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-cyan-400 transition">
+                <div class="relative flex items-center">
+                    <input type="text" id="videoUrlInput" placeholder="এখানে ভিডিও লিংক পেস্ট করুন..." 
+                           class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-4 pr-12 py-3.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition">
+                    <button id="pasteBtn" type="button" title="ক্লিপবোর্ড থেকে পেস্ট করুন" class="absolute right-3 text-slate-400 hover:text-cyan-400 p-1.5 transition">
+                        <i class="fa-regular fa-paste"></i>
+                    </button>
+                </div>
+
+                <!-- ফরম্যাট নির্বাচন (ভিডিও নাকি অডিও) -->
+                <div class="grid grid-cols-2 gap-2 text-xs font-medium">
+                    <label class="flex items-center justify-center gap-2 p-2 bg-slate-950 border border-slate-800 rounded-lg cursor-pointer hover:border-slate-700 transition">
+                        <input type="radio" name="downloadFormat" value="video" checked class="accent-cyan-400">
+                        <span><i class="fa-solid fa-video text-cyan-400"></i> ভিডিও (MP4)</span>
+                    </label>
+                    <label class="flex items-center justify-center gap-2 p-2 bg-slate-950 border border-slate-800 rounded-lg cursor-pointer hover:border-slate-700 transition">
+                        <input type="radio" name="downloadFormat" value="audio" class="accent-cyan-400">
+                        <span><i class="fa-solid fa-music text-pink-400"></i> অডিও (MP3)</span>
+                    </label>
+                </div>
                 
-                <button id="fetchBtn" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold py-3.5 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-lg active:scale-98">
+                <button id="fetchBtn" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg active:scale-[0.98]">
                     <i class="fa-solid fa-bolt"></i> ভিডিও লিংক আনুন
                 </button>
             </div>
 
             <!-- লোডার -->
             <div id="loader" class="hidden text-center py-6">
-                <i class="fa-solid fa-circle-notch fa-spin text-cyan-400 text-3xl mb-2"></i>
-                <p class="text-slate-400 text-xs">ভিডিও প্রস্তুত করা হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...</p>
-                <small class="text-slate-500 text-[11px]">(সার্ভার স্লিপে থাকলে প্রথমবার ৩০-৪০ সেকেন্ড লাগতে পারে)</small>
+                <i class="fa-solid fa-circle-notch fa-spin text-cyan-400 text-3xl mb-3"></i>
+                <p class="text-slate-300 text-xs font-medium">ভিডিও প্রসেস করা হচ্ছে, কয়েক সেকেন্ড অপেক্ষা করুন...</p>
+                <p id="retryStatus" class="text-slate-500 text-[11px] mt-1"></p>
+            </div>
+
+            <!-- এরর মেসেজ বক্স -->
+            <div id="errorBox" class="hidden mt-4 p-3 bg-red-950/60 border border-red-800/80 rounded-xl text-red-300 text-xs flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
+                <span id="errorMessage">কোনো সমস্যা হয়েছে।</span>
             </div>
 
             <!-- রেজাল্ট কার্ড -->
             <div id="resultBox" class="hidden mt-5 pt-5 border-t border-slate-800">
-                <img id="videoThumb" class="w-full h-44 object-cover rounded-xl mb-3 border border-slate-800" src="" alt="Thumbnail">
-                <h3 id="videoTitle" class="text-xs sm:text-sm font-bold text-slate-200 mb-3 line-clamp-2"></h3>
+                <div class="flex items-center gap-3 bg-slate-950 p-3.5 rounded-xl border border-slate-800 mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-cyan-950/80 border border-cyan-800/50 flex items-center justify-center shrink-0">
+                        <i id="resultIcon" class="fa-solid fa-circle-play text-cyan-400 text-xl"></i>
+                    </div>
+                    <div class="overflow-hidden">
+                        <h3 id="videoTitle" class="text-xs sm:text-sm font-semibold text-slate-200 truncate">ভিডিও ফাইল প্রস্তুত</h3>
+                        <p class="text-[11px] text-slate-500">হাই-স্পিড ডাউনলোড লিংক তৈরি হয়েছে</p>
+                    </div>
+                </div>
                 
-                <a id="downloadBtn" href="#" target="_blank" download class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition">
+                <a id="downloadBtn" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition">
                     <i class="fa-solid fa-download"></i> এখনই ডাউনলোড করুন
                 </a>
             </div>
         </div>
     </main>
 
+    <!-- ফুটার -->
     <footer class="text-center py-4 border-t border-slate-800 text-slate-500 text-xs">
         &copy; 2026 Technography. All rights reserved.
     </footer>
 
+    <!-- স্ক্রিপ্ট -->
     <script>
-        // আপনার নতুন লাইভ রেন্ডার সার্ভার লিঙ্ক
-        const BACKEND_URL = "https://technography-video-downloader.onrender.com";
+        // ব্যাকআপসহ নির্ভরযোগ্য ওপেন-সোর্স পাবলিক এপিআই তালিকা
+        const COBALT_INSTANCES = [
+            "https://api.cobalt.tools",
+            "https://cobalt.api.red",
+            "https://cobalt.tools"
+        ];
 
         const fetchBtn = document.getElementById('fetchBtn');
         const videoUrlInput = document.getElementById('videoUrlInput');
+        const pasteBtn = document.getElementById('pasteBtn');
         const loader = document.getElementById('loader');
+        const retryStatus = document.getElementById('retryStatus');
         const resultBox = document.getElementById('resultBox');
-        const videoThumb = document.getElementById('videoThumb');
+        const errorBox = document.getElementById('errorBox');
+        const errorMessage = document.getElementById('errorMessage');
         const videoTitle = document.getElementById('videoTitle');
         const downloadBtn = document.getElementById('downloadBtn');
+        const resultIcon = document.getElementById('resultIcon');
 
+        // ক্লিপবোর্ড পেস্ট বাটন
+        pasteBtn.addEventListener('click', async () => {
+            try {
+                const text = await navigator.clipboard.readText();
+                if (text) videoUrlInput.value = text.trim();
+            } catch (e) {
+                videoUrlInput.focus();
+            }
+        });
+
+        // লিংক প্রসেসিং ফাংশন
         fetchBtn.addEventListener('click', async () => {
             const url = videoUrlInput.value.trim();
             if (!url) {
-                alert("একটি সঠিক লিংক পেস্ট করুন!");
+                showError("অনুগ্রহ করে একটি সঠিক ভিডিও লিংক পেস্ট করুন!");
                 return;
             }
 
+            hideError();
             fetchBtn.disabled = true;
             resultBox.classList.add('hidden');
             loader.classList.remove('hidden');
+            retryStatus.textContent = "";
 
-            try {
-                const res = await fetch(`${BACKEND_URL}/get-video`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ url: url })
-                });
+            const selectedFormat = document.querySelector('input[name="downloadFormat"]:checked').value;
+            const isAudioOnly = selectedFormat === "audio";
 
-                const data = await res.json();
+            let finalDownloadUrl = null;
+            let finalFileName = isAudioOnly ? "Audio File (MP3)" : "Video File (MP4)";
 
-                if (data.success) {
-                    videoThumb.src = data.thumbnail || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400";
-                    videoTitle.textContent = data.title || "Video Download Link";
-                    downloadBtn.href = data.download_url;
-                    resultBox.classList.remove('hidden');
-                } else {
-                    alert(data.error || "ভিডিও লিংক প্রসেস করা সম্ভব হয়নি।");
+            // একাধিক এপিআই চেক করার লুপ
+            for (let i = 0; i < COBALT_INSTANCES.length; i++) {
+                const apiBase = COBALT_INSTANCES[i];
+                retryStatus.textContent = i > 0 ? `বিকল্প সার্ভারে চেষ্টা করা হচ্ছে (${i + 1}/${COBALT_INSTANCES.length})...` : "";
+
+                try {
+                    const endpoint = apiBase.endsWith('/') ? apiBase : `${apiBase}/`;
+                    const res = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            url: url,
+                            downloadMode: isAudioOnly ? "audio" : "auto",
+                            audioFormat: "mp3",
+                            videoQuality: "720",
+                            filenameStyle: "classic"
+                        })
+                    });
+
+                    if (!res.ok) continue;
+
+                    const data = await res.json();
+
+                    // Cobalt v7 / v10 রেসপন্স হ্যান্ডলার
+                    if (data.status === "tunnel" || data.status === "redirect") {
+                        finalDownloadUrl = data.url;
+                        if (data.filename) finalFileName = data.filename;
+                        break;
+                    } else if (data.status === "picker" && Array.isArray(data.picker) && data.picker.length > 0) {
+                        finalDownloadUrl = data.picker[0].url;
+                        break;
+                    } else if (data.url) {
+                        finalDownloadUrl = data.url;
+                        if (data.filename) finalFileName = data.filename;
+                        break;
+                    }
+                } catch (err) {
+                    console.warn(`সার্ভার এরর (${apiBase}):`, err);
                 }
-            } catch (err) {
-                alert("সার্ভার সমস্যা: " + err.message);
-            } finally {
-                loader.classList.add('hidden');
-                fetchBtn.disabled = false;
+            }
+
+            loader.classList.add('hidden');
+            fetchBtn.disabled = false;
+
+            if (finalDownloadUrl) {
+                videoTitle.textContent = finalFileName;
+                downloadBtn.href = finalDownloadUrl;
+                resultIcon.className = isAudioOnly ? "fa-solid fa-music text-pink-400 text-xl" : "fa-solid fa-circle-play text-cyan-400 text-xl";
+                resultBox.classList.remove('hidden');
+            } else {
+                showError("ভিডিও ডাউনলোড লিংকটি বের করা যায়নি। লিংকটি সঠিক কি না তা যাচাই করুন অথবা কিছুক্ষণ পর চেষ্টা করুন।");
             }
         });
+
+        function showError(msg) {
+            errorMessage.textContent = msg;
+            errorBox.classList.remove('hidden');
+        }
+
+        function hideError() {
+            errorBox.classList.add('hidden');
+        }
     </script>
 </body>
 </html>
