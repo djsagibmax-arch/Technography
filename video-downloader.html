@@ -6,385 +6,98 @@
     <title>Universal Video Downloader | Technography</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --primary: #00d2ff;
-            --primary-gradient: linear-gradient(135deg, #00d2ff, #0072ff);
-            --bg-dark: #0b0f19;
-            --card-bg: #111827;
-            --surface-bg: #1f2937;
-            --border-color: #374151;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background: rgba(17, 24, 39, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo span {
-            color: var(--primary);
-        }
-
-        .btn-home {
-            background: var(--surface-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 7px 14px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .container {
-            max-width: 750px;
-            margin: 35px auto;
-            padding: 0 15px;
-            width: 100%;
-            flex: 1;
-        }
-
-        .hero-banner {
-            text-align: center;
-            margin-bottom: 28px;
-        }
-
-        .hero-banner h1 {
-            font-size: 1.85rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, #fff, #9ca3af);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-banner p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .supported-platforms {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 14px;
-            font-size: 1.3rem;
-        }
-
-        .supported-platforms i {
-            color: var(--text-muted);
-            transition: color 0.2s, transform 0.2s;
-        }
-
-        .supported-platforms i:hover {
-            transform: scale(1.15);
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .input-wrapper {
-            display: flex;
-            gap: 10px;
-            background: var(--surface-bg);
-            border: 1.5px solid var(--border-color);
-            border-radius: 14px;
-            padding: 6px;
-            transition: border-color 0.2s;
-        }
-
-        .input-wrapper:focus-within {
-            border-color: var(--primary);
-        }
-
-        .input-wrapper input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #fff;
-            padding: 10px 14px;
-            font-size: 0.95rem;
-        }
-
-        .btn-fetch {
-            background: var(--primary-gradient);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 0 22px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: opacity 0.2s;
-        }
-
-        .btn-fetch:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .loader {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            margin: 30px 0;
-            color: var(--primary);
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3.5px solid rgba(0, 210, 255, 0.2);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Result View */
-        .result-container {
-            display: none;
-            margin-top: 24px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-            animation: fadeIn 0.4s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .video-meta {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .video-thumb {
-            width: 140px;
-            height: 90px;
-            border-radius: 10px;
-            object-fit: cover;
-            border: 1px solid var(--border-color);
-        }
-
-        .video-details {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .video-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            line-height: 1.35;
-            color: #fff;
-        }
-
-        .video-source {
-            font-size: 0.75rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .download-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        @media (max-width: 500px) {
-            .video-meta { flex-direction: column; }
-            .video-thumb { width: 100%; height: 180px; }
-            .download-grid { grid-template-columns: 1fr; }
-        }
-
-        .dl-card {
-            background: var(--surface-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 12px 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .dl-card-info span {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #fff;
-            display: block;
-        }
-
-        .dl-card-info small {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-        }
-
-        .btn-dl {
-            background: #10b981;
-            color: white;
-            text-decoration: none;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .btn-dl.audio {
-            background: #8b5cf6;
+        body { 
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif; 
+            background-color: #030712; 
+            color: #f3f4f6; 
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between">
 
-    <header>
-        <a href="index.html" class="logo">
-            <i class="fa-solid fa-cloud-arrow-down" style="color:var(--primary);"></i> Technography <span>Video</span>
+    <!-- হেডার -->
+    <header class="bg-slate-900/90 border-b border-slate-800 px-4 py-3.5 flex justify-between items-center sticky top-0 z-30">
+        <a href="index.html" class="text-cyan-400 font-bold text-base sm:text-lg flex items-center gap-2">
+            <i class="fa-solid fa-cloud-arrow-down"></i> Technography Video
         </a>
-        <a href="index.html" class="btn-home">
+        <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-slate-700 transition">
             <i class="fa-solid fa-house"></i> হোম
         </a>
     </header>
 
-    <div class="container">
-        <div class="hero-banner">
-            <h1>Universal Video Downloader</h1>
-            <p>ওয়াটারমার্ক ছাড়া হাই-কোয়ালিটি ভিডিও এক ক্লিকে ডাউনলোড করুন</p>
-            <div class="supported-platforms">
-                <i class="fa-brands fa-youtube" style="color:#ff0000;" title="YouTube"></i>
-                <i class="fa-brands fa-facebook" style="color:#1877f2;" title="Facebook"></i>
-                <i class="fa-brands fa-instagram" style="color:#e4405f;" title="Instagram"></i>
-                <i class="fa-brands fa-tiktok" style="color:#fff;" title="TikTok"></i>
+    <!-- মূল কনটেন্ট -->
+    <main class="max-w-xl mx-auto px-4 py-8 w-full flex-1 flex flex-col justify-center">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
+                Universal Video Downloader
+            </h1>
+            <p class="text-slate-400 text-xs sm:text-sm">ইউটিউব, ফেসবুক, ইনস্টাগ্রাম ও টিকটক ভিডিও ডাউনলোড করুন</p>
+            <div class="flex justify-center gap-4 text-xl mt-3 text-slate-400">
+                <i class="fa-brands fa-youtube text-red-500"></i>
+                <i class="fa-brands fa-facebook text-blue-500"></i>
+                <i class="fa-brands fa-instagram text-pink-500"></i>
+                <i class="fa-brands fa-tiktok text-white"></i>
             </div>
         </div>
 
-        <div class="card">
-            <div class="input-wrapper">
-                <input type="text" id="videoUrlInput" placeholder="যেকোনো ভিডিও বা রিলসের লিংক এখানে পেস্ট করুন...">
-                <button id="fetchBtn" class="btn-fetch">
-                    <i class="fa-solid fa-bolt"></i> লিংক খুঁজুন
+        <!-- ইনপুট ও বাটন কার্ড -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl">
+            <div class="flex flex-col gap-3">
+                <input type="text" id="videoUrlInput" placeholder="এখানে ভিডিও লিংক পেস্ট করুন..." 
+                       class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-cyan-400 transition">
+                
+                <button id="fetchBtn" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold py-3.5 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-lg active:scale-98">
+                    <i class="fa-solid fa-bolt"></i> ভিডিও লিংক আনুন
                 </button>
             </div>
 
-            <div class="loader" id="loader">
-                <div class="spinner"></div>
-                <p style="font-size: 0.85rem; color: var(--text-muted);">ভিডিওর ডাউনলোডেবল কোয়ালিটি প্রস্তুত হচ্ছে...</p>
+            <!-- লোডার -->
+            <div id="loader" class="hidden text-center py-6">
+                <i class="fa-solid fa-circle-notch fa-spin text-cyan-400 text-3xl mb-2"></i>
+                <p class="text-slate-400 text-xs">ভিডিও প্রস্তুত করা হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...</p>
+                <small class="text-slate-500 text-[11px]">(সার্ভার স্লিপে থাকলে প্রথমবার ৩০-৪০ সেকেন্ড লাগতে পারে)</small>
             </div>
 
-            <!-- Result Section -->
-            <div class="result-container" id="resultContainer">
-                <div class="video-meta">
-                    <img id="videoThumb" class="video-thumb" src="" alt="Thumbnail">
-                    <div class="video-details">
-                        <span class="video-source" id="platformBadge">Ready to Download</span>
-                        <div class="video-title" id="videoTitle">ভিডিওর নাম এখানে দেখাবে</div>
-                    </div>
-                </div>
-
-                <div class="download-grid">
-                    <div class="dl-card">
-                        <div class="dl-card-info">
-                            <span>HD Video (MP4)</span>
-                            <small>বেস্ট কোয়ালিটি</small>
-                        </div>
-                        <a id="hdDownloadBtn" class="btn-dl" href="#" target="_blank" download>
-                            <i class="fa-solid fa-download"></i> ডাউনলোড
-                        </a>
-                    </div>
-                    <div class="dl-card">
-                        <div class="dl-card-info">
-                            <span>Audio Only (MP3)</span>
-                            <small>অডিও ফাইল</small>
-                        </div>
-                        <a id="audioDownloadBtn" class="btn-dl audio" href="#" target="_blank" download>
-                            <i class="fa-solid fa-music"></i> ডাউনলোড
-                        </a>
-                    </div>
-                </div>
+            <!-- রেজাল্ট কার্ড -->
+            <div id="resultBox" class="hidden mt-5 pt-5 border-t border-slate-800">
+                <img id="videoThumb" class="w-full h-44 object-cover rounded-xl mb-3 border border-slate-800" src="" alt="Thumbnail">
+                <h3 id="videoTitle" class="text-xs sm:text-sm font-bold text-slate-200 mb-3 line-clamp-2"></h3>
+                
+                <a id="downloadBtn" href="#" target="_blank" download class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition">
+                    <i class="fa-solid fa-download"></i> এখনই ডাউনলোড করুন
+                </a>
             </div>
         </div>
-    </div>
+    </main>
+
+    <footer class="text-center py-4 border-t border-slate-800 text-slate-500 text-xs">
+        &copy; 2026 Technography. All rights reserved.
+    </footer>
 
     <script>
-        const BACKEND_URL = "https://technography-ai.onrender.com";
+        // আপনার নতুন লাইভ রেন্ডার সার্ভার লিঙ্ক
+        const BACKEND_URL = "https://technography-video-downloader.onrender.com";
 
         const fetchBtn = document.getElementById('fetchBtn');
         const videoUrlInput = document.getElementById('videoUrlInput');
         const loader = document.getElementById('loader');
-        const resultContainer = document.getElementById('resultContainer');
+        const resultBox = document.getElementById('resultBox');
         const videoThumb = document.getElementById('videoThumb');
         const videoTitle = document.getElementById('videoTitle');
-        const hdDownloadBtn = document.getElementById('hdDownloadBtn');
-        const audioDownloadBtn = document.getElementById('audioDownloadBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
 
         fetchBtn.addEventListener('click', async () => {
             const url = videoUrlInput.value.trim();
             if (!url) {
-                alert("দয়া করে একটি সঠিক ভিডিও লিংক পেস্ট করুন!");
+                alert("একটি সঠিক লিংক পেস্ট করুন!");
                 return;
             }
 
             fetchBtn.disabled = true;
-            resultContainer.style.display = 'none';
-            loader.style.display = 'flex';
+            resultBox.classList.add('hidden');
+            loader.classList.remove('hidden');
 
             try {
                 const res = await fetch(`${BACKEND_URL}/get-video`, {
@@ -396,21 +109,17 @@
                 const data = await res.json();
 
                 if (data.success) {
-                    videoThumb.src = data.thumbnail || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200";
-                    videoTitle.innerText = data.title || "Social Media Video";
-                    
-                    hdDownloadBtn.href = data.download_url;
-                    audioDownloadBtn.href = data.download_url; // fallback to media stream
-
-                    loader.style.display = 'none';
-                    resultContainer.style.display = 'block';
+                    videoThumb.src = data.thumbnail || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400";
+                    videoTitle.textContent = data.title || "Video Download Link";
+                    downloadBtn.href = data.download_url;
+                    resultBox.classList.remove('hidden');
                 } else {
-                    throw new Error(data.error || "ভিডিও লিংক বের করা সম্ভব হয়নি।");
+                    alert(data.error || "ভিডিও লিংক প্রসেস করা সম্ভব হয়নি।");
                 }
             } catch (err) {
-                alert("ত্রুটি: " + err.message);
-                loader.style.display = 'none';
+                alert("সার্ভার সমস্যা: " + err.message);
             } finally {
+                loader.classList.add('hidden');
                 fetchBtn.disabled = false;
             }
         });
