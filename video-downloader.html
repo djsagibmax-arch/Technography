@@ -13,12 +13,6 @@
             background-color: #030712; 
             color: #f3f4f6; 
         }
-        .frame-wrapper {
-            border: 1px solid #1e293b;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.15);
-        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
@@ -34,13 +28,12 @@
     </header>
 
     <!-- মূল কনটেন্ট -->
-    <main class="max-w-2xl mx-auto px-4 py-6 w-full flex-1 flex flex-col items-center justify-center">
-        <!-- টাইটেল ও প্ল্যাটফর্ম আইকন -->
-        <div class="text-center mb-5">
+    <main class="max-w-xl mx-auto px-4 py-8 w-full flex-1 flex flex-col justify-center">
+        <div class="text-center mb-6">
             <h1 class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
                 Universal Video Downloader
             </h1>
-            <p class="text-slate-400 text-xs sm:text-sm">ইউটিউব, ফেসবুক, ইনস্টাগ্রাম ও টিকটক ভিডিও বিজ্ঞাপন ছাড়াই ডাউনলোড করুন</p>
+            <p class="text-slate-400 text-xs sm:text-sm">ইউটিউব, ফেসবুক, ইনস্টাগ্রাম ও টিকটক ভিডিও ডাউনলোড করুন</p>
             <div class="flex justify-center gap-4 text-xl mt-3 text-slate-400">
                 <i class="fa-brands fa-youtube text-red-500"></i>
                 <i class="fa-brands fa-facebook text-blue-500"></i>
@@ -49,21 +42,95 @@
             </div>
         </div>
 
-        <!-- এম্বেড করা ইঞ্জিন ফ্রেম -->
-        <div class="w-full bg-slate-900/80 p-2 sm:p-2.5 rounded-2xl border border-slate-800 shadow-xl frame-wrapper">
-            <iframe 
-                src="https://cobalt.tools" 
-                class="w-full h-[580px] rounded-xl border-0"
-                allow="clipboard-write; clipboard-read"
-                loading="lazy">
-            </iframe>
+        <!-- ডাউনলোডার কার্ড -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl">
+            <div class="flex flex-col gap-3">
+                <input type="text" id="videoUrlInput" placeholder="এখানে ভিডিও লিংক পেস্ট করুন..." 
+                       class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-cyan-400 transition">
+                
+                <div class="grid grid-cols-2 gap-2 text-xs font-medium">
+                    <label class="flex items-center justify-center gap-2 p-2 bg-slate-950 border border-slate-800 rounded-lg cursor-pointer">
+                        <input type="radio" name="format" value="video" checked class="accent-cyan-400">
+                        <span>ভিডিও (MP4)</span>
+                    </label>
+                    <label class="flex items-center justify-center gap-2 p-2 bg-slate-950 border border-slate-800 rounded-lg cursor-pointer">
+                        <input type="radio" name="format" value="audio" class="accent-cyan-400">
+                        <span>অডিও (MP3)</span>
+                    </label>
+                </div>
+
+                <button id="fetchBtn" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold py-3.5 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-lg active:scale-95">
+                    <i class="fa-solid fa-bolt"></i> ভিডিও লিংক আনুন
+                </button>
+            </div>
+
+            <!-- লোডার -->
+            <div id="loader" class="hidden text-center py-6">
+                <i class="fa-solid fa-circle-notch fa-spin text-cyan-400 text-3xl mb-2"></i>
+                <p class="text-slate-400 text-xs">ভিডিও প্রস্তুত করা হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...</p>
+                <small class="text-slate-500 text-[11px]">(সার্ভার স্লিপে থাকলে প্রথমবার ২৫-৩০ সেকেন্ড লাগতে পারে)</small>
+            </div>
+
+            <!-- ফলাফল কার্ড -->
+            <div id="resultBox" class="hidden mt-5 pt-5 border-t border-slate-800">
+                <h3 id="videoTitle" class="text-xs sm:text-sm font-bold text-slate-200 mb-3 line-clamp-2"></h3>
+                <a id="downloadBtn" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition">
+                    <i class="fa-solid fa-download"></i> এখনই ডাউনলোড করুন
+                </a>
+            </div>
         </div>
     </main>
 
-    <!-- ফুটার -->
     <footer class="text-center py-4 border-t border-slate-800 text-slate-500 text-xs">
         &copy; 2026 Technography. All rights reserved.
     </footer>
 
+    <script>
+        const BACKEND_URL = "https://technography-video-downloader.onrender.com";
+
+        const fetchBtn = document.getElementById('fetchBtn');
+        const videoUrlInput = document.getElementById('videoUrlInput');
+        const loader = document.getElementById('loader');
+        const resultBox = document.getElementById('resultBox');
+        const videoTitle = document.getElementById('videoTitle');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        fetchBtn.addEventListener('click', async () => {
+            const url = videoUrlInput.value.trim();
+            if (!url) {
+                alert("একটি সঠিক লিংক পেস্ট করুন!");
+                return;
+            }
+
+            const selectedFormat = document.querySelector('input[name="format"]:checked').value;
+
+            fetchBtn.disabled = true;
+            resultBox.classList.add('hidden');
+            loader.classList.remove('hidden');
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/get-video`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url, mode: selectedFormat })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    videoTitle.textContent = data.title;
+                    downloadBtn.href = data.download_url;
+                    resultBox.classList.remove('hidden');
+                } else {
+                    alert(data.error || "ভিডিও লিংক প্রসেস করা সম্ভব হয়নি।");
+                }
+            } catch (err) {
+                alert("সার্ভার সমস্যা: " + err.message);
+            } finally {
+                loader.classList.add('hidden');
+                fetchBtn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
