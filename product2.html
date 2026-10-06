@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook & YouTube Growth Master Course | Technography</title>
 
+    <!-- নিজস্ব ব্যানার ইমেজ প্রি-লোড (ইনস্ট্যান্ট লোডের জন্য) -->
+    <link rel="preload" as="image" href="images/product2.png" fetchpriority="high">
+
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -47,9 +50,14 @@
 
     <div id="course-page">
         <section class="max-w-5xl mx-auto px-4 pt-6 text-center">
-            <!-- ব্যানার ইমেজ সবার উপরে -->
+            <!-- পরিবর্তিত ব্যানার ইমেজ (গিটহাবের images/product2.png) -->
             <div class="mb-6">
-                <img src="https://i.postimg.cc/JhPTdGvN/file-00000000825482118fbe670b1fe198c4.png" alt="Course Banner" loading="eager" fetchpriority="high" class="w-full max-w-4xl mx-auto rounded-3xl shadow-2xl border border-slate-800 object-cover">
+                <img src="images/product2.png" 
+                     alt="Course Banner" 
+                     loading="eager" 
+                     fetchpriority="high" 
+                     decoding="sync"
+                     class="w-full max-w-4xl mx-auto rounded-3xl shadow-2xl border border-slate-800 object-cover">
             </div>
 
             <div class="inline-flex items-center gap-2 py-1.5 px-5 rounded-full bg-cyan-500/10 border border-cyan-400/40 text-cyan-300 mb-4">
