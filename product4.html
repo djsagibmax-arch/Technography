@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>৫০,০০০+ Movie & Drama Clips Collection | Technography</title>
 
+    <!-- নিজস্ব ব্যানার ইমেজ প্রি-লোড (ইনস্ট্যান্ট লোডের জন্য) -->
+    <link rel="preload" as="image" href="images/product4.png" fetchpriority="high">
+
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -47,9 +50,14 @@
 
     <div id="p4-page">
         <section class="max-w-5xl mx-auto px-4 pt-6 text-center">
-            <!-- ব্যানার সবার উপরে -->
+            <!-- পরিবর্তিত ব্যানার সবার উপরে -->
             <div class="mb-6">
-                <img src="https://i.postimg.cc/pL8QFpR3/file-00000000ec748211ab687ae846780eb3.png" alt="Movie Clips Banner" loading="eager" fetchpriority="high" class="w-full max-w-4xl mx-auto rounded-3xl shadow-2xl border border-slate-800 object-cover">
+                <img src="images/product4.png" 
+                     alt="Movie Clips Banner" 
+                     loading="eager" 
+                     fetchpriority="high" 
+                     decoding="sync"
+                     class="w-full max-w-4xl mx-auto rounded-3xl shadow-2xl border border-slate-800 object-cover">
             </div>
 
             <div class="inline-flex items-center gap-2 py-1.5 px-5 rounded-full bg-pink-500/10 border border-pink-400/40 text-pink-300 mb-4">
