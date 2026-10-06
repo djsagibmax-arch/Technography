@@ -6,6 +6,9 @@
     <title>৫০ হাজার AI ভাইরাল Reels/shorts ভিডিও | Technography</title>
     <meta name="description" content="৫০ হাজার AI ভাইরাল Reels/shorts ভিডিও - AI Food Talking ও Health Fitness ভিডিও কালেকশন।">
 
+    <!-- নিজস্ব ব্যানার ইমেজ প্রি-লোড (ইনস্ট্যান্ট লোডের জন্য) -->
+    <link rel="preload" as="image" href="images/product5.png" fetchpriority="high">
+
     <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
@@ -54,9 +57,9 @@
             left: 0; 
             width: 100%; 
             background: rgba(7, 11, 24, 0.95); 
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px); 
             border-top: 1px solid rgba(245, 158, 11, 0.3); 
-            padding: 10px 15px;
+            padding: 10px 15px; 
             display: flex; 
             justify-content: center; 
             z-index: 50;
@@ -76,11 +79,13 @@
 
     <!-- মূল কনটেন্ট -->
     <main class="max-w-4xl mx-auto px-4 pt-6 text-center">
-        <!-- পোস্টার ব্যানার -->
+        <!-- পরিবর্তিত পোস্টার ব্যানার (images/product5.png) -->
         <div class="mb-6 w-full flex justify-center">
-            <img src="https://i.postimg.cc/vHyVcM0H/file-00000000435082118859234ac21ec9cb.png" 
+            <img src="images/product5.png" 
                  alt="৫০ হাজার AI ভাইরাল Reels/shorts ভিডিও" 
                  loading="eager" 
+                 fetchpriority="high"
+                 decoding="sync"
                  class="w-full max-w-2xl h-auto rounded-3xl shadow-2xl border border-slate-800 object-contain block">
         </div>
 
