@@ -31,9 +31,8 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
 
-    <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
-    <link rel="dns-prefetch" href="https://i.postimg.cc">
-    <link rel="preload" as="image" href="https://i.postimg.cc/br1zQcLN/20260827-131010.jpg" fetchpriority="high">
+    <!-- নিজস্ব ইমেজ প্রি-লোড (ইনস্ট্যান্ট লোডের জন্য) -->
+    <link rel="preload" as="image" href="images/product1.jpg" fetchpriority="high">
     <link rel="preload" as="image" href="https://i.postimg.cc/1zvnszHL/file-0000000067ec81faa53e8cf2a7ab0a68-removebg-preview.png" fetchpriority="high">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -148,10 +147,13 @@
 
     <div id="mega-landing-page">
         <div class="relative z-10 max-w-5xl mx-auto px-4 pt-10 pb-12 text-center">
-            <img src="https://i.postimg.cc/br1zQcLN/20260827-131010.jpg" 
+            
+            <!-- পরিবর্তিত মূল ব্যানার ইমেজ -->
+            <img src="images/product1.jpg" 
                  alt="Content Master Bundle" 
                  fetchpriority="high" 
                  loading="eager" 
+                 decoding="sync"
                  class="w-full max-w-4xl mx-auto rounded-3xl shadow-[0_0_40px_rgba(34,211,238,0.2)] mb-8 border border-slate-700 object-cover">
             
             <div class="inline-block py-3 px-8 rounded-full bg-slate-800/80 border border-slate-700 mb-8 shadow-lg">
@@ -222,7 +224,7 @@
                         <li>🎬 Netflix-related Movie Clips</li>
                         <li>🎬 English Movie Clips</li>
                         <li>🎭 Bangla Natok Clips</li>
-                        <li>🎞️ বিভিন্ন Movie Clip Collection</li>
+                        <li>🎞️️ বিভিন্ন Movie Clip Collection</li>
                     </ul>
                 </div>
 
