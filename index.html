@@ -11,8 +11,10 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://technographybd.xyz/">
 
-    <link rel="preconnect" href="https://i.postimg.cc">
     <link rel="preconnect" href="https://www.youtube.com">
+
+    <!-- প্রথম ব্যানার ইমেজ প্রি-লোড (ইনস্ট্যান্ট লোডিংয়ের জন্য) -->
+    <link rel="preload" as="image" href="images/product1.webp" fetchpriority="high">
 
     <!-- Meta Pixel Code -->
     <script>
@@ -41,6 +43,12 @@
             margin: 0; 
             padding: 0;
             overflow-x: hidden;
+        }
+
+        /* ফেসবুক ব্রাউজারে ছবি যাতে ঝাপসা না হয় */
+        img {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
         }
 
         .neon-glow-cyan {
@@ -184,7 +192,6 @@
             background: linear-gradient(135deg, #1877F2 0%, #0c56be 100%);
         }
 
-        /* সাইডবার মেনু স্লাইড এনিমেশন */
         #mobileSideMenu {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -215,11 +222,10 @@
         </a>
     </aside>
 
-    <!-- সাইডবার ব্যাকড্রপ ও ড্রয়ার (থ্রি ডটে চাপলে বের হবে) -->
+    <!-- সাইডবার ব্যাকড্রপ ও ড্রয়ার -->
     <div id="sideMenuBackdrop" onclick="closeSideMenu()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden opacity-0"></div>
     <aside id="mobileSideMenu" class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-slate-900 border-l border-slate-800 z-50 p-5 overflow-y-auto transform translate-x-full shadow-2xl flex flex-col justify-between">
         <div>
-            <!-- সাইডবার হেডার -->
             <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
                 <span class="text-base font-bold text-cyan-400 flex items-center gap-2">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> AI Tools & Menu
@@ -229,11 +235,9 @@
                 </button>
             </div>
 
-            <!-- AI টুলসের তালিকা -->
             <div class="space-y-1.5">
                 <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-2 py-1">ফ্রি এআই টুলস</div>
                 
-                <!-- 1. AI Image Generator -->
                 <a href="ai-image-generator.html" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-800/80 transition group">
                     <div class="w-8 h-8 rounded-lg bg-purple-950/80 text-purple-400 flex items-center justify-center text-sm border border-purple-500/30">
                         <i class="fa-solid fa-image"></i>
@@ -244,7 +248,6 @@
                     </div>
                 </a>
 
-                <!-- 2. Universal Video Downloader (নতুন যুক্ত করা হয়েছে) -->
                 <a href="video-downloader.html" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-800/80 transition group">
                     <div class="w-8 h-8 rounded-lg bg-sky-950/80 text-sky-400 flex items-center justify-center text-sm border border-sky-500/30">
                         <i class="fa-solid fa-cloud-arrow-down"></i>
@@ -255,7 +258,6 @@
                     </div>
                 </a>
 
-                <!-- 3. AI Background Remover -->
                 <a href="bg-remover.html" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-800/80 transition group">
                     <div class="w-8 h-8 rounded-lg bg-emerald-950/80 text-emerald-400 flex items-center justify-center text-sm border border-emerald-500/30">
                         <i class="fa-solid fa-scissors"></i>
@@ -266,7 +268,6 @@
                     </div>
                 </a>
 
-                <!-- 4. AI Voice Generator -->
                 <a href="ai-voice-generator.html" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-800/80 transition group">
                     <div class="w-8 h-8 rounded-lg bg-cyan-950/80 text-cyan-400 flex items-center justify-center text-sm border border-cyan-500/30">
                         <i class="fa-solid fa-microphone-lines"></i>
@@ -277,7 +278,6 @@
                     </div>
                 </a>
 
-                <!-- 5. AI Auto Subtitle -->
                 <a href="ai-auto-subtitle.html" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-800/80 transition group">
                     <div class="w-8 h-8 rounded-lg bg-pink-950/80 text-pink-400 flex items-center justify-center text-sm border border-pink-500/30">
                         <i class="fa-solid fa-closed-captioning"></i>
@@ -288,7 +288,6 @@
                     </div>
                 </a>
 
-                <!-- 6. Image Resizer -->
                 <a href="image-resizer.html" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-800/80 transition group">
                     <div class="w-8 h-8 rounded-lg bg-blue-950/80 text-blue-400 flex items-center justify-center text-sm border border-blue-500/30">
                         <i class="fa-solid fa-expand"></i>
@@ -299,7 +298,6 @@
                     </div>
                 </a>
 
-                <!-- 7. Image Compressor -->
                 <a href="image-compressor.html" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-800/80 transition group">
                     <div class="w-8 h-8 rounded-lg bg-amber-950/80 text-amber-400 flex items-center justify-center text-sm border border-amber-500/30">
                         <i class="fa-solid fa-compress"></i>
@@ -319,21 +317,19 @@
         </div>
     </aside>
 
-    <!-- হেডার (লম্বা থ্রি ডট মেনু বাটন সহ) -->
+    <!-- হেডার -->
     <header class="sticky top-0 z-30 backdrop-blur-md bg-slate-900/90 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400 no-underline">
                 Technography
             </a>
 
-            <!-- ডানপাশের অ্যাকশন বাটনসমূহ -->
             <div class="flex items-center gap-2.5">
                 <a href="select-payment.html?product=1"
                    class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow transition whitespace-nowrap">
                     এখনই কিনুন
                 </a>
 
-                <!-- লম্বা থ্রি ডট মেনু বাটন -->
                 <button onclick="openSideMenu()" title="মেনু ওপেন করুন" class="w-9 h-9 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-cyan-300 flex items-center justify-center text-lg transition active:scale-95">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -407,7 +403,7 @@
         </div>
 
 
-        <!-- ৪. প্রোডাক্ট গ্রিড -->
+        <!-- ৪. প্রোডাক্ট গ্রিড (আপডেট করা হাই-কোয়ালিটি লোকাল ইমেজ) -->
         <div id="products-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left mt-10">
 
             <!-- প্রোডাক্ট ১ -->
@@ -415,10 +411,11 @@
                 <div>
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
                         <img
-                            src="https://i.postimg.cc/br1zQcLN/20260827-131010.jpg"
+                            src="images/product1.webp"
                             alt="মেগা বান্ডিল"
                             loading="eager"
                             fetchpriority="high"
+                            decoding="sync"
                             class="card-poster-img rounded-xl">
 
                         <span class="absolute top-3 right-3 bg-red-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
@@ -460,9 +457,10 @@
                 <div>
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
                         <img
-                            src="https://i.postimg.cc/JhPTdGvN/file-00000000825482118fbe670b1fe198c4.png"
+                            src="images/product2.webp"
                             alt="মাস্টার কোর্স"
                             loading="lazy"
+                            decoding="async"
                             class="card-poster-img rounded-xl">
 
                         <span class="absolute top-3 right-3 bg-cyan-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
@@ -504,9 +502,10 @@
                 <div>
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
                         <img
-                            src="https://i.postimg.cc/76BZ6MRQ/file-0000000087f881f88ff6c440b3f40f9e.png"
+                            src="images/product3.webp"
                             alt="১.৫ লক্ষ+ মিক্সড মেগা রিলস"
                             loading="lazy"
+                            decoding="async"
                             class="card-poster-img rounded-xl">
 
                         <span class="absolute top-3 right-3 bg-purple-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
@@ -548,9 +547,10 @@
                 <div>
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
                         <img
-                            src="https://i.postimg.cc/pL8QFpR3/file-00000000ec748211ab687ae846780eb3.png"
+                            src="images/product4.webp"
                             alt="মুভি ও ড্রামা ক্লিপস"
                             loading="lazy"
+                            decoding="async"
                             class="card-poster-img rounded-xl">
 
                         <span class="absolute top-3 right-3 bg-pink-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
@@ -592,9 +592,10 @@
                 <div>
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
                         <img
-                            src="https://i.postimg.cc/vHyVcM0H/file-00000000435082118859234ac21ec9cb.png"
+                            src="images/product5.webp"
                             alt="৫০ হাজার AI ভাইরাল Reels/shorts ভিডিও"
                             loading="lazy"
+                            decoding="async"
                             class="card-poster-img rounded-xl">
 
                         <span class="absolute top-3 right-3 bg-amber-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
@@ -636,9 +637,10 @@
                 <div>
                     <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-900 border border-slate-800 p-1 flex items-center justify-center min-h-[200px]">
                         <img
-                            src="https://i.postimg.cc/yNC4zQVn/file-00000000fd3c8211b4893dc1d62370ca.png"
+                            src="images/product6.webp"
                             alt="৫০ হাজার ইসলামিক ভাইরাল Reels/shorts ভিডিও"
                             loading="lazy"
+                            decoding="async"
                             class="card-poster-img rounded-xl">
 
                         <span class="absolute top-3 right-3 bg-emerald-600 text-white text-[11px] font-black px-2.5 py-1 rounded-lg uppercase shadow">
@@ -757,7 +759,6 @@
             </div>
         </div>
 
-        <!-- রিভিউ কার্ড (টিক চিহ্ন ছাড়া) -->
         <div id="reviewsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         </div>
 
@@ -783,7 +784,6 @@
 
     <!-- স্ক্রিপ্টস -->
     <script>
-    // সাইডবার মেনু ওপেন/ক্লোজ ফাংশন
     function openSideMenu() {
         const sideMenu = document.getElementById('mobileSideMenu');
         const backdrop = document.getElementById('sideMenuBackdrop');
@@ -806,7 +806,6 @@
         }, 300);
     }
 
-    // লাইভ ও অনবরত কাউন্টডাউন টাইমার
     function initializeContinuousCountdown() {
         const STORAGE_KEY = 'technography_deal_end_time';
         const TOTAL_DURATION =
@@ -860,7 +859,6 @@
         setInterval(updateDisplay, 1000);
     }
 
-    // রিভিউ স্ক্রিপ্ট (টিক চিহ্ন সম্পূর্ণ রিমুভ করা হয়েছে)
     const INITIAL_REVIEWS = [
         {
             name: "সাদিয়া রহমান",
