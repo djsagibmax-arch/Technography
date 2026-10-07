@@ -177,7 +177,9 @@
         <div class="capcut-banner">
             <h2 class="text-3xl font-black text-white mb-2"><span class="text-4xl">🎁</span> Special Bonus Unlocked!</h2>
             <p class="text-white/90 text-lg mb-6">Latest Update Unlock CapCut Pro APK File</p>
-            <a href="https://drive.google.com/file/d/1k6lN0aaPvTRCqfmZT2kyY8zeRNRiXqDw/view?usp=drivesdk" target="_blank" class="main-download-btn">
+            
+            <!-- পরিবর্তিত ক্যাপকাট লিংক (নতুন গুগল ডক লিংক যুক্ত করা হয়েছে) -->
+            <a href="https://docs.google.com/document/d/1tPGUDqNhOLbyEEk4tte_fNzjeIDwx5EIRFHWhY2uKnU/edit?usp=drivesdk" target="_blank" class="main-download-btn">
                 <i class="fas fa-cloud-download-alt"></i> CapCut Pro ডাউনলোড করুন
             </a>
         </div>
@@ -367,31 +369,23 @@
 
 </div>
 
-<!-- Facebook Purchase Event Tracking Code (Strictly Ad-Only & Duplicate Protected) -->
+<!-- Facebook Purchase Event Tracking Code -->
 <script>
   (function() {
-    // ১. চেক করা হচ্ছে ব্যবহারকারী ফেসবুক বিজ্ঞাপনে ক্লিক করে এসেছে কি না
     const urlParams = new URLSearchParams(window.location.search);
     const hasFbclid = urlParams.has('fbclid');
     const fromFacebookReferrer = document.referrer.includes('facebook.com') || document.referrer.includes('fb.com');
 
-    // ২. শুধুমাত্র বিজ্ঞাপনের ক্লিক আইডি বা ফেসবুকের রেফারার থাকলে কাজ করবে
     if (hasFbclid || fromFacebookReferrer) {
-      
-      // ব্রাউজারের স্থায়ী স্টোরেজে চেক করা হচ্ছে আগে কিনেছে কি না
       if (!localStorage.getItem("mega_bundle_purchased")) {
         fbq('track', 'Purchase', {
-          value: 300.00, // প্রোডাক্টের দাম
+          value: 300.00,
           currency: 'BDT'
         });
-
-        // আজীবনের জন্য মার্ক করে রাখা হলো যাতে পেজ রিফ্রেশ বা আবার ঢুকলে ভুল হিসাব না যায়
         localStorage.setItem("mega_bundle_purchased", "true");
         console.log("Verified Ad Buyer: Purchase event fired!");
       }
-
     } else {
-      // বিজ্ঞাপন ছাড়া হোয়াটসঅ্যাপ বা সরাসরি লিংকে ঢুকলে কোনো পারচেজ ফেসবুককে পাঠানো হবে না
       console.log("Non-Ad / WhatsApp Visit: Purchase tracking ignored.");
     }
   })();
