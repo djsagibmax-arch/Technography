@@ -6,6 +6,11 @@
     <title>পেমেন্ট মাধ্যম নির্বাচন করুন | Technography</title>
     <meta name="theme-color" content="#070b18">
 
+    <!-- লোগোগুলো প্রি-লোড (ইনস্ট্যান্ট লোডিংয়ের জন্য) -->
+    <link rel="preload" as="image" href="images/bkash.webp">
+    <link rel="preload" as="image" href="images/nogod.webp">
+    <link rel="preload" as="image" href="images/rocket.webp">
+
     <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
@@ -24,6 +29,13 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        img {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+    </style>
 </head>
 <body class="bg-[#070b18] text-slate-100 antialiased min-h-screen flex flex-col">
 
@@ -51,18 +63,21 @@
             <p class="text-slate-400 text-xs sm:text-sm mb-6 text-center">নিচের লোগোতে ক্লিক করে পেমেন্ট মাধ্যম বেছে নিন</p>
 
             <div class="grid grid-cols-3 gap-3 text-center">
+                <!-- বিকাশ -->
                 <a id="linkBkash" href="checkout.html?method=bkash" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-pink-500/30">
-                    <img src="https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg" alt="বিকাশ" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
+                    <img src="images/bkash.webp" alt="বিকাশ" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
                     <span class="text-xs font-bold text-pink-400 block">বিকাশ</span>
                 </a>
 
+                <!-- নগদ -->
                 <a id="linkNagad" href="checkout.html?method=nagad" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-orange-500/30">
-                    <img src="https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg" alt="নগদ" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
+                    <img src="images/nogod.webp" alt="নগদ" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
                     <span class="text-xs font-bold text-orange-400 block">নগদ</span>
                 </a>
 
+                <!-- রকেট -->
                 <a id="linkRocket" href="checkout.html?method=rocket" class="block p-2 rounded-2xl transition hover:scale-105 active:scale-95 hover:bg-slate-800/40 border border-transparent hover:border-purple-500/30">
-                    <img src="https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg" alt="রকেট" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
+                    <img src="images/rocket.webp" alt="রকেট" class="h-14 w-14 mx-auto object-cover rounded-2xl shadow-lg mb-2">
                     <span class="text-xs font-bold text-purple-400 block">রকেট</span>
                 </a>
             </div>
