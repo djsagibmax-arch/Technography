@@ -86,17 +86,17 @@ function selectPayment(method) {
         infoBox.className = "bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
         nameSpan.className = "text-base sm:text-lg font-bold text-pink-400";
         nameSpan.innerText = "বিকাশ (Personal) পেমেন্ট নিয়ম";
-        logoImg.src = "https://i.postimg.cc/vm8XHmjc/IMG-20260913-023828.jpg";
+        logoImg.src = "images/bkash.webp";
     } else if (method === 'nagad') {
         infoBox.className = "bg-orange-950/20 border border-orange-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
         nameSpan.className = "text-base sm:text-lg font-bold text-orange-400";
         nameSpan.innerText = "নগদ (Personal) পেমেন্ট নিয়ম";
-        logoImg.src = "https://i.postimg.cc/mgCyS9x6/IMG-20260913-023227.jpg";
+        logoImg.src = "images/nogod.webp";
     } else if (method === 'rocket') {
         infoBox.className = "bg-purple-950/20 border border-purple-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
         nameSpan.className = "text-base sm:text-lg font-bold text-purple-400";
         nameSpan.innerText = "রকেট (Personal) পেমেন্ট নিয়ম";
-        logoImg.src = "https://i.postimg.cc/RZKLTtrg/IMG-20260913-023446.jpg";
+        logoImg.src = "images/rocket.webp";
     }
     closePaymentModal();
 }
@@ -204,7 +204,7 @@ async function handleFormSubmit(event) {
             return;
         }
 
-        // ৫. Render-এর পাইথন বটের কাছে ডাইনামিক ডেটা পাঠানো (৪টি প্যারামিটার)
+        // ৫. Render-এর পাইথন বটের কাছে ডাইনামিক ডেটা পাঠানো
         fetch("https://technography-whatsapp-bot.onrender.com/send-confirmation", { 
             method: "POST",
             headers: { "Content-Type": "application/json" },
