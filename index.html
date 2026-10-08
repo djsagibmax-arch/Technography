@@ -46,62 +46,53 @@
             position: relative;
         }
 
-        /* হালকা ব্যাকগ্রাউন্ড সফট গ্লো */
-        .ambient-glow-1 {
-            position: absolute;
-            top: 5%;
-            left: -10%;
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, rgba(147, 51, 234, 0.08) 0%, transparent 70%);
-            filter: blur(80px);
-            z-index: 0;
-            pointer-events: none;
-        }
-        .ambient-glow-2 {
-            position: absolute;
-            top: 25%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
-            filter: blur(90px);
-            z-index: 0;
-            pointer-events: none;
-        }
-
         img {
             image-rendering: -webkit-optimize-contrast;
             image-rendering: crisp-edges;
         }
 
-        /* ৩ডি ব্ল্যাক কালার নাম্বার ইফেক্ট */
-        .text-3d-black {
-            color: #0b0f19 !important;
+        /* লাল ৩ডি টাইমার নাম্বার */
+        .text-3d-red {
+            color: #dc2626 !important;
             font-weight: 900 !important;
             text-shadow: 
-                0 1px 0 #334155,
-                0 2px 0 #1e293b,
-                0 3px 0 #0f172a,
-                0 4px 6px rgba(0, 0, 0, 0.35),
-                0 8px 15px rgba(0, 0, 0, 0.2);
+                0 1px 0 #b91c1c,
+                0 2px 0 #991b1b,
+                0 3px 0 #7f1d1d,
+                0 4px 6px rgba(220, 38, 38, 0.35),
+                0 8px 15px rgba(0, 0, 0, 0.15);
         }
         
         .box-3d {
             background: #ffffff !important;
-            border: 1px solid rgba(226, 232, 240, 0.9);
+            border: 1px solid #e2e8f0;
             box-shadow: 
                 0 20px 40px -10px rgba(0, 0, 0, 0.08),
                 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .timer-unit-box {
-            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
-            border: 1px solid #cbd5e1;
+            background: linear-gradient(180deg, #ffffff 0%, #fef2f2 100%);
+            border: 1px solid #fecaca;
             box-shadow: 
                 inset 0 2px 4px rgba(255, 255, 255, 0.9),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.05),
-                0 8px 16px -4px rgba(0, 0, 0, 0.1);
+                0 6px 14px -3px rgba(239, 68, 68, 0.15);
+        }
+
+        /* ৩ডি গোল্ডেন স্টার */
+        .gold-star-3d {
+            color: #f59e0b !important;
+            filter: drop-shadow(0 2px 3px rgba(217, 119, 6, 0.55)) drop-shadow(0 0 4px rgba(251, 191, 36, 0.7));
+            display: inline-block;
+        }
+
+        /* ৩ডি প্রাইস ও টাকার পরিমাণ কালার */
+        .text-3d-price {
+            color: #0284c7 !important;
+            text-shadow: 
+                0 1px 0 #0369a1,
+                0 2px 0 #075985,
+                0 3px 5px rgba(2, 132, 199, 0.3);
         }
 
         @keyframes pulse-glow {
@@ -124,21 +115,15 @@
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 24px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
 
         .product-card:hover { 
-            transform: translateY(-7px);
+            transform: translateY(-6px);
             box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.12);
         }
-
-        .card-theme-purple:hover { border-color: rgba(168, 85, 247, 0.5); }
-        .card-theme-cyan:hover { border-color: rgba(6, 182, 212, 0.5); }
-        .card-theme-pink:hover { border-color: rgba(236, 72, 153, 0.5); }
-        .card-theme-amber:hover { border-color: rgba(245, 158, 11, 0.5); }
-        .card-theme-emerald:hover { border-color: rgba(16, 185, 129, 0.5); }
 
         .card-poster-img { 
             width: 100%; 
@@ -149,21 +134,36 @@
             margin: 0 auto; 
             border-radius: 16px;
         }
+
+        /* রিভিউ ফর্মের স্পষ্ট ইনপুট ফিল্ড */
+        .clear-input {
+            background-color: #ffffff !important;
+            border: 1.5px solid #94a3b8 !important;
+            color: #0f172a !important;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+            transition: all 0.2s ease;
+        }
+
+        .clear-input:focus {
+            border-color: #0284c7 !important;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2) !important;
+            outline: none !important;
+        }
         
         .rev-card {
             background: #ffffff !important;
-            border: 1px solid #e2e8f0 !important;
+            border: 1px solid #cbd5e1 !important;
             border-radius: 20px !important;
             padding: 20px !important;
             display: flex !important;
             flex-direction: column !important;
             justify-content: space-between !important;
             transition: all 0.25s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
         }
 
         .rev-card:hover {
-            border-color: #cbd5e1 !important;
+            border-color: #94a3b8 !important;
             transform: translateY(-3px);
             box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.08);
         }
@@ -181,41 +181,40 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
+        /* ফ্লোটিং যোগাযোগ সাইডবার (স্থায়ী ও দৃশ্যমান) */
         .floating-contact-bar {
             position: fixed;
-            right: 0;
+            right: 12px;
             top: 55%;
             transform: translateY(-50%);
-            z-index: 40;
+            z-index: 50;
             display: flex;
             flex-direction: column;
             gap: 12px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(14px);
-            padding: 12px 9px;
-            border-top-left-radius: 20px;
-            border-bottom-left-radius: 20px;
-            border: 1px solid #e2e8f0;
-            border-right: none;
-            box-shadow: -4px 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 24px;
+            border: 1.5px solid #cbd5e1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
         }
 
         .contact-btn {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ffffff !important;
-            font-size: 22px;
+            font-size: 24px;
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transition: transform 0.25s ease;
         }
 
         .contact-btn:hover {
-            transform: scale(1.15);
+            transform: scale(1.12);
         }
 
         .contact-btn-wa {
@@ -237,10 +236,7 @@
 
 <body class="text-slate-900 font-sans antialiased">
 
-    <div class="ambient-glow-1"></div>
-    <div class="ambient-glow-2"></div>
-
-    <!-- ফ্লোটিং যোগাযোগ সাইডবার -->
+    <!-- ফ্লোটিং যোগাযোগ সাইডবার (একদম ক্লিয়ার ও দৃশ্যমান) -->
     <aside class="floating-contact-bar">
         <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Technography%20ওয়েবসাইট%20থেকে%20যোগাযোগ%20করছি."
            target="_blank"
@@ -265,7 +261,7 @@
         <div>
             <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
                 <span class="text-base font-bold text-slate-800 flex items-center gap-2">
-                    <i class="fa-solid fa-wand-magic-sparkles text-cyan-500"></i> AI Tools & Menu
+                    <i class="fa-solid fa-wand-magic-sparkles text-cyan-600"></i> AI Tools & Menu
                 </span>
                 <button onclick="closeSideMenu()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark text-lg"></i>
@@ -354,8 +350,8 @@
         </div>
     </aside>
 
-    <!-- হেডার (হোয়াইট থিম) -->
-    <header class="sticky top-0 z-30 backdrop-blur-xl bg-white/90 border-b border-slate-200/80 shadow-sm">
+    <!-- হেডার -->
+    <header class="sticky top-0 z-30 backdrop-blur-xl bg-white/95 border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="index.html" class="text-2xl font-black tracking-wider text-cyan-600 no-underline">
                 Technography
@@ -395,31 +391,34 @@
                 </div>
             </div>
 
-            <!-- ২. লাইভ কাউন্টডাউন (হোয়াইট থিম ও ৩ডি ব্ল্যাক নাম্বারস) -->
+            <!-- ২. লাইভ কাউন্টডাউন (সবুজ ব্যাজ + লাল ৩ডি টাইমার) -->
             <div class="mb-10 max-w-lg mx-auto">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-amber-800 text-xs sm:text-sm font-bold mb-4 animate-pulse shadow-sm">
-                    <span>⚡ মেগা ডিসকাউন্ট অফার শেষ হতে বাকি</span>
+                <!-- সবুজ ব্যাজ -->
+                <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-50 border-2 border-emerald-500 text-emerald-800 text-xs sm:text-sm font-black mb-4 shadow-sm">
+                    <i class="fa-solid fa-bolt text-emerald-600"></i>
+                    <span>মেগা ডিসকাউন্ট অফার শেষ হতে বাকি</span>
                 </div>
 
+                <!-- ৩ডি লাল সংখ্যাসহ টাইমার বক্স -->
                 <div class="grid grid-cols-4 gap-2.5 sm:gap-4 p-4 sm:p-5 rounded-3xl box-3d">
                     <div class="flex flex-col items-center timer-unit-box rounded-2xl py-3 px-1">
-                        <span id="t-days" class="text-3xl sm:text-5xl text-3d-black">০১</span>
-                        <span class="text-[11px] sm:text-xs font-black text-slate-500 tracking-wider mt-1.5 uppercase">দিন</span>
+                        <span id="t-days" class="text-3xl sm:text-5xl text-3d-red">০১</span>
+                        <span class="text-[11px] sm:text-xs font-black text-slate-600 tracking-wider mt-1.5 uppercase">দিন</span>
                     </div>
 
                     <div class="flex flex-col items-center timer-unit-box rounded-2xl py-3 px-1">
-                        <span id="t-hours" class="text-3xl sm:text-5xl text-3d-black">২৩</span>
-                        <span class="text-[11px] sm:text-xs font-black text-slate-500 tracking-wider mt-1.5 uppercase">ঘণ্টা</span>
+                        <span id="t-hours" class="text-3xl sm:text-5xl text-3d-red">২৩</span>
+                        <span class="text-[11px] sm:text-xs font-black text-slate-600 tracking-wider mt-1.5 uppercase">ঘণ্টা</span>
                     </div>
 
                     <div class="flex flex-col items-center timer-unit-box rounded-2xl py-3 px-1">
-                        <span id="t-minutes" class="text-3xl sm:text-5xl text-3d-black">৫৭</span>
-                        <span class="text-[11px] sm:text-xs font-black text-slate-500 tracking-wider mt-1.5 uppercase">মিনিট</span>
+                        <span id="t-minutes" class="text-3xl sm:text-5xl text-3d-red">৫৭</span>
+                        <span class="text-[11px] sm:text-xs font-black text-slate-600 tracking-wider mt-1.5 uppercase">মিনিট</span>
                     </div>
 
                     <div class="flex flex-col items-center timer-unit-box rounded-2xl py-3 px-1">
-                        <span id="t-seconds" class="text-3xl sm:text-5xl text-3d-black">২৮</span>
-                        <span class="text-[11px] sm:text-xs font-black text-slate-500 tracking-wider mt-1.5 uppercase">সেকেন্ড</span>
+                        <span id="t-seconds" class="text-3xl sm:text-5xl text-3d-red">২৮</span>
+                        <span class="text-[11px] sm:text-xs font-black text-slate-600 tracking-wider mt-1.5 uppercase">সেকেন্ড</span>
                     </div>
                 </div>
             </div>
@@ -437,11 +436,11 @@
                 </div>
             </div>
 
-            <!-- ৪. প্রোডাক্ট গ্রিড -->
+            <!-- ৪. প্রোডাক্ট গ্রিড (স্পষ্ট ও বড় ৩ডি প্রাইসসহ) -->
             <div id="products-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left mt-10">
 
                 <!-- প্রোডাক্ট ১ -->
-                <div class="product-card card-theme-purple p-5 flex flex-col justify-between">
+                <div class="product-card p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-50 border border-slate-100 p-2 flex items-center justify-center min-h-[200px]">
                             <img
@@ -467,9 +466,10 @@
                     </div>
 
                     <div>
-                        <div class="flex items-center justify-between py-2 border-t border-slate-100 mb-3">
-                            <span class="text-xs font-bold text-slate-500">অফার প্রাইস:</span>
-                            <span class="text-2xl font-black text-emerald-600">৩০০ ৳</span>
+                        <!-- বড় ও স্পষ্ট ৩ডি প্রাইস -->
+                        <div class="flex items-center justify-between py-2.5 border-t border-slate-100 mb-3 bg-sky-50/50 px-3 rounded-xl border border-sky-100">
+                            <span class="text-sm sm:text-base font-black text-3d-price">অফার প্রাইস:</span>
+                            <span class="text-2xl sm:text-3xl font-black text-3d-price">৩০০ ৳</span>
                         </div>
 
                         <div class="grid grid-cols-2 gap-2">
@@ -486,7 +486,7 @@
                 </div>
 
                 <!-- প্রোডাক্ট ২ -->
-                <div class="product-card card-theme-cyan p-5 flex flex-col justify-between">
+                <div class="product-card p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-50 border border-slate-100 p-2 flex items-center justify-center min-h-[200px]">
                             <img
@@ -511,9 +511,10 @@
                     </div>
 
                     <div>
-                        <div class="flex items-center justify-between py-2 border-t border-slate-100 mb-3">
-                            <span class="text-xs font-bold text-slate-500">অফার প্রাইস:</span>
-                            <span class="text-2xl font-black text-cyan-600">৭০ ৳</span>
+                        <!-- বড় ও স্পষ্ট ৩ডি প্রাইস -->
+                        <div class="flex items-center justify-between py-2.5 border-t border-slate-100 mb-3 bg-sky-50/50 px-3 rounded-xl border border-sky-100">
+                            <span class="text-sm sm:text-base font-black text-3d-price">অফার প্রাইস:</span>
+                            <span class="text-2xl sm:text-3xl font-black text-3d-price">৭০ ৳</span>
                         </div>
 
                         <div class="grid grid-cols-2 gap-2">
@@ -530,7 +531,7 @@
                 </div>
 
                 <!-- প্রোডাক্ট ৩ -->
-                <div class="product-card card-theme-purple p-5 flex flex-col justify-between">
+                <div class="product-card p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-50 border border-slate-100 p-2 flex items-center justify-center min-h-[200px]">
                             <img
@@ -555,9 +556,10 @@
                     </div>
 
                     <div>
-                        <div class="flex items-center justify-between py-2 border-t border-slate-100 mb-3">
-                            <span class="text-xs font-bold text-slate-500">অফার প্রাইস:</span>
-                            <span class="text-2xl font-black text-purple-600">৯৯ ৳</span>
+                        <!-- বড় ও স্পষ্ট ৩ডি প্রাইস -->
+                        <div class="flex items-center justify-between py-2.5 border-t border-slate-100 mb-3 bg-sky-50/50 px-3 rounded-xl border border-sky-100">
+                            <span class="text-sm sm:text-base font-black text-3d-price">অফার প্রাইস:</span>
+                            <span class="text-2xl sm:text-3xl font-black text-3d-price">৯৯ ৳</span>
                         </div>
 
                         <div class="grid grid-cols-2 gap-2">
@@ -574,7 +576,7 @@
                 </div>
 
                 <!-- প্রোডাক্ট ৪ -->
-                <div class="product-card card-theme-pink p-5 flex flex-col justify-between">
+                <div class="product-card p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-50 border border-slate-100 p-2 flex items-center justify-center min-h-[200px]">
                             <img
@@ -599,9 +601,10 @@
                     </div>
 
                     <div>
-                        <div class="flex items-center justify-between py-2 border-t border-slate-100 mb-3">
-                            <span class="text-xs font-bold text-slate-500">অফার প্রাইস:</span>
-                            <span class="text-2xl font-black text-rose-600">৯৯ ৳</span>
+                        <!-- বড় ও স্পষ্ট ৩ডি প্রাইস -->
+                        <div class="flex items-center justify-between py-2.5 border-t border-slate-100 mb-3 bg-sky-50/50 px-3 rounded-xl border border-sky-100">
+                            <span class="text-sm sm:text-base font-black text-3d-price">অফার প্রাইস:</span>
+                            <span class="text-2xl sm:text-3xl font-black text-3d-price">৯৯ ৳</span>
                         </div>
 
                         <div class="grid grid-cols-2 gap-2">
@@ -618,7 +621,7 @@
                 </div>
 
                 <!-- প্রোডাক্ট ৫ -->
-                <div class="product-card card-theme-amber p-5 flex flex-col justify-between">
+                <div class="product-card p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-50 border border-slate-100 p-2 flex items-center justify-center min-h-[200px]">
                             <img
@@ -643,9 +646,10 @@
                     </div>
 
                     <div>
-                        <div class="flex items-center justify-between py-2 border-t border-slate-100 mb-3">
-                            <span class="text-xs font-bold text-slate-500">অফার প্রাইস:</span>
-                            <span class="text-2xl font-black text-amber-600">৫০ ৳</span>
+                        <!-- বড় ও স্পষ্ট ৩ডি প্রাইস -->
+                        <div class="flex items-center justify-between py-2.5 border-t border-slate-100 mb-3 bg-sky-50/50 px-3 rounded-xl border border-sky-100">
+                            <span class="text-sm sm:text-base font-black text-3d-price">অফার প্রাইস:</span>
+                            <span class="text-2xl sm:text-3xl font-black text-3d-price">৫০ ৳</span>
                         </div>
 
                         <div class="grid grid-cols-2 gap-2">
@@ -662,7 +666,7 @@
                 </div>
 
                 <!-- প্রোডাক্ট ৬ -->
-                <div class="product-card card-theme-emerald p-5 flex flex-col justify-between">
+                <div class="product-card p-5 flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-50 border border-slate-100 p-2 flex items-center justify-center min-h-[200px]">
                             <img
@@ -687,9 +691,10 @@
                     </div>
 
                     <div>
-                        <div class="flex items-center justify-between py-2 border-t border-slate-100 mb-3">
-                            <span class="text-xs font-bold text-slate-500">অফার প্রাইস:</span>
-                            <span class="text-2xl font-black text-emerald-600">৫০ ৳</span>
+                        <!-- বড় ও স্পষ্ট ৩ডি প্রাইস -->
+                        <div class="flex items-center justify-between py-2.5 border-t border-slate-100 mb-3 bg-sky-50/50 px-3 rounded-xl border border-sky-100">
+                            <span class="text-sm sm:text-base font-black text-3d-price">অফার প্রাইস:</span>
+                            <span class="text-2xl sm:text-3xl font-black text-3d-price">৫০ ৳</span>
                         </div>
 
                         <div class="grid grid-cols-2 gap-2">
@@ -718,25 +723,25 @@
                 <p class="text-slate-500 text-sm mt-2">আমাদের গ্রাহকদের বাস্তব অভিজ্ঞতা ও মতামত</p>
             </div>
 
-            <!-- রিভিউ সাবমিট ফর্ম -->
-            <div class="max-w-xl mx-auto bg-white border border-slate-200 p-6 rounded-3xl mb-10 shadow-lg">
-                <h3 class="text-sm font-bold text-slate-800 mb-4 text-center flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-pen-to-square text-cyan-600"></i>
+            <!-- স্পষ্ট ও আকর্ষণীয় রিভিউ ফর্ম -->
+            <div class="max-w-xl mx-auto bg-white border-2 border-slate-300 p-6 sm:p-7 rounded-3xl mb-10 shadow-xl">
+                <h3 class="text-sm sm:text-base font-extrabold text-slate-800 mb-4 text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-pen-to-square text-cyan-600 text-lg"></i>
                     আপনার মূল্যবান রিভিউ শেয়ার করুন
                 </h3>
 
-                <form id="userReviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-3.5">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <form id="userReviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                         <input
                             type="text"
                             id="revName"
                             required
                             placeholder="আপনার নাম"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-cyan-500 transition">
+                            class="w-full clear-input rounded-xl px-4 py-3 text-xs sm:text-sm font-semibold">
 
                         <select
                             id="revRating"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-amber-600 focus:outline-none focus:border-cyan-500 transition">
+                            class="w-full clear-input rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-amber-600">
                             <option value="5">⭐⭐⭐⭐⭐ (৫ স্টার)</option>
                             <option value="4.5">⭐⭐⭐⭐½ (৪.৫ স্টার)</option>
                             <option value="4">⭐⭐⭐⭐ (৪ স্টার)</option>
@@ -749,40 +754,40 @@
 
                     <textarea
                         id="revComment"
-                        rows="2"
+                        rows="3"
                         required
                         placeholder="বান্ডিলটি আপনার কেমন লেগেছে লিখুন..."
-                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-cyan-500 transition">
+                        class="w-full clear-input rounded-xl px-4 py-3 text-xs sm:text-sm font-medium">
                     </textarea>
 
                     <button
                         type="submit"
-                        class="w-full bg-gradient-to-r from-cyan-600 via-indigo-600 to-purple-600 hover:opacity-95 text-white font-bold py-3 rounded-xl text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2">
+                        class="w-full bg-gradient-to-r from-cyan-600 via-indigo-600 to-purple-600 hover:opacity-95 text-white font-black py-3.5 rounded-xl text-xs sm:text-sm shadow-lg transition flex items-center justify-center gap-2">
                         <i class="fa-solid fa-paper-plane"></i>
                         রিভিউ সাবমিট করুন
                     </button>
                 </form>
             </div>
 
-            <!-- রেটিং ওভারভিউ -->
+            <!-- রেটিং ওভারভিউ (৩ডি গোল্ডেন স্টার) -->
             <div class="text-center mb-10">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold mb-3 shadow-sm">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-amber-800 text-xs font-bold mb-3 shadow-sm">
                     <i class="fa-solid fa-certificate text-amber-500"></i>
                     Verified Customer Feedback
                 </div>
 
-                <div class="flex items-center justify-center gap-1.5 text-amber-500 text-base">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half-stroke"></i>
+                <div class="flex items-center justify-center gap-1.5 text-base sm:text-lg">
+                    <i class="fa-solid fa-star gold-star-3d"></i>
+                    <i class="fa-solid fa-star gold-star-3d"></i>
+                    <i class="fa-solid fa-star gold-star-3d"></i>
+                    <i class="fa-solid fa-star gold-star-3d"></i>
+                    <i class="fa-solid fa-star-half-stroke gold-star-3d"></i>
 
-                    <span class="text-slate-900 font-black ml-1.5 text-lg">
+                    <span class="text-slate-900 font-black ml-2 text-lg sm:text-xl">
                         ৪.৯ / ৫.০
                     </span>
 
-                    <span class="text-slate-500 ml-1 text-xs">
+                    <span class="text-slate-500 ml-1 text-xs sm:text-sm">
                         (৫০০+ সফল অর্ডার)
                     </span>
                 </div>
@@ -795,7 +800,7 @@
                 <button
                     id="loadMoreRevBtn"
                     onclick="loadMoreReviews()"
-                    class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-bold px-6 py-2.5 rounded-full text-xs shadow-sm transition">
+                    class="bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300 font-bold px-6 py-2.5 rounded-full text-xs shadow-sm transition">
                     আরো রিভিউ দেখুন
                     <i class="fa-solid fa-angles-down ml-1.5"></i>
                 </button>
@@ -1020,17 +1025,18 @@
 
     let displayedCount = 9;
 
+    /* ৩ডি গোল্ডেন স্টার ফাংশন */
     function getStarIcons(rating) {
         let stars = '';
         const fullStars = Math.floor(rating);
         const hasHalf = rating % 1 !== 0;
 
         for (let i = 0; i < fullStars; i++) {
-            stars += '<i class="fa-solid fa-star text-amber-500"></i>';
+            stars += '<i class="fa-solid fa-star gold-star-3d mr-0.5"></i>';
         }
 
         if (hasHalf) {
-            stars += '<i class="fa-solid fa-star-half-stroke text-amber-500"></i>';
+            stars += '<i class="fa-solid fa-star-half-stroke gold-star-3d mr-0.5"></i>';
         }
 
         return stars;
@@ -1056,7 +1062,7 @@
                             ${rev.initial || rev.name.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                            <div style="font-size:14px; font-weight:700; color:#0f172a;">
+                            <div style="font-size:14px; font-weight:800; color:#0f172a;">
                                 ${rev.name}
                             </div>
                             <div style="font-size:11px; color:#64748b;">
@@ -1065,7 +1071,7 @@
                         </div>
                     </div>
 
-                    <div style="margin-bottom:8px; font-size:11px;">
+                    <div style="margin-bottom:8px; font-size:13px;">
                         ${getStarIcons(rev.rating)}
                     </div>
 
@@ -1074,11 +1080,11 @@
                     </p>
                 </div>
 
-                <div style="margin-top:14px; padding-top:10px; border-top:1px solid #f1f5f9; display:flex; justify-content:space-between; font-size:11px; color:#64748b;">
-                    <span style="color:#059669; font-weight:600;">
+                <div style="margin-top:14px; padding-top:10px; border-top:1px solid #e2e8f0; display:flex; justify-content:space-between; font-size:11px; color:#64748b;">
+                    <span style="color:#059669; font-weight:700;">
                         <i class="fa-solid fa-bag-shopping"></i> ভেরিফাইড ক্রয়
                     </span>
-                    <span class="text-slate-400">Technography</span>
+                    <span class="text-slate-400 font-bold">Technography</span>
                 </div>
             `;
             container.appendChild(card);
