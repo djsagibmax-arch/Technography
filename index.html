@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>প্রিমিয়াম ডিজিটাল প্রোডাক্ট কালেকশন | Technography</title>
+    <title>প্রিমিয়াম ডিজিটাল প্রোডাক্ট কালেকশন | TECHNOGRAPHY</title>
 
     <meta name="description" content="আপনার ফেসবুক পেজ ও ইউটিউব চ্যানেল ভাইরাল করার জন্য প্রিমিয়াম AI Reels, কোর্স ও ডিজিটাল কালেকশন।">
 
@@ -54,6 +54,34 @@
             image-rendering: crisp-edges;
             max-width: 100%;
             height: auto;
+        }
+
+        /* আকর্ষণীয় ৩ডি লোগো স্টাইল */
+        .brand-logo-3d {
+            font-size: 1.55rem;
+            letter-spacing: 0.08em;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #0891b2;
+            text-shadow: 
+                0 1px 0 #0e7490,
+                0 2px 0 #155e75,
+                0 3px 0 #164e63,
+                0 4px 6px rgba(8, 145, 178, 0.4),
+                0 8px 15px rgba(0, 0, 0, 0.15);
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        @media (min-width: 640px) {
+            .brand-logo-3d {
+                font-size: 2rem;
+                letter-spacing: 0.1em;
+            }
+        }
+
+        .brand-logo-3d:hover {
+            transform: translateY(-1px) scale(1.02);
         }
 
         /* লাল ৩ডি টাইমার নাম্বার */
@@ -145,7 +173,7 @@
             font-size: 15px !important;
         }
 
-        /* ফ্লোটিং যোগাযোগ বাটন (স্ক্রিনের বাইরে যাবে না) */
+        /* ফ্লোটিং যোগাযোগ বাটন */
         .floating-contact-bar {
             position: fixed;
             right: 6px;
@@ -193,7 +221,6 @@
             background: linear-gradient(135deg, #1877F2 0%, #0c56be 100%);
         }
 
-        /* অর্ডার বাটন ফিক্স (কখনোই সাদা দেখাবে না) */
         .order-btn-solid {
             background: linear-gradient(135deg, #059669 0%, #0d9488 100%) !important;
             color: #ffffff !important;
@@ -280,7 +307,7 @@
                     </div>
                     <div>
                         <div class="text-xs font-bold text-slate-800 group-hover:text-emerald-300 transition">AI Background Remover</div>
-                        <div class="text-[10px] text-slate-500">১ ক্লিকে স্বচ্ছ PNG কাটআউট</div>
+                        <div class="text-[10px] text-slate-400">১ ক্লিকে স্বচ্ছ PNG কাটআউট</div>
                     </div>
                 </a>
 
@@ -290,7 +317,7 @@
                     </div>
                     <div>
                         <div class="text-xs font-bold text-slate-800 group-hover:text-cyan-300 transition">AI Voice Generator</div>
-                        <div class="text-[10px] text-slate-500">টেক্সট দিয়ে ভয়েসওভার</div>
+                        <div class="text-[10px] text-slate-400">টেক্সট দিয়ে ভয়েসওভার</div>
                     </div>
                 </a>
 
@@ -300,7 +327,7 @@
                     </div>
                     <div>
                         <div class="text-xs font-bold text-slate-800 group-hover:text-pink-300 transition">AI Auto Subtitle</div>
-                        <div class="text-[10px] text-slate-500">ভিডিওর জন্য অটো ক্যাপশন</div>
+                        <div class="text-[10px] text-slate-400">ভিডিওর জন্য অটো ক্যাপশন</div>
                     </div>
                 </a>
 
@@ -310,7 +337,7 @@
                     </div>
                     <div>
                         <div class="text-xs font-bold text-slate-800 group-hover:text-blue-300 transition">Image Resizer</div>
-                        <div class="text-[10px] text-slate-500">সাইজ ও রেজুলেশন পরিবর্তন</div>
+                        <div class="text-[10px] text-slate-400">সাইজ ও রেজুলেশন পরিবর্তন</div>
                     </div>
                 </a>
 
@@ -320,7 +347,7 @@
                     </div>
                     <div>
                         <div class="text-xs font-bold text-slate-800 group-hover:text-amber-300 transition">Image Compressor</div>
-                        <div class="text-[10px] text-slate-500">ছবির সাইজ (KB) কমান</div>
+                        <div class="text-[10px] text-slate-400">ছবির সাইজ (KB) কমান</div>
                     </div>
                 </a>
             </div>
@@ -333,11 +360,13 @@
         </div>
     </aside>
 
-    <!-- হেডার -->
+    <!-- হেডার (আপডেট করা ৩ডি লোগো সহ) -->
     <header class="sticky top-0 z-30 backdrop-blur-xl bg-white/95 border-b border-slate-200 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="index.html" class="text-xl sm:text-2xl font-black tracking-wider text-cyan-600 no-underline">
-                Technography
+            
+            <!-- পরিবর্তিত বড় হাতের আকর্ষণীয় ৩ডি লোগো -->
+            <a href="index.html" class="brand-logo-3d no-underline">
+                TECHNOGRAPHY
             </a>
 
             <div class="flex items-center gap-2">
@@ -669,13 +698,12 @@
     <!-- ফুটার -->
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-slate-500 text-xs">
         <p>
-            &copy; 2026 Technography. All rights reserved.
+            &copy; 2026 TECHNOGRAPHY. All rights reserved.
         </p>
     </footer>
 
     <!-- স্ক্রিপ্টস -->
     <script>
-    // অটো-হাইড WhatsApp ও Facebook বাটন স্ক্রিপ্ট (২ সেকেন্ড পর হাইড)
     let idleTimer = null;
     const contactBar = document.getElementById('floatingContactBar');
 
