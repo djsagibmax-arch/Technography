@@ -44,10 +44,11 @@
             max-width: 800px;
             margin: 0 auto 40px;
             padding: 30px;
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
         }
 
         .success-icon {
@@ -69,7 +70,7 @@
             padding: 30px;
             text-align: center;
             margin-bottom: 40px;
-            box-shadow: 0 15px 30px rgba(217, 70, 239, 0.2);
+            box-shadow: 0 15px 35px rgba(217, 70, 239, 0.25);
         }
 
         .download-grid {
@@ -85,7 +86,7 @@
             border: 1px solid #334155;
             border-radius: 20px;
             padding: 25px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         }
 
         .folder-card:hover {
@@ -151,7 +152,7 @@
             font-weight: 900;
             text-decoration: none;
             margin-top: 15px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, color 0.3s;
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
@@ -343,53 +344,4 @@
             <a href="https://drive.google.com/drive/folders/1Oel7oBvAtiMCOV7ggCwzDW2kdQ1D63_k" target="_blank" class="drive-btn"><span>Art & Craft Master</span> <i class="fab fa-google-drive"></i></a>
         </div>
 
-        <!-- Category 10: Lifestyle -->
-        <div class="folder-card lg:col-span-2">
-            <h3 class="folder-title"><span>🌟</span> লাইফস্টাইল, গ্যাজেট ও অন্যান্য</h3>
-            <div class="grid sm:grid-cols-2 gap-x-4">
-                <a href="https://drive.google.com/drive/folders/1feSnMmwUSPFIAPISubHppC33HPp88NGv" target="_blank" class="drive-btn"><span>Romantic & Song Reels</span> <i class="fab fa-google-drive"></i></a>
-                <a href="https://drive.google.com/drive/folders/12lA8PVS6z1nB0iQtHkjtX1zy60Fqvn0I" target="_blank" class="drive-btn"><span>Romantic Viral Reels 2</span> <i class="fab fa-google-drive"></i></a>
-                <a href="https://drive.google.com/drive/folders/138ba2ixQumbYTAaim-L2D83O-UV8rVxF" target="_blank" class="drive-btn"><span>Aesthetic Reels Collection</span> <i class="fab fa-google-drive"></i></a>
-                <a href="https://drive.google.com/drive/folders/1EEy77Jb5Wh5Eza8-35WtnIJlJhM_IEG4" target="_blank" class="drive-btn"><span>Cute Cat Viral Reels 1</span> <i class="fab fa-google-drive"></i></a>
-                <a href="https://drive.google.com/drive/folders/1Z09qwoV6UN6DiYw-6c0h2K06oVROyQmq" target="_blank" class="drive-btn"><span>Cute Cat Viral Reels 2</span> <i class="fab fa-google-drive"></i></a>
-                <a href="https://drive.google.com/drive/folders/15eIj2GWK1VpRw_QUEsSWSK9tNoPzKbKh" target="_blank" class="drive-btn"><span>Smart Gadget Reels</span> <i class="fab fa-google-drive"></i></a>
-                <a href="https://drive.google.com/drive/folders/1U4vqkFPQyw97hxny8DX1MArS_hUgWnzQ" target="_blank" class="drive-btn"><span>Meshing & Missing Tools</span> <i class="fab fa-google-drive"></i></a>
-                <a href="https://drive.google.com/drive/folders/1ev4YgEAw55izgE5mO6NTe0fswrrQTTva" target="_blank" class="drive-btn"><span>Mega Super Cars Reels</span> <i class="fab fa-google-drive"></i></a>
-                <a href="https://drive.google.com/drive/folders/1TfnOG2CqV_Gt5itp4E9AKeC0xCz4cJvO" target="_blank" class="drive-btn"><span>Space Content Master</span> <i class="fab fa-google-drive"></i></a>
-                <a href="https://drive.google.com/drive/folders/1hpwetf4zqIs1Yt0R0g8dBREDJ_oN61oW" target="_blank" class="drive-btn"><span>Car Reels & Space Mix</span> <i class="fab fa-google-drive"></i></a>
-                <a href="https://drive.google.com/drive/folders/1ZyZnAVP0ReK4QSiNjQ_F4I7A_26pvrip" target="_blank" class="drive-btn"><span>New Trending Reels</span> <i class="fab fa-google-drive"></i></a>
-            </div>
-        </div>
-
-    </div>
-    
-    <div class="text-center mt-12 text-slate-500 font-medium">
-        <p>⚠️ লিংকে ক্লিক করলে আপনাকে সরাসরি গুগল ড্রাইভে নিয়ে যাওয়া হবে। সেখান থেকে আপনার প্রয়োজনীয় কন্টেন্ট ডাউনলোড করে ব্যবহার করুন।</p>
-    </div>
-
-</div>
-
-<!-- Facebook Purchase Event Tracking Code -->
-<script>
-  (function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const hasFbclid = urlParams.has('fbclid');
-    const fromFacebookReferrer = document.referrer.includes('facebook.com') || document.referrer.includes('fb.com');
-
-    if (hasFbclid || fromFacebookReferrer) {
-      if (!localStorage.getItem("mega_bundle_purchased")) {
-        fbq('track', 'Purchase', {
-          value: 300.00,
-          currency: 'BDT'
-        });
-        localStorage.setItem("mega_bundle_purchased", "true");
-        console.log("Verified Ad Buyer: Purchase event fired!");
-      }
-    } else {
-      console.log("Non-Ad / WhatsApp Visit: Purchase tracking ignored.");
-    }
-  })();
-</script>
-
-</body>
-</html>
+        <!-- Category 10: Lifestyle
