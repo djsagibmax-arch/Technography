@@ -143,10 +143,21 @@ async function handleFormSubmit(event) {
         return;
     }
 
-    if (phone.startsWith('01')) {
-        phone = '88' + phone;
-    } else if (phone.startsWith('+88')) {
-        phone = phone.replace('+', '');
+    // ফোন নম্বরের স্ট্যান্ডার্ড ফরম্যাট (+88 সহ) নিশ্চিত করা
+    let rawPhone = phone;
+    if (rawPhone.startsWith('01')) {
+        phone = '88' + rawPhone;
+    } else if (rawPhone.startsWith('+88')) {
+        phone = rawPhone.replace('+', '');
+    }
+
+    // --- Meta Manual Advanced Matching সেটআপ ---
+    // গ্রাহকের ফোন ও নাম পিক্সেল ট্র্যাকিংয়ে ডায়নামিকালি পাঠানো
+    if (typeof fbq === 'function') {
+        fbq('init', '1913791776249045', {
+            ph: phone,
+            fn: name.toLowerCase()
+        });
     }
 
     submitBtn.disabled = true;
@@ -203,6 +214,19 @@ async function handleFormSubmit(event) {
             resetSubmitBtn(submitBtn);
             return;
         }
+
+        // --- Meta Purchase Event ফায়ার করা ---
+        if (typeof fbq === 'function') {
+            fbq('track', 'Purchase', {
+                content_name: CURRENT_PRODUCT.name,
+                content_type: 'product',
+                value: receivedAmount,
+                currency: 'BDT'
+            });
+        }
+
+        // ভেরিফাইড পারচেজ লোকালস্টোরেজে সংরক্ষণ (রিভিউ দেওয়ার জন্য)
+        localStorage.setItem('technography_order_success', 'true');
 
         // ৫. Render-এর পাইথন বটের কাছে ডাইনামিক ডেটা পাঠানো
         fetch("https://technography-whatsapp-bot.onrender.com/send-confirmation", { 
