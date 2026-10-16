@@ -152,7 +152,6 @@ async function handleFormSubmit(event) {
     }
 
     // --- Meta Manual Advanced Matching সেটআপ ---
-    // গ্রাহকের ফোন ও নাম পিক্সেল ট্র্যাকিংয়ে ডায়নামিকালি পাঠানো
     if (typeof fbq === 'function') {
         fbq('init', '1913791776249045', {
             ph: phone,
@@ -225,21 +224,27 @@ async function handleFormSubmit(event) {
             });
         }
 
-        // ভেরিফাইড পারচেজ লোকালস্টোরেজে সংরক্ষণ (রিভিউ দেওয়ার জন্য)
+        // ভেরিফাইড পারচেজ লোকালস্টোরেজে সংরক্ষণ
         localStorage.setItem('technography_order_success', 'true');
 
-        // ৫. Render-এর পাইথন বটের কাছে ডাইনামিক ডেটা পাঠানো
-        fetch("https://technography-whatsapp-bot.onrender.com/send-confirmation", { 
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                phone: phone,
-                name: name,
-                product: CURRENT_PRODUCT.name,
-                amount: String(receivedAmount),
-                link: CURRENT_PRODUCT.link
-            })
-        }).catch(e => console.log("Render Bot call error:", e));
+        // ৫. Cloudflare Workers-এর কাছে ডায়নামিক ডেটা পাঠানো
+        try {
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> হোয়াটসঅ্যাপে কনফার্মেশন পাঠানো হচ্ছে...';
+            
+            await fetch("https://requirements-txt.djsagibmax.workers.dev/send-confirmation", { 
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    phone: phone,
+                    name: name,
+                    product: CURRENT_PRODUCT.name,
+                    amount: String(receivedAmount),
+                    link: CURRENT_PRODUCT.link
+                })
+            });
+        } catch (botErr) {
+            console.error("Cloudflare Bot call error:", botErr);
+        }
 
         showToast("✅ পেমেন্ট সফল হয়েছে! অ্যাক্সেস পেজে নিয়ে যাওয়া হচ্ছে...");
 
