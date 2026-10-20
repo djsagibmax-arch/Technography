@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#070b18">
 
-    <!-- Meta Pixel Base Code -->
+    <!-- Meta Pixel Base Code: পেজ সবার জন্য খোলা থাকবে, কিন্তু পারচেজ ট্র্যাক হবে শুধু পেমেন্ট সম্পন্ন হলে -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -17,8 +17,18 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
+    
     fbq('init', '1913791776249045');
-    fbq('track', 'PageView');
+    fbq('track', 'PageView'); // সাধারণ ভিজিট বা পেজ ভিউ ট্র্যাক করবে
+
+    // চেক করা হচ্ছে কাস্টমার পেমেন্ট করে এসেছে কি না
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentStatus = urlParams.get('status');
+
+    if (paymentStatus === 'success') {
+        // আসল পারচেজ বা সেলস কেবল তখনই ফায়ার হবে যখন পেমেন্ট সাকসেস হবে
+        fbq('track', 'Purchase', {currency: 'BDT', value: 300});
+    }
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"
@@ -285,7 +295,12 @@
             </div>
         </div>
 
-        <!-- জরুরি নির্দেশনা ও সাপোর্ট -->
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 text-center mb-8">
-            <p class="text-xs sm:text-sm text-amber-300 font-semibold mb-2">
-                ⚠️ ফাইলগুলো ডাউনলোড করে আপনার
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 border-t border-slate-800 text-xs text-slate-500">
+        &copy; Technography. All rights reserved.
+    </footer>
+
+</body>
+</html>
