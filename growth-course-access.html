@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#070b18">
 
-    <!-- Meta Pixel Base Code -->
+    <!-- Meta Pixel Base Code: পেজ সবার জন্য খোলা, কিন্তু পারচেজ ট্র্যাক হবে শুধু পেমেন্ট সম্পন্ন হলে -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -17,8 +17,9 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
+    
     fbq('init', '1913791776249045');
-    fbq('track', 'PageView');
+    fbq('track', 'PageView'); // সাধারণ ভিজিট বা পেজ ভিউ ট্র্যাক করবে
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"
@@ -149,18 +150,25 @@
 <!-- স্মার্ট ফেসবুক পারচেজ ট্র্যাকিং (৭০ ৳ - ডুপ্লিকেট-সুরক্ষিত) -->
 <script>
   (function() {
+    // চেক করা হচ্ছে কাস্টমার পেমেন্ট করে এসেছে কি না
     const urlParams = new URLSearchParams(window.location.search);
-    const trxID = urlParams.get('trx') || 'ORDER_COURSE_' + Date.now();
+    const paymentStatus = urlParams.get('status');
 
-    // পেজ রিফ্রেশে যাতে ২ বার কাউন্ট না হয়
-    if (!sessionStorage.getItem("tracked_purchase_" + trxID)) {
-      fbq('track', 'Purchase', {
-        value: 70.00,
-        currency: 'BDT'
-      });
+    if (paymentStatus === 'success') {
+        const trxID = urlParams.get('trx') || 'ORDER_COURSE_' + Date.now();
 
-      sessionStorage.setItem("tracked_purchase_" + trxID, "true");
-      console.log("Purchase Event Fired: 70 BDT");
+        // পেজ রিফ্রেশে যাতে ২ বার কাউন্ট না হয়
+        if (!sessionStorage.getItem("tracked_purchase_" + trxID)) {
+          fbq('track', 'Purchase', {
+            value: 70.00,
+            currency: 'BDT'
+          });
+
+          sessionStorage.setItem("tracked_purchase_" + trxID, "true");
+          console.log("Purchase Event Fired: 70 BDT");
+        }
+    } else {
+        console.warn("Direct Access Detected: Fake purchase pixel tracking disabled.");
     }
   })();
 </script>
