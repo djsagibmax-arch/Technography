@@ -3,7 +3,7 @@ const supabaseUrl = 'https://safymsagxrjymhfdzkph.supabase.co';
 const supabaseKey = 'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv';
 const client = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-// ৬টি প্রোডাক্টের সম্পূর্ণ কনফিগারেশন (নাম, দাম ও হিডেন লিংক)
+// ৬টি প্রোডাক্টের সম্পূর্ণ কনফিগারেশন (নতুন প্রাইস আপডেট করা হয়েছে)
 const PRODUCTS_DATA = {
     '1': { 
         name: 'Mega Bundle (All in One)', 
@@ -12,22 +12,22 @@ const PRODUCTS_DATA = {
     },
     '2': { 
         name: 'Facebook & YouTube Growth Course', 
-        price: 70, 
+        price: 99, 
         link: 'https://technographybd.xyz/growth-course-access.html' 
     },
     '3': { 
         name: '1.5 Lakh Mixed Mega Reels Bundle', 
-        price: 99, 
+        price: 180, 
         link: 'https://technographybd.xyz/reels-bundle-access.html' 
     },
     '4': { 
         name: 'Movie & Drama Clips Collection', 
-        price: 99, 
+        price: 180, 
         link: 'https://technographybd.xyz/movie-clips-access.html' 
     },
     '5': { 
         name: 'AI Food & Fitness Videos', 
-        price: 50, 
+        price: 99, 
         link: 'https://technographybd.xyz/food-fitness-access.html' 
     },
     '6': { 
