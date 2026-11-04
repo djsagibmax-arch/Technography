@@ -177,6 +177,17 @@
             background: #000;
             display: block;
         }
+
+        /* গুগল ক্রোম বা ব্রাউজারের ডাউনলোড অপশন হাইড করার সিএসএস */
+        video::-internal-media-controls-download-button {
+            display:none !important;
+        }
+        video::-webkit-media-controls-enclosure {
+            overflow:hidden !important;
+        }
+        video::-webkit-media-controls-panel {
+            width: calc(100% + 30px);
+        }
     </style>
 </head>
 <body class="bg-[#070b18] text-slate-100 font-sans antialiased">
@@ -267,43 +278,43 @@
                         <div class="sample-label"><i class="fas fa-play-circle text-cyan-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.1.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.1.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.2.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.2.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.3.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.3.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.4.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.4.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.5.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.5.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.6.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.6.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/7.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/7.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/8.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/8.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.9.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.9.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.10.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.10.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.11.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.11.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/13.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/13.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Words.Have.Power.1080P_HD.720P_HD.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Words.Have.Power.1080P_HD.720P_HD.mp4#t=0.01"></video>
                             </div>
                         </div>
                     </div>
@@ -327,22 +338,22 @@
                         <div class="sample-label"><i class="fas fa-play-circle text-pink-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
                             <div class="video-card-wide">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection1.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection1.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-wide">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection2.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection2.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-wide">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection3.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection3.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-wide">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection4.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection4.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-wide">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection5.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection5.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-wide">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection6.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection6.mp4#t=0.01"></video>
                             </div>
                         </div>
                     </div>
@@ -372,13 +383,13 @@
                         <div class="sample-label"><i class="fas fa-play-circle text-yellow-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos1.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos1.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos2.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos2.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos3.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos3.mp4#t=0.01"></video>
                             </div>
                         </div>
                     </div>
@@ -394,16 +405,16 @@
                         <div class="sample-label"><i class="fas fa-play-circle text-green-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos1.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos1.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos2.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos2.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos3.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos3.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos4.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos4.mp4#t=0.01"></video>
                             </div>
                         </div>
                     </div>
@@ -419,16 +430,16 @@
                         <div class="sample-label"><i class="fas fa-play-circle text-emerald-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection1.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection1.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection2.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection2.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection3.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection3.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection4.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection4.mp4#t=0.01"></video>
                             </div>
                         </div>
                     </div>
@@ -444,22 +455,22 @@
                         <div class="sample-label"><i class="fas fa-play-circle text-pink-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels1.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels1.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels2.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels2.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels3.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels3.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels4.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels4.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels5.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels5.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels6.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels6.mp4#t=0.01"></video>
                             </div>
                         </div>
                     </div>
@@ -475,28 +486,28 @@
                         <div class="sample-label"><i class="fas fa-play-circle text-blue-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels1.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels1.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels2.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels2.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels3.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels3.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels4.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels4.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels5.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels5.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels6.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels6.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels7.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels7.mp4#t=0.01"></video>
                             </div>
                             <div class="video-card-reels">
-                                <video class="sample-video-element" preload="none" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels8.mp4#t=0.1"></video>
+                                <video class="sample-video-element" preload="auto" controlsList="nodownload" oncontextmenu="return false;" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels8.mp4#t=0.01"></video>
                             </div>
                         </div>
                     </div>
@@ -557,18 +568,29 @@
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
-    <!-- স্ক্রিপ্ট: একটি চালু করলে বাকি সব বন্ধ হওয়ার শক্তিশালী ইভেন্ট হ্যান্ডলার -->
+    <!-- স্ক্রিপ্ট: ডাউনলোড ব্লক ও সিঙ্গেল ভিডিও প্লে এনফোর্সমেন্ট -->
     <script>
         const allVideos = document.querySelectorAll('video');
 
         allVideos.forEach(video => {
-            // যখনই কোনো ভিডিও প্লে হবে, তৎক্ষণাৎ বাকি সব ভিডিও থেমে যাবে
+            // ডাউনলোড অপশন ও রাইট ক্লিক বন্ধ রাখা
+            video.setAttribute('controlsList', 'nodownload');
+            video.oncontextmenu = () => false;
+
+            // যেকোনো ভিডিও প্লে হলে সাথে সাথে বাকি সব পজ হয়ে যাওয়া
             video.addEventListener('play', () => {
                 allVideos.forEach(otherVideo => {
                     if (otherVideo !== video && !otherVideo.paused) {
                         otherVideo.pause();
                     }
                 });
+            });
+
+            // স্ক্রিনের প্রথম ফ্রেম অটোমেটিক থাম্বনেইল হিসেবে সেট করা
+            video.addEventListener('loadeddata', () => {
+                if (video.currentTime === 0) {
+                    video.currentTime = 0.01;
+                }
             });
         });
 
