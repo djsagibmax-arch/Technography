@@ -110,16 +110,16 @@
 
         /* স্যাম্পল ভিডিও কন্টেইনার */
         .sample-video-box {
-            margin-top: 18px;
-            background: rgba(11, 19, 36, 0.95);
+            margin-top: 20px;
+            background: rgba(11, 19, 36, 0.9);
             padding: 14px 10px;
             border-radius: 20px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(56, 189, 248, 0.25);
             text-align: left;
             width: 100%;
         }
         .sample-label {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.08em;
@@ -145,10 +145,10 @@
             border-radius: 10px;
         }
 
-        /* ৯:১৬ (রিলস সাইজ) */
+        /* রিলস ফ্রেম (৯:১৬) */
         .video-card-reels {
-            flex: 0 0 220px;
-            height: 380px;
+            flex: 0 0 200px;
+            height: 350px;
             border-radius: 16px;
             overflow: hidden;
             background: #000;
@@ -158,11 +158,11 @@
             cursor: pointer;
         }
 
-        /* ১৬:৯ (মুভি ও লং ভিডিও সাইজ) */
+        /* মুভি ও লং ক্লিপ ফ্রেম (১৬:৯) */
         .video-card-wide {
-            flex: 0 0 92%;
-            max-width: 330px;
-            height: 220px;
+            flex: 0 0 88%;
+            max-width: 320px;
+            height: 200px;
             border-radius: 16px;
             overflow: hidden;
             background: #000;
@@ -170,18 +170,6 @@
             scroll-snap-align: center;
             position: relative;
             cursor: pointer;
-        }
-
-        .video-thumbnail {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.9;
-            transition: transform 0.3s;
-        }
-        .video-card-reels:hover .video-thumbnail,
-        .video-card-wide:hover .video-thumbnail {
-            transform: scale(1.05);
         }
 
         .play-overlay {
@@ -190,8 +178,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             pointer-events: none;
+            transition: opacity 0.2s;
         }
         .play-icon-circle {
             width: 52px;
@@ -211,84 +200,15 @@
             transform: scale(1.15);
         }
 
-        /* ১০০% ফুল স্ক্রিন পপআপ প্লেয়ার মডাল */
-        #video-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.92);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(8px);
-            padding: 15px;
-        }
-        .modal-content {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            background: #000;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1.5px solid rgba(56, 189, 248, 0.4);
-            box-shadow: 0 0 40px rgba(0,0,0,0.9);
-        }
-        .modal-aspect-reels {
-            height: 80vh;
-            max-height: 700px;
-        }
-        .modal-aspect-wide {
-            height: 56.25vw;
-            max-height: 380px;
-        }
-        .modal-content iframe {
+        .video-player {
             width: 100%;
             height: 100%;
-            border: none;
-        }
-        .modal-close-btn {
-            position: absolute;
-            top: -45px;
-            right: 0;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .modal-close-btn:hover {
-            background: #ef4444;
-        }
-        /* ড্রাইভের তীর চিহ্ন ঢাকা ও ব্লক রাখার সেকশন */
-        .modal-block-arrow {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 65px;
-            height: 50px;
+            object-fit: contain;
             background: #000;
-            z-index: 25;
-            cursor: default;
         }
     </style>
 </head>
 <body class="bg-[#070b18] text-slate-100 font-sans antialiased">
-
-    <!-- ফুল স্ক্রিন ভিডিও মডাল -->
-    <div id="video-modal">
-        <div class="modal-content" id="modal-container">
-            <button class="modal-close-btn" onclick="closeVideoModal()"><i class="fas fa-times"></i></button>
-            <div class="modal-block-arrow"></div>
-            <div id="modal-iframe-wrapper" style="width: 100%; height: 100%;"></div>
-        </div>
-    </div>
 
     <!-- Header / Navbar -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
@@ -375,18 +295,24 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-cyan-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" onclick="openVideoModal('1CxKkFqV8zSo048JEC0ezdestWPBpgzdy', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1CxKkFqV8zSo048JEC0ezdestWPBpgzdy&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1sriOx5hHXrseE1N1gxFVXV20-mKIriBA', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1sriOx5hHXrseE1N1gxFVXV20-mKIriBA&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1XQYZCxgMXCAp45wqZbM20T86hh8nn-kA', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1XQYZCxgMXCAp45wqZbM20T86hh8nn-kA&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1i8uLMbs0eDgMZSL9hawEjEXjeBhPAi_N', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1i8uLMbs0eDgMZSL9hawEjEXjeBhPAi_N&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.1.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.2.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.3.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.4.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.5.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.6.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/7.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/8.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.9.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.10.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.11.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Words.Have.Power.1080P_HD.720P_HD.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Thaemine.Shows.His.True.Power._wherewindsmeet._wwmcps4._wwmcies4.1080P_60FPS.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- ৫০,০০০+ Movie & Drama Clips (১৬:৯ ফুল স্ক্রিন মুভি সাইজ) -->
+                <!-- ৫০,০০০+ Movie & Drama Clips (মুভি সাইজ ১৬:৯ ফুল ফ্রেম) -->
                 <div class="glass-card hover:border-red-500 text-center">
                     <img src="https://i.postimg.cc/vBsvHGp0/1787765938160-removebg-preview.png" loading="lazy" alt="Movie & Drama Clips" class="card-img">
                     <h3 class="text-xl font-extrabold text-[#ec4899] mb-3">৫০,০০০+ Movie & Drama Clips Collection</h3>
@@ -403,12 +329,12 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-pink-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-wide" onclick="openVideoModal('1v3FpVE0JFqu4Gy4bQATjJ6QNIl7bwak8', 'wide')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1v3FpVE0JFqu4Gy4bQATjJ6QNIl7bwak8&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-wide" onclick="openVideoModal('140VdNnJJs6h2FHAOeY5u142DYkRlndFb', 'wide')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=140VdNnJJs6h2FHAOeY5u142DYkRlndFb&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-wide" onclick="openVideoModal('1CGNYg8_kEwz15psNuDVC_aE2SXP-E6Rm', 'wide')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1CGNYg8_kEwz15psNuDVC_aE2SXP-E6Rm&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-wide" onclick="openVideoModal('12FEiJsuzxhDBbWOzJ3UAUQcrCYW_T5or', 'wide')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=12FEiJsuzxhDBbWOzJ3UAUQcrCYW_T5or&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-wide" onclick="openVideoModal('1K--4JYDVP4vEOgEWdNZbk6nF5dBuKjVJ', 'wide')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1K--4JYDVP4vEOgEWdNZbk6nF5dBuKjVJ&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-wide" onclick="openVideoModal('1PzVBDXhEhLWmtdXsatGTlUQP9zYOBFCv', 'wide')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1PzVBDXhEhLWmtdXsatGTlUQP9zYOBFCv&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection1.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection2.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection3.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection4.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection5.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection6.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -436,12 +362,9 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-yellow-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" onclick="openVideoModal('1cepDrxI7TG022jbflFv2MWvJiNxI-hDf', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1cepDrxI7TG022jbflFv2MWvJiNxI-hDf&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1ppcfcZh8HIFhMtTMAo3b0X1qCVTj4JYy', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1ppcfcZh8HIFhMtTMAo3b0X1qCVTj4JYy&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1du6O3q0WPc1aAkhIlWuabhce49Bo8DTa', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1du6O3q0WPc1aAkhIlWuabhce49Bo8DTa&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('176k5nTscpOkCS3hYadCvi-mYSXrZsyR0', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=176k5nTscpOkCS3hYadCvi-mYSXrZsyR0&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1EOHH-qne9CEIWCxtYM99enX5h8QEbP7t', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1EOHH-qne9CEIWCxtYM99enX5h8QEbP7t&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos1.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos2.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos3.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -455,9 +378,10 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-green-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" onclick="openVideoModal('1wgZuEkESfqMFMTgFaP8LjnluNZvbSuN6', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1wgZuEkESfqMFMTgFaP8LjnluNZvbSuN6&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1ldoj-oKlSu3ALNgrJc5giT5PRm0bEhAJ', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1ldoj-oKlSu3ALNgrJc5giT5PRm0bEhAJ&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1WlQHjrhpok-MAZ2oryZu_uFnKadut6jK', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1WlQHjrhpok-MAZ2oryZu_uFnKadut6jK&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos1.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos2.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos3.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos4.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -471,10 +395,10 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-emerald-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" onclick="openVideoModal('1d2JKWPqoC301I-RvwVgq9g3VEw1OYqZy', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1d2JKWPqoC301I-RvwVgq9g3VEw1OYqZy&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1mCJcKSqxS5ml-ELORax3cmq-9uqxoI6l', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1mCJcKSqxS5ml-ELORax3cmq-9uqxoI6l&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1w352_vLA3Arb_jP-p-6mdp8SX-Ik5O-p', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1w352_vLA3Arb_jP-p-6mdp8SX-Ik5O-p&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection1.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection2.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection3.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection4.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -488,12 +412,12 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-pink-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" onclick="openVideoModal('1t_pVUrBpbJCLFNSHpMA60OJhSw5KKpOM', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1t_pVUrBpbJCLFNSHpMA60OJhSw5KKpOM&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1egsXvhK1maHDNEQt9AGDdZitIbkUR2aN', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1egsXvhK1maHDNEQt9AGDdZitIbkUR2aN&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1uGyL--3Qx3nZCm2jcSswH4AjAEXZcKLi', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1uGyL--3Qx3nZCm2jcSswH4AjAEXZcKLi&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1K6Pf_omVLHbylQMj8dEbaLFPkt4BF_tK', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1K6Pf_omVLHbylQMj8dEbaLFPkt4BF_tK&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('18fxaE1OwOxJaXGqR3Q2gz4xG5ffGywB7', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=18fxaE1OwOxJaXGqR3Q2gz4xG5ffGywB7&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1LwZuZvX2O6AxlYhVXhVFkN3Ter4H-yXk', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1LwZuZvX2O6AxlYhVXhVFkN3Ter4H-yXk&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels1.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels2.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels3.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels4.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels5.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels6.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -507,12 +431,14 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-blue-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" onclick="openVideoModal('1cUpXe2_iVeZsoTKFuLVq0KUOdWxntFaE', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1cUpXe2_iVeZsoTKFuLVq0KUOdWxntFaE&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('14Fxo5JMzWCSTndOvjT36HoEslN3C9-m5', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=14Fxo5JMzWCSTndOvjT36HoEslN3C9-m5&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1SCgMVZavujPMornSH9izwQPlgmS5viYa', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1SCgMVZavujPMornSH9izwQPlgmS5viYa&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1Exf8tFOJsLw6BQDzOA0Ghv3MjxBMKncB', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1Exf8tFOJsLw6BQDzOA0Ghv3MjxBMKncB&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" onclick="openVideoModal('1xFkNyxbyvgQ1kw6GYnE5JuZu3R98smID', 'reels')"><img class="video-thumbnail" src="https://drive.google.com/thumbnail?id=1xFkNyxbyvgQ1kw6GYnE5JuZu3R98smID&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels1.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels2.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels3.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels4.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels5.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels6.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels7.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels8.mp4"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -572,41 +498,25 @@
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
-    <!-- স্ক্রিপ্ট: ফুল স্ক্রিন মডাল প্লেয়ার এবং টাইমার হ্যান্ডলার -->
+    <!-- কাস্টম HTML5 ভিডিও প্লেয়ার কন্ট্রোলার -->
     <script>
-        function openVideoModal(videoId, type) {
-            const modal = document.getElementById('video-modal');
-            const container = document.getElementById('modal-container');
-            const wrapper = document.getElementById('modal-iframe-wrapper');
+        document.querySelectorAll('.video-card-reels, .video-card-wide').forEach(card => {
+            card.addEventListener('click', function() {
+                const src = this.getAttribute('data-src');
+                if (src && !this.querySelector('video')) {
+                    // অন্যান্য প্লে হওয়া ভিডিও থামিয়ে দেওয়া
+                    document.querySelectorAll('video').forEach(v => v.pause());
 
-            if (type === 'wide') {
-                container.className = 'modal-content modal-aspect-wide';
-            } else {
-                container.className = 'modal-content modal-aspect-reels';
-            }
-
-            wrapper.innerHTML = `
-                <iframe 
-                    src="https://drive.google.com/file/d/${videoId}/preview" 
-                    allow="autoplay; encrypted-media" 
-                    allowfullscreen>
-                </iframe>
-            `;
-            modal.style.display = 'flex';
-        }
-
-        function closeVideoModal() {
-            const modal = document.getElementById('video-modal');
-            const wrapper = document.getElementById('modal-iframe-wrapper');
-            modal.style.display = 'none';
-            wrapper.innerHTML = '';
-        }
-
-        // মডালের বাইরে ক্লিক করলেও ভিডিও বন্ধ হয়ে যাবে
-        document.getElementById('video-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeVideoModal();
-            }
+                    this.innerHTML = `
+                        <video class="video-player" controls autoplay playsinline webkit-playsinline>
+                            <source src="${src}" type="video/mp4">
+                            আপনার ব্রাউজারে ভিডিও সাপোর্ট করছে না।
+                        </video>
+                    `;
+                    const vid = this.querySelector('video');
+                    vid.play().catch(e => console.log('Autoplay handled'));
+                }
+            });
         });
 
         function initializeProductCountdown() {
