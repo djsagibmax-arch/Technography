@@ -108,10 +108,10 @@
             transform: perspective(700px) translateZ(12px);
         }
 
-        /* অপ্টিমাইজড ইনস্ট্যান্ট স্যাম্পল ভিডিও সেকশন */
+        /* পারফেক্ট অ্যাসপেক্ট রেশিও স্যাম্পল ভিডিও বক্স */
         .sample-video-box {
-            margin-top: 16px;
-            background: rgba(11, 19, 36, 0.85);
+            margin-top: 18px;
+            background: rgba(11, 19, 36, 0.9);
             padding: 12px;
             border-radius: 18px;
             border: 1px solid rgba(56, 189, 248, 0.25);
@@ -144,8 +144,8 @@
             border-radius: 10px;
         }
         .video-card {
-            flex: 0 0 160px;
-            height: 270px;
+            flex: 0 0 210px;
+            height: 330px;
             border-radius: 14px;
             overflow: hidden;
             background: #000;
@@ -153,17 +153,16 @@
             scroll-snap-align: start;
             position: relative;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .video-card img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0.85;
-            transition: transform 0.3s;
-        }
-        .video-card:hover img {
-            transform: scale(1.05);
-            opacity: 1;
+            object-fit: contain;
+            background: #000;
+            opacity: 0.9;
         }
         .play-overlay {
             position: absolute;
@@ -171,29 +170,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.25);
             pointer-events: none;
         }
         .play-icon-circle {
-            width: 44px;
-            height: 44px;
-            background: rgba(34, 211, 238, 0.9);
+            width: 48px;
+            height: 48px;
+            background: rgba(34, 211, 238, 0.95);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #04121e;
-            font-size: 18px;
-            box-shadow: 0 0 15px rgba(34, 211, 238, 0.6);
-            transition: transform 0.2s;
+            font-size: 20px;
+            box-shadow: 0 0 18px rgba(34, 211, 238, 0.7);
         }
-        .video-card:hover .play-icon-circle {
-            transform: scale(1.15);
-        }
-        .video-card iframe {
+        .video-card video {
             width: 100%;
             height: 100%;
-            border: none;
+            object-fit: contain;
+            background: #000;
+            outline: none;
         }
     </style>
 </head>
@@ -258,7 +255,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Course & Viral Method -->
+                <!-- Course & Method -->
                 <div class="glass-card hover:border-purple-500 text-center md:text-left">
                     <img src="https://i.postimg.cc/t40NT6vB/file-0000000035d481fa81e7f7fe81f6f595-removebg-preview.png" loading="lazy" alt="Growth & Viral Method" class="card-img md:mx-0">
                     <h3 class="text-xl font-extrabold text-white mb-3 mt-4">Facebook & YouTube Growth + Video viral method</h3>
@@ -283,13 +280,13 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-cyan-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card" data-video="1CxKkFqV8zSo048JEC0ezdestWPBpgzdy"><img src="https://drive.google.com/thumbnail?id=1CxKkFqV8zSo048JEC0ezdestWPBpgzdy&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1"><img src="https://drive.google.com/thumbnail?id=1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1sriOx5hHXrseE1N1gxFVXV20-mKIriBA"><img src="https://drive.google.com/thumbnail?id=1sriOx5hHXrseE1N1gxFVXV20-mKIriBA&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1XQYZCxgMXCAp45wqZbM20T86hh8nn-kA"><img src="https://drive.google.com/thumbnail?id=1XQYZCxgMXCAp45wqZbM20T86hh8nn-kA&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1i8uLMbs0eDgMZSL9hawEjEXjeBhPAi_N"><img src="https://drive.google.com/thumbnail?id=1i8uLMbs0eDgMZSL9hawEjEXjeBhPAi_N&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL"><img src="https://drive.google.com/thumbnail?id=1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr"><img src="https://drive.google.com/thumbnail?id=183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1CxKkFqV8zSo048JEC0ezdestWPBpgzdy"><img src="https://drive.google.com/thumbnail?id=1CxKkFqV8zSo048JEC0ezdestWPBpgzdy&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1"><img src="https://drive.google.com/thumbnail?id=1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1sriOx5hHXrseE1N1gxFVXV20-mKIriBA"><img src="https://drive.google.com/thumbnail?id=1sriOx5hHXrseE1N1gxFVXV20-mKIriBA&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1XQYZCxgMXCAp45wqZbM20T86hh8nn-kA"><img src="https://drive.google.com/thumbnail?id=1XQYZCxgMXCAp45wqZbM20T86hh8nn-kA&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1i8uLMbs0eDgMZSL9hawEjEXjeBhPAi_N"><img src="https://drive.google.com/thumbnail?id=1i8uLMbs0eDgMZSL9hawEjEXjeBhPAi_N&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL"><img src="https://drive.google.com/thumbnail?id=1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr"><img src="https://drive.google.com/thumbnail?id=183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -311,12 +308,12 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-pink-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card" data-video="1v3FpVE0JFqu4Gy4bQATjJ6QNIl7bwak8"><img src="https://drive.google.com/thumbnail?id=1v3FpVE0JFqu4Gy4bQATjJ6QNIl7bwak8&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="140VdNnJJs6h2FHAOeY5u142DYkRlndFb"><img src="https://drive.google.com/thumbnail?id=140VdNnJJs6h2FHAOeY5u142DYkRlndFb&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1CGNYg8_kEwz15psNuDVC_aE2SXP-E6Rm"><img src="https://drive.google.com/thumbnail?id=1CGNYg8_kEwz15psNuDVC_aE2SXP-E6Rm&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="12FEiJsuzxhDBbWOzJ3UAUQcrCYW_T5or"><img src="https://drive.google.com/thumbnail?id=12FEiJsuzxhDBbWOzJ3UAUQcrCYW_T5or&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1K--4JYDVP4vEOgEWdNZbk6nF5dBuKjVJ"><img src="https://drive.google.com/thumbnail?id=1K--4JYDVP4vEOgEWdNZbk6nF5dBuKjVJ&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1PzVBDXhEhLWmtdXsatGTlUQP9zYOBFCv"><img src="https://drive.google.com/thumbnail?id=1PzVBDXhEhLWmtdXsatGTlUQP9zYOBFCv&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1v3FpVE0JFqu4Gy4bQATjJ6QNIl7bwak8"><img src="https://drive.google.com/thumbnail?id=1v3FpVE0JFqu4Gy4bQATjJ6QNIl7bwak8&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="140VdNnJJs6h2FHAOeY5u142DYkRlndFb"><img src="https://drive.google.com/thumbnail?id=140VdNnJJs6h2FHAOeY5u142DYkRlndFb&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1CGNYg8_kEwz15psNuDVC_aE2SXP-E6Rm"><img src="https://drive.google.com/thumbnail?id=1CGNYg8_kEwz15psNuDVC_aE2SXP-E6Rm&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="12FEiJsuzxhDBbWOzJ3UAUQcrCYW_T5or"><img src="https://drive.google.com/thumbnail?id=12FEiJsuzxhDBbWOzJ3UAUQcrCYW_T5or&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1K--4JYDVP4vEOgEWdNZbk6nF5dBuKjVJ"><img src="https://drive.google.com/thumbnail?id=1K--4JYDVP4vEOgEWdNZbk6nF5dBuKjVJ&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1PzVBDXhEhLWmtdXsatGTlUQP9zYOBFCv"><img src="https://drive.google.com/thumbnail?id=1PzVBDXhEhLWmtdXsatGTlUQP9zYOBFCv&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -344,12 +341,12 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-yellow-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card" data-video="1cepDrxI7TG022jbflFv2MWvJiNxI-hDf"><img src="https://drive.google.com/thumbnail?id=1cepDrxI7TG022jbflFv2MWvJiNxI-hDf&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1ppcfcZh8HIFhMtTMAo3b0X1qCVTj4JYy"><img src="https://drive.google.com/thumbnail?id=1ppcfcZh8HIFhMtTMAo3b0X1qCVTj4JYy&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1du6O3q0WPc1aAkhIlWuabhce49Bo8DTa"><img src="https://drive.google.com/thumbnail?id=1du6O3q0WPc1aAkhIlWuabhce49Bo8DTa&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="176k5nTscpOkCS3hYadCvi-mYSXrZsyR0"><img src="https://drive.google.com/thumbnail?id=176k5nTscpOkCS3hYadCvi-mYSXrZsyR0&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1"><img src="https://drive.google.com/thumbnail?id=1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1EOHH-qne9CEIWCxtYM99enX5h8QEbP7t"><img src="https://drive.google.com/thumbnail?id=1EOHH-qne9CEIWCxtYM99enX5h8QEbP7t&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1cepDrxI7TG022jbflFv2MWvJiNxI-hDf"><img src="https://drive.google.com/thumbnail?id=1cepDrxI7TG022jbflFv2MWvJiNxI-hDf&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1ppcfcZh8HIFhMtTMAo3b0X1qCVTj4JYy"><img src="https://drive.google.com/thumbnail?id=1ppcfcZh8HIFhMtTMAo3b0X1qCVTj4JYy&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1du6O3q0WPc1aAkhIlWuabhce49Bo8DTa"><img src="https://drive.google.com/thumbnail?id=1du6O3q0WPc1aAkhIlWuabhce49Bo8DTa&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="176k5nTscpOkCS3hYadCvi-mYSXrZsyR0"><img src="https://drive.google.com/thumbnail?id=176k5nTscpOkCS3hYadCvi-mYSXrZsyR0&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1"><img src="https://drive.google.com/thumbnail?id=1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1EOHH-qne9CEIWCxtYM99enX5h8QEbP7t"><img src="https://drive.google.com/thumbnail?id=1EOHH-qne9CEIWCxtYM99enX5h8QEbP7t&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -363,9 +360,9 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-green-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card" data-video="1wgZuEkESfqMFMTgFaP8LjnluNZvbSuN6"><img src="https://drive.google.com/thumbnail?id=1wgZuEkESfqMFMTgFaP8LjnluNZvbSuN6&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1ldoj-oKlSu3ALNgrJc5giT5PRm0bEhAJ"><img src="https://drive.google.com/thumbnail?id=1ldoj-oKlSu3ALNgrJc5giT5PRm0bEhAJ&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1WlQHjrhpok-MAZ2oryZu_uFnKadut6jK"><img src="https://drive.google.com/thumbnail?id=1WlQHjrhpok-MAZ2oryZu_uFnKadut6jK&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1wgZuEkESfqMFMTgFaP8LjnluNZvbSuN6"><img src="https://drive.google.com/thumbnail?id=1wgZuEkESfqMFMTgFaP8LjnluNZvbSuN6&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1ldoj-oKlSu3ALNgrJc5giT5PRm0bEhAJ"><img src="https://drive.google.com/thumbnail?id=1ldoj-oKlSu3ALNgrJc5giT5PRm0bEhAJ&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1WlQHjrhpok-MAZ2oryZu_uFnKadut6jK"><img src="https://drive.google.com/thumbnail?id=1WlQHjrhpok-MAZ2oryZu_uFnKadut6jK&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -379,10 +376,10 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-emerald-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card" data-video="1d2JKWPqoC301I-RvwVgq9g3VEw1OYqZy"><img src="https://drive.google.com/thumbnail?id=1d2JKWPqoC301I-RvwVgq9g3VEw1OYqZy&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL"><img src="https://drive.google.com/thumbnail?id=1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1mCJcKSqxS5ml-ELORax3cmq-9uqxoI6l"><img src="https://drive.google.com/thumbnail?id=1mCJcKSqxS5ml-ELORax3cmq-9uqxoI6l&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1w352_vLA3Arb_jP-p-6mdp8SX-Ik5O-p"><img src="https://drive.google.com/thumbnail?id=1w352_vLA3Arb_jP-p-6mdp8SX-Ik5O-p&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1d2JKWPqoC301I-RvwVgq9g3VEw1OYqZy"><img src="https://drive.google.com/thumbnail?id=1d2JKWPqoC301I-RvwVgq9g3VEw1OYqZy&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL"><img src="https://drive.google.com/thumbnail?id=1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1mCJcKSqxS5ml-ELORax3cmq-9uqxoI6l"><img src="https://drive.google.com/thumbnail?id=1mCJcKSqxS5ml-ELORax3cmq-9uqxoI6l&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1w352_vLA3Arb_jP-p-6mdp8SX-Ik5O-p"><img src="https://drive.google.com/thumbnail?id=1w352_vLA3Arb_jP-p-6mdp8SX-Ik5O-p&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -396,12 +393,12 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-pink-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card" data-video="1t_pVUrBpbJCLFNSHpMA60OJhSw5KKpOM"><img src="https://drive.google.com/thumbnail?id=1t_pVUrBpbJCLFNSHpMA60OJhSw5KKpOM&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1egsXvhK1maHDNEQt9AGDdZitIbkUR2aN"><img src="https://drive.google.com/thumbnail?id=1egsXvhK1maHDNEQt9AGDdZitIbkUR2aN&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1uGyL--3Qx3nZCm2jcSswH4AjAEXZcKLi"><img src="https://drive.google.com/thumbnail?id=1uGyL--3Qx3nZCm2jcSswH4AjAEXZcKLi&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1K6Pf_omVLHbylQMj8dEbaLFPkt4BF_tK"><img src="https://drive.google.com/thumbnail?id=1K6Pf_omVLHbylQMj8dEbaLFPkt4BF_tK&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="18fxaE1OwOxJaXGqR3Q2gz4xG5ffGywB7"><img src="https://drive.google.com/thumbnail?id=18fxaE1OwOxJaXGqR3Q2gz4xG5ffGywB7&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1LwZuZvX2O6AxlYhVXhVFkN3Ter4H-yXk"><img src="https://drive.google.com/thumbnail?id=1LwZuZvX2O6AxlYhVXhVFkN3Ter4H-yXk&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1t_pVUrBpbJCLFNSHpMA60OJhSw5KKpOM"><img src="https://drive.google.com/thumbnail?id=1t_pVUrBpbJCLFNSHpMA60OJhSw5KKpOM&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1egsXvhK1maHDNEQt9AGDdZitIbkUR2aN"><img src="https://drive.google.com/thumbnail?id=1egsXvhK1maHDNEQt9AGDdZitIbkUR2aN&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1uGyL--3Qx3nZCm2jcSswH4AjAEXZcKLi"><img src="https://drive.google.com/thumbnail?id=1uGyL--3Qx3nZCm2jcSswH4AjAEXZcKLi&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1K6Pf_omVLHbylQMj8dEbaLFPkt4BF_tK"><img src="https://drive.google.com/thumbnail?id=1K6Pf_omVLHbylQMj8dEbaLFPkt4BF_tK&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="18fxaE1OwOxJaXGqR3Q2gz4xG5ffGywB7"><img src="https://drive.google.com/thumbnail?id=18fxaE1OwOxJaXGqR3Q2gz4xG5ffGywB7&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1LwZuZvX2O6AxlYhVXhVFkN3Ter4H-yXk"><img src="https://drive.google.com/thumbnail?id=1LwZuZvX2O6AxlYhVXhVFkN3Ter4H-yXk&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -415,12 +412,12 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-blue-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card" data-video="1cUpXe2_iVeZsoTKFuLVq0KUOdWxntFaE"><img src="https://drive.google.com/thumbnail?id=1cUpXe2_iVeZsoTKFuLVq0KUOdWxntFaE&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="14Fxo5JMzWCSTndOvjT36HoEslN3C9-m5"><img src="https://drive.google.com/thumbnail?id=14Fxo5JMzWCSTndOvjT36HoEslN3C9-m5&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1SCgMVZavujPMornSH9izwQPlgmS5viYa"><img src="https://drive.google.com/thumbnail?id=1SCgMVZavujPMornSH9izwQPlgmS5viYa&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr"><img src="https://drive.google.com/thumbnail?id=183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1Exf8tFOJsLw6BQDzOA0Ghv3MjxBMKncB"><img src="https://drive.google.com/thumbnail?id=1Exf8tFOJsLw6BQDzOA0Ghv3MjxBMKncB&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card" data-video="1xFkNyxbyvgQ1kw6GYnE5JuZu3R98smID"><img src="https://drive.google.com/thumbnail?id=1xFkNyxbyvgQ1kw6GYnE5JuZu3R98smID&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1cUpXe2_iVeZsoTKFuLVq0KUOdWxntFaE"><img src="https://drive.google.com/thumbnail?id=1cUpXe2_iVeZsoTKFuLVq0KUOdWxntFaE&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="14Fxo5JMzWCSTndOvjT36HoEslN3C9-m5"><img src="https://drive.google.com/thumbnail?id=14Fxo5JMzWCSTndOvjT36HoEslN3C9-m5&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1SCgMVZavujPMornSH9izwQPlgmS5viYa"><img src="https://drive.google.com/thumbnail?id=1SCgMVZavujPMornSH9izwQPlgmS5viYa&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr"><img src="https://drive.google.com/thumbnail?id=183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1Exf8tFOJsLw6BQDzOA0Ghv3MjxBMKncB"><img src="https://drive.google.com/thumbnail?id=1Exf8tFOJsLw6BQDzOA0Ghv3MjxBMKncB&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1xFkNyxbyvgQ1kw6GYnE5JuZu3R98smID"><img src="https://drive.google.com/thumbnail?id=1xFkNyxbyvgQ1kw6GYnE5JuZu3R98smID&sz=w600" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -480,13 +477,19 @@
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
-    <!-- স্ক্রিপ্ট: শুধু ক্লিক করলেই লোড হবে এবং ল্যাগ ছাড়াই চলবে -->
+    <!-- স্ক্রিপ্ট: HTML5 কাস্টম ভিডিও প্লেয়ার যা কাটবে না এবং ফুল দেখাবে -->
     <script>
         document.querySelectorAll('.video-card').forEach(card => {
             card.addEventListener('click', function() {
                 const videoId = this.getAttribute('data-video');
-                if (videoId && !this.querySelector('iframe')) {
-                    this.innerHTML = `<iframe src="https://drive.google.com/file/d/${videoId}/preview?autoplay=1" allow="autoplay" allowfullscreen></iframe>`;
+                if (videoId && !this.querySelector('video')) {
+                    // ড্রাইভের ডিরেক্ট ফাইল দিয়ে কাস্টম ব্রাউজার ভিডিও লোড
+                    this.innerHTML = `
+                        <video controls autoplay playsinline style="width:100%; height:100%; object-fit:contain; background:#000;">
+                            <source src="https://drive.google.com/uc?export=download&id=${videoId}" type="video/mp4">
+                            <iframe src="https://drive.google.com/file/d/${videoId}/preview?autoplay=1" style="width:100%; height:100%; border:none;"></iframe>
+                        </video>
+                    `;
                 }
             });
         });
