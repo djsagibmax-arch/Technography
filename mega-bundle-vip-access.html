@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mega Bundle VIP Access | Technography</title>
-    <meta name="robots" content="noindex, nofollow"> <!-- হিডেন পেজ, গুগল ইনডেক্স করবে না -->
+    <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#0f172a">
 
-    <!-- Meta Pixel Base Code: পেজ সবার জন্য খোলা থাকবে, কিন্তু পারচেজ ট্র্যাক হবে শুধু পেমেন্ট সম্পন্ন হলে -->
+    <!-- Meta Pixel Base Code -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -19,14 +19,12 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     
     fbq('init', '1913791776249045');
-    fbq('track', 'PageView'); // সাধারণ ভিজিট বা পেজ ভিউ ট্র্যাক করবে
+    fbq('track', 'PageView');
 
-    // চেক করা হচ্ছে কাস্টমার পেমেন্ট করে এসেছে কি না
     const urlParams = new URLSearchParams(window.location.search);
     const paymentStatus = urlParams.get('status');
 
     if (paymentStatus === 'success') {
-        // আসল পারচেজ বা সেলস কেবল তখনই ফায়ার হবে যখন পেমেন্ট সাকসেস হবে
         fbq('track', 'Purchase', {currency: 'BDT', value: 300});
     }
     </script>
@@ -170,6 +168,62 @@
             transform: scale(1.05);
             color: #c026d3;
         }
+
+        /* স্যাম্পল ভিডিও স্ক্রল কন্টেইনার */
+        .sample-video-section {
+            margin-top: 15px;
+            margin-bottom: 10px;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid #334155;
+        }
+
+        .sample-video-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #38bdf8;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .video-scroll-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 6px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .video-scroll-container::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .video-scroll-container::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+
+        .video-scroll-item {
+            flex: 0 0 170px;
+            height: 270px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid #475569;
+            scroll-snap-align: start;
+        }
+
+        .video-scroll-item iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -207,6 +261,20 @@
             <a href="https://drive.google.com/file/d/1tNWjaTjbnFMSarK_5yb3TqEzsg75m2QR/view?usp=drivesdk" target="_blank" class="drive-btn border-emerald-500/50">
                 <span class="text-emerald-400">১.৫ লক্ষ মিক্সড মেগা রিলস বান্ডেল</span> <i class="fab fa-google-drive"></i>
             </a>
+
+            <!-- Sample Videos: 1.5 Lakh Mixed Reels -->
+            <div class="sample-video-section">
+                <div class="sample-video-title"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                <div class="video-scroll-container">
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1CxKkFqV8zSo048JEC0ezdestWPBpgzdy/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1sriOx5hHXrseE1N1gxFVXV20-mKIriBA/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1XQYZCxgMXCAp45wqZbM20T86hh8nn-kA/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1i8uLMbs0eDgMZSL9hawEjEXjeBhPAi_N/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr/preview" allow="autoplay"></iframe></div>
+                </div>
+            </div>
         </div>
 
         <!-- Category 2: Movie Clips Main -->
@@ -227,6 +295,19 @@
             <a href="https://drive.google.com/drive/folders/1VW81bBoceT5tA_G3A0x0pk3ucCQIFspA" target="_blank" class="drive-btn">
                 <span>Bangla Natok Clips</span> <i class="fab fa-google-drive"></i>
             </a>
+
+            <!-- Sample Videos: Movie & Drama Clips -->
+            <div class="sample-video-section">
+                <div class="sample-video-title"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                <div class="video-scroll-container">
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1v3FpVE0JFqu4Gy4bQATjJ6QNIl7bwak8/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/140VdNnJJs6h2FHAOeY5u142DYkRlndFb/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1CGNYg8_kEwz15psNuDVC_aE2SXP-E6Rm/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/12FEiJsuzxhDBbWOzJ3UAUQcrCYW_T5or/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1K--4JYDVP4vEOgEWdNZbk6nF5dBuKjVJ/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1PzVBDXhEhLWmtdXsatGTlUQP9zYOBFCv/preview" allow="autoplay"></iframe></div>
+                </div>
+            </div>
         </div>
 
         <!-- Category 3: Movie Clips Folders -->
@@ -272,13 +353,38 @@
             <a href="https://drive.google.com/drive/folders/1yZaauRRpNLStI-J4zqInxMBrtn4I6Ma3" target="_blank" class="drive-btn">
                 <span>AI Food Talking Video 2</span> <i class="fab fa-google-drive"></i>
             </a>
+
+            <!-- Sample Videos: AI Food Talking Videos -->
+            <div class="sample-video-section">
+                <div class="sample-video-title"><i class="fas fa-play-circle"></i> Sample Videos (Food)</div>
+                <div class="video-scroll-container">
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1cepDrxI7TG022jbflFv2MWvJiNxI-hDf/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1ppcfcZh8HIFhMtTMAo3b0X1qCVTj4JYy/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1du6O3q0WPc1aAkhIlWuabhce49Bo8DTa/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/176k5nTscpOkCS3hYadCvi-mYSXrZsyR0/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1EOHH-qne9CEIWCxtYM99enX5h8QEbP7t/preview" allow="autoplay"></iframe></div>
+                </div>
+            </div>
+
             <div class="border-t border-slate-700 my-3"></div>
+
             <a href="https://drive.google.com/drive/folders/1WHC9lBBGagtWfG-M5aZLlv8ddYwaMGCZ" target="_blank" class="drive-btn">
                 <span>AI Health Video 1</span> <i class="fab fa-google-drive"></i>
             </a>
             <a href="https://drive.google.com/drive/folders/1xYwhI5-wWgP2bEysINmSk9ylB16Gg3lp" target="_blank" class="drive-btn">
                 <span>AI Health Video 2</span> <i class="fab fa-google-drive"></i>
             </a>
+
+            <!-- Sample Videos: AI Health & Fitness Videos -->
+            <div class="sample-video-section">
+                <div class="sample-video-title"><i class="fas fa-play-circle"></i> Sample Videos (Health)</div>
+                <div class="video-scroll-container">
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1wgZuEkESfqMFMTgFaP8LjnluNZvbSuN6/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1ldoj-oKlSu3ALNgrJc5giT5PRm0bEhAJ/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1WlQHjrhpok-MAZ2oryZu_uFnKadut6jK/preview" allow="autoplay"></iframe></div>
+                </div>
+            </div>
         </div>
 
         <!-- Category 6: Islamic -->
@@ -299,6 +405,17 @@
             <a href="https://drive.google.com/drive/folders/14DWamckG97Vr6MBvqHZvmzKEK_sGQxsL" target="_blank" class="drive-btn">
                 <span>Islamic Reels Pack 4</span> <i class="fab fa-google-drive"></i>
             </a>
+
+            <!-- Sample Videos: Islamic Viral Reels -->
+            <div class="sample-video-section">
+                <div class="sample-video-title"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                <div class="video-scroll-container">
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1d2JKWPqoC301I-RvwVgq9g3VEw1OYqZy/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1mCJcKSqxS5ml-ELORax3cmq-9uqxoI6l/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1w352_vLA3Arb_jP-p-6mdp8SX-Ik5O-p/preview" allow="autoplay"></iframe></div>
+                </div>
+            </div>
         </div>
 
         <!-- Category 7: Motivation -->
@@ -319,6 +436,19 @@
             <a href="https://drive.google.com/drive/folders/1-U9uGtARMW57J5kawr-bKvRLTnskPRC3" target="_blank" class="drive-btn">
                 <span>Viral Emotional Pack</span> <i class="fab fa-google-drive"></i>
             </a>
+
+            <!-- Sample Videos: Motivational & Emotional Reels -->
+            <div class="sample-video-section">
+                <div class="sample-video-title"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                <div class="video-scroll-container">
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1t_pVUrBpbJCLFNSHpMA60OJhSw5KKpOM/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1egsXvhK1maHDNEQt9AGDdZitIbkUR2aN/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1uGyL--3Qx3nZCm2jcSswH4AjAEXZcKLi/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1K6Pf_omVLHbylQMj8dEbaLFPkt4BF_tK/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/18fxaE1OwOxJaXGqR3Q2gz4xG5ffGywB7/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1LwZuZvX2O6AxlYhVXhVFkN3Ter4H-yXk/preview" allow="autoplay"></iframe></div>
+                </div>
+            </div>
         </div>
 
         <!-- Category 8: Sports -->
@@ -339,6 +469,19 @@
             <a href="https://drive.google.com/drive/folders/187a-ja5HS16Quki6JnsAxeXJayd4QlOd" target="_blank" class="drive-btn">
                 <span>WWE + Sports Others</span> <i class="fab fa-google-drive"></i>
             </a>
+
+            <!-- Sample Videos: Sports & Trending Reels -->
+            <div class="sample-video-section">
+                <div class="sample-video-title"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                <div class="video-scroll-container">
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1cUpXe2_iVeZsoTKFuLVq0KUOdWxntFaE/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/14Fxo5JMzWCSTndOvjT36HoEslN3C9-m5/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1SCgMVZavujPMornSH9izwQPlgmS5viYa/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1Exf8tFOJsLw6BQDzOA0Ghv3MjxBMKncB/preview" allow="autoplay"></iframe></div>
+                    <div class="video-scroll-item"><iframe src="https://drive.google.com/file/d/1xFkNyxbyvgQ1kw6GYnE5JuZu3R98smID/preview" allow="autoplay"></iframe></div>
+                </div>
+            </div>
         </div>
 
         <!-- Category 9: Cartoon & Art -->
