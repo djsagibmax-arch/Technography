@@ -127,6 +127,56 @@
             box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25), 0 12px 35px -5px rgba(0, 0, 0, 0.9), 0 0 30px rgba(6, 182, 212, 0.28);
             transform: perspective(700px) translateZ(12px);
         }
+
+        /* স্যাম্পল ভিডিও স্ক্রল বক্স স্টাইল */
+        .sample-video-box {
+            margin-top: 18px;
+            background: rgba(15, 23, 42, 0.7);
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            text-align: left;
+        }
+        .sample-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #38bdf8;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .video-slider {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 6px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .video-slider::-webkit-scrollbar {
+            height: 5px;
+        }
+        .video-slider::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 6px;
+        }
+        .video-card {
+            flex: 0 0 160px;
+            height: 260px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid #334155;
+            scroll-snap-align: start;
+        }
+        .video-card iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 <body class="bg-[#070b18] text-slate-100 font-sans antialiased">
@@ -147,7 +197,6 @@
     <div id="mega-landing-page">
         <div class="relative z-10 max-w-5xl mx-auto px-4 pt-10 pb-12 text-center">
             
-            <!-- পরিবর্তিত ব্যানার ইমেজ (images/product1.webp) -->
             <img src="images/product1.webp" 
                  alt="Content Master Bundle" 
                  fetchpriority="high" 
@@ -192,6 +241,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Course & Method -->
                 <div class="glass-card hover:border-purple-500 text-center md:text-left">
                     <img src="https://i.postimg.cc/t40NT6vB/file-0000000035d481fa81e7f7fe81f6f595-removebg-preview.png" loading="lazy" alt="Growth & Viral Method" class="card-img md:mx-0">
                     <h3 class="text-xl font-extrabold text-white mb-3 mt-4">Facebook & YouTube Growth + Video viral method</h3>
@@ -206,18 +256,34 @@
                     </div>
                 </div>
 
+                <!-- ১.৫ লক্ষ+ মিক্সড মেগা রিলস -->
                 <div class="glass-card hover:border-cyan-500 text-center">
                     <img src="https://i.postimg.cc/bw4TWxLv/1787765735872-removebg-preview.png" loading="lazy" alt="Mixed Mega Reels" class="card-img">
                     <h3 class="text-xl font-extrabold text-[#22d3ee] mb-3">১.৫ লক্ষ+ মিক্সড মেগা রিলস</h3>
                     <p class="text-slate-300 font-bold mb-2">একসাথে বিশাল পরিমাণ Mixed Reels Collection!</p>
                     <p class="text-slate-400 text-sm">বিভিন্ন ধরনের Short Video ও Reels থেকে নিজের প্রয়োজন অনুযায়ী কনটেন্ট আইডিয়া এবং ভিডিও সংগ্রহ করতে পারবেন।</p>
+                    
+                    <!-- স্যাম্পল ভিডিও: ১.৫ লক্ষ+ মিক্সড মেগা রিলস -->
+                    <div class="sample-video-box">
+                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="video-slider">
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1CxKkFqV8zSo048JEC0ezdestWPBpgzdy/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1sriOx5hHXrseE1N1gxFVXV20-mKIriBA/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1XQYZCxgMXCAp45wqZbM20T86hh8nn-kA/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1i8uLMbs0eDgMZSL9hawEjEXjeBhPAi_N/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr/preview"></iframe></div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- ৫০,০০০+ Movie & Drama Clips Collection -->
                 <div class="glass-card hover:border-red-500 text-center">
                     <img src="https://i.postimg.cc/vBsvHGp0/1787765938160-removebg-preview.png" loading="lazy" alt="Movie & Drama Clips" class="card-img">
                     <h3 class="text-xl font-extrabold text-[#ec4899] mb-3">৫০,০০০+ Movie & Drama Clips Collection</h3>
                     <p class="text-slate-400 text-sm mb-4">মুভি ও নাটকভিত্তিক কনটেন্ট নিয়ে কাজ করতে আগ্রহীদের জন্য রয়েছে বিশাল Clip Collection।</p>
-                    <ul class="text-sm text-slate-300 font-medium space-y-2 text-left ml-4">
+                    <ul class="text-sm text-slate-300 font-medium space-y-2 text-left ml-4 mb-4">
                         <li>🎬 Bollywood Movie Clips</li>
                         <li>🎬 Hollywood Movie Clips</li>
                         <li>🎬 Netflix-related Movie Clips</li>
@@ -225,8 +291,22 @@
                         <li>🎭 Bangla Natok Clips</li>
                         <li>🎞️ বিভিন্ন Movie Clip Collection</li>
                     </ul>
+
+                    <!-- স্যাম্পল ভিডিও: Movie & Drama Clips -->
+                    <div class="sample-video-box">
+                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="video-slider">
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1v3FpVE0JFqu4Gy4bQATjJ6QNIl7bwak8/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/140VdNnJJs6h2FHAOeY5u142DYkRlndFb/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1CGNYg8_kEwz15psNuDVC_aE2SXP-E6Rm/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/12FEiJsuzxhDBbWOzJ3UAUQcrCYW_T5or/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1K--4JYDVP4vEOgEWdNZbk6nF5dBuKjVJ/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1PzVBDXhEhLWmtdXsatGTlUQP9zYOBFCv/preview"></iframe></div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Exclusive Mega Shorts & Reels Collection -->
                 <div class="glass-card hover:border-orange-500 text-center">
                     <img src="https://i.postimg.cc/ydHTY7MB/file-00000000370c81fabc33ef3860b0c2bd-removebg-preview.png" loading="lazy" alt="Exclusive Mega Shorts" class="card-img">
                     <h3 class="text-xl font-extrabold text-orange-400 mb-3">Exclusive Mega Shorts & Reels Collection</h3>
@@ -240,34 +320,99 @@
                     </ul>
                 </div>
 
+                <!-- AI Food Talking Videos -->
                 <div class="glass-card hover:border-yellow-500 text-center">
                     <img src="https://i.postimg.cc/bNzF99Vm/file-000000000b28820ba36af9c6b9ef2c38-removebg-preview.png" loading="lazy" alt="AI Food Talking Videos" class="card-img">
                     <h3 class="text-xl font-extrabold text-yellow-400 mb-3">AI Food Talking Videos</h3>
                     <p class="text-slate-400 text-sm mb-4">AI-ভিত্তিক Food Content বর্তমানে ব্যাপক জনপ্রিয়। এই বান্ডেলে রয়েছে AI Food Videos ও Short Content কালেকশন।</p>
+
+                    <!-- স্যাম্পল ভিডিও: AI Food Talking Videos -->
+                    <div class="sample-video-box">
+                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="video-slider">
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1cepDrxI7TG022jbflFv2MWvJiNxI-hDf/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1ppcfcZh8HIFhMtTMAo3b0X1qCVTj4JYy/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1du6O3q0WPc1aAkhIlWuabhce49Bo8DTa/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/176k5nTscpOkCS3hYadCvi-mYSXrZsyR0/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1EOHH-qne9CEIWCxtYM99enX5h8QEbP7t/preview"></iframe></div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- AI Health & Fitness Videos -->
                 <div class="glass-card hover:border-green-500 text-center">
                     <img src="https://i.postimg.cc/SKw5hX7R/file-000000001128820bac2ea36b874f2e4a.png" loading="lazy" alt="AI Health Videos" class="card-img">
                     <h3 class="text-xl font-extrabold text-green-400 mb-3">AI Health & Fitness Videos</h3>
                     <p class="text-slate-400 text-sm mb-4">Health ও Fitness বিষয়ক কনটেন্ট তৈরির জন্য রয়েছে আলাদা ভিডিও কালেকশন ও ওয়ার্কআউট কনটেন্ট।</p>
+
+                    <!-- স্যাম্পল ভিডিও: AI Health & Fitness Videos -->
+                    <div class="sample-video-box">
+                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="video-slider">
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1wgZuEkESfqMFMTgFaP8LjnluNZvbSuN6/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1ldoj-oKlSu3ALNgrJc5giT5PRm0bEhAJ/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1WlQHjrhpok-MAZ2oryZu_uFnKadut6jK/preview"></iframe></div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Islamic Viral Reels Collection -->
                 <div class="glass-card hover:border-emerald-500 text-center">
                     <img src="https://i.postimg.cc/NMcxfQ3h/file-00000000327c81fa881ee6274649cf88-removebg-preview-(1).png" loading="lazy" alt="Islamic Viral Reels" class="card-img">
                     <h3 class="text-xl font-extrabold text-emerald-400 mb-3">Islamic Viral Reels Collection</h3>
                     <p class="text-slate-400 text-sm mb-4">Islamic Content Creatorদের জন্য রয়েছে আলাদা বিশাল Master Collection ও শর্ট ভিডিও।</p>
+
+                    <!-- স্যাম্পল ভিডিও: Islamic Viral Reels -->
+                    <div class="sample-video-box">
+                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="video-slider">
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1d2JKWPqoC301I-RvwVgq9g3VEw1OYqZy/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1mCJcKSqxS5ml-ELORax3cmq-9uqxoI6l/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1w352_vLA3Arb_jP-p-6mdp8SX-Ik5O-p/preview"></iframe></div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Motivational & Emotional Reels -->
                 <div class="glass-card hover:border-pink-500 text-center">
                     <img src="https://i.postimg.cc/q7nLTNZC/file-0000000061b081fabc33ef3860b0c2bd-removebg-preview.png" loading="lazy" alt="Motivational Reels" class="card-img">
                     <h3 class="text-xl font-extrabold text-pink-400 mb-3">Motivational & Emotional Reels</h3>
                     <p class="text-slate-400 text-sm mb-4">মানুষের আবেগ, অনুপ্রেরণা ও জীবনের গল্পভিত্তিক শর্ট কনটেন্টের জন্য রয়েছে বিশাল কালেকশন।</p>
+
+                    <!-- স্যাম্পল ভিডিও: Motivational & Emotional Reels -->
+                    <div class="sample-video-box">
+                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="video-slider">
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1t_pVUrBpbJCLFNSHpMA60OJhSw5KKpOM/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1egsXvhK1maHDNEQt9AGDdZitIbkUR2aN/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1uGyL--3Qx3nZCm2jcSswH4AjAEXZcKLi/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1K6Pf_omVLHbylQMj8dEbaLFPkt4BF_tK/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/18fxaE1OwOxJaXGqR3Q2gz4xG5ffGywB7/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1LwZuZvX2O6AxlYhVXhVFkN3Ter4H-yXk/preview"></iframe></div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Sports & Trending Reels -->
                 <div class="glass-card hover:border-blue-500 text-center">
                     <img src="https://i.postimg.cc/g0RDWxBy/file-00000000681081faa28feeee957fb3ed-removebg-preview.png" loading="lazy" alt="Sports & Trending Reels" class="card-img">
                     <h3 class="text-xl font-extrabold text-blue-400 mb-3">Sports & Trending Reels</h3>
                     <p class="text-slate-400 text-sm mb-4">Football, Cricket, WWE সহ বিভিন্ন খেলাধুলার ভাইরাল ট্রেন্ডিং ভিডিও।</p>
+
+                    <!-- স্যাম্পল ভিডিও: Sports & Trending Reels -->
+                    <div class="sample-video-box">
+                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="video-slider">
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1cUpXe2_iVeZsoTKFuLVq0KUOdWxntFaE/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/14Fxo5JMzWCSTndOvjT36HoEslN3C9-m5/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1SCgMVZavujPMornSH9izwQPlgmS5viYa/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1Exf8tFOJsLw6BQDzOA0Ghv3MjxBMKncB/preview"></iframe></div>
+                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1xFkNyxbyvgQ1kw6GYnE5JuZu3R98smID/preview"></iframe></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
