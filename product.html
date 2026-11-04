@@ -108,7 +108,6 @@
             transform: perspective(700px) translateZ(12px);
         }
 
-        /* স্যাম্পল ভিডিও বক্স */
         .sample-video-box {
             margin-top: 18px;
             background: rgba(11, 19, 36, 0.95);
@@ -146,31 +145,38 @@
             border-radius: 10px;
         }
 
-        /* রিলস ফ্রেম (৯:১৬ আসল রেশিও) */
+        /* রিলস ফ্রেম (৯:১৬) */
         .video-card-reels {
             flex: 0 0 210px;
             height: 360px;
             border-radius: 14px;
             overflow: hidden;
-            background: #000;
+            background: #111827;
             border: 1.5px solid #334155;
             scroll-snap-align: center;
             position: relative;
             cursor: pointer;
         }
 
-        /* মুভি ফ্রেম (১৬:৯ আসল ফুল ফ্রেম, কোনো কাটবে না) */
+        /* মুভি ফ্রেম (১৬:৯ আসল ফুল ফ্রেম) */
         .video-card-wide {
             flex: 0 0 95%;
             max-width: 360px;
             height: 220px;
             border-radius: 14px;
             overflow: hidden;
-            background: #000;
+            background: #111827;
             border: 1.5px solid #334155;
             scroll-snap-align: center;
             position: relative;
             cursor: pointer;
+        }
+
+        .canvas-poster {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .video-inner-player {
@@ -187,9 +193,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.35);
             z-index: 10;
-            transition: opacity 0.2s;
         }
         .play-circle {
             width: 52px;
@@ -202,6 +207,11 @@
             color: #04121e;
             font-size: 22px;
             box-shadow: 0 0 25px rgba(34, 211, 238, 0.8);
+            transition: transform 0.2s ease;
+        }
+        .video-card-reels:hover .play-circle,
+        .video-card-wide:hover .play-circle {
+            transform: scale(1.12);
         }
     </style>
 </head>
@@ -304,12 +314,13 @@
                             <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.10.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
                             <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.11.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
                             <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Words.Have.Power.1080P_HD.720P_HD.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Thaemine.Shows.His.True.Power._wherewindsmeet._wwmcps4._wwmcies4.1080P_60FPS.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
+                            <!-- 13.mp4 ভিডিওটি এখানে সঠিকভাবে বসানো হলো -->
+                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/13.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- ৫০,০০০+ Movie & Drama Clips (আসল ১৬:৯ সাইজ, কোনো কাটবে না) -->
+                <!-- ৫০,০০০+ Movie & Drama Clips (আসল ১৬:৯ সাইজ) -->
                 <div class="glass-card hover:border-red-500 text-center">
                     <img src="https://i.postimg.cc/vBsvHGp0/1787765938160-removebg-preview.png" loading="lazy" alt="Movie & Drama Clips" class="card-img">
                     <h3 class="text-xl font-extrabold text-[#ec4899] mb-3">৫০,০০০+ Movie & Drama Clips Collection</h3>
@@ -495,41 +506,96 @@
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
-    <!-- স্ক্রিপ্ট: সিঙ্গেল ইনস্ট্যান্ট প্লেয়ার হ্যান্ডলার -->
+    <!-- স্ক্রিপ্ট: ক্রমান্বয়ে থাম্বনেইল লোডার ও প্লেয়ার হ্যান্ডলার -->
     <script>
-        document.querySelectorAll('.video-card-reels, .video-card-wide').forEach(card => {
+        // সিরিয়াল অনুযায়ী ক্রমান্বয়ে থাম্বনেইল লোড করার অটোমেটিক ইঞ্জিন
+        const allCards = Array.from(document.querySelectorAll('.video-card-reels, .video-card-wide'));
+
+        function generateNextThumbnail(index) {
+            if (index >= allCards.length) return;
+
+            const card = allCards[index];
+            const src = card.getAttribute('data-src');
+
+            const tempVideo = document.createElement('video');
+            tempVideo.src = src;
+            tempVideo.crossOrigin = 'anonymous';
+            tempVideo.currentTime = 0.5;
+            tempVideo.muted = true;
+
+            tempVideo.addEventListener('loadeddata', function() {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = tempVideo.videoWidth || 320;
+                    canvas.height = tempVideo.videoHeight || 180;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(tempVideo, 0, 0, canvas.width, canvas.height);
+
+                    const img = document.createElement('img');
+                    img.src = canvas.toDataURL('image/jpeg', 0.7);
+                    img.className = 'canvas-poster';
+
+                    // কার্ডে থাম্বনেইল সেট করা
+                    card.insertBefore(img, card.firstChild);
+                } catch (e) {
+                    // ফেইল করলে নরমাল কন্টিনিউ
+                }
+
+                // পরবর্তী ভিডিওটির থাম্বনেইল শুরু করা (সিরিয়াল লোডিং)
+                generateNextThumbnail(index + 1);
+            });
+
+            tempVideo.addEventListener('error', function() {
+                // কোনো ভিডিও এরর দিলে পরেরটাতে চলে যাওয়া
+                generateNextThumbnail(index + 1);
+            });
+        }
+
+        // পেজ লোড হলে প্রথম ভিডিও থেকে লোডিং শুরু
+        window.addEventListener('DOMContentLoaded', () => {
+            generateNextThumbnail(0);
+        });
+
+        // ক্লিক করলে শুধু একটি ভিডিওই চলবে
+        allCards.forEach(card => {
             card.addEventListener('click', function() {
                 const src = this.getAttribute('data-src');
-                const existingVideo = this.querySelector('video');
+                const existingVid = this.querySelector('video');
 
-                // যদি ইতিমধ্যে ভিডিও প্লেয়ার চালু থাকে
-                if (existingVideo) {
-                    if (existingVideo.paused) {
-                        existingVideo.play();
-                    } else {
-                        existingVideo.pause();
-                    }
+                if (existingVid) {
+                    if (existingVid.paused) existingVid.play();
+                    else existingVid.pause();
                     return;
                 }
 
-                // অন্যান্য চলমান ভিডিওগুলো থামিয়ে দেওয়া
-                document.querySelectorAll('.video-card-reels, .video-card-wide').forEach(otherCard => {
-                    const otherVid = otherCard.querySelector('video');
+                // অন্যান্য ভিডিও পজ ও রিমুভ করা
+                allCards.forEach(c => {
+                    const otherVid = c.querySelector('video');
                     if (otherVid) {
                         otherVid.pause();
-                        otherCard.innerHTML = `<div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>`;
+                        otherVid.remove();
+                        const btn = c.querySelector('.custom-play-btn');
+                        if (btn) btn.style.display = 'flex';
+                        const poster = c.querySelector('.canvas-poster');
+                        if (poster) poster.style.display = 'block';
                     }
                 });
 
-                // নতুন ভিডিও ইনস্ট্যান্ট লোড করা
-                this.innerHTML = `
-                    <video class="video-inner-player" controls autoplay playsinline webkit-playsinline>
-                        <source src="${src}" type="video/mp4">
-                    </video>
-                `;
+                // প্লে বাটন ও পোস্টার লুকিয়ে প্লেয়ার বসানো
+                const btn = this.querySelector('.custom-play-btn');
+                if (btn) btn.style.display = 'none';
+                const poster = this.querySelector('.canvas-poster');
+                if (poster) poster.style.display = 'none';
 
-                const currentVid = this.querySelector('video');
-                currentVid.play().catch(e => console.log('Playback ready'));
+                const video = document.createElement('video');
+                video.className = 'video-inner-player';
+                video.controls = true;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.src = src;
+
+                this.appendChild(video);
+                video.play().catch(e => console.log('Playing'));
             });
         });
 
