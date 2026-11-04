@@ -108,6 +108,7 @@
             transform: perspective(700px) translateZ(12px);
         }
 
+        /* স্যাম্পল ভিডিও বক্স */
         .sample-video-box {
             margin-top: 18px;
             background: rgba(11, 19, 36, 0.95);
@@ -151,7 +152,7 @@
             height: 360px;
             border-radius: 14px;
             overflow: hidden;
-            background: #111827;
+            background: #000;
             border: 1.5px solid #334155;
             scroll-snap-align: center;
             position: relative;
@@ -165,24 +166,17 @@
             height: 220px;
             border-radius: 14px;
             overflow: hidden;
-            background: #111827;
+            background: #000;
             border: 1.5px solid #334155;
             scroll-snap-align: center;
             position: relative;
             cursor: pointer;
         }
 
-        .canvas-poster {
+        .sample-video-element {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .video-inner-player {
-            width: 100%;
-            height: 100%;
-            object-fit: contain !important;
+            object-fit: contain;
             background: #000;
             display: block;
         }
@@ -193,8 +187,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.35);
+            background: rgba(0, 0, 0, 0.28);
             z-index: 10;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
         }
         .play-circle {
             width: 52px;
@@ -302,20 +298,59 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-cyan-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.1.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.2.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.3.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.4.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.5.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.6.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/7.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/8.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.9.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.10.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.11.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Words.Have.Power.1080P_HD.720P_HD.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <!-- 13.mp4 ভিডিওটি এখানে সঠিকভাবে বসানো হলো -->
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/13.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.1.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.2.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.3.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.4.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.5.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.6.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/7.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/8.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.9.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.10.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.11.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/13.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <!-- স্থানান্তরিত মোটিভেশনাল রিলস ভিডিও -->
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Words.Have.Power.1080P_HD.720P_HD.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -337,12 +372,30 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-pink-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection1.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection2.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection3.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection4.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection5.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-wide" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection6.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-wide">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection1.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-wide">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection2.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-wide">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection3.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-wide">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection4.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-wide">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection5.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-wide">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection6.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -370,9 +423,18 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-yellow-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos1.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos2.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos3.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos1.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos2.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos3.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -386,27 +448,51 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-green-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos1.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos2.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos3.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos4.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos1.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos2.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos3.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos4.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Islamic Viral Reels (রিলস সাইজ ৯:১৬) -->
                 <div class="glass-card hover:border-emerald-500 text-center">
-                    <img src="https://i.postimg.cc/NMcxfQ3h/file-00000000327c81fa881ee6274649cf88-removebg-preview-(1).png" loading="lazy" alt="Islamic Viral Reels" class="card-img">
+                    <img src="https://i.postimg.cc/NMcxfQ3h/file-00000000327c81fa881ee6274649cf88-removebg-preview.png" loading="lazy" alt="Islamic Viral Reels" class="card-img">
                     <h3 class="text-xl font-extrabold text-emerald-400 mb-3">Islamic Viral Reels Collection</h3>
                     <p class="text-slate-400 text-sm mb-4">Islamic Content Creatorদের জন্য রয়েছে আলাদা বিশাল Master Collection ও শর্ট ভিডিও।</p>
 
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-emerald-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection1.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection2.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection3.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection4.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection1.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection2.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection3.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection4.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -420,12 +506,30 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-pink-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels1.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels2.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels3.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels4.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels5.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels6.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels1.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels2.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels3.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels4.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels5.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Motivational.Emotional.Reels6.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -439,14 +543,38 @@
                     <div class="sample-video-box">
                         <div class="sample-label"><i class="fas fa-play-circle text-blue-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels1.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels2.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels3.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels4.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels5.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels6.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels7.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
-                            <div class="video-card-reels" data-src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels8.mp4"><div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels1.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels2.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels3.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels4.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels5.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels6.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels7.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
+                            <div class="video-card-reels">
+                                <video class="sample-video-element" preload="metadata" playsinline webkit-playsinline controls src="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Sports.Trending.Reels8.mp4#t=0.1"></video>
+                                <div class="custom-play-btn"><div class="play-circle"><i class="fas fa-play"></i></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -489,156 +617,4 @@
                     </div>
                     <div class="flex flex-col items-center bg-amber-950/40 border border-amber-400/40 rounded-2xl py-3 px-1 shadow-inner">
                         <span id="p-seconds" class="text-3xl sm:text-5xl font-black text-amber-200 neon-glow-amber">২৮</span>
-                        <span class="text-[12px] sm:text-xs font-black text-amber-300 tracking-wider mt-1.5 uppercase">সেকেন্ড</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="sticky-buy-bar">
-            <a href="select-payment.html" class="w-full md:w-auto bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white px-10 py-4 rounded-full font-black text-xl md:text-2xl shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all hover:scale-105 border-b-4 border-green-800 flex items-center justify-center animate-bounce text-decoration-none">
-                <i class="fas fa-shopping-cart mr-3"></i> এখনই অর্ডার করুন
-            </a>
-        </div>
-    </div>
-
-    <footer class="bg-slate-900 border-t border-slate-800 py-8 text-center text-slate-500 text-sm">
-        <p>&copy; 2026 Technography. All rights reserved.</p>
-    </footer>
-
-    <!-- স্ক্রিপ্ট: ক্রমান্বয়ে থাম্বনেইল লোডার ও প্লেয়ার হ্যান্ডলার -->
-    <script>
-        // সিরিয়াল অনুযায়ী ক্রমান্বয়ে থাম্বনেইল লোড করার অটোমেটিক ইঞ্জিন
-        const allCards = Array.from(document.querySelectorAll('.video-card-reels, .video-card-wide'));
-
-        function generateNextThumbnail(index) {
-            if (index >= allCards.length) return;
-
-            const card = allCards[index];
-            const src = card.getAttribute('data-src');
-
-            const tempVideo = document.createElement('video');
-            tempVideo.src = src;
-            tempVideo.crossOrigin = 'anonymous';
-            tempVideo.currentTime = 0.5;
-            tempVideo.muted = true;
-
-            tempVideo.addEventListener('loadeddata', function() {
-                try {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = tempVideo.videoWidth || 320;
-                    canvas.height = tempVideo.videoHeight || 180;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(tempVideo, 0, 0, canvas.width, canvas.height);
-
-                    const img = document.createElement('img');
-                    img.src = canvas.toDataURL('image/jpeg', 0.7);
-                    img.className = 'canvas-poster';
-
-                    // কার্ডে থাম্বনেইল সেট করা
-                    card.insertBefore(img, card.firstChild);
-                } catch (e) {
-                    // ফেইল করলে নরমাল কন্টিনিউ
-                }
-
-                // পরবর্তী ভিডিওটির থাম্বনেইল শুরু করা (সিরিয়াল লোডিং)
-                generateNextThumbnail(index + 1);
-            });
-
-            tempVideo.addEventListener('error', function() {
-                // কোনো ভিডিও এরর দিলে পরেরটাতে চলে যাওয়া
-                generateNextThumbnail(index + 1);
-            });
-        }
-
-        // পেজ লোড হলে প্রথম ভিডিও থেকে লোডিং শুরু
-        window.addEventListener('DOMContentLoaded', () => {
-            generateNextThumbnail(0);
-        });
-
-        // ক্লিক করলে শুধু একটি ভিডিওই চলবে
-        allCards.forEach(card => {
-            card.addEventListener('click', function() {
-                const src = this.getAttribute('data-src');
-                const existingVid = this.querySelector('video');
-
-                if (existingVid) {
-                    if (existingVid.paused) existingVid.play();
-                    else existingVid.pause();
-                    return;
-                }
-
-                // অন্যান্য ভিডিও পজ ও রিমুভ করা
-                allCards.forEach(c => {
-                    const otherVid = c.querySelector('video');
-                    if (otherVid) {
-                        otherVid.pause();
-                        otherVid.remove();
-                        const btn = c.querySelector('.custom-play-btn');
-                        if (btn) btn.style.display = 'flex';
-                        const poster = c.querySelector('.canvas-poster');
-                        if (poster) poster.style.display = 'block';
-                    }
-                });
-
-                // প্লে বাটন ও পোস্টার লুকিয়ে প্লেয়ার বসানো
-                const btn = this.querySelector('.custom-play-btn');
-                if (btn) btn.style.display = 'none';
-                const poster = this.querySelector('.canvas-poster');
-                if (poster) poster.style.display = 'none';
-
-                const video = document.createElement('video');
-                video.className = 'video-inner-player';
-                video.controls = true;
-                video.autoplay = true;
-                video.playsInline = true;
-                video.src = src;
-
-                this.appendChild(video);
-                video.play().catch(e => console.log('Playing'));
-            });
-        });
-
-        function initializeProductCountdown() {
-            const STORAGE_KEY = 'technography_deal_end_time';
-            const TOTAL_DURATION = 48 * 60 * 60 * 1000;
-            const MIN_THRESHOLD = 10 * 60 * 60 * 1000;
-            let targetTime = localStorage.getItem(STORAGE_KEY);
-            const now = new Date().getTime();
-
-            if (!targetTime || (parseInt(targetTime) - now) <= MIN_THRESHOLD) {
-                targetTime = now + TOTAL_DURATION;
-                localStorage.setItem(STORAGE_KEY, targetTime);
-            } else {
-                targetTime = parseInt(targetTime);
-            }
-
-            function updateDisplay() {
-                const currentTime = new Date().getTime();
-                let diff = targetTime - currentTime;
-                if (diff <= MIN_THRESHOLD) {
-                    targetTime = currentTime + TOTAL_DURATION;
-                    localStorage.setItem(STORAGE_KEY, targetTime);
-                    diff = TOTAL_DURATION;
-                }
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                const toBn = num => String(num).padStart(2, '0').replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
-                const elDays = document.getElementById('p-days');
-                const elHours = document.getElementById('p-hours');
-                const elMinutes = document.getElementById('p-minutes');
-                const elSeconds = document.getElementById('p-seconds');
-                if (elDays) elDays.textContent = toBn(days);
-                if (elHours) elHours.textContent = toBn(hours);
-                if (elMinutes) elMinutes.textContent = toBn(minutes);
-                if (elSeconds) elSeconds.textContent = toBn(seconds);
-            }
-            updateDisplay();
-            setInterval(updateDisplay, 1000);
-        }
-        initializeProductCountdown();
-    </script>
-</body>
-</html>
+                        <span class="text-[12px] sm:text-xs font-black text-amber-300 tracking-wider mt-1.5
