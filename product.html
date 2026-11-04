@@ -51,7 +51,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
-            padding: 24px;
+            padding: 20px 16px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .glass-card:hover {
@@ -108,49 +108,52 @@
             transform: perspective(700px) translateZ(12px);
         }
 
-        /* পারফেক্ট অ্যাসপেক্ট রেশিও স্যাম্পল ভিডিও বক্স */
+        /* বড় ফ্রেম ও ফুল কার্ড পূরণ করা ভিডিও কন্টেইনার */
         .sample-video-box {
-            margin-top: 18px;
-            background: rgba(11, 19, 36, 0.9);
-            padding: 12px;
-            border-radius: 18px;
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            margin-top: 20px;
+            background: rgba(11, 19, 36, 0.95);
+            padding: 12px 8px;
+            border-radius: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
             text-align: left;
+            width: 100%;
         }
         .sample-label {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: #38bdf8;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            padding-left: 6px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
         .video-slider {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
             -webkit-overflow-scrolling: touch;
         }
         .video-slider::-webkit-scrollbar {
-            height: 5px;
+            height: 6px;
         }
         .video-slider::-webkit-scrollbar-thumb {
             background: #334155;
             border-radius: 10px;
         }
         .video-card {
-            flex: 0 0 210px;
-            height: 330px;
-            border-radius: 14px;
+            flex: 0 0 85%;
+            max-width: 320px;
+            height: 420px;
+            border-radius: 16px;
             overflow: hidden;
             background: #000;
-            border: 1px solid #334155;
-            scroll-snap-align: start;
+            border: 1.5px solid #334155;
+            scroll-snap-align: center;
             position: relative;
             cursor: pointer;
             display: flex;
@@ -160,9 +163,12 @@
         .video-card img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            background: #000;
-            opacity: 0.9;
+            object-fit: cover;
+            opacity: 0.88;
+            transition: transform 0.3s ease;
+        }
+        .video-card:hover img {
+            transform: scale(1.04);
         }
         .play-overlay {
             position: absolute;
@@ -170,27 +176,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.35);
             pointer-events: none;
         }
         .play-icon-circle {
-            width: 48px;
-            height: 48px;
+            width: 58px;
+            height: 58px;
             background: rgba(34, 211, 238, 0.95);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #04121e;
-            font-size: 20px;
-            box-shadow: 0 0 18px rgba(34, 211, 238, 0.7);
+            font-size: 24px;
+            box-shadow: 0 0 25px rgba(34, 211, 238, 0.8);
+            transition: transform 0.2s;
         }
-        .video-card video {
+        .video-card:hover .play-icon-circle {
+            transform: scale(1.12);
+        }
+        .video-card iframe {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            background: #000;
-            outline: none;
+            border: none;
         }
     </style>
 </head>
@@ -477,18 +485,19 @@
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
-    <!-- স্ক্রিপ্ট: HTML5 কাস্টম ভিডিও প্লেয়ার যা কাটবে না এবং ফুল দেখাবে -->
+    <!-- স্ক্রিপ্ট: ট্যাপ করলেই ফুল ফ্রেম গুগল ড্রাইভ প্লেয়ারে সরাসরি ভিডিও লোড হবে -->
     <script>
         document.querySelectorAll('.video-card').forEach(card => {
             card.addEventListener('click', function() {
                 const videoId = this.getAttribute('data-video');
-                if (videoId && !this.querySelector('video')) {
-                    // ড্রাইভের ডিরেক্ট ফাইল দিয়ে কাস্টম ব্রাউজার ভিডিও লোড
+                if (videoId && !this.querySelector('iframe')) {
                     this.innerHTML = `
-                        <video controls autoplay playsinline style="width:100%; height:100%; object-fit:contain; background:#000;">
-                            <source src="https://drive.google.com/uc?export=download&id=${videoId}" type="video/mp4">
-                            <iframe src="https://drive.google.com/file/d/${videoId}/preview?autoplay=1" style="width:100%; height:100%; border:none;"></iframe>
-                        </video>
+                        <iframe 
+                            src="https://drive.google.com/file/d/${videoId}/preview" 
+                            style="width: 100%; height: 100%; border: none;" 
+                            allow="autoplay; encrypted-media" 
+                            allowfullscreen>
+                        </iframe>
                     `;
                 }
             });
