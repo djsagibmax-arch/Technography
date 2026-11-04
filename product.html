@@ -31,7 +31,6 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
 
-    <!-- নিজস্ব ইমেজ প্রি-লোড (ইনস্ট্যান্ট লোডের জন্য) -->
     <link rel="preload" as="image" href="images/product1.webp" fetchpriority="high">
     <link rel="preload" as="image" href="https://i.postimg.cc/1zvnszHL/file-0000000067ec81faa53e8cf2a7ab0a68-removebg-preview.png" fetchpriority="high">
 
@@ -52,7 +51,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
-            padding: 30px;
+            padding: 24px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .glass-card:hover {
@@ -60,16 +59,13 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
         .card-img {
-            height: 130px;
+            height: 120px;
             width: auto;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 15px auto;
             object-fit: contain;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
             transition: transform 0.3s ease;
             display: block; 
-        }
-        .glass-card:hover .card-img {
-            transform: scale(1.1);
         }
         .feature-img {
             max-width: 100%;
@@ -78,20 +74,6 @@
             margin: 0 auto 20px auto;
             object-fit: contain;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-            transition: transform 0.4s ease;
-            display: block;
-        }
-        .glass-card:hover .feature-img {
-            transform: scale(1.05);
-        }
-        .bonus-img {
-            max-width: 100%;
-            height: auto;
-            max-height: 250px;
-            margin: 0 auto 20px auto;
-            object-fit: contain;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
-            transition: transform 0.4s ease;
             display: block;
         }
         .order-img {
@@ -100,8 +82,6 @@
             max-height: 380px; 
             margin: 0 auto 15px auto;
             object-fit: contain;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-            transition: transform 0.4s ease;
             display: block;
         }
         .sticky-buy-bar {
@@ -128,20 +108,20 @@
             transform: perspective(700px) translateZ(12px);
         }
 
-        /* স্যাম্পল ভিডিও স্ক্রল বক্স স্টাইল */
+        /* অপ্টিমাইজড ইনস্ট্যান্ট স্যাম্পল ভিডিও সেকশন */
         .sample-video-box {
-            margin-top: 18px;
-            background: rgba(15, 23, 42, 0.7);
+            margin-top: 16px;
+            background: rgba(11, 19, 36, 0.85);
             padding: 12px;
-            border-radius: 16px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 18px;
+            border: 1px solid rgba(56, 189, 248, 0.25);
             text-align: left;
         }
         .sample-label {
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
             color: #38bdf8;
             margin-bottom: 10px;
             display: flex;
@@ -153,7 +133,7 @@
             gap: 12px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            padding-bottom: 6px;
+            padding-bottom: 8px;
             -webkit-overflow-scrolling: touch;
         }
         .video-slider::-webkit-scrollbar {
@@ -161,16 +141,54 @@
         }
         .video-slider::-webkit-scrollbar-thumb {
             background: #334155;
-            border-radius: 6px;
+            border-radius: 10px;
         }
         .video-card {
             flex: 0 0 160px;
-            height: 260px;
-            border-radius: 10px;
+            height: 270px;
+            border-radius: 14px;
             overflow: hidden;
             background: #000;
             border: 1px solid #334155;
             scroll-snap-align: start;
+            position: relative;
+            cursor: pointer;
+        }
+        .video-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: transform 0.3s;
+        }
+        .video-card:hover img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+        .play-icon-circle {
+            width: 44px;
+            height: 44px;
+            background: rgba(34, 211, 238, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #04121e;
+            font-size: 18px;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.6);
+            transition: transform 0.2s;
+        }
+        .video-card:hover .play-icon-circle {
+            transform: scale(1.15);
         }
         .video-card iframe {
             width: 100%;
@@ -181,7 +199,6 @@
 </head>
 <body class="bg-[#070b18] text-slate-100 font-sans antialiased">
 
-    <!-- Header / Navbar -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400">Technography</a>
@@ -241,7 +258,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Course & Method -->
+                <!-- Course & Viral Method -->
                 <div class="glass-card hover:border-purple-500 text-center md:text-left">
                     <img src="https://i.postimg.cc/t40NT6vB/file-0000000035d481fa81e7f7fe81f6f595-removebg-preview.png" loading="lazy" alt="Growth & Viral Method" class="card-img md:mx-0">
                     <h3 class="text-xl font-extrabold text-white mb-3 mt-4">Facebook & YouTube Growth + Video viral method</h3>
@@ -263,17 +280,16 @@
                     <p class="text-slate-300 font-bold mb-2">একসাথে বিশাল পরিমাণ Mixed Reels Collection!</p>
                     <p class="text-slate-400 text-sm">বিভিন্ন ধরনের Short Video ও Reels থেকে নিজের প্রয়োজন অনুযায়ী কনটেন্ট আইডিয়া এবং ভিডিও সংগ্রহ করতে পারবেন।</p>
                     
-                    <!-- স্যাম্পল ভিডিও: ১.৫ লক্ষ+ মিক্সড মেগা রিলস -->
                     <div class="sample-video-box">
-                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="sample-label"><i class="fas fa-play-circle text-cyan-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1CxKkFqV8zSo048JEC0ezdestWPBpgzdy/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1sriOx5hHXrseE1N1gxFVXV20-mKIriBA/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1XQYZCxgMXCAp45wqZbM20T86hh8nn-kA/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1i8uLMbs0eDgMZSL9hawEjEXjeBhPAi_N/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr/preview"></iframe></div>
+                            <div class="video-card" data-video="1CxKkFqV8zSo048JEC0ezdestWPBpgzdy"><img src="https://drive.google.com/thumbnail?id=1CxKkFqV8zSo048JEC0ezdestWPBpgzdy&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1"><img src="https://drive.google.com/thumbnail?id=1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1sriOx5hHXrseE1N1gxFVXV20-mKIriBA"><img src="https://drive.google.com/thumbnail?id=1sriOx5hHXrseE1N1gxFVXV20-mKIriBA&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1XQYZCxgMXCAp45wqZbM20T86hh8nn-kA"><img src="https://drive.google.com/thumbnail?id=1XQYZCxgMXCAp45wqZbM20T86hh8nn-kA&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1i8uLMbs0eDgMZSL9hawEjEXjeBhPAi_N"><img src="https://drive.google.com/thumbnail?id=1i8uLMbs0eDgMZSL9hawEjEXjeBhPAi_N&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL"><img src="https://drive.google.com/thumbnail?id=1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr"><img src="https://drive.google.com/thumbnail?id=183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -292,21 +308,20 @@
                         <li>🎞️ বিভিন্ন Movie Clip Collection</li>
                     </ul>
 
-                    <!-- স্যাম্পল ভিডিও: Movie & Drama Clips -->
                     <div class="sample-video-box">
-                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="sample-label"><i class="fas fa-play-circle text-pink-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1v3FpVE0JFqu4Gy4bQATjJ6QNIl7bwak8/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/140VdNnJJs6h2FHAOeY5u142DYkRlndFb/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1CGNYg8_kEwz15psNuDVC_aE2SXP-E6Rm/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/12FEiJsuzxhDBbWOzJ3UAUQcrCYW_T5or/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1K--4JYDVP4vEOgEWdNZbk6nF5dBuKjVJ/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1PzVBDXhEhLWmtdXsatGTlUQP9zYOBFCv/preview"></iframe></div>
+                            <div class="video-card" data-video="1v3FpVE0JFqu4Gy4bQATjJ6QNIl7bwak8"><img src="https://drive.google.com/thumbnail?id=1v3FpVE0JFqu4Gy4bQATjJ6QNIl7bwak8&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="140VdNnJJs6h2FHAOeY5u142DYkRlndFb"><img src="https://drive.google.com/thumbnail?id=140VdNnJJs6h2FHAOeY5u142DYkRlndFb&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1CGNYg8_kEwz15psNuDVC_aE2SXP-E6Rm"><img src="https://drive.google.com/thumbnail?id=1CGNYg8_kEwz15psNuDVC_aE2SXP-E6Rm&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="12FEiJsuzxhDBbWOzJ3UAUQcrCYW_T5or"><img src="https://drive.google.com/thumbnail?id=12FEiJsuzxhDBbWOzJ3UAUQcrCYW_T5or&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1K--4JYDVP4vEOgEWdNZbk6nF5dBuKjVJ"><img src="https://drive.google.com/thumbnail?id=1K--4JYDVP4vEOgEWdNZbk6nF5dBuKjVJ&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1PzVBDXhEhLWmtdXsatGTlUQP9zYOBFCv"><img src="https://drive.google.com/thumbnail?id=1PzVBDXhEhLWmtdXsatGTlUQP9zYOBFCv&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Exclusive Mega Shorts & Reels Collection -->
+                <!-- Exclusive Mega Shorts -->
                 <div class="glass-card hover:border-orange-500 text-center">
                     <img src="https://i.postimg.cc/ydHTY7MB/file-00000000370c81fabc33ef3860b0c2bd-removebg-preview.png" loading="lazy" alt="Exclusive Mega Shorts" class="card-img">
                     <h3 class="text-xl font-extrabold text-orange-400 mb-3">Exclusive Mega Shorts & Reels Collection</h3>
@@ -326,16 +341,15 @@
                     <h3 class="text-xl font-extrabold text-yellow-400 mb-3">AI Food Talking Videos</h3>
                     <p class="text-slate-400 text-sm mb-4">AI-ভিত্তিক Food Content বর্তমানে ব্যাপক জনপ্রিয়। এই বান্ডেলে রয়েছে AI Food Videos ও Short Content কালেকশন।</p>
 
-                    <!-- স্যাম্পল ভিডিও: AI Food Talking Videos -->
                     <div class="sample-video-box">
-                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="sample-label"><i class="fas fa-play-circle text-yellow-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1cepDrxI7TG022jbflFv2MWvJiNxI-hDf/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1ppcfcZh8HIFhMtTMAo3b0X1qCVTj4JYy/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1du6O3q0WPc1aAkhIlWuabhce49Bo8DTa/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/176k5nTscpOkCS3hYadCvi-mYSXrZsyR0/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1EOHH-qne9CEIWCxtYM99enX5h8QEbP7t/preview"></iframe></div>
+                            <div class="video-card" data-video="1cepDrxI7TG022jbflFv2MWvJiNxI-hDf"><img src="https://drive.google.com/thumbnail?id=1cepDrxI7TG022jbflFv2MWvJiNxI-hDf&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1ppcfcZh8HIFhMtTMAo3b0X1qCVTj4JYy"><img src="https://drive.google.com/thumbnail?id=1ppcfcZh8HIFhMtTMAo3b0X1qCVTj4JYy&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1du6O3q0WPc1aAkhIlWuabhce49Bo8DTa"><img src="https://drive.google.com/thumbnail?id=1du6O3q0WPc1aAkhIlWuabhce49Bo8DTa&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="176k5nTscpOkCS3hYadCvi-mYSXrZsyR0"><img src="https://drive.google.com/thumbnail?id=176k5nTscpOkCS3hYadCvi-mYSXrZsyR0&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1"><img src="https://drive.google.com/thumbnail?id=1SatMEBaActdQYSn9lwyDdqOBNeF4QFZ1&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1EOHH-qne9CEIWCxtYM99enX5h8QEbP7t"><img src="https://drive.google.com/thumbnail?id=1EOHH-qne9CEIWCxtYM99enX5h8QEbP7t&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -346,13 +360,12 @@
                     <h3 class="text-xl font-extrabold text-green-400 mb-3">AI Health & Fitness Videos</h3>
                     <p class="text-slate-400 text-sm mb-4">Health ও Fitness বিষয়ক কনটেন্ট তৈরির জন্য রয়েছে আলাদা ভিডিও কালেকশন ও ওয়ার্কআউট কনটেন্ট।</p>
 
-                    <!-- স্যাম্পল ভিডিও: AI Health & Fitness Videos -->
                     <div class="sample-video-box">
-                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="sample-label"><i class="fas fa-play-circle text-green-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1wgZuEkESfqMFMTgFaP8LjnluNZvbSuN6/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1ldoj-oKlSu3ALNgrJc5giT5PRm0bEhAJ/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1WlQHjrhpok-MAZ2oryZu_uFnKadut6jK/preview"></iframe></div>
+                            <div class="video-card" data-video="1wgZuEkESfqMFMTgFaP8LjnluNZvbSuN6"><img src="https://drive.google.com/thumbnail?id=1wgZuEkESfqMFMTgFaP8LjnluNZvbSuN6&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1ldoj-oKlSu3ALNgrJc5giT5PRm0bEhAJ"><img src="https://drive.google.com/thumbnail?id=1ldoj-oKlSu3ALNgrJc5giT5PRm0bEhAJ&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1WlQHjrhpok-MAZ2oryZu_uFnKadut6jK"><img src="https://drive.google.com/thumbnail?id=1WlQHjrhpok-MAZ2oryZu_uFnKadut6jK&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -363,14 +376,13 @@
                     <h3 class="text-xl font-extrabold text-emerald-400 mb-3">Islamic Viral Reels Collection</h3>
                     <p class="text-slate-400 text-sm mb-4">Islamic Content Creatorদের জন্য রয়েছে আলাদা বিশাল Master Collection ও শর্ট ভিডিও।</p>
 
-                    <!-- স্যাম্পল ভিডিও: Islamic Viral Reels -->
                     <div class="sample-video-box">
-                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="sample-label"><i class="fas fa-play-circle text-emerald-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1d2JKWPqoC301I-RvwVgq9g3VEw1OYqZy/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1mCJcKSqxS5ml-ELORax3cmq-9uqxoI6l/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1w352_vLA3Arb_jP-p-6mdp8SX-Ik5O-p/preview"></iframe></div>
+                            <div class="video-card" data-video="1d2JKWPqoC301I-RvwVgq9g3VEw1OYqZy"><img src="https://drive.google.com/thumbnail?id=1d2JKWPqoC301I-RvwVgq9g3VEw1OYqZy&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL"><img src="https://drive.google.com/thumbnail?id=1eBAqZk5li-VUOrDJO5phRSg4HYHSqTRL&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1mCJcKSqxS5ml-ELORax3cmq-9uqxoI6l"><img src="https://drive.google.com/thumbnail?id=1mCJcKSqxS5ml-ELORax3cmq-9uqxoI6l&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1w352_vLA3Arb_jP-p-6mdp8SX-Ik5O-p"><img src="https://drive.google.com/thumbnail?id=1w352_vLA3Arb_jP-p-6mdp8SX-Ik5O-p&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -381,16 +393,15 @@
                     <h3 class="text-xl font-extrabold text-pink-400 mb-3">Motivational & Emotional Reels</h3>
                     <p class="text-slate-400 text-sm mb-4">মানুষের আবেগ, অনুপ্রেরণা ও জীবনের গল্পভিত্তিক শর্ট কনটেন্টের জন্য রয়েছে বিশাল কালেকশন।</p>
 
-                    <!-- স্যাম্পল ভিডিও: Motivational & Emotional Reels -->
                     <div class="sample-video-box">
-                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="sample-label"><i class="fas fa-play-circle text-pink-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1t_pVUrBpbJCLFNSHpMA60OJhSw5KKpOM/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1egsXvhK1maHDNEQt9AGDdZitIbkUR2aN/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1uGyL--3Qx3nZCm2jcSswH4AjAEXZcKLi/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1K6Pf_omVLHbylQMj8dEbaLFPkt4BF_tK/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/18fxaE1OwOxJaXGqR3Q2gz4xG5ffGywB7/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1LwZuZvX2O6AxlYhVXhVFkN3Ter4H-yXk/preview"></iframe></div>
+                            <div class="video-card" data-video="1t_pVUrBpbJCLFNSHpMA60OJhSw5KKpOM"><img src="https://drive.google.com/thumbnail?id=1t_pVUrBpbJCLFNSHpMA60OJhSw5KKpOM&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1egsXvhK1maHDNEQt9AGDdZitIbkUR2aN"><img src="https://drive.google.com/thumbnail?id=1egsXvhK1maHDNEQt9AGDdZitIbkUR2aN&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1uGyL--3Qx3nZCm2jcSswH4AjAEXZcKLi"><img src="https://drive.google.com/thumbnail?id=1uGyL--3Qx3nZCm2jcSswH4AjAEXZcKLi&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1K6Pf_omVLHbylQMj8dEbaLFPkt4BF_tK"><img src="https://drive.google.com/thumbnail?id=1K6Pf_omVLHbylQMj8dEbaLFPkt4BF_tK&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="18fxaE1OwOxJaXGqR3Q2gz4xG5ffGywB7"><img src="https://drive.google.com/thumbnail?id=18fxaE1OwOxJaXGqR3Q2gz4xG5ffGywB7&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1LwZuZvX2O6AxlYhVXhVFkN3Ter4H-yXk"><img src="https://drive.google.com/thumbnail?id=1LwZuZvX2O6AxlYhVXhVFkN3Ter4H-yXk&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -401,16 +412,15 @@
                     <h3 class="text-xl font-extrabold text-blue-400 mb-3">Sports & Trending Reels</h3>
                     <p class="text-slate-400 text-sm mb-4">Football, Cricket, WWE সহ বিভিন্ন খেলাধুলার ভাইরাল ট্রেন্ডিং ভিডিও।</p>
 
-                    <!-- স্যাম্পল ভিডিও: Sports & Trending Reels -->
                     <div class="sample-video-box">
-                        <div class="sample-label"><i class="fas fa-play-circle"></i> Sample Videos</div>
+                        <div class="sample-label"><i class="fas fa-play-circle text-blue-400"></i> Sample Videos (Tap to Play)</div>
                         <div class="video-slider">
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1cUpXe2_iVeZsoTKFuLVq0KUOdWxntFaE/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/14Fxo5JMzWCSTndOvjT36HoEslN3C9-m5/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1SCgMVZavujPMornSH9izwQPlgmS5viYa/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1Exf8tFOJsLw6BQDzOA0Ghv3MjxBMKncB/preview"></iframe></div>
-                            <div class="video-card"><iframe src="https://drive.google.com/file/d/1xFkNyxbyvgQ1kw6GYnE5JuZu3R98smID/preview"></iframe></div>
+                            <div class="video-card" data-video="1cUpXe2_iVeZsoTKFuLVq0KUOdWxntFaE"><img src="https://drive.google.com/thumbnail?id=1cUpXe2_iVeZsoTKFuLVq0KUOdWxntFaE&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="14Fxo5JMzWCSTndOvjT36HoEslN3C9-m5"><img src="https://drive.google.com/thumbnail?id=14Fxo5JMzWCSTndOvjT36HoEslN3C9-m5&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1SCgMVZavujPMornSH9izwQPlgmS5viYa"><img src="https://drive.google.com/thumbnail?id=1SCgMVZavujPMornSH9izwQPlgmS5viYa&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr"><img src="https://drive.google.com/thumbnail?id=183zn1MPy_U4nS9onJQ1EeWSIOnoPLYzr&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1Exf8tFOJsLw6BQDzOA0Ghv3MjxBMKncB"><img src="https://drive.google.com/thumbnail?id=1Exf8tFOJsLw6BQDzOA0Ghv3MjxBMKncB&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
+                            <div class="video-card" data-video="1xFkNyxbyvgQ1kw6GYnE5JuZu3R98smID"><img src="https://drive.google.com/thumbnail?id=1xFkNyxbyvgQ1kw6GYnE5JuZu3R98smID&sz=w400" alt="Video"><div class="play-overlay"><div class="play-icon-circle"><i class="fas fa-play"></i></div></div></div>
                         </div>
                     </div>
                 </div>
@@ -459,7 +469,6 @@
             </div>
         </div>
 
-        <!-- Sticky Floating Buy Button -->
         <div class="sticky-buy-bar">
             <a href="select-payment.html" class="w-full md:w-auto bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white px-10 py-4 rounded-full font-black text-xl md:text-2xl shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all hover:scale-105 border-b-4 border-green-800 flex items-center justify-center animate-bounce text-decoration-none">
                 <i class="fas fa-shopping-cart mr-3"></i> এখনই অর্ডার করুন
@@ -467,12 +476,21 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-slate-900 border-t border-slate-800 py-8 text-center text-slate-500 text-sm">
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
+    <!-- স্ক্রিপ্ট: শুধু ক্লিক করলেই লোড হবে এবং ল্যাগ ছাড়াই চলবে -->
     <script>
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const videoId = this.getAttribute('data-video');
+                if (videoId && !this.querySelector('iframe')) {
+                    this.innerHTML = `<iframe src="https://drive.google.com/file/d/${videoId}/preview?autoplay=1" allow="autoplay" allowfullscreen></iframe>`;
+                }
+            });
+        });
+
         function initializeProductCountdown() {
             const STORAGE_KEY = 'technography_deal_end_time';
             const TOTAL_DURATION = 48 * 60 * 60 * 1000;
