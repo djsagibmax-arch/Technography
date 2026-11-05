@@ -6,7 +6,7 @@
     <title>নিরাপদ পেমেন্ট ও চেকআউট | Technography</title>
     <meta name="theme-color" content="#070b18">
 
-    <!-- লোগোগুলো প্রি-লোড (ইনস্ট্যান্ট লোডিংয়ের জন্য) -->
+    <!-- লোগোগুলো প্রি-লোড -->
     <link rel="preload" as="image" href="images/bkash.webp">
     <link rel="preload" as="image" href="images/nogod.webp">
     <link rel="preload" as="image" href="images/rocket.webp">
@@ -100,12 +100,18 @@
 
     <main class="max-w-xl mx-auto px-4 py-8">
         <div class="bg-slate-900/90 border border-slate-800 p-5 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
-            <h2 class="text-xl sm:text-2xl font-black mb-5 text-center text-white">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
+            <h2 class="text-xl sm:text-2xl font-black mb-2 text-center text-white">পেমেন্ট ও অর্ডার কনফার্মেশন</h2>
+            
+            <!-- সিলেক্টেড প্রোডাক্ট টাইটেল ব্যাজ -->
+            <div class="text-center mb-5">
+                <span id="checkoutProductName" class="inline-block px-3 py-1 bg-cyan-950/60 border border-cyan-400/40 text-cyan-300 text-xs font-bold rounded-full">
+                    লোডিং প্রোডাক্ট...
+                </span>
+            </div>
 
             <div id="selected-info-box" class="bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all">
                 <div class="mb-3 flex items-center justify-between">
                     <div class="flex items-center gap-2.5">
-                        <!-- পরিবর্তিত বিকাশ ব্যানার/লোগো -->
                         <img id="active-method-logo" src="images/bkash.webp" alt="Logo" class="h-10 w-10 object-cover rounded-xl shadow-md border border-white/10">
                         <span id="active-method-name" class="text-base sm:text-lg font-bold text-pink-400">বিকাশ (Personal) পেমেন্ট নিয়ম</span>
                     </div>
