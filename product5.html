@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>৫০ হাজার AI ভাইরাল Reels/shorts ভিডিও | Technography</title>
-    <meta name="description" content="৫০ হাজার AI ভাইরাল Reels/shorts ভিডিও - AI Food Talking ও Health Fitness ভিডিও কালেকশন।">
+    <title>৫ হাজার AI ভাইরাল Reels/shorts ভিডিও | Technography</title>
+    <meta name="description" content="৫ হাজার AI ভাইরাল Reels/shorts ভিডিও - AI Food Talking, Health Fitness, Cartoon এবং Funny ভিডিও কালেকশন।">
 
     <!-- নিজস্ব ব্যানার ইমেজ প্রি-লোড -->
     <link rel="preload" as="image" href="images/product5.webp" fetchpriority="high">
@@ -22,11 +22,14 @@
     fbq('init', '1913791776249045');
     fbq('track', 'PageView');
     fbq('track', 'ViewContent', {
-        content_name: '50 Thousand AI Viral Reels Shorts Videos',
+        content_name: '5 Thousand AI Viral Reels Shorts Videos',
         value: 99,
         currency: 'BDT'
     });
     </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"
+    /></noscript>
     <!-- End Meta Pixel Code -->
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -37,7 +40,7 @@
             background-color: #070b18; 
             color: #f1f5f9; 
             font-family: system-ui, -apple-system, sans-serif;
-            padding-bottom: 90px;
+            padding-bottom: 110px;
         }
         .glass-card { 
             background: rgba(30, 41, 59, 0.7); 
@@ -59,16 +62,87 @@
             background: rgba(7, 11, 24, 0.95); 
             backdrop-filter: blur(12px); 
             border-top: 1px solid rgba(245, 158, 11, 0.3); 
-            padding: 10px 15px; 
+            padding: 12px 15px; 
             display: flex; 
             justify-content: center; 
             z-index: 50;
         }
-        .neon-glow-amber { text-shadow: 0 0 8px #fbbf24; }
+        .video-slider {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 10px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .video-slider::-webkit-scrollbar {
+            height: 5px;
+        }
+        .video-slider::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+        .video-wrapper-reels {
+            flex: 0 0 200px;
+            height: 350px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            border: 1.5px solid #334155;
+            scroll-snap-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .thumb-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: #000;
+            transition: transform 0.3s ease;
+        }
+        .video-wrapper-reels:hover .thumb-preview-img {
+            transform: scale(1.05);
+        }
+        .white-play-btn {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.25);
+            pointer-events: none;
+        }
+        .play-white-circle {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #04121e;
+            font-size: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            transition: transform 0.2s ease;
+        }
+        .video-wrapper-reels:hover .play-white-circle {
+            transform: scale(1.1);
+        }
+        .active-video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+            display: block;
+        }
+        video::-internal-media-controls-download-button { display:none !important; }
+        video::-webkit-media-controls-enclosure { overflow:hidden !important; }
     </style>
 </head>
 <body class="antialiased">
 
+    <!-- হেডার -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400">Technography</a>
@@ -77,10 +151,10 @@
     </header>
 
     <main class="max-w-4xl mx-auto px-4 pt-6 text-center">
-        <!-- পরিবর্তিত ব্যানার (images/product5.webp) -->
+        <!-- ব্যানার ইমেজ -->
         <div class="mb-6 w-full flex justify-center">
             <img src="images/product5.webp" 
-                 alt="৫০ হাজার AI ভাইরাল Reels/shorts ভিডিও" 
+                 alt="৫ হাজার AI ভাইরাল Reels/shorts ভিডিও" 
                  loading="eager" 
                  fetchpriority="high"
                  decoding="sync"
@@ -88,38 +162,156 @@
         </div>
 
         <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-amber-500/10 border border-amber-400/40 text-amber-300 mb-3">
-            <span class="text-xs sm:text-sm font-bold uppercase">🍔 AI Food & Fitness Bundle</span>
+            <span class="text-xs sm:text-sm font-bold uppercase">⚡ Ultimate AI Video Creator Bundle</span>
         </div>
 
         <h1 class="text-2xl sm:text-4xl md:text-5xl font-black mb-3 text-white leading-tight">
-            ৫০ হাজার <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-emerald-400">AI ভাইরাল Reels/shorts ভিডিও</span>
+            ৫ হাজার <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-emerald-400">AI ভাইরাল Reels/shorts ভিডিও</span>
         </h1>
 
-        <p class="text-sm sm:text-lg text-slate-300 mb-6 max-w-2xl mx-auto">
-            AI-ভিত্তিক Food এবং Health-Fitness কনটেন্ট দিয়ে সহজে ও আকর্ষণীয়ভাবে ফেসবুক পেজ বা ইউটিউব চ্যানেল গ্রো করুন।
+        <p class="text-sm sm:text-base text-slate-300 mb-6 max-w-2xl mx-auto leading-relaxed">
+            ফেসবুক রিলস, ইউটিউব শর্টস এবং টিকটকে নিমিষেই ভাইরাল হওয়ার জন্য তৈরি রেডিমেড হাই কোয়ালিটি AI অ্যানিমেশন ও ফানি ভিডিও বান্ডেল।
         </p>
 
-        <!-- বিবরণ কার্ড -->
-        <div class="glass-card p-6 text-left border-t-4 border-t-amber-500 mb-8">
-            <h2 class="text-lg font-black text-amber-400 mb-3 flex items-center gap-2">
-                <span>🔥</span> প্যাকেজের অন্তর্ভুক্ত মূল ক্যাটাগরি:
+        <!-- ৪টি ক্যাটাগরির বিস্তারিত বিবরণ কার্ড -->
+        <div class="glass-card p-6 text-left border-t-4 border-t-amber-500 mb-10">
+            <h2 class="text-lg sm:text-xl font-black text-amber-400 mb-4 flex items-center gap-2">
+                <span>🔥</span> প্যাকেজের অন্তর্ভুক্ত ৪টি মেগা ক্যাটাগরি:
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm text-slate-200">
+                <!-- ১. ফুড টকিং -->
                 <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
-                    <h3 class="font-bold text-amber-300 mb-2 flex items-center gap-2">
+                    <h3 class="font-bold text-amber-300 mb-2 flex items-center gap-2 text-sm sm:text-base">
                         <span>🍔</span> AI Food Talking Videos
                     </h3>
                     <p class="text-slate-400 leading-relaxed">
-                        কথা বলা বার্গার, পিজ্জা ও মুখরোচক খাবারের ট্রেন্ডিং AI ভিডিও যা সোশ্যাল মিডিয়ায় বিপুল পরিমাণ ভিউ এনে দেয়।
+                        কথা বলা বার্গার, পিজ্জা, জুস ও মুখরোচক খাবারের ট্রেন্ডিং এআই অ্যানিমেশন। এই ধরণের ভিডিওগুলো বাচ্চা থেকে শুরু করে সব বয়সী দর্শককে দীর্ঘ সময় ধরে আটকে রাখে, ফলে সোশ্যাল মিডিয়ায় অর্গানিক রিচ ও ভিউ ব্যাপক বৃদ্ধি পায়।
                     </p>
                 </div>
+                <!-- ২. হেলথ ও ফিটনেস -->
                 <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
-                    <h3 class="font-bold text-emerald-300 mb-2 flex items-center gap-2">
+                    <h3 class="font-bold text-emerald-300 mb-2 flex items-center gap-2 text-sm sm:text-base">
                         <span>🩺</span> AI Health & Fitness Videos
                     </h3>
                     <p class="text-slate-400 leading-relaxed">
-                        ব্যায়াম, পুষ্টিগুণ, স্বাস্থ্য টিপস এবং ওয়ার্কআউট সংক্রান্ত রেডি-টু-আপলোড শর্ট ভিডিও ফুটেজ।
+                        ব্যায়াম টিপস, সুস্বাস্থ্য বজায় রাখার উপায়, ডায়েট গাইড এবং জিম ওয়ার্কআউট সংক্রান্ত দৃষ্টিনন্দন থ্রিডি ভিজ্যুয়াল ক্লিপ। হেলথ নিশে নিয়মিত এই কনটেন্ট আপলোড করে দ্রুত পেজ মনিটাইজ ও ব্র্যান্ড ভ্যালু তৈরি সম্ভব।
                     </p>
+                </div>
+                <!-- ৩. কার্টুন ভিডিও -->
+                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                    <h3 class="font-bold text-cyan-300 mb-2 flex items-center gap-2 text-sm sm:text-base">
+                        <span>🎬</span> AI Cartoon Video
+                    </h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        বাচ্চাদের রূপকথা, অনুপ্রেরণামূলক নীতিশিক্ষা ও আকর্ষণীয় কাল্পনিক চরিত্রের থ্রিডি এআই অ্যানিমেশন কার্টুন। কার্টুন কনটেন্টে ফেসবুক ও ইউটিউবে সবচেয়ে বেশি ভিউ এবং ওয়াচটাইম আসে।
+                    </p>
+                </div>
+                <!-- ৪. ফানি ভিডিও -->
+                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                    <h3 class="font-bold text-pink-300 mb-2 flex items-center gap-2 text-sm sm:text-base">
+                        <span>😂</span> AI Funny Video
+                    </h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        মজার মজার এআই অ্যাক্টিভিটি, হাস্যকর অঙ্গভঙ্গি, অদ্ভুত পরিস্থিতির প্র্যাঙ্ক ও কমেডি শর্ট ক্লিপ। নিমিষেই দর্শকদের শেয়ার করতে বাধ্য করবে এবং দ্রুত ফলোয়ার বাড়াতে ভূমিকা রাখবে।
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ভিডিও সেকশনসমূহ ================= -->
+
+        <!-- সেকশন ১: AI Food Talking Videos -->
+        <div class="glass-card p-5 text-left mb-8">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-2xl">🍔</span>
+                <h3 class="text-lg sm:text-xl font-bold text-amber-400">AI Food Talking Videos</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 mb-4">
+                খাবারের আকর্ষণীয় অভিব্যক্তি ও ভয়েস অ্যানিমেশনের কিছু প্রিভিউ দেখুন (প্লে করতে ক্লিক করুন):
+            </p>
+            <div class="video-slider">
+                <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos1.mp4">
+                    <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/AI%20Food%20Talking%20Videos1.jpg" alt="Food 1">
+                    <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                </div>
+                <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos2.mp4">
+                    <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/AI%20Food%20Talking%20Videos2.jpg" alt="Food 2">
+                    <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                </div>
+                <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Food.Talking.Videos3.mp4">
+                    <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/AI%20Food%20Talking%20Videos3.jpg" alt="Food 3">
+                    <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- সেকশন ২: AI Health & Fitness Videos -->
+        <div class="glass-card p-5 text-left mb-8">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-2xl">🩺</span>
+                <h3 class="text-lg sm:text-xl font-bold text-emerald-400">AI Health & Fitness Videos</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 mb-4">
+                স্বাস্থ্য সচেতনতা ও জিম ওয়ার্কআউট ফ্রেমের প্রিভিউ (প্লে করতে ক্লিক করুন):
+            </p>
+            <div class="video-slider">
+                <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos1.mp4">
+                    <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/AI%20Health%20%26%20Fitness%20Videos1.jpg" alt="Fitness 1">
+                    <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                </div>
+                <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos2.mp4">
+                    <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/AI%20Health%20%26%20Fitness%20Videos2.jpg" alt="Fitness 2">
+                    <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                </div>
+                <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos3.mp4">
+                    <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/AI%20Health%20%26%20Fitness%20Videos3.jpg" alt="Fitness 3">
+                    <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                </div>
+                <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/AI.Health.Fitness.Videos4.mp4">
+                    <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/AI%20Health%20%26%20Fitness%20Videos4.jpg" alt="Fitness 4">
+                    <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- সেকশন ৩: AI Cartoon Video -->
+        <div class="glass-card p-5 text-left mb-8">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-2xl">🎬</span>
+                <h3 class="text-lg sm:text-xl font-bold text-cyan-400">AI Cartoon Video</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 mb-4">
+                মনোমুগ্ধকর অ্যানিমেশন ও রূপকথার গল্পের স্যাম্পল ক্লিপ:
+            </p>
+            <div class="video-slider">
+                <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.1.mp4">
+                    <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels1.jpg" alt="Cartoon 1">
+                    <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                </div>
+                <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.2.mp4">
+                    <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels2.jpg" alt="Cartoon 2">
+                    <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- সেকশন ৪: AI Funny Video -->
+        <div class="glass-card p-5 text-left mb-8">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-2xl">😂</span>
+                <h3 class="text-lg sm:text-xl font-bold text-pink-400">AI Funny Video</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 mb-4">
+                হাস্যরসাত্মক ভাইরাল এআই কমেডি শর্টসের প্রিভিউ:
+            </p>
+            <div class="video-slider">
+                <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.3.mp4">
+                    <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels3.jpg" alt="Funny 1">
+                    <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                </div>
+                <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.4.mp4">
+                    <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels4.jpg" alt="Funny 2">
+                    <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
                 </div>
             </div>
         </div>
@@ -145,15 +337,65 @@
         </div>
     </main>
 
+    <!-- স্টিকি বাই বাটন -->
     <div class="sticky-buy-bar">
         <a href="select-payment.html?product=5" class="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 text-slate-950 px-8 py-3 rounded-full font-black text-sm sm:text-base shadow-xl flex items-center justify-center gap-2">
             <i class="fas fa-shopping-cart"></i> এখনই অর্ডার করুন (৯৯ ৳)
         </a>
     </div>
 
+    <!-- ফুটার -->
     <footer class="bg-slate-900 border-t border-slate-800 py-6 text-center text-slate-500 text-xs">
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
+    <!-- স্ক্রিপ্ট: অন-ক্লিক ভিডিও প্লেয়ার ও সিঙ্গেল প্লে কন্ট্রোল -->
+    <script>
+        const allWrappers = document.querySelectorAll('.video-wrapper-reels');
+
+        allWrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', function(e) {
+                const existingVideo = this.querySelector('video');
+                if (existingVideo) {
+                    if (existingVideo.paused) existingVideo.play();
+                    else existingVideo.pause();
+                    return;
+                }
+
+                // অন্য চলমান ভিডিও থামিয়ে থাম্বনেইলে ফিরিয়ে আনা
+                allWrappers.forEach(otherWrapper => {
+                    const otherVideo = otherWrapper.querySelector('video');
+                    if (otherVideo) {
+                        otherVideo.pause();
+                        otherVideo.remove();
+                        const otherThumb = otherWrapper.querySelector('.thumb-preview-img');
+                        const otherBtn = otherWrapper.querySelector('.white-play-btn');
+                        if (otherThumb) otherThumb.style.display = 'block';
+                        if (otherBtn) otherBtn.style.display = 'flex';
+                    }
+                });
+
+                // বর্তমান কার্ডের ছবি ও প্লে বাটন হাইড করা
+                const thumb = this.querySelector('.thumb-preview-img');
+                const playBtn = this.querySelector('.white-play-btn');
+                if (thumb) thumb.style.display = 'none';
+                if (playBtn) playBtn.style.display = 'none';
+
+                // অন-ডিমান্ড ভিডিও তৈরি
+                const videoUrl = this.getAttribute('data-video');
+                const video = document.createElement('video');
+                video.className = 'active-video-player';
+                video.controls = true;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.setAttribute('controlsList', 'nodownload');
+                video.oncontextmenu = () => false;
+                video.src = videoUrl;
+
+                this.appendChild(video);
+                video.play().catch(err => console.log('Playback:', err));
+            });
+        });
+    </script>
 </body>
 </html>
