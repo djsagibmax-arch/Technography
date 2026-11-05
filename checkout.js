@@ -3,7 +3,7 @@ const supabaseUrl = 'https://safymsagxrjymhfdzkph.supabase.co';
 const supabaseKey = 'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv';
 const client = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-// ৬টি প্রোডাক্টের সম্পূর্ণ কনফিগারেশন (নতুন প্রাইস আপডেট করা হয়েছে)
+// ৬টি প্রোডাক্টের সম্পূর্ণ কনফিগারেশন (নতুন প্রাইস ও নাম সহ আপডেট করা হয়েছে)
 const PRODUCTS_DATA = {
     '1': { 
         name: 'Mega Bundle (All in One)', 
@@ -17,21 +17,21 @@ const PRODUCTS_DATA = {
     },
     '3': { 
         name: '1.5 Lakh Mixed Mega Reels Bundle', 
-        price: 180, 
+        price: 190, 
         link: 'https://technographybd.xyz/reels-bundle-access.html' 
     },
     '4': { 
         name: 'Movie & Drama Clips Collection', 
-        price: 180, 
+        price: 200, 
         link: 'https://technographybd.xyz/movie-clips-access.html' 
     },
     '5': { 
-        name: 'AI Food & Fitness Videos', 
-        price: 99, 
+        name: '5000 AI Viral Reels Shorts', 
+        price: 180, 
         link: 'https://technographybd.xyz/food-fitness-access.html' 
     },
     '6': { 
-        name: 'Islamic Viral Reels Collection', 
+        name: '5000 Islamic Viral Reels Collection', 
         price: 50, 
         link: 'https://technographybd.xyz/islamic-reels-access.html' 
     }
@@ -64,6 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ruleNotice) {
         ruleNotice.innerHTML = `⚠️ নিয়ম: প্রথমে আপনার একাউন্ট থেকে ওপরের নাম্বারে <span class="text-yellow-400 font-bold">${toBn(REQUIRED_AMOUNT)} টাকা</span> Send Money করুন। এরপর নিচের ফর্মটি পূরণ করুন।`;
     }
+    const prodNameHeader = document.getElementById('checkoutProductName');
+    if (prodNameHeader) {
+        prodNameHeader.innerText = CURRENT_PRODUCT.name;
+    }
 });
 
 function openPaymentModal() {
@@ -81,6 +85,8 @@ function selectPayment(method) {
     const infoBox = document.getElementById('selected-info-box');
     const nameSpan = document.getElementById('active-method-name');
     const logoImg = document.getElementById('active-method-logo');
+
+    if (!infoBox || !nameSpan || !logoImg) return;
 
     if (method === 'bkash') {
         infoBox.className = "bg-pink-950/20 border border-pink-500/30 p-4 sm:p-5 rounded-2xl mb-6 transition-all";
