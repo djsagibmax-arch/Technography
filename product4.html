@@ -30,22 +30,135 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        #p4-page { background-color: #070b18; color: #f1f5f9; padding-bottom: 110px !important; }
+        #p4-page { background-color: #070b18; color: #f1f5f9; padding-bottom: 120px !important; }
         .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; }
+        
+        /* স্টিকি বটম বাই বার */
         .sticky-buy-bar {
-            position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important;
-            background: rgba(7, 11, 24, 0.95) !important; backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(16, 185, 129, 0.3); padding: 10px 15px;
-            display: flex !important; justify-content: center !important; z-index: 40 !important;
+            position: fixed !important; 
+            bottom: 0 !important; 
+            left: 0 !important; 
+            width: 100% !important;
+            background: rgba(7, 11, 24, 0.95) !important; 
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(16, 185, 129, 0.4); 
+            padding: 14px 20px;
+            display: flex !important; 
+            justify-content: center !important; 
+            align-items: center !important;
+            z-index: 50 !important;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
         }
+
         .neon-glow-cyan { text-shadow: 0 0 8px #22d3ee; }
         .neon-glow-emerald { text-shadow: 0 0 8px #34d399; }
         .neon-glow-purple { text-shadow: 0 0 8px #c084fc; }
         .neon-glow-amber { text-shadow: 0 0 8px #fbbf24; }
+
+        /* স্যাম্পল ভিডিও বক্স ও ১৬:৯ ওয়াইড ফ্রেম স্লাইডার */
+        .sample-video-box {
+            background: rgba(11, 19, 36, 0.95);
+            padding: 16px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(236, 72, 153, 0.35);
+            text-align: left;
+            width: 100%;
+            margin-top: 24px;
+        }
+        .sample-label {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #ec4899;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-left: 4px;
+        }
+        .video-slider {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .video-slider::-webkit-scrollbar {
+            height: 5px;
+        }
+        .video-slider::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+
+        /* মুভি ফ্রেম (১৬:৯ আসল ফুল ফ্রেম) */
+        .video-wrapper-wide {
+            flex: 0 0 88%;
+            max-width: 380px;
+            height: 215px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            border: 1.5px solid #334155;
+            scroll-snap-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .thumb-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+            background: #000;
+        }
+        .video-wrapper-wide:hover .thumb-preview-img {
+            transform: scale(1.03);
+        }
+
+        .white-play-btn {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+        }
+        .play-white-circle {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #04121e;
+            font-size: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            transition: transform 0.2s ease;
+        }
+        .video-wrapper-wide:hover .play-white-circle {
+            transform: scale(1.1);
+        }
+
+        .active-video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+            display: block;
+        }
+
+        video::-internal-media-controls-download-button { display:none !important; }
+        video::-webkit-media-controls-enclosure { overflow:hidden !important; }
     </style>
 </head>
 <body class="bg-[#070b18] text-slate-100 font-sans antialiased">
 
+    <!-- হেডার -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400">Technography</a>
@@ -55,7 +168,7 @@
 
     <div id="p4-page">
         <section class="max-w-5xl mx-auto px-4 pt-6 text-center">
-            <!-- পরিবর্তিত ব্যানার (images/product4.webp) -->
+            <!-- ব্যানার -->
             <div class="mb-6">
                 <img src="images/product4.webp" 
                      alt="Movie Clips Banner" 
@@ -74,61 +187,133 @@
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-400 to-amber-300">Clips Collection</span>
             </h1>
 
+            <!-- বিস্তারিত পরিচিতি -->
             <div class="glass-card p-6 sm:p-8 max-w-4xl mx-auto text-left border-t-4 border-t-pink-500 mb-8">
                 <p class="text-slate-200 text-base sm:text-lg leading-relaxed font-medium mb-3">
-                    মুভি ও নাটকভিত্তিক কনটেন্ট তৈরি করতে আগ্রহীদের জন্য থাকছে ৫০,০০০+ Movie & Drama Clips-এর বিশাল কালেকশন। 
+                    মুভি ও নাটকভিত্তিক কনটেন্ট তৈরি করতে আগ্রহীদের জন্য এটি বাংলাদেশের সবচেয়ে বড় ৫০,০০০+ Movie & Drama Clips-এর মেগা রিসোর্স প্যাক।
                 </p>
                 <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-4">
-                    বিভিন্ন ধরনের Movie ও Drama Content থেকে প্রয়োজন অনুযায়ী ক্লিপ খুঁজে কনটেন্ট আইডিয়া, শর্টস, রিলস ও ভিডিও এডিটিংয়ের কাজে ব্যবহার করতে পারবেন।
+                    প্রতিদিন নতুন নতুন মুভির সিন খোঁজা, ডাউনলোড করা এবং সেগুলো থেকে ইন্টারেস্টিং অংশ আলাদা করার মতো ঝামেলার দিন শেষ। এই বান্ডেলে রয়েছে রেডি হাই-ডেফিনিশন ক্লিপস—যা ফেসবুক পেজ, ইউটিউব শর্টস, টিকটক ও ইনস্টাগ্রাম রিলসে মুহূর্তেই দর্শকদের ধরে রাখবে।
                 </p>
-                <div class="bg-pink-950/40 border border-pink-500/30 p-4 rounded-xl text-pink-200 text-sm font-semibold">
-                    🔥 Movie Clip Content Creatorদের জন্য একটি বড় Content Library—যেখান থেকে আপনার প্রয়োজন অনুযায়ী বিভিন্ন ক্লিপ খুঁজে নিয়ে Shorts, Reels এবং অন্যান্য Short-form Content তৈরির কাজে ব্যবহার করতে পারবেন।
+                <div class="bg-pink-950/40 border border-pink-500/30 p-4 rounded-xl text-pink-200 text-sm font-semibold leading-relaxed">
+                    🔥 প্রতিটি ক্লিপ ক্রিস্টাল ক্লিয়ার অডিও ও হাই-রেজোলিউশন ভিডিও কোয়ালিটিতে সাজানো। আপনি সরাসরি ভয়েসওভার যোগ করে, রি-এডিট করে বা ব্যাকগ্রাউন্ড মিউজিক দিয়ে কপিরাইট সেফ উপায়ে কনটেন্ট তৈরি করতে পারবেন।
+                </div>
+
+                <!-- ৬টি স্যাম্পল ভিডিও সেকশন -->
+                <div class="sample-video-box">
+                    <div class="sample-label">
+                        <i class="fas fa-play-circle text-pink-400"></i> স্যাম্পল ভিডিও (Tap to Play)
+                    </div>
+                    <div class="video-slider">
+                        <!-- Movie Clip 1 -->
+                        <div class="video-wrapper-wide" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection1.mp4">
+                            <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/movie1.jpg" alt="Movie 1">
+                            <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                        </div>
+
+                        <!-- Movie Clip 2 -->
+                        <div class="video-wrapper-wide" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection2.mp4">
+                            <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/movie2.jpg" alt="Movie 2">
+                            <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                        </div>
+
+                        <!-- Movie Clip 3 -->
+                        <div class="video-wrapper-wide" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection3.mp4">
+                            <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/movie3.jpg" alt="Movie 3">
+                            <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                        </div>
+
+                        <!-- Movie Clip 4 -->
+                        <div class="video-wrapper-wide" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection4.mp4">
+                            <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/movie4.jpg" alt="Movie 4">
+                            <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                        </div>
+
+                        <!-- Movie Clip 5 -->
+                        <div class="video-wrapper-wide" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection5.mp4">
+                            <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/movie5.jpg" alt="Movie 5">
+                            <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                        </div>
+
+                        <!-- Movie Clip 6 -->
+                        <div class="video-wrapper-wide" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.Movie.Drama.Clips.Collection6.mp4">
+                            <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/movie6.jpg" alt="Movie 6">
+                            <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- মুভি ক্লিপের ক্যাটাগরি তালিকা -->
+        <!-- মুভি ক্লিপের বিস্তারিত ক্যাটাগরি তালিকা -->
         <section class="max-w-5xl mx-auto px-4 py-4">
             <div class="text-center mb-8">
                 <h2 class="text-amber-400 text-2xl sm:text-3xl font-black mb-2">🎞️ কালেকশনে যা যা থাকছে</h2>
-                <p class="text-slate-400 text-sm">জনপ্রিয় ও ট্রেন্ডিং সব ক্যাটাগরির ক্লিপ এক লাইব্রেরিতে</p>
+                <p class="text-slate-400 text-sm">জনপ্রিয় ও ট্রেন্ডিং সব ক্যাটাগরির ক্লিপ এক মেগা লাইব্রেরিতে</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Hindi Action Movie Clips -->
+                <div class="glass-card p-5 border border-slate-800">
+                    <span class="text-2xl mb-2 block">💥</span>
+                    <h3 class="text-base font-bold text-amber-300 mb-1">Hindi Action Movie Clips</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">হিন্দি ব্লকবাস্টার অ্যাকশন সিনেমার হাই-ভোল্টেজ ফাইট সিকোয়েন্স, চেইজিং সিন ও পাওয়ারফুল ডায়লগ ক্লিপ কালেকশন।</p>
+                </div>
+
+                <!-- South Indian Action & Mass Clips -->
+                <div class="glass-card p-5 border border-slate-800">
+                    <span class="text-2xl mb-2 block">🔥</span>
+                    <h3 class="text-base font-bold text-rose-300 mb-1">South Indian Action & Mass Clips</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">সোশ্যাল মিডিয়ায় ব্যাপক ভাইরাল হওয়া সাউথ ইন্ডিয়ান হিরোদের মাস এন্ট্রি, স্লোগ্রাফি ও অবিশ্বাস্য অ্যাকশন মুহূর্ত।</p>
+                </div>
+
+                <!-- Bollywood Movie Clips -->
                 <div class="glass-card p-5 border border-slate-800">
                     <span class="text-2xl mb-2 block">🎬</span>
                     <h3 class="text-base font-bold text-white mb-1">Bollywood Movie Clips</h3>
-                    <p class="text-xs text-slate-400">জনপ্রিয় Bollywood Movie-এর বিভিন্ন ধরনের রোমান্টিক ও অ্যাকশন ক্লিপ।</p>
+                    <p class="text-xs text-slate-400 leading-relaxed">জনপ্রিয় বলিউড সিনেমার নির্বাচিত ক্লাসিক, রোমান্টিক, ড্রামা ও সেরা পারফরম্যান্স সিনগুলোর বিশেষ কালেকশন।</p>
                 </div>
 
+                <!-- Hollywood Movie Clips -->
                 <div class="glass-card p-5 border border-slate-800">
-                    <span class="text-2xl mb-2 block">🎬</span>
-                    <h3 class="text-base font-bold text-white mb-1">Hollywood Movie Clips</h3>
-                    <p class="text-xs text-slate-400">বিভিন্ন Hollywood Blockbuster Movie-এর নির্বাচিত হাই-কোয়ালিটি Clip Collection।</p>
+                    <span class="text-2xl mb-2 block">🌍</span>
+                    <h3 class="text-base font-bold text-cyan-300 mb-1">Hollywood Movie Clips</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">মার্ভেল, ডিসি, সাই-ফাই ও বিভিন্ন হলিউড ব্লকবাস্টার সিনেমার সিনেমাটিক ভিজ্যুয়াল ও মেগা অ্যাকশন সিন।</p>
                 </div>
 
+                <!-- Thriller & Suspense Clips -->
                 <div class="glass-card p-5 border border-slate-800">
-                    <span class="text-2xl mb-2 block">🎬</span>
-                    <h3 class="text-base font-bold text-white mb-1">Netflix-related Clips</h3>
-                    <p class="text-xs text-slate-400">Netflix-সম্পর্কিত বিভিন্ন Movie ও Entertainment সিরিজ Clips।</p>
+                    <span class="text-2xl mb-2 block">⚡</span>
+                    <h3 class="text-base font-bold text-purple-300 mb-1">Thriller & Suspense Clips</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">দর্শকদের শেষ পর্যন্ত কৌতূহলী করে রাখার মতো সাসপেন্স, ক্রাইম থ্রিলার ও মিস্ট্রি দৃশ্য যা পুরো ভিডিও দেখতে বাধ্য করে।</p>
                 </div>
 
+                <!-- Netflix & Web Series Clips -->
                 <div class="glass-card p-5 border border-slate-800">
-                    <span class="text-2xl mb-2 block">🎬</span>
-                    <h3 class="text-base font-bold text-white mb-1">English Movie Clips</h3>
-                    <p class="text-xs text-slate-400">English Movie-এর বিভিন্ন Short Clip ও ডায়লগ ফুটেজ।</p>
+                    <span class="text-2xl mb-2 block">📺</span>
+                    <h3 class="text-base font-bold text-red-400 mb-1">Netflix & Web Series Clips</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">নেটফ্লিক্স, অ্যামাজন প্রাইম ও ট্রেন্ডিং ওয়েব সিরিজের সেরা ক্লিপ—যা বর্তমান তরুণ প্রজন্মের কাছে শীর্ষ ট্রেন্ডে রয়েছে।</p>
                 </div>
 
+                <!-- English Movie Clips -->
+                <div class="glass-card p-5 border border-slate-800">
+                    <span class="text-2xl mb-2 block">📽️</span>
+                    <h3 class="text-base font-bold text-emerald-300 mb-1">English Movie Clips</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">ইংরেজি ক্ল্যাসিক ও ট্রেন্ডিং মুভির মোটিভেশনাল ও ডিপ মিনিং ডায়লগ ফুটেজ, যা রিলসের জন্য পারফেক্ট।</p>
+                </div>
+
+                <!-- Bangla Natok Clips -->
                 <div class="glass-card p-5 border border-slate-800">
                     <span class="text-2xl mb-2 block">🎭</span>
-                    <h3 class="text-base font-bold text-white mb-1">Bangla Natok Clips</h3>
-                    <p class="text-xs text-slate-400">বাংলা জনপ্রিয় নাটকের সেরা ইমোশনাল ও ফানি Clip Collection।</p>
+                    <h3 class="text-base font-bold text-pink-300 mb-1">Bangla Natok Clips</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">বাংলা জনপ্রিয় নাটকের সেরা ইমোশনাল, বাস্তবধর্মী ও ফানি কমেডি ক্লিপ কালেকশন—লোকাল অডিয়েন্সের প্রিয়।</p>
                 </div>
 
+                <!-- Mixed Movie & Mega Collection -->
                 <div class="glass-card p-5 border border-slate-800">
                     <span class="text-2xl mb-2 block">🎞️</span>
-                    <h3 class="text-base font-bold text-white mb-1">Mixed Movie Collection</h3>
-                    <p class="text-xs text-slate-400">বিভিন্ন Movie ও Drama Content একসাথে একটি বড় মেগা সংগ্রহে।</p>
+                    <h3 class="text-base font-bold text-yellow-300 mb-1">Mixed Mega Collection</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">বিভিন্ন দেশি-বিদেশি মুভি, ড্রামা ও শর্ট ফিল্মের সব ধরনের ফুটেজের এক বিশাল মাস্টার ড্রাইভ সংগ্রহ।</p>
                 </div>
             </div>
         </section>
@@ -148,10 +333,10 @@
             </div>
         </section>
 
-        <!-- স্টিকি বাটন -->
+        <!-- স্টিকি বটম বাই বার (বাউন্স অ্যানিমেশন সহ) -->
         <div class="sticky-buy-bar">
-            <a href="select-payment.html?product=4" class="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 text-white px-7 py-2.5 rounded-full font-black text-sm sm:text-base shadow-lg transition flex items-center justify-center gap-2">
-                <i class="fas fa-shopping-cart text-sm"></i> এখনই অর্ডার করুন (১৮০ ৳)
+            <a href="select-payment.html?product=4" class="w-full sm:w-auto bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white px-10 py-3.5 rounded-full font-black text-base sm:text-lg shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all hover:scale-105 border-b-4 border-green-800 flex items-center justify-center gap-3 animate-bounce text-decoration-none">
+                <i class="fas fa-shopping-cart text-lg"></i> এখনই অর্ডার করুন (১৮০ ৳)
             </a>
         </div>
     </div>
@@ -160,7 +345,54 @@
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
+    <!-- স্ক্রিপ্ট: অন-ক্লিক ভিডিও প্লেয়ার ও টাইমার -->
     <script>
+        const allWrappers = document.querySelectorAll('.video-wrapper-wide');
+
+        allWrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', function(e) {
+                const existingVideo = this.querySelector('video');
+                if (existingVideo) {
+                    if (existingVideo.paused) existingVideo.play();
+                    else existingVideo.pause();
+                    return;
+                }
+
+                // অন্য কার্ডের চলমান ভিডিও বন্ধ করে থাম্বনেইলে ফিরিয়ে আনা
+                allWrappers.forEach(otherWrapper => {
+                    const otherVideo = otherWrapper.querySelector('video');
+                    if (otherVideo) {
+                        otherVideo.pause();
+                        otherVideo.remove();
+                        const otherThumb = otherWrapper.querySelector('.thumb-preview-img');
+                        const otherBtn = otherWrapper.querySelector('.white-play-btn');
+                        if (otherThumb) otherThumb.style.display = 'block';
+                        if (otherBtn) otherBtn.style.display = 'flex';
+                    }
+                });
+
+                // বর্তমান কার্ডের ছবি ও বাটন হাইড করা
+                const thumb = this.querySelector('.thumb-preview-img');
+                const playBtn = this.querySelector('.white-play-btn');
+                if (thumb) thumb.style.display = 'none';
+                if (playBtn) playBtn.style.display = 'none';
+
+                // অন-ডিমান্ড ভিডিও তৈরি ও প্লে
+                const videoUrl = this.getAttribute('data-video');
+                const video = document.createElement('video');
+                video.className = 'active-video-player';
+                video.controls = true;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.setAttribute('controlsList', 'nodownload');
+                video.oncontextmenu = () => false;
+                video.src = videoUrl;
+
+                this.appendChild(video);
+                video.play().catch(err => console.log('Playback:', err));
+            });
+        });
+
         function runTimer() {
             const now = new Date().getTime();
             let end = localStorage.getItem('t_end') || (now + 48*3600*1000);
