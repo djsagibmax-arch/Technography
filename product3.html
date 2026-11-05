@@ -23,7 +23,7 @@
     fbq('track', 'PageView');
     fbq('track', 'ViewContent', {
         content_name: '1.5 Lakh Mixed Reels Bundle',
-        value: 180,
+        value: 190,
         currency: 'BDT'
     });
     </script>
@@ -36,7 +36,7 @@
         #p3-page { 
             background-color: #070b18; 
             color: #f1f5f9; 
-            padding-bottom: 110px !important; 
+            padding-bottom: 120px !important; 
         }
         .glass-card { 
             background: rgba(30, 41, 59, 0.7); 
@@ -50,23 +50,127 @@
             border-color: rgba(34, 211, 238, 0.4);
             box-shadow: 0 15px 30px rgba(0,0,0,0.5);
         }
+        
+        /* স্টিকি বটম বাই বার */
         .sticky-buy-bar {
             position: fixed !important; 
             bottom: 0 !important; 
             left: 0 !important; 
             width: 100% !important;
             background: rgba(7, 11, 24, 0.95) !important; 
-            backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(16, 185, 129, 0.3); 
-            padding: 10px 15px;
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(16, 185, 129, 0.4); 
+            padding: 14px 20px;
             display: flex !important; 
             justify-content: center !important; 
-            z-index: 40 !important;
+            align-items: center !important;
+            z-index: 50 !important;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
         }
+
         .neon-glow-cyan { text-shadow: 0 0 8px #22d3ee; }
         .neon-glow-emerald { text-shadow: 0 0 8px #34d399; }
         .neon-glow-purple { text-shadow: 0 0 8px #c084fc; }
         .neon-glow-amber { text-shadow: 0 0 8px #fbbf24; }
+
+        /* স্যাম্পল ভিডিও বক্স ও স্লাইডার */
+        .sample-video-box {
+            background: rgba(11, 19, 36, 0.95);
+            padding: 16px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            text-align: left;
+            width: 100%;
+            margin-top: 25px;
+        }
+        .sample-label {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #22d3ee;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-left: 4px;
+        }
+        .video-slider {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .video-slider::-webkit-scrollbar {
+            height: 5px;
+        }
+        .video-slider::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+
+        /* রিলস ফ্রেম (৯:১৬) */
+        .video-wrapper-reels {
+            flex: 0 0 190px;
+            height: 330px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            border: 1.5px solid #334155;
+            scroll-snap-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .thumb-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+            background: #000;
+        }
+        .video-wrapper-reels:hover .thumb-preview-img {
+            transform: scale(1.04);
+        }
+
+        .white-play-btn {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+        .play-white-circle {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #04121e;
+            font-size: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            transition: transform 0.2s ease;
+        }
+        .video-wrapper-reels:hover .play-white-circle {
+            transform: scale(1.1);
+        }
+
+        .active-video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+            display: block;
+        }
+
+        video::-internal-media-controls-download-button { display:none !important; }
+        video::-webkit-media-controls-enclosure { overflow:hidden !important; }
     </style>
 </head>
 <body class="bg-[#070b18] text-slate-100 font-sans antialiased">
@@ -75,14 +179,14 @@
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400">Technography</a>
-            <a href="select-payment.html?product=3" class="bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 text-white px-5 py-2 rounded-full font-medium text-sm shadow-lg">অর্ডার করুন (১৮০ ৳)</a>
+            <a href="select-payment.html?product=3" class="bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 text-white px-5 py-2 rounded-full font-medium text-sm shadow-lg">অর্ডার করুন (১৯০ ৳)</a>
         </div>
     </header>
 
     <div id="p3-page">
         <section class="max-w-5xl mx-auto px-4 pt-6 text-center">
             
-            <!-- পরিবর্তিত ব্যানার (images/product3.webp) -->
+            <!-- ব্যানার -->
             <div class="mb-6">
                 <img src="images/product3.webp" 
                      alt="১.৫ লক্ষ+ মিক্সড মেগা রিলস" 
@@ -239,6 +343,98 @@
                 </div>
 
             </div>
+
+            <!-- স্ক্রিনশট অনুযায়ী সঠিক স্থানে সবকটি স্যাম্পল ভিডিও -->
+            <div class="sample-video-box">
+                <div class="sample-label">
+                    <i class="fas fa-play-circle text-cyan-400"></i> স্যাম্পল ভিডিও (Tap to Play)
+                </div>
+                <div class="video-slider">
+                    <!-- Reels 1 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.1.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels1.jpg" alt="Mixed 1">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 2 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.2.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels2.jpg" alt="Mixed 2">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 3 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.3.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels3.jpg" alt="Mixed 3">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 4 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.4.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels4.jpg" alt="Mixed 4">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 5 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.5.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels5.jpg" alt="Mixed 5">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 6 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.6.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels6.jpg" alt="Mixed 6">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 7 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/7.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels7.jpg" alt="Mixed 7">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 8 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/8.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels8.jpg" alt="Mixed 8">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 9 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.9.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels9.jpg" alt="Mixed 9">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 10 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.10.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels10.jpg" alt="Mixed 10">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 11 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/+.11.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels11.jpg" alt="Mixed 11">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 12 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Words.Have.Power.1080P_HD.720P_HD.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels12.jpg" alt="Mixed 12">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 13 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/13.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels13.jpg" alt="Mixed 13">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Reels 14 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/reels14.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/reels14.jpg" alt="Mixed 14">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- মূল সুবিধাসমূহ -->
@@ -278,10 +474,10 @@
             </div>
         </section>
 
-        <!-- স্টিকি বাটন -->
+        <!-- স্টিকি বটম বাই বার (বাউন্স অ্যানিমেশন ও ১৯০ ৳ সহ) -->
         <div class="sticky-buy-bar">
-            <a href="select-payment.html?product=3" class="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 text-white px-7 py-2.5 rounded-full font-black text-sm sm:text-base shadow-lg transition flex items-center justify-center gap-2">
-                <i class="fas fa-shopping-cart text-sm"></i> এখনই অর্ডার করুন (১৮০ ৳)
+            <a href="select-payment.html?product=3" class="w-full sm:w-auto bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white px-10 py-3.5 rounded-full font-black text-base sm:text-lg shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all hover:scale-105 border-b-4 border-green-800 flex items-center justify-center gap-3 animate-bounce text-decoration-none">
+                <i class="fas fa-shopping-cart text-lg"></i> এখনই অর্ডার করুন (১৯০ ৳)
             </a>
         </div>
     </div>
@@ -290,7 +486,54 @@
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
+    <!-- স্ক্রিপ্ট: অন-ক্লিক ভিডিও প্লেয়ার ও টাইমার -->
     <script>
+        const allWrappers = document.querySelectorAll('.video-wrapper-reels');
+
+        allWrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', function(e) {
+                const existingVideo = this.querySelector('video');
+                if (existingVideo) {
+                    if (existingVideo.paused) existingVideo.play();
+                    else existingVideo.pause();
+                    return;
+                }
+
+                // অন্য কার্ডের চলমান ভিডিও বন্ধ করে থাম্বনেইলে ফিরিয়ে আনা
+                allWrappers.forEach(otherWrapper => {
+                    const otherVideo = otherWrapper.querySelector('video');
+                    if (otherVideo) {
+                        otherVideo.pause();
+                        otherVideo.remove();
+                        const otherThumb = otherWrapper.querySelector('.thumb-preview-img');
+                        const otherBtn = otherWrapper.querySelector('.white-play-btn');
+                        if (otherThumb) otherThumb.style.display = 'block';
+                        if (otherBtn) otherBtn.style.display = 'flex';
+                    }
+                });
+
+                // বর্তমান কার্ডের ছবি ও বাটন হাইড করা
+                const thumb = this.querySelector('.thumb-preview-img');
+                const playBtn = this.querySelector('.white-play-btn');
+                if (thumb) thumb.style.display = 'none';
+                if (playBtn) playBtn.style.display = 'none';
+
+                // অন-ডিমান্ড ভিডিও তৈরি ও প্লে
+                const videoUrl = this.getAttribute('data-video');
+                const video = document.createElement('video');
+                video.className = 'active-video-player';
+                video.controls = true;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.setAttribute('controlsList', 'nodownload');
+                video.oncontextmenu = () => false;
+                video.src = videoUrl;
+
+                this.appendChild(video);
+                video.play().catch(err => console.log('Playback:', err));
+            });
+        });
+
         function runTimer() {
             const now = new Date().getTime();
             let end = localStorage.getItem('t_end') || (now + 48*3600*1000);
