@@ -37,7 +37,7 @@
             background-color: #070b18; 
             color: #f1f5f9; 
             font-family: system-ui, -apple-system, sans-serif;
-            padding-bottom: 90px;
+            padding-bottom: 110px;
         }
         .glass-card { 
             background: rgba(30, 41, 59, 0.7); 
@@ -51,33 +51,136 @@
             border-color: rgba(16, 185, 129, 0.4);
             box-shadow: 0 15px 30px rgba(0,0,0,0.5);
         }
+
+        /* স্টিকি বটম বাই বার */
         .sticky-buy-bar {
             position: fixed; 
             bottom: 0; 
             left: 0; 
             width: 100%; 
             background: rgba(7, 11, 24, 0.95); 
-            backdrop-filter: blur(12px); 
-            border-top: 1px solid rgba(16, 185, 129, 0.3); 
-            padding: 10px 15px; 
+            backdrop-filter: blur(15px); 
+            border-top: 1px solid rgba(16, 185, 129, 0.4); 
+            padding: 14px 20px; 
             display: flex; 
             justify-content: center; 
+            align-items: center;
             z-index: 50;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
         }
-        .neon-glow-emerald { text-shadow: 0 0 8px #34d399; }
+
+        /* স্যাম্পল ভিডিও বক্স ও স্লাইডার */
+        .sample-video-box {
+            background: rgba(11, 19, 36, 0.95);
+            padding: 14px 10px;
+            border-radius: 18px;
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            text-align: left;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .sample-label {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #34d399;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding-left: 4px;
+        }
+        .video-slider {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .video-slider::-webkit-scrollbar {
+            height: 5px;
+        }
+        .video-slider::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+
+        /* রিলস ফ্রেম (৯:১৬) */
+        .video-wrapper-reels {
+            flex: 0 0 190px;
+            height: 330px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            border: 1.5px solid #334155;
+            scroll-snap-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .thumb-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+            background: #000;
+        }
+        .video-wrapper-reels:hover .thumb-preview-img {
+            transform: scale(1.04);
+        }
+
+        .white-play-btn {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+        .play-white-circle {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #04121e;
+            font-size: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            transition: transform 0.2s ease;
+        }
+        .video-wrapper-reels:hover .play-white-circle {
+            transform: scale(1.1);
+        }
+
+        .active-video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+            display: block;
+        }
+
+        video::-internal-media-controls-download-button { display:none !important; }
+        video::-webkit-media-controls-enclosure { overflow:hidden !important; }
     </style>
 </head>
 <body class="antialiased">
 
+    <!-- হেডার -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="index.html" class="text-xl font-bold tracking-wider text-cyan-400">Technography</a>
-            <a href="select-payment.html?product=6" class="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 text-white font-black px-5 py-2 rounded-full text-sm shadow-lg">অর্ডার করুন (৫০ ৳)</a>
+            <a href="select-payment.html?product=6" class="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 text-white font-black px-5 py-2 rounded-full text-sm shadow-lg shadow-emerald-500/20 transition">অর্ডার করুন (৫০ ৳)</a>
         </div>
     </header>
 
     <main class="max-w-4xl mx-auto px-4 pt-6 text-center">
-        <!-- পরিবর্তিত ব্যানার (images/product6.webp) -->
+        <!-- ব্যানার ইমেজ -->
         <div class="mb-6 w-full flex justify-center">
             <img src="images/product6.webp" 
                  alt="৫০ হাজার ইসলামিক ভাইরাল Reels/shorts ভিডিও" 
@@ -99,7 +202,7 @@
             ইসলামিক কনটেন্ট নিয়ে নিয়মিত ভিডিও তৈরি করতে আগ্রহীদের জন্য রয়েছে বিশেষ ৫০,০০০+ ইসলামিক ভাইরাল রিলস কালেকশন।
         </p>
 
-        <!-- বিবরণ কার্ড -->
+        <!-- বিবরণ কার্ড এবং স্যাম্পল ভিডিও -->
         <div class="glass-card p-6 text-left border-t-4 border-t-emerald-500 mb-8">
             <h2 class="text-lg font-black text-emerald-400 mb-3 flex items-center gap-2">
                 <span>✨</span> কালেকশনে যা যা থাকছে:
@@ -120,6 +223,38 @@
                     <p class="text-slate-400 leading-relaxed">
                         অসাধারণ ব্যাকগ্রাউন্ড ও হৃদয়স্পর্শী সুরের তিলাওয়াত এবং নাশিদ শর্ট ভিডিও ফুটেজ।
                     </p>
+                </div>
+            </div>
+
+            <!-- ইসলামিক স্যাম্পল ভিডিও সেকশন -->
+            <div class="sample-video-box">
+                <div class="sample-label">
+                    <i class="fas fa-play-circle text-emerald-400"></i> স্যাম্পল ভিডিও (Tap to Play)
+                </div>
+                <div class="video-slider">
+                    <!-- Islamic Video 1 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection1.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/Islamic%20Viral%20Reels%20Collection1.jpg" alt="Islamic 1">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Islamic Video 2 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection2.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/Islamic%20Viral%20Reels%20Collection2.jpg" alt="Islamic 2">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Islamic Video 3 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection3.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/Islamic%20Viral%20Reels%20Collection3.jpg" alt="Islamic 3">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
+
+                    <!-- Islamic Video 4 -->
+                    <div class="video-wrapper-reels" data-video="https://github.com/djsagibmax-arch/Technography/releases/download/v1.0/Islamic.Viral.Reels.Collection4.mp4">
+                        <img class="thumb-preview-img" src="https://raw.githubusercontent.com/djsagibmax-arch/Technography/main/sample-image/Islamic%20Viral%20Reels%20Collection4.jpg" alt="Islamic 4">
+                        <div class="white-play-btn"><div class="play-white-circle"><i class="fas fa-play"></i></div></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -145,9 +280,10 @@
         </div>
     </main>
 
+    <!-- স্টিকি বটম বাই বার (বাউন্স অ্যানিমেশন সহ) -->
     <div class="sticky-buy-bar">
-        <a href="select-payment.html?product=6" class="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 text-white px-8 py-3 rounded-full font-black text-sm sm:text-base shadow-xl flex items-center justify-center gap-2">
-            <i class="fas fa-shopping-cart"></i> এখনই অর্ডার করুন (৫০ ৳)
+        <a href="select-payment.html?product=6" class="w-full sm:w-auto bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white px-10 py-3.5 rounded-full font-black text-base sm:text-lg shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all hover:scale-105 border-b-4 border-green-800 flex items-center justify-center gap-3 animate-bounce text-decoration-none">
+            <i class="fas fa-shopping-cart text-lg"></i> এখনই অর্ডার করুন (৫০ ৳)
         </a>
     </div>
 
@@ -155,5 +291,53 @@
         <p>&copy; 2026 Technography. All rights reserved.</p>
     </footer>
 
+    <!-- স্ক্রিপ্ট: অন-ক্লিক ভিডিও প্লেয়ার ও অটো-রিসেট হ্যান্ডলার -->
+    <script>
+        const allWrappers = document.querySelectorAll('.video-wrapper-reels');
+
+        allWrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', function(e) {
+                const existingVideo = this.querySelector('video');
+                if (existingVideo) {
+                    if (existingVideo.paused) existingVideo.play();
+                    else existingVideo.pause();
+                    return;
+                }
+
+                // অন্য কার্ডের চলমান ভিডিও বন্ধ করে থাম্বনেইলে ফিরিয়ে আনা
+                allWrappers.forEach(otherWrapper => {
+                    const otherVideo = otherWrapper.querySelector('video');
+                    if (otherVideo) {
+                        otherVideo.pause();
+                        otherVideo.remove();
+                        const otherThumb = otherWrapper.querySelector('.thumb-preview-img');
+                        const otherBtn = otherWrapper.querySelector('.white-play-btn');
+                        if (otherThumb) otherThumb.style.display = 'block';
+                        if (otherBtn) otherBtn.style.display = 'flex';
+                    }
+                });
+
+                // বর্তমান কার্ডের ছবি ও বাটন হাইড করা
+                const thumb = this.querySelector('.thumb-preview-img');
+                const playBtn = this.querySelector('.white-play-btn');
+                if (thumb) thumb.style.display = 'none';
+                if (playBtn) playBtn.style.display = 'none';
+
+                // অন-ডিমান্ড ভিডিও তৈরি ও প্লে
+                const videoUrl = this.getAttribute('data-video');
+                const video = document.createElement('video');
+                video.className = 'active-video-player';
+                video.controls = true;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.setAttribute('controlsList', 'nodownload');
+                video.oncontextmenu = () => false;
+                video.src = videoUrl;
+
+                this.appendChild(video);
+                video.play().catch(err => console.log('Playback:', err));
+            });
+        });
+    </script>
 </body>
 </html>
