@@ -3,7 +3,7 @@ const supabaseUrl = 'https://safymsagxrjymhfdzkph.supabase.co';
 const supabaseKey = 'sb_publishable_qthdZZg-tjDRc_loLbVUYg_b77rK-Bv';
 const client = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-// ৬টি প্রোডাক্টের সম্পূর্ণ কনফিগারেশন (নতুন প্রাইস ও নাম সহ আপডেট করা হয়েছে)
+// ৬টি প্রোডাক্টের সম্পূর্ণ কনফিগারেশন (নতুন প্রাইস ও নাম সহ)
 const PRODUCTS_DATA = {
     '1': { 
         name: 'Mega Bundle (All in One)', 
@@ -149,12 +149,16 @@ async function handleFormSubmit(event) {
         return;
     }
 
-    // ফোন নম্বরের স্ট্যান্ডার্ড ফরম্যাট (+88 সহ) নিশ্চিত করা
-    let rawPhone = phone;
-    if (rawPhone.startsWith('01')) {
-        phone = '88' + rawPhone;
-    } else if (rawPhone.startsWith('+88')) {
-        phone = rawPhone.replace('+', '');
+    // ফোন নম্বরের স্ট্যান্ডার্ড ফরম্যাট (880...) নিশ্চিত করা
+    let rawDigits = phone.replace(/[^0-9]/g, '');
+    if (rawDigits.startsWith('0')) {
+        phone = '88' + rawDigits;
+    } else if (rawDigits.startsWith('880')) {
+        phone = rawDigits;
+    } else if (rawDigits.length === 10 && rawDigits.startsWith('1')) {
+        phone = '880' + rawDigits;
+    } else {
+        phone = rawDigits;
     }
 
     // --- Meta Manual Advanced Matching সেটআপ ---
@@ -205,12 +209,16 @@ async function handleFormSubmit(event) {
             return;
         }
 
-        // ৪. Supabase-এ স্ট্যাটাস আপডেট
+        // ৪. কাস্টমারের নাম, প্রোডাক্টের নাম, লিংক ও হোয়াটসঅ্যাপ নম্বর সহ Supabase-এ স্ট্যাটাস আপডেট
         const { error: updateError } = await client
             .from('payments')
             .update({ 
                 is_used: true, 
-                whatsapp_number: phone
+                whatsapp_number: phone,
+                customer_name: name,
+                product_name: CURRENT_PRODUCT.name,
+                product_link: CURRENT_PRODUCT.link,
+                whatsapp_sent: false
             })
             .eq('id', paymentRecord.id);
 
@@ -233,28 +241,9 @@ async function handleFormSubmit(event) {
         // ভেরিফাইড পারচেজ লোকালস্টোরেজে সংরক্ষণ
         localStorage.setItem('technography_order_success', 'true');
 
-        // ৫. Cloudflare Workers-এর কাছে ডায়নামিক ডেটা পাঠানো
-        try {
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> হোয়াটসঅ্যাপে কনফার্মেশন পাঠানো হচ্ছে...';
-            
-            await fetch("https://requirements-txt.djsagibmax.workers.dev/send-confirmation", { 
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    phone: phone,
-                    name: name,
-                    product: CURRENT_PRODUCT.name,
-                    amount: String(receivedAmount),
-                    link: CURRENT_PRODUCT.link
-                })
-            });
-        } catch (botErr) {
-            console.error("Cloudflare Bot call error:", botErr);
-        }
-
         showToast("✅ পেমেন্ট সফল হয়েছে! অ্যাক্সেস পেজে নিয়ে যাওয়া হচ্ছে...");
 
-        // ৬. নির্দিষ্ট প্রোডাক্টের হিডেন অ্যাক্সেস পেজে রিডাইরেক্ট
+        // ৫. নির্দিষ্ট প্রোডাক্টের অ্যাক্সেস পেজে রিডাইরেক্ট
         setTimeout(() => {
             window.location.href = CURRENT_PRODUCT.link;
         }, 1200);
