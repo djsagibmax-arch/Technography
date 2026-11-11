@@ -11,6 +11,12 @@
     <!-- Google Search Console Verification Tag -->
     <meta name="google-site-verification" content="N-N8aWQyFWHWHsNQJMsUs7M9xLbCVrnqOPKGumGeOPI" />
 
+    <!-- Google Search & Browser Favicon (images ফোল্ডারের লোগো পাথ) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    <link rel="shortcut icon" href="images/logo.png" type="image/png">
+
     <!-- Canonical URL -->
     <link rel="canonical" href="https://technographybd.xyz/">
 
@@ -59,32 +65,21 @@
             height: auto;
         }
 
-        /* আকর্ষণীয় ৩ডি লোগো স্টাইল */
-        .brand-logo-3d {
-            font-size: 1.55rem;
-            letter-spacing: 0.08em;
+        /* আকর্ষণীয় ব্র্যান্ড লোগো টেক্সট */
+        .brand-logo-text {
+            font-size: 1.25rem;
+            letter-spacing: 0.04em;
             font-weight: 900;
             text-transform: uppercase;
             color: #0891b2;
-            text-shadow: 
-                0 1px 0 #0e7490,
-                0 2px 0 #155e75,
-                0 3px 0 #164e63,
-                0 4px 6px rgba(8, 145, 178, 0.4),
-                0 8px 15px rgba(0, 0, 0, 0.15);
             display: inline-block;
-            transition: transform 0.2s ease;
         }
 
         @media (min-width: 640px) {
-            .brand-logo-3d {
-                font-size: 2rem;
-                letter-spacing: 0.1em;
+            .brand-logo-text {
+                font-size: 1.6rem;
+                letter-spacing: 0.06em;
             }
-        }
-
-        .brand-logo-3d:hover {
-            transform: translateY(-1px) scale(1.02);
         }
 
         /* লাল ৩ডি টাইমার নাম্বার */
@@ -220,8 +215,9 @@
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
         }
 
-        .contact-btn-fb {
-            background: linear-gradient(135deg, #1877F2 0%, #0c56be 100%);
+        /* মেসেঞ্জারের অফিশিয়াল ব্র্যান্ড গ্রাডিয়েন্ট */
+        .contact-btn-msg {
+            background: linear-gradient(135deg, #00B2FF 0%, #006AFF 50%, #A033FF 100%);
         }
 
         .order-btn-solid {
@@ -249,7 +245,7 @@
 
 <body class="text-slate-900 font-sans antialiased">
 
-    <!-- স্মার্ট অটো-হাইড ফ্লোটিং যোগাযোগ সাইডবার -->
+    <!-- স্মার্ট অটো-হাইড ফ্লোটিং যোগাযোগ সাইডবার (মেসেঞ্জার সহ) -->
     <aside id="floatingContactBar" class="floating-contact-bar">
         <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Technography%20ওয়েবসাইট%20থেকে%20যোগাযোগ%20করছি."
            target="_blank"
@@ -259,12 +255,13 @@
             <i class="fa-brands fa-whatsapp"></i>
         </a>
 
-        <a href="https://www.facebook.com/Digitalgrowthbdd"
+        <!-- ফেসবুক পরিবর্তন করে মেসেঞ্জার যুক্ত করা হলো -->
+        <a href="https://m.me/Technographybdd"
            target="_blank"
            rel="noopener noreferrer"
-           title="ফেসবুক পেজ ভিজিট করুন"
-           class="contact-btn contact-btn-fb">
-            <i class="fa-brands fa-facebook-f"></i>
+           title="Messenger-এ সরাসরি কথা বলুন"
+           class="contact-btn contact-btn-msg">
+            <i class="fa-brands fa-facebook-messenger"></i>
         </a>
     </aside>
 
@@ -273,9 +270,10 @@
     <aside id="mobileSideMenu" class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white border-l border-slate-200 z-50 p-5 overflow-y-auto transform translate-x-full shadow-2xl flex flex-col justify-between">
         <div>
             <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
-                <span class="text-base font-bold text-slate-800 flex items-center gap-2">
-                    <i class="fa-solid fa-wand-magic-sparkles text-cyan-600"></i> AI Tools & Menu
-                </span>
+                <div class="flex items-center gap-2">
+                    <img src="images/logo.png" alt="Logo" class="w-7 h-7 rounded-full shadow-sm">
+                    <span class="text-sm font-bold text-slate-800">Technography Menu</span>
+                </div>
                 <button onclick="closeSideMenu()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
@@ -363,12 +361,13 @@
         </div>
     </aside>
 
-    <!-- হেডার -->
+    <!-- হেডার (images/logo.png পাথসহ) -->
     <header class="sticky top-0 z-30 backdrop-blur-xl bg-white/95 border-b border-slate-200 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             
-            <a href="index.html" class="brand-logo-3d no-underline">
-                TECHNOGRAPHY
+            <a href="index.html" class="flex items-center gap-2 sm:gap-2.5 no-underline">
+                <img src="images/logo.png" alt="TECHNOGRAPHY Logo" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full shadow-md border border-slate-100 object-cover">
+                <span class="brand-logo-text">TECHNOGRAPHY</span>
             </a>
 
             <div class="flex items-center gap-2">
@@ -500,7 +499,7 @@
                 </div>
             </div>
 
-            <!-- প্রোডাক্ট ৩ (১৯০ টাকা করা হলো) -->
+            <!-- প্রোডাক্ট ৩ (১৯০ টাকা) -->
             <div class="product-card p-4 sm:p-5 flex flex-col justify-between">
                 <div>
                     <div class="relative overflow-hidden rounded-xl mb-3 bg-slate-50 border border-slate-100 p-2 flex items-center justify-center min-h-[190px]">
@@ -525,7 +524,7 @@
                 </div>
             </div>
 
-            <!-- প্রোডাক্ট ৪ (২০০ টাকা করা হলো) -->
+            <!-- প্রোডাক্ট ৪ (২০০ টাকা) -->
             <div class="product-card p-4 sm:p-5 flex flex-col justify-between">
                 <div>
                     <div class="relative overflow-hidden rounded-xl mb-3 bg-slate-50 border border-slate-100 p-2 flex items-center justify-center min-h-[190px]">
@@ -550,7 +549,7 @@
                 </div>
             </div>
 
-            <!-- প্রোডাক্ট ৫ (৫০০০ করা হলো এবং ১৮০ টাকা) -->
+            <!-- প্রোডাক্ট ৫ (১৮০ টাকা) -->
             <div class="product-card p-4 sm:p-5 flex flex-col justify-between">
                 <div>
                     <div class="relative overflow-hidden rounded-xl mb-3 bg-slate-50 border border-slate-100 p-2 flex items-center justify-center min-h-[190px]">
@@ -575,7 +574,7 @@
                 </div>
             </div>
 
-            <!-- প্রোডাক্ট ৬ (৫০০০ করা হলো এবং ৫০ টাকা অপরিবর্তিত) -->
+            <!-- প্রোডাক্ট ৬ (৫০ টাকা) -->
             <div class="product-card p-4 sm:p-5 flex flex-col justify-between">
                 <div>
                     <div class="relative overflow-hidden rounded-xl mb-3 bg-slate-50 border border-slate-100 p-2 flex items-center justify-center min-h-[190px]">
