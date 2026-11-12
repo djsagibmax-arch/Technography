@@ -155,7 +155,7 @@
                 </p>
             </div>
 
-            <form id="paymentForm" onsubmit="triggerGoogleConversion(); handleFormSubmit(event);" class="space-y-4">
+            <form id="paymentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-slate-200 mb-1.5">আপনার নাম:</label>
                     <input type="text" id="customerName" required placeholder="আপনার পূর্ণ নাম লিখুন" class="w-full dark-input rounded-xl px-4 py-3 text-sm font-medium outline-none transition">
@@ -194,19 +194,6 @@
 
     <script src="checkout.js"></script>
     <script>
-        // Google Ads Purchase Conversion Event
-        function triggerGoogleConversion() {
-            const trxVal = document.getElementById('trxId') ? document.getElementById('trxId').value.trim() : '';
-            if (typeof gtag === 'function') {
-                gtag('event', 'conversion', {
-                    'send_to': 'AW-18568550069/q3UhCJDt5rYdELWtlpZF',
-                    'value': 1.0,
-                    'currency': 'USD',
-                    'transaction_id': trxVal
-                });
-            }
-        }
-
         window.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const method = params.get('method');
