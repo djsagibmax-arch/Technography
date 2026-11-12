@@ -7,7 +7,15 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#070b18">
 
-    <!-- Meta Pixel Base Code: পেজ সবার জন্য খোলা, কিন্তু পারচেজ ট্র্যাক হবে শুধু পেমেন্ট সম্পন্ন হলে -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-P4DXCNLL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    </script>
+
+    <!-- Meta Pixel & Google Conversion Tracking -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -19,12 +27,28 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     
     fbq('init', '1913791776249045');
-    fbq('track', 'PageView'); // সাধারণ ভিজিট বা পেজ ভিউ ট্র্যাক করবে
+    fbq('track', 'PageView');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentStatus = urlParams.get('status');
+
+    if (paymentStatus === 'success') {
+        const trxID = urlParams.get('trx') || 'ORDER_COURSE_' + Date.now();
+        if (!sessionStorage.getItem("tracked_purchase_" + trxID)) {
+            fbq('track', 'Purchase', {currency: 'BDT', value: 99.00});
+            gtag('event', 'conversion', {
+                'send_to': 'AW-18568550069/q3UhCJDt5rYdELWtlpZF',
+                'value': 0.90,
+                'currency': 'USD',
+                'transaction_id': trxID
+            });
+            sessionStorage.setItem("tracked_purchase_" + trxID, "true");
+        }
+    }
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Base Code -->
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -63,7 +87,6 @@
 </head>
 <body class="antialiased min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
 
-    <!-- Header -->
     <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
         <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
             <span class="text-xl font-bold tracking-wider text-cyan-400">TECHNOGRAPHY</span>
@@ -73,11 +96,8 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="max-w-2xl mx-auto px-4 py-8 flex-1 w-full">
         <div class="glass-card rounded-3xl p-6 sm:p-8 text-center border-t-4 border-t-cyan-500">
-            
-            <!-- সাকসেস আইকন -->
             <div class="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl sm:text-4xl shadow-lg shadow-emerald-500/20 animate-pulse">
                 <i class="fa-solid fa-check"></i>
             </div>
@@ -89,7 +109,6 @@
                 <span class="text-cyan-400 font-bold">Facebook & YouTube Growth + Video Viral Method</span> কোর্সে আপনাকে স্বাগতম। নিচে দেওয়া বাটনে ক্লিক করে সরাসরি গুগল ড্রাইভে গিয়ে আপনার সমস্ত কোর্স ফাইল ডাউনলোড ও দেখা শুরু করুন।
             </p>
 
-            <!-- গুগল ড্রাইভ ডাউনলোড বাটন -->
             <div class="my-6">
                 <a href="https://drive.google.com/drive/folders/1X5QrLG4vd1b2Ot2_cW2zkBSZ_I6y3y-k" 
                    target="_blank" 
@@ -99,7 +118,6 @@
                 </a>
             </div>
 
-            <!-- কোর্সের বিষয়বস্তু রিমাইন্ডার -->
             <div class="text-left bg-slate-950/80 border border-slate-800 rounded-2xl p-5 my-6">
                 <h3 class="text-sm font-bold text-cyan-300 uppercase tracking-wider mb-3 flex items-center gap-2">
                     <i class="fa-solid fa-folder-open"></i> এই ড্রাইভ ফোল্ডারে যা যা পাচ্ছেন:
@@ -120,7 +138,6 @@
                 </ul>
             </div>
 
-            <!-- গুরুত্বপূর্ণ নির্দেশনা -->
             <div class="p-4 rounded-xl bg-amber-950/30 border border-amber-500/30 text-xs sm:text-sm text-amber-200/90 text-left mb-6">
                 <p class="font-bold text-amber-300 mb-1 flex items-center gap-1.5">
                     <i class="fa-solid fa-triangle-exclamation"></i> জরুরি নির্দেশনা:
@@ -128,7 +145,6 @@
                 <p>ড্রাইভ ফোল্ডারের ফাইলগুলো আপনার নিজের গুগল ড্রাইভে কপি করে নিন অথবা অফলাইনে ডাউনলোড করে সংরক্ষণ করুন। লিঙ্কটি ভবিষ্যতে ব্যবহারের জন্য বুকমার্ক বা সেভ করে রাখুন।</p>
             </div>
 
-            <!-- হোয়াটসঅ্যাপ হেল্পলাইন -->
             <div class="pt-5 border-t border-slate-800">
                 <p class="text-xs sm:text-sm text-slate-400 mb-3">ফাইল অ্যাক্সেস করতে কোনো সমস্যা হচ্ছে?</p>
                 <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Facebook%20%26%20YouTube%20Growth%20কোর্সটি%20অর্ডার%20করেছি,%20সহায়তা%20চাচ্ছি।" 
@@ -138,40 +154,12 @@
                     <span>হোয়াটসঅ্যাপ হেল্পলাইনে মেসেজ দিন</span>
                 </a>
             </div>
-
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-900">
         &copy; 2026 TECHNOGRAPHY. All rights reserved.
     </footer>
-
-<!-- স্মার্ট ফেসবুক পারচেজ ট্র্যাকিং (৭০ ৳ - ডুপ্লিকেট-সুরক্ষিত) -->
-<script>
-  (function() {
-    // চেক করা হচ্ছে কাস্টমার পেমেন্ট করে এসেছে কি না
-    const urlParams = new URLSearchParams(window.location.search);
-    const paymentStatus = urlParams.get('status');
-
-    if (paymentStatus === 'success') {
-        const trxID = urlParams.get('trx') || 'ORDER_COURSE_' + Date.now();
-
-        // পেজ রিফ্রেশে যাতে ২ বার কাউন্ট না হয়
-        if (!sessionStorage.getItem("tracked_purchase_" + trxID)) {
-          fbq('track', 'Purchase', {
-            value: 70.00,
-            currency: 'BDT'
-          });
-
-          sessionStorage.setItem("tracked_purchase_" + trxID, "true");
-          console.log("Purchase Event Fired: 70 BDT");
-        }
-    } else {
-        console.warn("Direct Access Detected: Fake purchase pixel tracking disabled.");
-    }
-  })();
-</script>
 
 </body>
 </html>
