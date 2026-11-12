@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>প্রিমিয়াম ডিজিটাল প্রোডাক্ট কালেকশন | TECHNOGRAPHY</title>
+    <title>প্রিমিয়াম ডিজিটাল প্রোডাক্ট কালেকশন | TECHNOGRAPHY BD</title>
 
     <meta name="description" content="আপনার ফেসবুক পেজ ও ইউটিউব চ্যানেল ভাইরাল করার জন্য প্রিমিয়াম AI Reels, কোর্স ও ডিজিটাল কালেকশন।">
 
@@ -65,20 +65,32 @@
             height: auto;
         }
 
-        /* আকর্ষণীয় ব্র্যান্ড লোগো টেক্সট */
+        /* আকর্ষণীয় ৩ডি ও গ্রেডিয়েন্ট ব্র্যান্ড টাইটেল */
         .brand-logo-text {
-            font-size: 1.25rem;
-            letter-spacing: 0.04em;
+            font-size: 1.35rem;
+            letter-spacing: 0.03em;
             font-weight: 900;
             text-transform: uppercase;
-            color: #0891b2;
-            display: inline-block;
+            background: linear-gradient(135deg, #0284c7 0%, #0891b2 50%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            white-space: nowrap;
+        }
+
+        .brand-logo-text .highlight-bd {
+            background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-left: 4px;
         }
 
         @media (min-width: 640px) {
             .brand-logo-text {
-                font-size: 1.6rem;
-                letter-spacing: 0.06em;
+                font-size: 1.75rem;
+                letter-spacing: 0.05em;
             }
         }
 
@@ -199,23 +211,25 @@
         }
 
         .contact-btn {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ffffff !important;
-            font-size: 22px;
+            font-size: 23px;
             text-decoration: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            border: none;
         }
 
         .contact-btn-wa {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
         }
 
-        /* মেসেঞ্জারের অফিশিয়াল ব্র্যান্ড গ্রাডিয়েন্ট */
+        /* মেসেঞ্জারের অফিশিয়াল ব্র্যান্ড গ্রেডিয়েন্ট */
         .contact-btn-msg {
             background: linear-gradient(135deg, #00B2FF 0%, #006AFF 50%, #A033FF 100%);
         }
@@ -245,7 +259,7 @@
 
 <body class="text-slate-900 font-sans antialiased">
 
-    <!-- স্মার্ট অটো-হাইড ফ্লোটিং যোগাযোগ সাইডবার (মেসেঞ্জার সহ) -->
+    <!-- স্মার্ট অটো-হাইড ফ্লোটিং যোগাযোগ সাইডবার (সরাসরি মেসেঞ্জার অ্যাপ খোলার ফাংশনসহ) -->
     <aside id="floatingContactBar" class="floating-contact-bar">
         <a href="https://wa.me/8801871337792?text=হ্যালো,%20আমি%20Technography%20ওয়েবসাইট%20থেকে%20যোগাযোগ%20করছি."
            target="_blank"
@@ -255,14 +269,12 @@
             <i class="fa-brands fa-whatsapp"></i>
         </a>
 
-        <!-- ফেসবুক পরিবর্তন করে মেসেঞ্জার যুক্ত করা হলো -->
-        <a href="https://m.me/Technographybdd"
-           target="_blank"
-           rel="noopener noreferrer"
-           title="Messenger-এ সরাসরি কথা বলুন"
+        <!-- সরাসরি মেসেঞ্জার অ্যাপ ওপেন করার বাটন -->
+        <button onclick="openMessengerApp()"
+           title="Messenger অ্যাপে সরাসরি কথা বলুন"
            class="contact-btn contact-btn-msg">
             <i class="fa-brands fa-facebook-messenger"></i>
-        </a>
+        </button>
     </aside>
 
     <!-- সাইডবার ব্যাকড্রপ ও ড্রয়ার -->
@@ -272,7 +284,7 @@
             <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
                 <div class="flex items-center gap-2">
                     <img src="images/logo.png" alt="Logo" class="w-7 h-7 rounded-full shadow-sm">
-                    <span class="text-sm font-bold text-slate-800">Technography Menu</span>
+                    <span class="text-sm font-bold text-slate-800">Technography BD Menu</span>
                 </div>
                 <button onclick="closeSideMenu()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark text-lg"></i>
@@ -361,25 +373,21 @@
         </div>
     </aside>
 
-    <!-- হেডার (images/logo.png পাথসহ) -->
+    <!-- হেডার (সম্পূর্ণ স্পষ্ট ও সুবিন্যস্ত ব্র্যান্ডিং) -->
     <header class="sticky top-0 z-30 backdrop-blur-xl bg-white/95 border-b border-slate-200 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             
-            <a href="index.html" class="flex items-center gap-2 sm:gap-2.5 no-underline">
-                <img src="images/logo.png" alt="TECHNOGRAPHY Logo" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full shadow-md border border-slate-100 object-cover">
-                <span class="brand-logo-text">TECHNOGRAPHY</span>
+            <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 no-underline">
+                <img src="images/logo.png" alt="TECHNOGRAPHY Logo" class="w-9 h-9 sm:w-11 sm:h-11 rounded-full shadow-md border border-slate-100 object-cover flex-shrink-0">
+                <span class="brand-logo-text">
+                    TECHNOGRAPHY<span class="highlight-bd">BD</span>
+                </span>
             </a>
 
-            <div class="flex items-center gap-2">
-                <a href="select-payment.html?product=1"
-                   class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-3.5 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold shadow-md transition transform active:scale-95 whitespace-nowrap">
-                    এখনই কিনুন
-                </a>
-
-                <button onclick="openSideMenu()" title="মেনু ওপেন করুন" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-base sm:text-lg transition active:scale-95">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </button>
-            </div>
+            <!-- শুধুমাত্র থ্রি-ডট মেনু বাটন রাখা হলো -->
+            <button onclick="openSideMenu()" title="মেনু ওপেন করুন" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-lg transition active:scale-95 flex-shrink-0">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
         </div>
     </header>
 
@@ -699,12 +707,28 @@
     <!-- ফুটার -->
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-slate-500 text-xs">
         <p>
-            &copy; 2026 TECHNOGRAPHY. All rights reserved.
+            &copy; 2026 TECHNOGRAPHY BD. All rights reserved.
         </p>
     </footer>
 
     <!-- স্ক্রিপ্টস -->
     <script>
+    // সরাসরি মেসেঞ্জার অ্যাপ ওপেন করার ফাংশন
+    function openMessengerApp() {
+        const username = "Technographybdd";
+        const appUri = `fb-messenger://user-thread/${username}`;
+        const webUrl = `https://m.me/${username}`;
+        
+        const now = new Date().getTime();
+        window.location.href = appUri;
+        
+        setTimeout(() => {
+            if (new Date().getTime() - now < 1500) {
+                window.open(webUrl, '_blank');
+            }
+        }, 600);
+    }
+
     let idleTimer = null;
     const contactBar = document.getElementById('floatingContactBar');
 
@@ -872,7 +896,7 @@
                     <span style="color:#059669; font-weight:700;">
                         <i class="fa-solid fa-bag-shopping"></i> ভেরিফাইড ক্রয়
                     </span>
-                    <span class="text-slate-400 font-bold">Technography</span>
+                    <span class="text-slate-400 font-bold">Technography BD</span>
                 </div>
             `;
             container.appendChild(card);
