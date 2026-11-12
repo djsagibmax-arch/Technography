@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mega Bundle VIP Access | Technography</title>
-    <meta name="robots" content="noindex, nofollow"> <!-- হিডেন পেজ, গুগল ইনডেক্স করবে না -->
+    <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#0f172a">
 
-    <!-- Meta Pixel Base Code: পেজ সবার জন্য খোলা থাকবে, কিন্তু পারচেজ ট্র্যাক হবে শুধু পেমেন্ট সম্পন্ন হলে -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-P4DXCNLL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    </script>
+
+    <!-- Meta Pixel & Google Conversion Tracking -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -19,23 +27,29 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     
     fbq('init', '1913791776249045');
-    fbq('track', 'PageView'); // সাধারণ ভিজিট বা পেজ ভিউ ট্র্যাক করবে
+    fbq('track', 'PageView');
 
-    // চেক করা হচ্ছে কাস্টমার পেমেন্ট করে এসেছে কি না
     const urlParams = new URLSearchParams(window.location.search);
     const paymentStatus = urlParams.get('status');
 
     if (paymentStatus === 'success') {
-        // আসল পারচেজ বা সেলস কেবল তখনই ফায়ার হবে যখন পেমেন্ট সাকসেস হবে
-        fbq('track', 'Purchase', {currency: 'BDT', value: 300});
+        const trxID = urlParams.get('trx') || 'ORDER_MEGA_' + Date.now();
+        if (!sessionStorage.getItem("tracked_purchase_" + trxID)) {
+            fbq('track', 'Purchase', {currency: 'BDT', value: 300.00});
+            gtag('event', 'conversion', {
+                'send_to': 'AW-18568550069/q3UhCJDt5rYdELWtlpZF',
+                'value': 2.50,
+                'currency': 'USD',
+                'transaction_id': trxID
+            });
+            sessionStorage.setItem("tracked_purchase_" + trxID, "true");
+        }
     }
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1913791776249045&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Base Code -->
 
-    <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -175,15 +189,12 @@
 <body>
 
 <div id="confirmation-dashboard">
-
-    <!-- Success Header -->
     <div class="dashboard-header">
         <span class="success-icon">🎉</span>
         <h1 class="text-3xl md:text-5xl font-black text-emerald-400 mb-4">অভিনন্দন! পেমেন্ট সফল হয়েছে।</h1>
         <p class="text-lg text-slate-300">আপনার ডিজিটাল কনটেন্ট ক্রিয়েশন এবং YouTube, Instagram, Facebook পেজ মনিটাইজেশনের জন্য প্রয়োজনীয় সকল প্রিমিয়াম ক্যাটাগরির ভিডিও এবং কোর্স নিচে আনলক করা হয়েছে। লিংকে ক্লিক করে সরাসরি গুগল ড্রাইভ থেকে ডাউনলোড করে নিন।</p>
     </div>
 
-    <!-- Mega Bonus Banner -->
     <div class="max-w-4xl mx-auto">
         <div class="capcut-banner">
             <h2 class="text-3xl font-black text-white mb-2"><span class="text-4xl">🎁</span> Special Bonus Unlocked!</h2>
@@ -195,10 +206,7 @@
         </div>
     </div>
 
-    <!-- Content Grid -->
     <div class="download-grid">
-
-        <!-- Category 1: Course & Mega Reels -->
         <div class="folder-card">
             <h3 class="folder-title"><span>🎓</span> কোর্স ও মেগা রিলস</h3>
             <a href="https://drive.google.com/drive/folders/1X5QrLG4vd1b2Ot2_cW2zkBSZ_I6y3y-k" target="_blank" class="drive-btn">
@@ -209,7 +217,6 @@
             </a>
         </div>
 
-        <!-- Category 2: Movie Clips Main -->
         <div class="folder-card">
             <h3 class="folder-title"><span>🎬</span> ৫০,০০০+ মুভি ও নাটক ক্লিপস</h3>
             <a href="https://drive.google.com/drive/folders/1Nms2_o8rjU-XCGPIOBdR94UhFVvMf9i4" target="_blank" class="drive-btn">
@@ -229,7 +236,6 @@
             </a>
         </div>
 
-        <!-- Category 3: Movie Clips Folders -->
         <div class="folder-card">
             <h3 class="folder-title"><span>📂</span> Movie Clip Resources</h3>
             <a href="https://drive.google.com/file/d/1tgL72Qnjm1Jw59aVl_oZbMmk5HB6Jrq0/view" target="_blank" class="drive-btn">
@@ -243,7 +249,6 @@
             <a href="https://drive.google.com/drive/folders/18CqQY2oxgvCeAFQKfHLiGtxols7lwCIc" target="_blank" class="drive-btn"><span>Movie Clip Folder 6</span> <i class="fab fa-google-drive"></i></a>
         </div>
 
-        <!-- Category 4: VIP Gaming & Shorts -->
         <div class="folder-card">
             <h3 class="folder-title"><span>🔥</span> VIP Shorts & Gaming</h3>
             <a href="https://drive.google.com/file/d/1t3mYGqEQ861WXNwZuywNa_X5hp16QJKN/view?usp=sharing" target="_blank" class="drive-btn">
@@ -263,7 +268,6 @@
             </a>
         </div>
 
-        <!-- Category 5: Food & Health -->
         <div class="folder-card">
             <h3 class="folder-title"><span>🍔</span> AI Food & Health</h3>
             <a href="https://drive.google.com/drive/folders/115kwC6eGj9YzmU4nQYHi9pKUMYSKx8wB" target="_blank" class="drive-btn">
@@ -281,7 +285,6 @@
             </a>
         </div>
 
-        <!-- Category 6: Islamic -->
         <div class="folder-card">
             <h3 class="folder-title"><span>🕌</span> ইসলামিক ভাইরাল রিলস</h3>
             <a href="https://docs.google.com/document/d/12HluNRbU_SLxJsJu9tWVb15E2qEdHDjdK264G_QjHMo/edit?tab=t.0" target="_blank" class="drive-btn border-blue-500/50">
@@ -301,7 +304,6 @@
             </a>
         </div>
 
-        <!-- Category 7: Motivation -->
         <div class="folder-card">
             <h3 class="folder-title"><span>💡</span> মোটিভেশন ও ইমোশনাল</h3>
             <a href="https://drive.google.com/drive/folders/1Aqiv-rY6MpQMJPD3_MM6jnC7s6TsT2ah" target="_blank" class="drive-btn">
@@ -321,7 +323,6 @@
             </a>
         </div>
 
-        <!-- Category 8: Sports -->
         <div class="folder-card">
             <h3 class="folder-title"><span>⚽</span> স্পোর্টস ও ট্রেন্ডিং</h3>
             <a href="https://drive.google.com/drive/folders/1GH4QAvErprAF42mQt0H2gVjj8cxZdgJv" target="_blank" class="drive-btn">
@@ -341,7 +342,6 @@
             </a>
         </div>
 
-        <!-- Category 9: Cartoon & Art -->
         <div class="folder-card">
             <h3 class="folder-title"><span>🎨</span> কার্টুন, অ্যানিমেশন ও ফানি</h3>
             <a href="https://drive.google.com/drive/folders/1iXzeEJB9vaxKjpqNYyDQNlWMZlSkNT5B" target="_blank" class="drive-btn"><span>Cartoon Video Bangla</span> <i class="fab fa-google-drive"></i></a>
@@ -352,9 +352,7 @@
             <a href="https://drive.google.com/drive/folders/1uvX4I50ffSWSI4I0391SHuMA87ap8MEL" target="_blank" class="drive-btn"><span>Art & Craft Collection 2</span> <i class="fab fa-google-drive"></i></a>
             <a href="https://drive.google.com/drive/folders/1Oel7oBvAtiMCOV7ggCwzDW2kdQ1D63_k" target="_blank" class="drive-btn"><span>Art & Craft Master</span> <i class="fab fa-google-drive"></i></a>
         </div>
-
     </div>
-
 </div>
 
 </body>
